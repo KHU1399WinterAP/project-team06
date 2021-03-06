@@ -1,0 +1,67 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp MainBackground::l::378:x}"
+			"$verticalGroup": "par l {comp MainBackground::l::573:x}"
+		} ) {
+			name: "this"
+			"resizable": false
+			"minimumSize": new java.awt.Dimension( 380, 605 )
+			"maximizedBounds": new java.awt.Rectangle( 530, 60, 380, 605 )
+			"background": new java.awt.Color( 0, 112, 192, 255 )
+			"title": "Quiz Of Kings"
+			"font": new java.awt.Font( "Calibri", 0, 14 )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq t {space :p:25:p, comp LoginBackground:::p::p, space :::x, comp RegisterBackground:::p::p, space :p:25:p}, seq t {space :::x, comp label1:::p::p, space :p:42:p}, seq l {space :p:136:p, comp Logo:::p::p, space :::x}}"
+				"$verticalGroup": "par l {seq t {space :p:35:p, comp Logo:::p::p, space :p:30:p, comp label1:::p::p, space :::x, par t {comp LoginBackground:::p::p, comp RegisterBackground:::p::p}, space :p:87:p}}"
+			} ) {
+				name: "MainBackground"
+				"maximumSize": new java.awt.Dimension( 380, 605 )
+				"minimumSize": new java.awt.Dimension( 380, 605 )
+				"background": new java.awt.Color( 0, 112, 192, 255 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {space :p:38:p, comp Login:::p::p, space ::41:x}}"
+					"$verticalGroup": "par l {seq t {space ::26:x, comp Login:::p:31:p, space :p:20:p}}"
+				} ) {
+					name: "LoginBackground"
+					"background": &Color0 new java.awt.Color( 0, 32, 96, 255 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "Login"
+						"text": "Login"
+						"font": &Font0 new java.awt.Font( "Calibri", 0, 32 )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {space :p:22:p, comp Register:::p::p, space ::22:x}}"
+					"$verticalGroup": "par l {seq t {space ::28:x, comp Register:::p:31:p, space :p:18:p}}"
+				} ) {
+					name: "RegisterBackground"
+					"background": #Color0
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "Register"
+						"text": "Register"
+						"font": #Font0
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Quiz Of Kings"
+					"font": new java.awt.Font( "Calibri", 0, 54 )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {space :0:100:x}"
+					"$verticalGroup": "par l {space :0:100:x}"
+				} ) {
+					name: "Logo"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 450, 70 )
+			"size": new java.awt.Dimension( 380, 605 )
+		} )
+	}
+}
