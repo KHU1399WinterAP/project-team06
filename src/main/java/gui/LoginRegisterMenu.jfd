@@ -16,47 +16,34 @@ new FormModel {
 			"font": new java.awt.Font( "Calibri", 0, 14 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :p:25:p, comp LoginBackground:::p::p, space :::x, comp RegisterBackground:::p::p, space :p:25:p}, seq t {space :::x, comp label1:::p::p, space :p:42:p}, seq l {space :p:136:p, comp Logo:::p::p, space :::x}}"
-				"$verticalGroup": "par l {seq t {space :p:35:p, comp Logo:::p::p, space :p:30:p, comp label1:::p::p, space :::x, par t {comp LoginBackground:::p::p, comp RegisterBackground:::p::p}, space :p:87:p}}"
+				"$horizontalGroup": "par l {seq t {space :::x, comp label1:::p::p, space :p:42:p}, seq {par l {seq {space :p:27:p, comp button1:::p:148:p, space :p:27:p, comp Register:::p:148:p}, seq l {space :p:131:p, comp label2:::p:116:p}}, space :::x}}"
+				"$verticalGroup": "par l {seq t {space :p:16:p, comp label2:::p:118:p, space :p:31:p, comp label1:::p::p, space :::x, par b {comp button1::b:p:77:p, comp Register::b:p:77:p}, space :::x}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
 				"minimumSize": new java.awt.Dimension( 380, 605 )
 				"background": new java.awt.Color( 0, 112, 192, 255 )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:38:p, comp Login:::p::p, space ::41:x}}"
-					"$verticalGroup": "par l {seq t {space ::26:x, comp Login:::p:31:p, space :p:20:p}}"
-				} ) {
-					name: "LoginBackground"
-					"background": &Color0 new java.awt.Color( 0, 32, 96, 255 )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "Login"
-						"text": "Login"
-						"font": &Font0 new java.awt.Font( "Calibri", 0, 32 )
-					} )
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:22:p, comp Register:::p::p, space ::22:x}}"
-					"$verticalGroup": "par l {seq t {space ::28:x, comp Register:::p:31:p, space :p:18:p}}"
-				} ) {
-					name: "RegisterBackground"
-					"background": #Color0
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "Register"
-						"text": "Register"
-						"font": #Font0
-					} )
-				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "Quiz Of Kings"
 					"font": new java.awt.Font( "Calibri", 0, 54 )
 				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {space :0:100:x}"
-					"$verticalGroup": "par l {space :0:100:x}"
-				} ) {
-					name: "Logo"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "Login"
+					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 196608, 15, false )
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "Register"
+					"text": "Register"
+					"font": #SwingDerivedFont0
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "text"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

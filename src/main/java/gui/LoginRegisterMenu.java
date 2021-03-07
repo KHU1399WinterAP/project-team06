@@ -19,12 +19,10 @@ public class LoginRegisterMenu extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         MainBackground = new JPanel();
-        LoginBackground = new JPanel();
-        Login = new JLabel();
-        RegisterBackground = new JPanel();
-        Register = new JLabel();
         label1 = new JLabel();
-        Logo = new JPanel();
+        button1 = new JButton();
+        Register = new JButton();
+        label2 = new JLabel();
 
         //======== this ========
         setResizable(false);
@@ -42,108 +40,56 @@ public class LoginRegisterMenu extends JFrame {
             MainBackground.setMinimumSize(new Dimension(380, 605));
             MainBackground.setBackground(new Color(0, 112, 192));
 
-            //======== LoginBackground ========
-            {
-                LoginBackground.setBackground(new Color(0, 32, 96));
-
-                //---- Login ----
-                Login.setText("Login");
-                Login.setFont(new Font("Calibri", Font.PLAIN, 32));
-
-                GroupLayout LoginBackgroundLayout = new GroupLayout(LoginBackground);
-                LoginBackground.setLayout(LoginBackgroundLayout);
-                LoginBackgroundLayout.setHorizontalGroup(
-                    LoginBackgroundLayout.createParallelGroup()
-                        .addGroup(LoginBackgroundLayout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addComponent(Login)
-                            .addContainerGap(41, Short.MAX_VALUE))
-                );
-                LoginBackgroundLayout.setVerticalGroup(
-                    LoginBackgroundLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, LoginBackgroundLayout.createSequentialGroup()
-                            .addContainerGap(26, Short.MAX_VALUE)
-                            .addComponent(Login, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20))
-                );
-            }
-
-            //======== RegisterBackground ========
-            {
-                RegisterBackground.setBackground(new Color(0, 32, 96));
-
-                //---- Register ----
-                Register.setText("Register");
-                Register.setFont(new Font("Calibri", Font.PLAIN, 32));
-
-                GroupLayout RegisterBackgroundLayout = new GroupLayout(RegisterBackground);
-                RegisterBackground.setLayout(RegisterBackgroundLayout);
-                RegisterBackgroundLayout.setHorizontalGroup(
-                    RegisterBackgroundLayout.createParallelGroup()
-                        .addGroup(RegisterBackgroundLayout.createSequentialGroup()
-                            .addGap(22, 22, 22)
-                            .addComponent(Register)
-                            .addContainerGap(22, Short.MAX_VALUE))
-                );
-                RegisterBackgroundLayout.setVerticalGroup(
-                    RegisterBackgroundLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, RegisterBackgroundLayout.createSequentialGroup()
-                            .addContainerGap(28, Short.MAX_VALUE)
-                            .addComponent(Register, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18))
-                );
-            }
-
             //---- label1 ----
             label1.setText("Quiz Of Kings");
             label1.setFont(new Font("Calibri", Font.PLAIN, 54));
 
-            //======== Logo ========
-            {
+            //---- button1 ----
+            button1.setText("Login");
+            button1.setFont(button1.getFont().deriveFont(Font.PLAIN, button1.getFont().getSize() + 15f));
+            button1.setBackground(new Color(0, 32, 96));
 
-                GroupLayout LogoLayout = new GroupLayout(Logo);
-                Logo.setLayout(LogoLayout);
-                LogoLayout.setHorizontalGroup(
-                    LogoLayout.createParallelGroup()
-                        .addGap(0, 100, Short.MAX_VALUE)
-                );
-                LogoLayout.setVerticalGroup(
-                    LogoLayout.createParallelGroup()
-                        .addGap(0, 100, Short.MAX_VALUE)
-                );
-            }
+            //---- Register ----
+            Register.setText("Register");
+            Register.setFont(Register.getFont().deriveFont(Font.PLAIN, Register.getFont().getSize() + 15f));
+            Register.setBackground(new Color(0, 32, 96));
+
+            //---- label2 ----
+            label2.setText("text");
+            label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")));
 
             GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
             MainBackground.setLayout(MainBackgroundLayout);
             MainBackgroundLayout.setHorizontalGroup(
                 MainBackgroundLayout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(LoginBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(RegisterBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
-                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(label1)
                         .addGap(42, 42, 42))
                     .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(Logo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(MainBackgroundLayout.createParallelGroup()
+                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(button1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(Register, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                .addGap(131, 131, 131)
+                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             MainBackgroundLayout.setVerticalGroup(
                 MainBackgroundLayout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(Logo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(16, 16, 16)
+                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
                         .addComponent(label1)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(LoginBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RegisterBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(87, 87, 87))
+                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(button1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Register, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
 
@@ -164,11 +110,9 @@ public class LoginRegisterMenu extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel MainBackground;
-    private JPanel LoginBackground;
-    private JLabel Login;
-    private JPanel RegisterBackground;
-    private JLabel Register;
     private JLabel label1;
-    private JPanel Logo;
+    private JButton button1;
+    private JButton Register;
+    private JLabel label2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
