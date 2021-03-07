@@ -5,113 +5,136 @@
 package main.java.gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
 /**
  * @author Alireza
  */
-public class LoginRegisterMenu extends JFrame {
+public class LoginRegisterMenu  {
+
     public LoginRegisterMenu() {
         initComponents();
+
+    }
+
+    private void RegisterActionPerformed(ActionEvent e) {
+        new RegisterMenu(MainMenuFrame);
+        MainMenuFrame.setVisible(false);
+
+    }
+
+    private void LoginActionPerformed(ActionEvent e) {
+        // TODO add your code here
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        MainMenuFrame = new JFrame();
         MainBackground = new JPanel();
         label1 = new JLabel();
-        button1 = new JButton();
+        Login = new JButton();
         Register = new JButton();
         label2 = new JLabel();
 
-        //======== this ========
-        setResizable(false);
-        setMinimumSize(new Dimension(380, 605));
-        setMaximizedBounds(new Rectangle(530, 60, 380, 605));
-        setBackground(new Color(0, 112, 192));
-        setTitle("Quiz Of Kings");
-        setFont(new Font("Calibri", Font.PLAIN, 14));
-        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")).getImage());
-        var contentPane = getContentPane();
-
-        //======== MainBackground ========
+        //======== MainMenuFrame ========
         {
-            MainBackground.setMaximumSize(new Dimension(380, 605));
-            MainBackground.setMinimumSize(new Dimension(380, 605));
-            MainBackground.setBackground(new Color(0, 112, 192));
+            MainMenuFrame.setResizable(false);
+            MainMenuFrame.setMinimumSize(new Dimension(380, 605));
+            MainMenuFrame.setMaximizedBounds(new Rectangle(530, 60, 380, 605));
+            MainMenuFrame.setBackground(new Color(0, 112, 192));
+            MainMenuFrame.setTitle("Quiz Of Kings");
+            MainMenuFrame.setFont(new Font("Calibri", Font.PLAIN, 14));
+            MainMenuFrame.setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")).getImage());
+            MainMenuFrame.setVisible(true);
+            MainMenuFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            var MainMenuFrameContentPane = MainMenuFrame.getContentPane();
 
-            //---- label1 ----
-            label1.setText("Quiz Of Kings");
-            label1.setFont(new Font("Calibri", Font.PLAIN, 54));
+            //======== MainBackground ========
+            {
+                MainBackground.setMaximumSize(new Dimension(380, 605));
+                MainBackground.setMinimumSize(new Dimension(380, 605));
+                MainBackground.setBackground(new Color(0, 112, 192));
 
-            //---- button1 ----
-            button1.setText("Login");
-            button1.setFont(button1.getFont().deriveFont(Font.PLAIN, button1.getFont().getSize() + 15f));
-            button1.setBackground(new Color(0, 32, 96));
+                //---- label1 ----
+                label1.setText("Quiz Of Kings");
+                label1.setFont(new Font("Calibri", Font.PLAIN, 54));
 
-            //---- Register ----
-            Register.setText("Register");
-            Register.setFont(Register.getFont().deriveFont(Font.PLAIN, Register.getFont().getSize() + 15f));
-            Register.setBackground(new Color(0, 32, 96));
+                //---- Login ----
+                Login.setText("Login");
+                Login.setFont(Login.getFont().deriveFont(Font.PLAIN, Login.getFont().getSize() + 15f));
+                Login.setBackground(new Color(0, 32, 96));
+                Login.setFocusable(false);
+                Login.addActionListener(e -> LoginActionPerformed(e));
 
-            //---- label2 ----
-            label2.setText("text");
-            label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")));
+                //---- Register ----
+                Register.setText("Register");
+                Register.setFont(Register.getFont().deriveFont(Font.PLAIN, Register.getFont().getSize() + 15f));
+                Register.setBackground(new Color(0, 32, 96));
+                Register.setFocusable(false);
+                Register.addActionListener(e -> RegisterActionPerformed(e));
 
-            GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
-            MainBackground.setLayout(MainBackgroundLayout);
-            MainBackgroundLayout.setHorizontalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(label1)
-                        .addGap(42, 42, 42))
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(button1, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(Register, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                .addGap(131, 131, 131)
-                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                //---- label2 ----
+                label2.setText("text");
+                label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")));
+
+                GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
+                MainBackground.setLayout(MainBackgroundLayout);
+                MainBackgroundLayout.setHorizontalGroup(
+                    MainBackgroundLayout.createParallelGroup()
+                        .addGroup(MainBackgroundLayout.createSequentialGroup()
+                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGap(27, 27, 27)
+                                    .addComponent(Login, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(Register, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGap(131, 131, 131)
+                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(MainBackgroundLayout.createSequentialGroup()
+                            .addGap(45, 45, 45)
+                            .addComponent(label1)
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+                MainBackgroundLayout.setVerticalGroup(
+                    MainBackgroundLayout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addComponent(label2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                            .addGap(29, 29, 29)
+                            .addComponent(label1)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(Login, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Register, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+            }
+
+            GroupLayout MainMenuFrameContentPaneLayout = new GroupLayout(MainMenuFrameContentPane);
+            MainMenuFrameContentPane.setLayout(MainMenuFrameContentPaneLayout);
+            MainMenuFrameContentPaneLayout.setHorizontalGroup(
+                MainMenuFrameContentPaneLayout.createParallelGroup()
+                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
             );
-            MainBackgroundLayout.setVerticalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(label1)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(button1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Register, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            MainMenuFrameContentPaneLayout.setVerticalGroup(
+                MainMenuFrameContentPaneLayout.createParallelGroup()
+                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
             );
+            MainMenuFrame.pack();
+            MainMenuFrame.setLocationRelativeTo(MainMenuFrame.getOwner());
         }
-
-        GroupLayout contentPaneLayout = new GroupLayout(contentPane);
-        contentPane.setLayout(contentPaneLayout);
-        contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-        );
-        contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-        );
-        pack();
-        setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JFrame MainMenuFrame;
     private JPanel MainBackground;
     private JLabel label1;
-    private JButton button1;
+    private JButton Login;
     private JButton Register;
     private JLabel label2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
