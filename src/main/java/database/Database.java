@@ -48,15 +48,19 @@ public class Database {
             throwables.printStackTrace();
         }
     }
-    public static boolean AlreadyExisted(String username){
-        try{
-            PreparedStatement statement=connection.prepareStatement("SELECT * FROM user WHENEVER username=?");
-            statement.setString(1,username);
-            return true;
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+    public static boolean AlreadyExisted(String username) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE username=?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                if (resultSet.getString("username").equals(username)) return true;
+            }
             return false;
+        }catch(SQLException throwables){
+            throwables.printStackTrace();
+            return true;
         }
     }
 }

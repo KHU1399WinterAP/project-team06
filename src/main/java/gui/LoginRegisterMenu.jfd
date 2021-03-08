@@ -29,6 +29,7 @@ new FormModel {
 					name: "label1"
 					"text": "Quiz Of Kings"
 					"font": new java.awt.Font( "Calibri", 0, 54 )
+					"foreground": sfield java.awt.Color white
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "Login"

@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp MainBackground::l:::x}"
+			"$horizontalGroup": "par l {comp MainBackground::t:::x}"
 			"$verticalGroup": "par l {comp MainBackground::l::565:x}"
 		} ) {
 			name: "RegisterFrame"
@@ -20,8 +20,8 @@ new FormModel {
 			"modalExclusionType": enum java.awt.Dialog$ModalExclusionType APPLICATION_EXCLUDE
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "RegisterFrameWindowClosed", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :0:0:x, par l {seq {space :131:131:p, comp label2:::p:116:p}, seq l {space :p:90:p, par t {comp RegisterButton::t:p:200:p, comp scrollPane1::l:p:200:p, comp InputPassword::l:p:200:p, comp UsernameLabel::l:p::p, comp PasswordLabel::l:p::p}}, seq l {space :p:140:p, comp PreviousButton:::p:100:p}, seq l {space :p:45:p, comp label1:::p::p}}, space :p:48:p}}"
-				"$verticalGroup": "par l {seq t {space :p:16:p, comp label2:::p:118:p, space :p:31:p, comp label1:::p::p, space :p:30:p, comp UsernameLabel:::p:35:p, space :::p, comp scrollPane1:::p::p, space :::p, comp PasswordLabel:::p:39:p, space :::p, comp InputPassword:::::p, space :p:32:p, comp RegisterButton:::p:47:p, space :p:46:p, comp PreviousButton:::p:30:p}}"
+				"$horizontalGroup": "par l {seq {space ::49:x, par l {seq t {comp label1:::p::p, space :p:44:p}, seq t {comp label2:::p:116:p, space :p:125:p}, seq t {par t {comp scrollPane1::l:p:200:p, comp UsernameLabel::l:p::p, comp PasswordLabel::l:p::p, comp InputPassword::l:p:200:p, comp RegisterButton::l:p:200:p}, space :p:85:p}, seq t {par l {comp PreviousButton:::p:100:p, comp tryAgainButton:::p:100:p}, space :p:136:p}}}}"
+				"$verticalGroup": "par l {seq t {space :p:18:p, comp label2:::p:118:p, space :p:29:p, comp label1:::p::p, space s:::p, comp UsernameLabel:::p:35:p, space :::p, comp scrollPane1:::p::p, space :::p, comp PasswordLabel:::p:39:p, space :::p, comp InputPassword:::::p, space :p:24:p, comp RegisterButton:::p:47:p, space :::p, comp tryAgainButton:::p::p, space :::x, comp PreviousButton:::p:30:p, space :::p}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -32,6 +32,7 @@ new FormModel {
 					name: "label1"
 					"text": "Quiz Of Kings"
 					"font": new java.awt.Font( "Calibri", 0, 54 )
+					"foreground": sfield java.awt.Color white
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
@@ -83,10 +84,17 @@ new FormModel {
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "PreviousButtonActionPerformed", true ) )
 				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "tryAgainButton"
+					"text": "Try again"
+					"focusable": false
+					"visible": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "tryAgainButtonActionPerformed", true ) )
+				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 380, 605 )
-			"location": new java.awt.Point( 345, 95 )
+			"location": new java.awt.Point( 345, 65 )
 		} )
 	}
 }

@@ -60,6 +60,7 @@ public class LoginRegisterMenu  {
                 //---- label1 ----
                 label1.setText("Quiz Of Kings");
                 label1.setFont(new Font("Calibri", Font.PLAIN, 54));
+                label1.setForeground(Color.white);
 
                 //---- Login ----
                 Login.setText("Login");
