@@ -2,7 +2,6 @@ package main.java.database;
 
 import main.java.config.DatabaseConfig;
 import main.java.models.User;
-
 import java.sql.*;
 import java.util.ArrayList;
 
