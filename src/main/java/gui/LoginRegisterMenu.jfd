@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,7 +7,7 @@ new FormModel {
 			"$horizontalGroup": "par l {comp MainBackground::l::378:x}"
 			"$verticalGroup": "par l {comp MainBackground::l::573:x}"
 		} ) {
-			name: "this"
+			name: "MainMenuFrame"
 			"resizable": false
 			"minimumSize": new java.awt.Dimension( 380, 605 )
 			"maximizedBounds": new java.awt.Rectangle( 530, 60, 380, 605 )
@@ -15,9 +15,11 @@ new FormModel {
 			"title": "Quiz Of Kings"
 			"font": new java.awt.Font( "Calibri", 0, 14 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
+			"visible": true
+			"defaultCloseOperation": 3
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :::x, comp label1:::p::p, space :p:42:p}, seq {par l {seq {space :p:27:p, comp button1:::p:148:p, space :p:27:p, comp Register:::p:148:p}, seq l {space :p:131:p, comp label2:::p:116:p}}, space :::x}}"
-				"$verticalGroup": "par l {seq t {space :p:16:p, comp label2:::p:118:p, space :p:31:p, comp label1:::p::p, space :::x, par b {comp button1::b:p:77:p, comp Register::b:p:77:p}, space :::x}}"
+				"$horizontalGroup": "par l {seq {par l {seq {space :p:27:p, comp Login:::p:148:p, space :::x, comp Register:::p:148:p}, seq l {space :p:131:p, comp label2:::p:116:p}}, space :::x}, seq l {space :p:45:p, comp label1:::p::p, space :::x}}"
+				"$verticalGroup": "par l {seq t {space :p:16:p, comp label2:::p:118:p, space :p:29:p, comp label1:::p::p, space :::x, par b {comp Login::b:p:77:p, comp Register::b:p:77:p}, space :::x}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -27,18 +29,23 @@ new FormModel {
 					name: "label1"
 					"text": "Quiz Of Kings"
 					"font": new java.awt.Font( "Calibri", 0, 54 )
+					"foreground": sfield java.awt.Color white
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
+					name: "Login"
 					"text": "Login"
 					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 196608, 15, false )
 					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "LoginActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "Register"
 					"text": "Register"
 					"font": #SwingDerivedFont0
 					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RegisterActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
