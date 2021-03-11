@@ -2,45 +2,61 @@
  * Created by JFormDesigner on Thu Mar 11 15:23:19 IRST 2021
  */
 
-package main.java.gui;
+package main.java.gui.LoginMenu;
+
+import main.java.animations.ColorChangeAnimation;
+import main.java.database.Database;
+import main.java.gui.Dashord.Dashbord;
+import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.function.Consumer;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+
+import static main.java.config.GuiConfig.COLOR_DANGER;
 
 /**
  * @author Sina
  */
 public class LoginMenu extends JFrame {
-    private final JFrame PreviousFrame;
-    public LoginMenu(JFrame PreviousFrame) {
-        this.PreviousFrame = PreviousFrame;
+    private final JFrame LoginRegisterMenu;
+
+    public LoginMenu(JFrame LoginRegisterMenu) {
+        this.LoginRegisterMenu = LoginRegisterMenu;
         initComponents();
-    }
-
-    private void LoginFrameWindowClosed(WindowEvent e) {
-        LoginFrame.dispose();
-        PreviousFrame.setVisible(true);
-    }
-
-    private void LoginButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
     }
 
     private void PreviousButtonActionPerformed(ActionEvent e) {
         LoginFrame.dispose();
-        PreviousFrame.setVisible(true);
+        LoginRegisterMenu.setVisible(true);
     }
 
-    private void tryAgainButtonActionPerformed(ActionEvent e) {
-        new LoginMenu(PreviousFrame);
+    private void loginFrameWindowClosed(WindowEvent e) {
+        LoginFrame.dispose();
+        LoginRegisterMenu.setVisible(true);
     }
 
-    private void RegisterFrameWindowClosed(WindowEvent e) {
-        // TODO add your code here
+    private void loginButtonActionPerformed(ActionEvent e) {
+        String username = InputUserName.getText();
+        String password = String.valueOf(InputPassword.getPassword());
+        if (!username.isBlank()) {
+            User user = Database.getUserByUsername(username);
+            if (user != null && user.password.equals(password)) {
+                LoginFrame.setVisible(false);
+                new Dashbord(LoginRegisterMenu);
+                return;
+            }
+        }
+        runMainPanelBackgroundColorAnimation();
     }
 
+    private void runMainPanelBackgroundColorAnimation() {
+        Consumer<Color> stepCallback = (color) -> MainBackground.setBackground(color);
+        Runnable endCallback = () -> MainBackground.setBackground(new Color(0, 112, 192));
+        new ColorChangeAnimation(MainBackground.getBackground(), COLOR_DANGER, stepCallback, endCallback).start();
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -53,28 +69,25 @@ public class LoginMenu extends JFrame {
         InputUserName = new JTextArea();
         PasswordLabel = new JLabel();
         InputPassword = new JPasswordField();
-        LoginButton = new JButton();
+        loginButton = new JButton();
         PreviousButton = new JButton();
-        tryAgainButton = new JButton();
-        usernameErrorLabel = new JLabel();
-        passwordErrorLabel = new JLabel();
 
         //======== LoginFrame ========
         {
-            LoginFrame.setResizable(false);
             LoginFrame.setMinimumSize(new Dimension(380, 605));
             LoginFrame.setMaximizedBounds(new Rectangle(530, 60, 380, 605));
             LoginFrame.setBackground(new Color(0, 112, 192));
             LoginFrame.setTitle("Login Menu");
             LoginFrame.setFont(new Font("Calibri", Font.PLAIN, 14));
             LoginFrame.setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")).getImage());
-            LoginFrame.setVisible(true);
             LoginFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             LoginFrame.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
+            LoginFrame.setResizable(false);
+            LoginFrame.setVisible(true);
             LoginFrame.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    RegisterFrameWindowClosed(e);
+                    loginFrameWindowClosed(e);
                 }
             });
             var LoginFrameContentPane = LoginFrame.getContentPane();
@@ -120,12 +133,12 @@ public class LoginMenu extends JFrame {
                 InputPassword.setBackground(Color.white);
                 InputPassword.setForeground(Color.darkGray);
 
-                //---- LoginButton ----
-                LoginButton.setText("Login");
-                LoginButton.setForeground(Color.gray);
-                LoginButton.setBackground(new Color(0, 32, 96));
-                LoginButton.setFocusable(false);
-                LoginButton.addActionListener(e -> LoginButtonActionPerformed(e));
+                //---- loginButton ----
+                loginButton.setText("Login");
+                loginButton.setForeground(Color.gray);
+                loginButton.setBackground(new Color(0, 32, 96));
+                loginButton.setFocusable(false);
+                loginButton.addActionListener(e -> loginButtonActionPerformed(e));
 
                 //---- PreviousButton ----
                 PreviousButton.setText("previous");
@@ -136,55 +149,35 @@ public class LoginMenu extends JFrame {
                 PreviousButton.setFocusable(false);
                 PreviousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
 
-                //---- tryAgainButton ----
-                tryAgainButton.setText("Try again");
-                tryAgainButton.setFocusable(false);
-                tryAgainButton.setVisible(false);
-                tryAgainButton.addActionListener(e -> tryAgainButtonActionPerformed(e));
-
-                //---- usernameErrorLabel ----
-                usernameErrorLabel.setForeground(Color.red);
-                usernameErrorLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-
-                //---- passwordErrorLabel ----
-                passwordErrorLabel.setForeground(Color.red);
-                passwordErrorLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-
                 GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
                 MainBackground.setLayout(MainBackgroundLayout);
                 MainBackgroundLayout.setHorizontalGroup(
                     MainBackgroundLayout.createParallelGroup()
                         .addGroup(MainBackgroundLayout.createSequentialGroup()
-                            .addContainerGap(42, Short.MAX_VALUE)
+                            .addContainerGap(49, Short.MAX_VALUE)
                             .addGroup(MainBackgroundLayout.createParallelGroup()
                                 .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createParallelGroup()
                                     .addGroup(MainBackgroundLayout.createSequentialGroup()
                                         .addComponent(PasswordLabel)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())
                                     .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                                         .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                             .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(InputPassword, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(LoginButton, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(loginButton, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
                                         .addGap(85, 85, 85)))
                                 .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                                     .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
                                     .addGap(125, 125, 125))
                                 .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addGroup(MainBackgroundLayout.createParallelGroup()
-                                        .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                                     .addGap(136, 136, 136))
                                 .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                                     .addComponent(label1)
                                     .addGap(44, 44, 44))
                                 .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                                     .addComponent(UsernameLabel)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())))
+                                    .addGap(223, 223, 223))))
                 );
                 MainBackgroundLayout.setVerticalGroup(
                     MainBackgroundLayout.createParallelGroup()
@@ -194,21 +187,15 @@ public class LoginMenu extends JFrame {
                             .addGap(29, 29, 29)
                             .addComponent(label1)
                             .addGap(18, 18, 18)
-                            .addGroup(MainBackgroundLayout.createParallelGroup()
-                                .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(MainBackgroundLayout.createParallelGroup()
-                                .addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(InputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(71, 71, 71)
-                            .addComponent(tryAgainButton)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(LoginButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+                            .addGap(32, 32, 32)
+                            .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                             .addContainerGap())
@@ -219,17 +206,20 @@ public class LoginMenu extends JFrame {
             LoginFrameContentPane.setLayout(LoginFrameContentPaneLayout);
             LoginFrameContentPaneLayout.setHorizontalGroup(
                 LoginFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(LoginFrameContentPaneLayout.createSequentialGroup()
+                        .addComponent(MainBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
             );
             LoginFrameContentPaneLayout.setVerticalGroup(
                 LoginFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
             );
             LoginFrame.pack();
             LoginFrame.setLocationRelativeTo(LoginFrame.getOwner());
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
+
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JFrame LoginFrame;
@@ -241,10 +231,7 @@ public class LoginMenu extends JFrame {
     private JTextArea InputUserName;
     private JLabel PasswordLabel;
     private JPasswordField InputPassword;
-    private JButton LoginButton;
+    private JButton loginButton;
     private JButton PreviousButton;
-    private JButton tryAgainButton;
-    private JLabel usernameErrorLabel;
-    private JLabel passwordErrorLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

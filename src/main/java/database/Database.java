@@ -2,6 +2,7 @@ package main.java.database;
 
 import main.java.config.DatabaseConfig;
 import main.java.models.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -16,6 +17,19 @@ public class Database {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static User getUserByUsername(String username) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE username =?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+                return new User(resultSet.getString("username"), resultSet.getString("password"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
     public static ArrayList<User> SelectAllUsers() {
@@ -53,11 +67,11 @@ public class Database {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM user WHERE username=?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 if (resultSet.getString("username").equals(username)) return true;
             }
             return false;
-        }catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
             return true;
         }

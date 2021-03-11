@@ -1,4 +1,4 @@
-package main.java.gui;
+package main.java.gui.RegisterMenu;
 
 import main.java.animations.ColorChangeAnimation;
 import main.java.database.Database;
@@ -8,13 +8,11 @@ import main.java.utils.GuiValidation;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 import java.util.function.Consumer;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
 import static main.java.config.GuiConfig.COLOR_DANGER;
-import static main.java.config.GuiConfig.COLOR_GRAY_10;
 
 
 public class RegisterMenu extends JFrame {
@@ -206,58 +204,62 @@ public class RegisterMenu extends JFrame {
                 MainBackground.setLayout(MainBackgroundLayout);
                 MainBackgroundLayout.setHorizontalGroup(
                     MainBackgroundLayout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                            .addContainerGap(74, Short.MAX_VALUE)
+                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addComponent(RegisterButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(88, 88, 88))
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGroup(MainBackgroundLayout.createParallelGroup()
+                                        .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                                                .addComponent(UsernameLabel)
+                                                .addComponent(PasswordLabel))
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                                                .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(InputPassword, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(0, 0, Short.MAX_VALUE)))
+                            .addGap(18, 18, 18))
                         .addGroup(MainBackgroundLayout.createSequentialGroup()
-                            .addContainerGap(42, Short.MAX_VALUE)
                             .addGroup(MainBackgroundLayout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(125, 125, 125))
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGap(133, 133, 133)
+                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGap(126, 126, 126)
                                     .addGroup(MainBackgroundLayout.createParallelGroup()
                                         .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(136, 136, 136))
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(label1)
-                                    .addGap(44, 44, 44))
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(UsernameLabel)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createParallelGroup()
-                                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                        .addComponent(PasswordLabel)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap())
-                                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(InputPassword, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(RegisterButton, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                                        .addGap(85, 85, 85)))))
+                                        .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))))
+                            .addGap(0, 131, Short.MAX_VALUE))
+                        .addGroup(MainBackgroundLayout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(label1)
+                            .addContainerGap(53, Short.MAX_VALUE))
                 );
                 MainBackgroundLayout.setVerticalGroup(
                     MainBackgroundLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                            .addGap(18, 18, 18)
+                            .addContainerGap()
                             .addComponent(label2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label1)
-                            .addGap(18, 18, 18)
-                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                            .addGap(27, 27, 27)
+                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(18, 18, 18)
                             .addComponent(InputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(24, 24, 24)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(RegisterButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tryAgainButton)
@@ -271,11 +273,11 @@ public class RegisterMenu extends JFrame {
             RegisterFrameContentPane.setLayout(RegisterFrameContentPaneLayout);
             RegisterFrameContentPaneLayout.setHorizontalGroup(
                 RegisterFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
             RegisterFrameContentPaneLayout.setVerticalGroup(
                 RegisterFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
             );
             RegisterFrame.pack();
             RegisterFrame.setLocationRelativeTo(RegisterFrame.getOwner());

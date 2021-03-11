@@ -1,27 +1,27 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp MainBackground::t:::x}"
-			"$verticalGroup": "par l {comp MainBackground::l::573:x}"
+			"$horizontalGroup": "par l {seq l {comp MainBackground:::p::p, space :0:0:x}}"
+			"$verticalGroup": "par l {comp MainBackground::l::565:x}"
 		} ) {
 			name: "LoginFrame"
-			"resizable": false
 			"minimumSize": new java.awt.Dimension( 380, 605 )
 			"maximizedBounds": new java.awt.Rectangle( 530, 60, 380, 605 )
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"title": "Login Menu"
 			"font": new java.awt.Font( "Calibri", 0, 14 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
-			"visible": true
 			"defaultCloseOperation": 2
 			"modalExclusionType": enum java.awt.Dialog$ModalExclusionType APPLICATION_EXCLUDE
-			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "RegisterFrameWindowClosed", true ) )
+			"resizable": false
+			"visible": true
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "loginFrameWindowClosed", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space ::42:x, par l {par l:t {seq l {comp PasswordLabel:::p::p, space :::p, comp passwordErrorLabel:::p:215:p, space :::p}, seq t {par t {comp scrollPane1::l:p:200:p, comp InputPassword::l:p:200:p, comp LoginButton::l:p:200:p}, space :p:85:p}}, seq t {comp label2:::p:116:p, space :p:125:p}, seq t {par l {comp PreviousButton:::p:100:p, comp tryAgainButton:::p:100:p}, space :p:136:p}, seq t {comp label1:::p::p, space :p:44:p}, seq t {comp UsernameLabel:::p::p, space :::p, comp usernameErrorLabel:::p:211:p, space :::p}}}}"
-				"$verticalGroup": "par l {seq t {space :p:18:p, comp label2:::p:118:p, space :p:29:p, comp label1:::p::p, space s:::p, par l {comp UsernameLabel:::p:35:p, comp usernameErrorLabel:::p:33:p}, space :::p, comp scrollPane1:::p::p, space :::p, par l {comp PasswordLabel:::p:39:p, comp passwordErrorLabel:::p:33:p}, space :::p, comp InputPassword:::::p, space :p:71:p, comp tryAgainButton:::p::p, space :::p, comp LoginButton:::p:47:p, space :::x, comp PreviousButton:::p:30:p, space :::p}}"
+				"$horizontalGroup": "par l {seq {space ::49:x, par l {par l:t {seq l {comp PasswordLabel:::p::p, space :::p}, seq t {par t {comp scrollPane1::l:p:200:p, comp InputPassword::l:p:200:p, comp loginButton::l:p:200:p}, space :p:85:p}}, seq t {comp label2:::p:116:p, space :p:125:p}, seq t {comp PreviousButton:::p:100:p, space :p:136:p}, seq t {comp label1:::p::p, space :p:44:p}, seq t {comp UsernameLabel:::p::p, space :p:223:p}}}}"
+				"$verticalGroup": "par l {seq t {space :p:18:p, comp label2:::p:118:p, space :p:29:p, comp label1:::p::p, space s:::p, comp UsernameLabel:::p:35:p, space :::p, comp scrollPane1:::p::p, space :::p, comp PasswordLabel:::p:39:p, space :::p, comp InputPassword:::::p, space :p:32:p, comp loginButton:::p:47:p, space :::x, comp PreviousButton:::p:30:p, space :::p}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -67,12 +67,12 @@ new FormModel {
 					"foreground": sfield java.awt.Color darkGray
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "LoginButton"
+					name: "loginButton"
 					"text": "Login"
 					"foreground": sfield java.awt.Color gray
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "LoginButtonActionPerformed", true ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "loginButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "PreviousButton"
@@ -83,23 +83,6 @@ new FormModel {
 					"alignmentX": 16.0f
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "PreviousButtonActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "tryAgainButton"
-					"text": "Try again"
-					"focusable": false
-					"visible": false
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "tryAgainButtonActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "usernameErrorLabel"
-					"foreground": sfield java.awt.Color red
-					"font": new java.awt.Font( "Segoe UI", 0, 12 )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "passwordErrorLabel"
-					"foreground": sfield java.awt.Color red
-					"font": new java.awt.Font( "Segoe UI", 0, 12 )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

@@ -2,7 +2,10 @@
  * Created by JFormDesigner on Sat Mar 06 18:47:16 IRST 2021
  */
 
-package main.java.gui;
+package main.java.gui.LoginRegisterMenu;
+
+import main.java.gui.LoginMenu.LoginMenu;
+import main.java.gui.RegisterMenu.RegisterMenu;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +15,7 @@ import javax.swing.GroupLayout;
 /**
  * @author Alireza
  */
-public class LoginRegisterMenu  {
+public class LoginRegisterMenu extends JFrame {
 
     public LoginRegisterMenu() {
         initComponents();
@@ -120,11 +123,11 @@ public class LoginRegisterMenu  {
             MainMenuFrameContentPane.setLayout(MainMenuFrameContentPaneLayout);
             MainMenuFrameContentPaneLayout.setHorizontalGroup(
                 MainMenuFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
             );
             MainMenuFrameContentPaneLayout.setVerticalGroup(
                 MainMenuFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
             );
             MainMenuFrame.pack();
             MainMenuFrame.setLocationRelativeTo(MainMenuFrame.getOwner());

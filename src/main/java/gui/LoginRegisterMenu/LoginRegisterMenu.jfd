@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp MainBackground::l::378:x}"
-			"$verticalGroup": "par l {comp MainBackground::l::573:x}"
+			"$horizontalGroup": "par l {comp MainBackground::t::378:x}"
+			"$verticalGroup": "par l {comp MainBackground::l::565:x}"
 		} ) {
 			name: "MainMenuFrame"
 			"resizable": false

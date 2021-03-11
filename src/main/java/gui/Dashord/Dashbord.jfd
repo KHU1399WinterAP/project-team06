@@ -1,0 +1,41 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panel1::l:::x}"
+			"$verticalGroup": "par l {comp panel1::l:::x}"
+		} ) {
+			name: "DashbordFrame"
+			"minimumSize": new java.awt.Dimension( 380, 605 )
+			"name": "Dashbord"
+			"maximizedBounds": new java.awt.Rectangle( 580, 60, 380, 605 )
+			"resizable": false
+			"title": "Dashbord"
+			"background": new java.awt.Color( 0, 112, 192, 255 )
+			"visible": true
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "DashbordFrameWindowClosed", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:111:p, par t {comp label1::t:p:133:p, comp logoutButton:::p:121:p}, space ::134:x}}"
+				"$verticalGroup": "par l {seq t {space :p:98:p, comp label1:::p:54:p, space ::244:x, comp logoutButton:::p:58:p, space :p:151:p}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 112, 192, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "logoutButton"
+					"text": "Log out"
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "logoutButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "adasdasdasds"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 200, 20 )
+			"size": new java.awt.Dimension( 380, 645 )
+		} )
+	}
+}
