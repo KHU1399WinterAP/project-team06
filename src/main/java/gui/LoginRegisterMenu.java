@@ -26,7 +26,8 @@ public class LoginRegisterMenu  {
     }
 
     private void LoginActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        new LoginMenu(MainMenuFrame);
+        MainMenuFrame.setVisible(false);
     }
 
     private void initComponents() {
