@@ -1,4 +1,4 @@
-package main.java.gui;
+package main.java.gui.RegisterMenu;
 
 import main.java.animations.ColorChangeAnimation;
 import main.java.database.Database;
@@ -8,13 +8,11 @@ import main.java.utils.GuiValidation;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 import java.util.function.Consumer;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
 import static main.java.config.GuiConfig.COLOR_DANGER;
-import static main.java.config.GuiConfig.COLOR_GRAY_10;
 
 
 public class RegisterMenu extends JFrame {
