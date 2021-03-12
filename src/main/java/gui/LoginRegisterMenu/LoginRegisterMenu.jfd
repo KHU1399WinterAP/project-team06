@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {comp MainBackground::t::378:x}"
-			"$verticalGroup": "par l {comp MainBackground::l::565:x}"
+			"$verticalGroup": "par l {comp MainBackground::l::579:x}"
 		} ) {
 			name: "MainMenuFrame"
 			"resizable": false
@@ -14,22 +14,25 @@ new FormModel {
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"title": "Quiz Of Kings"
 			"font": new java.awt.Font( "Calibri", 0, 14 )
-			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo (1).jpg" )
 			"visible": true
 			"defaultCloseOperation": 3
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq {space :p:27:p, comp Login:::p:148:p, space :::x, comp Register:::p:148:p}, seq l {space :p:131:p, comp label2:::p:116:p}}, space :::x}, seq l {space :p:45:p, comp label1:::p::p, space :::x}}"
-				"$verticalGroup": "par l {seq t {space :p:16:p, comp label2:::p:118:p, space :p:29:p, comp label1:::p::p, space :::x, par b {comp Login::b:p:77:p, comp Register::b:p:77:p}, space :::x}}"
+				"$horizontalGroup": "par l {seq t {space :p:28:p, comp Login:::p:148:p, space :::x, comp Register:::p:148:p, space :p:25:p}, seq l {space :p:14:p, comp Banner:::p::p, space :::x}}"
+				"$verticalGroup": "par l {seq {space :p:72:p, comp Banner:::p::p, space :p:125:p, par b {comp Login::b:p:77:p, comp Register::b:p:77:p}, space :::x}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
 				"minimumSize": new java.awt.Dimension( 380, 605 )
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "Quiz Of Kings"
+					name: "Banner"
 					"font": new java.awt.Font( "Calibri", 0, 54 )
 					"foreground": sfield java.awt.Color white
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/CropedBanner2 (1).jpg" )
+					"maximumSize": new java.awt.Dimension( 350, 162 )
+					"minimumSize": new java.awt.Dimension( 350, 162 )
+					"preferredSize": new java.awt.Dimension( 350, 162 )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "Login"
@@ -37,6 +40,7 @@ new FormModel {
 					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 196608, 15, false )
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "LoginActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -45,17 +49,13 @@ new FormModel {
 					"font": #SwingDerivedFont0
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RegisterActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
-					"text": "text"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 450, 70 )
-			"size": new java.awt.Dimension( 380, 605 )
+			"size": new java.awt.Dimension( 380, 615 )
+			"location": new java.awt.Point( 335, 85 )
 		} )
 	}
 }

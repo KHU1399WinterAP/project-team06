@@ -21,7 +21,6 @@ public class RegisterMenu extends JFrame {
     private JFrame RegisterFrame;
     private JPanel MainBackground;
     private JLabel label1;
-    private JLabel label2;
     private JLabel UsernameLabel;
     private JScrollPane scrollPane1;
     private JTextArea InputUserName;
@@ -32,6 +31,7 @@ public class RegisterMenu extends JFrame {
     private JButton tryAgainButton;
     private JLabel usernameErrorLabel;
     private JLabel passwordErrorLabel;
+    private JLabel label2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public RegisterMenu(JFrame PreviousFrame) {
@@ -97,7 +97,6 @@ public class RegisterMenu extends JFrame {
         RegisterFrame = new JFrame();
         MainBackground = new JPanel();
         label1 = new JLabel();
-        label2 = new JLabel();
         UsernameLabel = new JLabel();
         scrollPane1 = new JScrollPane();
         InputUserName = new JTextArea();
@@ -108,6 +107,7 @@ public class RegisterMenu extends JFrame {
         tryAgainButton = new JButton();
         usernameErrorLabel = new JLabel();
         passwordErrorLabel = new JLabel();
+        label2 = new JLabel();
 
         //======== RegisterFrame ========
         {
@@ -117,7 +117,7 @@ public class RegisterMenu extends JFrame {
             RegisterFrame.setBackground(new Color(0, 112, 192));
             RegisterFrame.setTitle("Register Menu");
             RegisterFrame.setFont(new Font("Calibri", Font.PLAIN, 14));
-            RegisterFrame.setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")).getImage());
+            RegisterFrame.setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo (1).jpg")).getImage());
             RegisterFrame.setVisible(true);
             RegisterFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             RegisterFrame.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
@@ -140,10 +140,6 @@ public class RegisterMenu extends JFrame {
                 label1.setText("Quiz Of Kings");
                 label1.setFont(new Font("Calibri", Font.PLAIN, 54));
                 label1.setForeground(Color.white);
-
-                //---- label2 ----
-                label2.setText("text");
-                label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")));
 
                 //---- UsernameLabel ----
                 UsernameLabel.setText("Username");
@@ -200,72 +196,74 @@ public class RegisterMenu extends JFrame {
                 passwordErrorLabel.setForeground(Color.red);
                 passwordErrorLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 
+                //---- label2 ----
+                label2.setText("text");
+                label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/SmallLogo.jpg")));
+
                 GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
                 MainBackground.setLayout(MainBackgroundLayout);
                 MainBackgroundLayout.setHorizontalGroup(
                     MainBackgroundLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                            .addContainerGap(74, Short.MAX_VALUE)
-                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(RegisterButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(88, 88, 88))
-                                .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                    .addGroup(MainBackgroundLayout.createParallelGroup()
-                                        .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                            .addGroup(MainBackgroundLayout.createParallelGroup()
-                                                .addComponent(UsernameLabel)
-                                                .addComponent(PasswordLabel))
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(MainBackgroundLayout.createParallelGroup()
-                                                .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(InputPassword, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 0, Short.MAX_VALUE)))
-                            .addGap(18, 18, 18))
                         .addGroup(MainBackgroundLayout.createSequentialGroup()
                             .addGroup(MainBackgroundLayout.createParallelGroup()
                                 .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                    .addGap(133, 133, 133)
-                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(112, 112, 112)
+                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                    .addGap(126, 126, 126)
+                                    .addGap(55, 55, 55)
+                                    .addComponent(label1)))
+                            .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                            .addContainerGap(98, Short.MAX_VALUE)
+                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                                     .addGroup(MainBackgroundLayout.createParallelGroup()
+                                        .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                            .addComponent(UsernameLabel)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                            .addComponent(PasswordLabel)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(InputPassword, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(RegisterButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(3, 3, 3))
+                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                                    .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))))
-                            .addGap(0, 131, Short.MAX_VALUE))
-                        .addGroup(MainBackgroundLayout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addComponent(label1)
-                            .addContainerGap(53, Short.MAX_VALUE))
+                                        .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(135, 135, 135))))
                 );
                 MainBackgroundLayout.setVerticalGroup(
                     MainBackgroundLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(label2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                            .addGap(47, 47, 47)
+                            .addComponent(label2)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(label1)
-                            .addGap(27, 27, 27)
-                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addComponent(label1)
+                                    .addGap(8, 8, 8)
+                                    .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(10, 10, 10))
+                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                                    .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)))
                             .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addGroup(MainBackgroundLayout.createParallelGroup()
                                 .addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(InputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(RegisterButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tryAgainButton)
+                            .addComponent(InputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(RegisterButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
+                            .addComponent(tryAgainButton)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
                 );
             }
 
@@ -273,7 +271,7 @@ public class RegisterMenu extends JFrame {
             RegisterFrameContentPane.setLayout(RegisterFrameContentPaneLayout);
             RegisterFrameContentPaneLayout.setHorizontalGroup(
                 RegisterFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
             RegisterFrameContentPaneLayout.setVerticalGroup(
                 RegisterFrameContentPaneLayout.createParallelGroup()

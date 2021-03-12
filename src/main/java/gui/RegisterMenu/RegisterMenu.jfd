@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp MainBackground::l:::x}"
+			"$horizontalGroup": "par l {comp MainBackground::t:::x}"
 			"$verticalGroup": "par l {comp MainBackground::t::565:x}"
 		} ) {
 			name: "RegisterFrame"
@@ -14,14 +14,14 @@ new FormModel {
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"title": "Register Menu"
 			"font": new java.awt.Font( "Calibri", 0, 14 )
-			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo (1).jpg" )
 			"visible": true
 			"defaultCloseOperation": 2
 			"modalExclusionType": enum java.awt.Dialog$ModalExclusionType APPLICATION_EXCLUDE
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "RegisterFrameWindowClosed", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space ::74:x, par l:::p {seq {comp RegisterButton:::p:200:p, space :p:88:p}, seq {par l {seq {par l {comp UsernameLabel:::p::p, comp PasswordLabel::l:p::p}, space :::p, par l {comp usernameErrorLabel:::p:211:p, comp passwordErrorLabel::l:p:215:p}}, comp scrollPane1:::p:200:p, comp InputPassword::l:p:200:p}, space :0:0:x}}, space :p:18:p}, seq {par l {seq l {space :p:133:p, comp label2:::p:116:p}, seq l {space :p:126:p, par l {comp PreviousButton:::p:100:p, comp tryAgainButton:::p:100:p}}}, space :0:131:x}, seq l {space :p:40:p, comp label1:::p::p, space ::53:x}}"
-				"$verticalGroup": "par l {seq t {space :::p, comp label2:::p:118:p, space :::p, comp label1:::p::p, space :p:27:p, par t {comp UsernameLabel:::p:35:p, comp usernameErrorLabel:::p:33:p}, space :::p, comp scrollPane1:::p::p, space :::p, par t {comp PasswordLabel:::p:39:p, comp passwordErrorLabel:::p:33:p}, space :p:18:p, comp InputPassword:::::p, space u:::p, comp RegisterButton:::p:47:p, space :::p, comp tryAgainButton:::p::p, space :::x, comp PreviousButton:::p:30:p, space :::p}}"
+				"$horizontalGroup": "par l {seq {par l {seq {space :p:112:p, comp label2:::p:156:p}, seq l {space :p:55:p, comp label1:::p::p}}, space ::38:x}, seq t {space ::98:x, par l {seq t {par l {seq l {comp UsernameLabel:::p::p, space :::p, comp usernameErrorLabel:::p:211:p}, seq {comp PasswordLabel:::p::p, space :::p, comp passwordErrorLabel:::p:215:p}, comp scrollPane1::l:p:200:p, comp InputPassword::l:p:200:p, comp RegisterButton::l:p:200:p}, space :p:3:p}, seq t {par t {comp PreviousButton:::p:100:p, comp tryAgainButton:::p:100:p}, space :p:135:p}}}}"
+				"$verticalGroup": "par l {seq t {space :p:47:p, comp label2:::p::p, space :::p, par l {seq {comp label1:::p::p, space :p:8:p, comp usernameErrorLabel:::p:33:p, space :p:10:p}, seq t {comp UsernameLabel:::p:35:p, space s:::p}}, comp scrollPane1:::p::p, space :::p, par l {comp PasswordLabel:::p:39:p, comp passwordErrorLabel:::p:33:p}, space :::p, comp InputPassword:::::p, space :::p, comp RegisterButton:::p:47:p, space :::x, comp tryAgainButton:::p::p, space u:::p, comp PreviousButton:::p:30:p}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -33,11 +33,6 @@ new FormModel {
 					"text": "Quiz Of Kings"
 					"font": new java.awt.Font( "Calibri", 0, 54 )
 					"foreground": sfield java.awt.Color white
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
-					"text": "text"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo.jpg" )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "UsernameLabel"
@@ -100,6 +95,11 @@ new FormModel {
 					name: "passwordErrorLabel"
 					"foreground": sfield java.awt.Color red
 					"font": new java.awt.Font( "Segoe UI", 0, 12 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "text"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/SmallLogo.jpg" )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

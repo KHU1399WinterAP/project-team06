@@ -4,8 +4,6 @@
 
 package main.java.gui.Dashord;
 
-import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -49,6 +47,7 @@ public class Dashbord extends JFrame {
             DashbordFrame.setTitle("Dashbord");
             DashbordFrame.setBackground(new Color(0, 112, 192));
             DashbordFrame.setVisible(true);
+            DashbordFrame.setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo (1).jpg")).getImage());
             DashbordFrame.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {

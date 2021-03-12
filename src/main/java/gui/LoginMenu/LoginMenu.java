@@ -79,7 +79,7 @@ public class LoginMenu extends JFrame {
             LoginFrame.setBackground(new Color(0, 112, 192));
             LoginFrame.setTitle("Login Menu");
             LoginFrame.setFont(new Font("Calibri", Font.PLAIN, 14));
-            LoginFrame.setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")).getImage());
+            LoginFrame.setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Logo (1).jpg")).getImage());
             LoginFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             LoginFrame.setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
             LoginFrame.setResizable(false);
@@ -106,7 +106,7 @@ public class LoginMenu extends JFrame {
 
                 //---- label2 ----
                 label2.setText("text");
-                label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Logo.jpg")));
+                label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/SmallLogo.jpg")));
 
                 //---- UsernameLabel ----
                 UsernameLabel.setText("Username");
@@ -154,39 +154,37 @@ public class LoginMenu extends JFrame {
                 MainBackgroundLayout.setHorizontalGroup(
                     MainBackgroundLayout.createParallelGroup()
                         .addGroup(MainBackgroundLayout.createSequentialGroup()
-                            .addContainerGap(49, Short.MAX_VALUE)
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(MainBackgroundLayout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createParallelGroup()
-                                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                        .addComponent(PasswordLabel)
-                                        .addContainerGap())
-                                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(InputPassword, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(loginButton, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                                        .addGap(85, 85, 85)))
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(125, 125, 125))
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(136, 136, 136))
                                 .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                                     .addComponent(label1)
                                     .addGap(44, 44, 44))
                                 .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(UsernameLabel)
-                                    .addGap(223, 223, 223))))
+                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(110, 110, 110))))
+                        .addGroup(MainBackgroundLayout.createSequentialGroup()
+                            .addGroup(MainBackgroundLayout.createParallelGroup()
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGap(138, 138, 138)
+                                    .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGap(84, 84, 84)
+                                    .addGroup(MainBackgroundLayout.createParallelGroup()
+                                        .addComponent(InputPassword, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(PasswordLabel)
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(UsernameLabel))))
+                            .addGap(0, 0, Short.MAX_VALUE))
                 );
                 MainBackgroundLayout.setVerticalGroup(
                     MainBackgroundLayout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                             .addGap(18, 18, 18)
-                            .addComponent(label2, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-                            .addGap(29, 29, 29)
+                            .addComponent(label2, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label1)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -194,7 +192,7 @@ public class LoginMenu extends JFrame {
                             .addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(InputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(32, 32, 32)
+                            .addGap(12, 12, 12)
                             .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -206,13 +204,11 @@ public class LoginMenu extends JFrame {
             LoginFrameContentPane.setLayout(LoginFrameContentPaneLayout);
             LoginFrameContentPaneLayout.setHorizontalGroup(
                 LoginFrameContentPaneLayout.createParallelGroup()
-                    .addGroup(LoginFrameContentPaneLayout.createSequentialGroup()
-                        .addComponent(MainBackground, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
             );
             LoginFrameContentPaneLayout.setVerticalGroup(
                 LoginFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
             );
             LoginFrame.pack();
             LoginFrame.setLocationRelativeTo(LoginFrame.getOwner());
