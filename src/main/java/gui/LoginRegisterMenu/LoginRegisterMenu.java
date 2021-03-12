@@ -2,7 +2,10 @@
  * Created by JFormDesigner on Sat Mar 06 18:47:16 IRST 2021
  */
 
-package main.java.gui;
+package main.java.gui.LoginRegisterMenu;
+
+import main.java.gui.LoginMenu.LoginMenu;
+import main.java.gui.RegisterMenu.RegisterMenu;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +15,7 @@ import javax.swing.GroupLayout;
 /**
  * @author Alireza
  */
-public class LoginRegisterMenu  {
+public class LoginRegisterMenu extends JFrame {
 
     public LoginRegisterMenu() {
         initComponents();
@@ -26,7 +29,8 @@ public class LoginRegisterMenu  {
     }
 
     private void LoginActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        new LoginMenu(MainMenuFrame);
+        MainMenuFrame.setVisible(false);
     }
 
     private void initComponents() {
