@@ -18,8 +18,8 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo (1).jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "DashbordFrameWindowClosed", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:111:p, par t {comp label1::t:p:133:p, comp logoutButton:::p:121:p}, space ::134:x}}"
-				"$verticalGroup": "par l {seq t {space :p:98:p, comp label1:::p:54:p, space ::244:x, comp logoutButton:::p:58:p, space :p:151:p}}"
+				"$horizontalGroup": "par l {seq t {space ::134:x, comp logoutButton:::p:121:p, space :p:123:p}}"
+				"$verticalGroup": "par l {seq t {space ::355:x, comp logoutButton:::p:58:p, space :p:152:p}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -29,14 +29,10 @@ new FormModel {
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "logoutButtonActionPerformed", true ) )
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "adasdasdasds"
-				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 200, 20 )
-			"size": new java.awt.Dimension( 380, 645 )
+			"location": new java.awt.Point( 300, 130 )
+			"size": new java.awt.Dimension( 380, 605 )
 		} )
 	}
 }

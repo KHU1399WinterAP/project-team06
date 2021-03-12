@@ -113,11 +113,11 @@ public class LoginRegisterMenu extends JFrame {
             MainMenuFrameContentPane.setLayout(MainMenuFrameContentPaneLayout);
             MainMenuFrameContentPaneLayout.setHorizontalGroup(
                 MainMenuFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
             );
             MainMenuFrameContentPaneLayout.setVerticalGroup(
                 MainMenuFrameContentPaneLayout.createParallelGroup()
-                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                    .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
             );
             MainMenuFrame.pack();
             MainMenuFrame.setLocationRelativeTo(MainMenuFrame.getOwner());

@@ -36,7 +36,6 @@ public class Dashbord extends JFrame {
         DashbordFrame = new JFrame();
         panel1 = new JPanel();
         logoutButton = new JButton();
-        label1 = new JLabel();
 
         //======== DashbordFrame ========
         {
@@ -65,28 +64,21 @@ public class Dashbord extends JFrame {
                 logoutButton.setFocusable(false);
                 logoutButton.addActionListener(e -> logoutButtonActionPerformed(e));
 
-                //---- label1 ----
-                label1.setText("adasdasdasds");
-
                 GroupLayout panel1Layout = new GroupLayout(panel1);
                 panel1.setLayout(panel1Layout);
                 panel1Layout.setHorizontalGroup(
                     panel1Layout.createParallelGroup()
-                        .addGroup(panel1Layout.createSequentialGroup()
-                            .addGap(111, 111, 111)
-                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(134, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                            .addContainerGap(134, Short.MAX_VALUE)
+                            .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+                            .addGap(123, 123, 123))
                 );
                 panel1Layout.setVerticalGroup(
                     panel1Layout.createParallelGroup()
                         .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                            .addGap(98, 98, 98)
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                            .addContainerGap(355, Short.MAX_VALUE)
                             .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                            .addGap(151, 151, 151))
+                            .addGap(152, 152, 152))
                 );
             }
 
@@ -110,6 +102,5 @@ public class Dashbord extends JFrame {
     private JFrame DashbordFrame;
     private JPanel panel1;
     private JButton logoutButton;
-    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

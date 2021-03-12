@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp MainBackground::l::378:x}"
-			"$verticalGroup": "par l {comp MainBackground::l::573:x}"
+			"$horizontalGroup": "par l {comp MainBackground::t::378:x}"
+			"$verticalGroup": "par l {comp MainBackground::l::565:x}"
 		} ) {
 			name: "MainMenuFrame"
 			"resizable": false
@@ -51,7 +51,7 @@ new FormModel {
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 160, 5 )
+			"location": new java.awt.Point( 300, 130 )
 			"size": new java.awt.Dimension( 380, 605 )
 		} )
 	}

@@ -89,6 +89,7 @@ public class RegisterMenu extends JFrame {
     }
 
     private void tryAgainButtonActionPerformed(ActionEvent e) {
+        RegisterFrame.setVisible(false);
         new RegisterMenu(PreviousFrame);
     }
 
