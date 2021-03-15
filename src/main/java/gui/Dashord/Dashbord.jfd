@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp panel1::l:::x}"
-			"$verticalGroup": "par l {comp panel1::l:::x}"
+			"$horizontalGroup": "par l {comp Panel::l:::x}"
+			"$verticalGroup": "par l {comp Panel::l:::x}"
 		} ) {
 			name: "DashbordFrame"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
@@ -18,20 +18,48 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo (1).jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "DashbordFrameWindowClosed", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space ::134:x, comp logoutButton:::p:121:p, space :p:123:p}}"
-				"$verticalGroup": "par l {seq t {space ::355:x, comp logoutButton:::p:58:p, space :p:152:p}}"
+				"$horizontalGroup": "par l {seq t {par l {seq {space :p:9:p, comp ProfileButton:::p:46:p, space :::p, comp ProfileName:::p:86:p, space :::p, comp SettingsIcon:::p:41:p, space ::102:x, comp NumberOfCoins:::p:40:p}, seq {space ::52:x, comp MultiplayerButton:::p:133:p, space s:::p, comp SingleplayerButton:::p:133:p}}, space :::p, comp CoinIcon:::p::p, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :p:24:p, par l {seq {par t {comp CoinIcon::t:p::p, par b:t {comp NumberOfCoins::b:p::p, comp ProfileName::b:::x}}, space :p:71:p}, seq l {par l {seq l {space :3:3:p, comp SettingsIcon:::p::p}, seq l {space :p:6:p, comp ProfileButton:::p::p}}, space :::x}}, par b {comp MultiplayerButton::b:p:69:p, comp SingleplayerButton::b:p:69:p}, space ::380:x}}"
 			} ) {
-				name: "panel1"
+				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "CoinIcon"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/smallCoin.png" )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "NumberOfCoins"
+					"background": new java.awt.Color( 255, 255, 51, 255 )
+					"foreground": new java.awt.Color( 255, 255, 51, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "ProfileName"
+				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "logoutButton"
-					"text": "Log out"
-					"focusable": false
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "logoutButtonActionPerformed", true ) )
+					name: "ProfileButton"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/profile.png" )
+					"background": new java.awt.Color( 0, 112, 192, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "SettingsIcon"
+					"background": new java.awt.Color( 0, 112, 192, 255 )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/settings.png" )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "MultiplayerButton"
+					"text": "Multiplayer"
+					"background": &Color0 new java.awt.Color( 0, 153, 0, 255 )
+					"foreground": &Color1 new java.awt.Color( 255, 102, 102, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "SingleplayerButton"
+					"text": "Singleplayer"
+					"background": #Color0
+					"foreground": #Color1
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 300, 130 )
+			"location": new java.awt.Point( 450, 50 )
 			"size": new java.awt.Dimension( 380, 605 )
 		} )
 	}
