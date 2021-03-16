@@ -78,17 +78,19 @@ public class Dashbord extends JFrame {
 
                 //---- SettingsIcon ----
                 SettingsIcon.setBackground(new Color(0, 112, 192));
-                SettingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settings.png")));
+                SettingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settingUB.png")));
 
                 //---- MultiplayerButton ----
                 MultiplayerButton.setText("Multiplayer");
-                MultiplayerButton.setBackground(new Color(0, 153, 0));
-                MultiplayerButton.setForeground(new Color(255, 102, 102));
+                MultiplayerButton.setBackground(new Color(255, 153, 0));
+                MultiplayerButton.setForeground(new Color(0, 204, 153));
+                MultiplayerButton.setFont(MultiplayerButton.getFont().deriveFont(MultiplayerButton.getFont().getSize() + 4f));
 
                 //---- SingleplayerButton ----
                 SingleplayerButton.setText("Singleplayer");
-                SingleplayerButton.setBackground(new Color(0, 153, 0));
-                SingleplayerButton.setForeground(new Color(255, 102, 102));
+                SingleplayerButton.setBackground(new Color(255, 153, 0));
+                SingleplayerButton.setForeground(new Color(0, 204, 153));
+                SingleplayerButton.setFont(SingleplayerButton.getFont().deriveFont(SingleplayerButton.getFont().getSize() + 4f));
 
                 GroupLayout PanelLayout = new GroupLayout(Panel);
                 Panel.setLayout(PanelLayout);
