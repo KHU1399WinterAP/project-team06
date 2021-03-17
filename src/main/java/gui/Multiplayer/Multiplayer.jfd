@@ -7,7 +7,7 @@ new FormModel {
 			"$horizontalGroup": "par l {comp Panel::l:::x}"
 			"$verticalGroup": "par l {comp Panel::l:::x}"
 		} ) {
-			name: "DashbordFrame"
+			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
 			"name": "Dashbord"
 			"maximizedBounds": new java.awt.Rectangle( 580, 60, 380, 605 )
@@ -15,18 +15,18 @@ new FormModel {
 			"title": "Dashbord"
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"visible": true
-			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo (1).jpg" )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "DashbordFrameWindowClosed", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq l {space :p:29:p, comp QuestionMark:::p::p, space ::29:x}}"
-				"$verticalGroup": "par l {seq l {space :p:82:p, comp QuestionMark:::p::p, space ::171:x}}"
+				"$verticalGroup": "par l {seq l {space :p:82:p, comp QuestionMark:::p::p, space ::163:x}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "QuestionMark"
 					"enabled": false
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/709c2fb9d74ddc87ccab6eb4341f888e.jpg" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/QuestionMark.jpg" )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

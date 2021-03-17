@@ -1,0 +1,174 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panel::t:::x}"
+			"$verticalGroup": "par l {comp panel::t:::x}"
+		} ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 380, 605 )
+			"name": "ProfileSettings"
+			"maximizedBounds": new java.awt.Rectangle( 580, 60, 380, 605 )
+			"resizable": false
+			"title": "profile settings"
+			"background": new java.awt.Color( 0, 112, 192, 255 )
+			"visible": true
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
+			"defaultCloseOperation": 2
+			"$sizePolicy": 2
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "ProfileSettingsFrameWindowClosing", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {par l {seq l {space :p:2:p, comp changePasswordButton:::p::p, space s:::p, par l {comp inputNewPassword:::p:189:p, comp passwordErrorLabel:::::x}}, seq l {space :::p, comp previousButton:::p:57:p}, seq l {space :p:138:p, comp logoutButton:::p:85:p}, seq l {space :p:37:p, par l {seq {comp face1:::p:73:p, space :::p, comp face2:::p:73:p, space :::p, comp face3:::p:73:p, space :::p, comp face4:::p:73:p}, seq {par t {comp face5:::p:73:p, comp face9:::p:73:p}, space :::p, par l {seq {comp face6:::p:73:p, space :::p, comp face7:::p:73:p}, seq {comp face10:::p:73:p, space :::p, comp face11:::p:73:p}}, space :::p, par l {comp face8:::p:73:p, comp face12:::p:73:p}}}}, seq l {comp changeUsernameButton:::p::p, space s:::p, par l {comp InputNewUserName:::p:188:p, comp usernameErrorLabel:::p:190:p}}}, space ::25:x}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :::p, par l {comp face1::l:p:64:p, comp face2::l:p:64:p, comp face3::l:p:64:p, comp face4::l:p:64:p}, space :::p, par l {comp face5:::p:64:p, comp face6::l:p:64:p, comp face7::l:p:64:p, comp face8::l:p:64:p}, space :::p, par l {comp face9::l:p:64:p, comp face10::l:p:64:p, comp face11::l:p:64:p, comp face12::l:p:64:p}, space :p:72:p, par t {comp changeUsernameButton:::p:32:p, comp InputNewUserName:::p::p}, space :::p, comp usernameErrorLabel:::p:24:p, space s:::p, par l {comp changePasswordButton:::p:30:p, comp inputNewPassword:::p:27:p}, space :::p, comp passwordErrorLabel:::p:26:p, space ::26:x, comp logoutButton:::p::p, space :p:15:p}}"
+			} ) {
+				name: "panel"
+				"background": new java.awt.Color( 0, 112, 192, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "previousButton"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/leftArrow@2x.png" )
+					"background": new java.awt.Color( 0, 112, 192, 255 )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face1"
+					"background": &Color0 new java.awt.Color( 0, 112, 192, 255 )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face1.png" )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face1ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face2"
+					"background": #Color0
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face2.png" )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face2ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face3"
+					"background": #Color0
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face3.png" )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face3ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face5"
+					"background": #Color0
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face5.png" )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face5ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face6"
+					"background": #Color0
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face6.png" )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face6ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face4"
+					"background": #Color0
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face4.png" )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face4ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face7"
+					"background": #Color0
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face7.png" )
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face7ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face8"
+					"background": #Color0
+					"icon": &SwingIcon0 new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Avatars/face2.png" )
+					"focusable": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face10"
+					"background": #Color0
+					"icon": #SwingIcon0
+					"focusable": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face9"
+					"background": #Color0
+					"icon": #SwingIcon0
+					"focusable": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face11"
+					"background": #Color0
+					"icon": #SwingIcon0
+					"focusable": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "face12"
+					"background": #Color0
+					"icon": #SwingIcon0
+					"focusable": false
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "changeUsernameButton"
+					"text": "Change username :"
+					"font": new java.awt.Font( "Segoe UI", 1, 10 )
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"foreground": sfield java.awt.Color white
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "changeUsernameButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "changePasswordButton"
+					"text": "Change password :"
+					"font": new java.awt.Font( "Segoe UI", 1, 10 )
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"focusable": false
+					"foreground": sfield java.awt.Color white
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "changePasswordButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JPasswordField" ) {
+					name: "inputNewPassword"
+					"background": sfield java.awt.Color white
+					"foreground": new java.awt.Color( 0, 112, 192, 255 )
+					"text": "new password"
+					"font": new java.awt.Font( "Monospaced", 0, 18 )
+					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "inputNewPasswordFocusGained", true ) )
+					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "inputNewPasswordFocusLost", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "usernameErrorLabel"
+					"foreground": sfield java.awt.Color red
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "passwordErrorLabel"
+					"foreground": sfield java.awt.Color red
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "logoutButton"
+					"text": "Log out"
+					"background": new java.awt.Color( 0, 112, 192, 255 )
+					"foreground": sfield java.awt.Color red
+					"focusable": false
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "logoutButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "InputNewUserName"
+					"background": sfield java.awt.Color white
+					"foreground": new java.awt.Color( 0, 112, 192, 255 )
+					"lineWrap": true
+					"tabSize": 5
+					"text": "new username"
+					"font": new java.awt.Font( "Microsoft Yi Baiti", 1, 18 )
+					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "InputNewUserNameFocusGained", true ) )
+					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "InputNewUserNameFocusLost", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 380, 605 )
+			"location": new java.awt.Point( 175, 45 )
+		} )
+	}
+}

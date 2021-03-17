@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,20 +7,21 @@ new FormModel {
 			"$horizontalGroup": "par l {comp MainBackground::l::378:x}"
 			"$verticalGroup": "par l {comp MainBackground::t::565:x}"
 		} ) {
-			name: "LoginFrame"
+			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
 			"maximizedBounds": new java.awt.Rectangle( 530, 60, 380, 605 )
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"title": "Login Menu"
 			"font": new java.awt.Font( "Calibri", 0, 14 )
-			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo (1).jpg" )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
 			"defaultCloseOperation": 2
 			"modalExclusionType": enum java.awt.Dialog$ModalExclusionType APPLICATION_EXCLUDE
 			"resizable": false
 			"visible": true
-			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "loginFrameWindowClosed", true ) )
+			"name": "LoginMenu"
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::x, par l {seq t {comp label1:::p::p, space :p:44:p}, seq t {comp label2:::p:154:p, space :p:110:p}}}, seq {par l {seq l {space :p:138:p, comp PreviousButton:::p:100:p}, seq l {space :p:84:p, par l {comp InputPassword:::p:200:p, comp loginButton:::p:200:p, comp PasswordLabel::l:p::p, comp scrollPane1::l:p:200:p, comp UsernameLabel::l:p::p}}}, space :0:0:x}}"
+				"$horizontalGroup": "par l {seq {space :::x, comp label1:::p::p, space :p:44:p}, seq {par l {seq l {space :p:138:p, comp PreviousButton:::p:100:p}, seq l {space :p:84:p, par l {comp InputPassword:::p:200:p, comp loginButton:::p:200:p, comp PasswordLabel::l:p::p, comp scrollPane1::l:p:200:p, comp UsernameLabel::l:p::p}}}, space :0:0:x}, seq l {space :p:110:p, comp label2:::p:154:p, space :::x}}"
 				"$verticalGroup": "par l {seq t {space :p:18:p, comp label2:::p:141:p, space :::p, comp label1:::p::p, space :::p, comp UsernameLabel:::p:35:p, space :::p, comp scrollPane1:::p::p, space :::p, comp PasswordLabel:::p:39:p, space :::p, comp InputPassword:::::p, space :p:12:p, comp loginButton:::p:47:p, space :::x, comp PreviousButton:::p:30:p, space :::p}}"
 			} ) {
 				name: "MainBackground"
@@ -37,7 +38,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "text"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/SmallLogo.jpg" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/SmallLogo.jpg" )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "UsernameLabel"
