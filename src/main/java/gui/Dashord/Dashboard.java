@@ -6,6 +6,7 @@ package main.java.gui.Dashord;
 
 import main.java.config.profileConfig;
 import main.java.gui.Dashord.profilesettings.ProfileSettings;
+import main.java.gui.Dashord.setting.SettingPanel;
 import main.java.models.User;
 
 import java.awt.*;
@@ -40,6 +41,11 @@ public class Dashboard extends JFrame {
                 initProfilePicture(activeUser);
             }
         });
+    }
+
+    private void SettingButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new SettingPanel(this);
     }
 
     private void dashboardFrameWindowClosing(WindowEvent e) {
@@ -98,6 +104,7 @@ public class Dashboard extends JFrame {
             SettingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settingUB.png")));
             SettingsIcon.setFocusable(false);
             SettingsIcon.setBorder(null);
+            SettingsIcon.addActionListener(e -> SettingButtonActionPerformed(e));
 
             //---- MultiplayerButton ----
             MultiplayerButton.setText("Multiplayer");
