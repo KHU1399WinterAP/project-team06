@@ -15,7 +15,6 @@ new FormModel {
 			"title": "Register Menu"
 			"font": new java.awt.Font( "Calibri", 0, 14 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
-			"visible": true
 			"defaultCloseOperation": 2
 			"modalExclusionType": enum java.awt.Dialog$ModalExclusionType APPLICATION_EXCLUDE
 			"name": "RegisterMenu"

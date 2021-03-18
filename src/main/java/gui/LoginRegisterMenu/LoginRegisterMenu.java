@@ -19,6 +19,7 @@ public class LoginRegisterMenu extends JFrame {
 
     public LoginRegisterMenu() {
         initComponents();
+        this.setVisible(true);
 
     }
 
@@ -48,7 +49,6 @@ public class LoginRegisterMenu extends JFrame {
         setTitle("Quiz Of Kings");
         setFont(new Font("Calibri", Font.PLAIN, 14));
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
-        setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         var contentPane = getContentPane();
 

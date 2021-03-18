@@ -5,7 +5,7 @@
 package main.java.gui.Dashord;
 
 import main.java.config.profileConfig;
-import main.java.gui.Dashord.profilesettings.profilesettings;
+import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.models.User;
 
 import java.awt.*;
@@ -13,21 +13,33 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
-public class Dashbord extends JFrame {
+public class Dashboard extends JFrame {
     public static User activeUser;
     private final JFrame LoginRegisterMenu;
 
-    public Dashbord(JFrame LoginRegisterMenu, User activeUser) {
-        Dashbord.activeUser =activeUser;
+    public Dashboard(JFrame LoginRegisterMenu, User activeUser) {
+        Dashboard.activeUser = activeUser;
         this.LoginRegisterMenu = LoginRegisterMenu;
         initComponents();
-        username.setText(activeUser.username);
+        this.setVisible(true);
+        setCurrentUsername();
         initProfilePicture(activeUser);
     }
-   
+
+    private void setCurrentUsername(){
+        username.setText(activeUser.username);
+    }
+
     private void ProfileButtonActionPerformed(ActionEvent e) {
         this.setVisible(false);
-        new profilesettings(LoginRegisterMenu,this);
+        var prof = new ProfileSettings(LoginRegisterMenu, this);
+        prof.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                setCurrentUsername();
+                initProfilePicture(activeUser);
+            }
+        });
     }
 
     private void dashboardFrameWindowClosing(WindowEvent e) {
@@ -35,7 +47,7 @@ public class Dashbord extends JFrame {
         LoginRegisterMenu.setVisible(true);
     }
 
-    public void initProfilePicture(User user){
+    public void initProfilePicture(User user) {
         profile.setIcon(new ImageIcon(getClass().getResource(profileConfig.profilePicture(user))));
     }
 
@@ -58,7 +70,6 @@ public class Dashbord extends JFrame {
         setResizable(false);
         setTitle("Dashboard");
         setBackground(new Color(0, 112, 192));
-        setVisible(true);
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
         addWindowListener(new WindowAdapter() {
             @Override
@@ -79,12 +90,14 @@ public class Dashbord extends JFrame {
             ProfileButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/profile.png")));
             ProfileButton.setBackground(new Color(0, 112, 192));
             ProfileButton.setFocusable(false);
+            ProfileButton.setBorder(null);
             ProfileButton.addActionListener(e -> ProfileButtonActionPerformed(e));
 
             //---- SettingsIcon ----
             SettingsIcon.setBackground(new Color(0, 112, 192));
             SettingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settingUB.png")));
             SettingsIcon.setFocusable(false);
+            SettingsIcon.setBorder(null);
 
             //---- MultiplayerButton ----
             MultiplayerButton.setText("Multiplayer");

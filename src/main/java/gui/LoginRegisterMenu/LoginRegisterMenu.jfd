@@ -15,7 +15,6 @@ new FormModel {
 			"title": "Quiz Of Kings"
 			"font": new java.awt.Font( "Calibri", 0, 14 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
-			"visible": true
 			"defaultCloseOperation": 3
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq {space :p:14:p, comp Banner:::p::p, space :::x}, seq l {space :p:28:p, comp Login:::p:148:p, space :::x, comp Register:::p:148:p, space :p:25:p}}"

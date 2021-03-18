@@ -18,7 +18,7 @@ import static main.java.config.GuiConfig.COLOR_DANGER;
 public class RegisterMenu extends JFrame {
     private final JFrame PreviousFrame;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private static JPanel MainBackground;
+    private JPanel MainBackground;
     private JLabel label1;
     private JLabel label2;
     private JLabel UsernameLabel;
@@ -36,6 +36,7 @@ public class RegisterMenu extends JFrame {
     public RegisterMenu(JFrame PreviousFrame) {
         this.PreviousFrame = PreviousFrame;
         initComponents();
+        this.setVisible(true);
     }
 
     private void RegisterButtonActionPerformed(ActionEvent e) {
@@ -116,7 +117,6 @@ public class RegisterMenu extends JFrame {
         setTitle("Register Menu");
         setFont(new Font("Calibri", Font.PLAIN, 14));
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
-        setVisible(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setName("RegisterMenu");

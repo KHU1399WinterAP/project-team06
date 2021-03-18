@@ -4,19 +4,15 @@
 
 package main.java.gui.LoginMenu;
 
-import main.java.animations.ColorChangeAnimation;
 import main.java.database.Database;
-import main.java.gui.Dashord.Dashbord;
+import main.java.gui.Dashord.Dashboard;
 import main.java.gui.RegisterMenu.RegisterMenu;
 import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.function.Consumer;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-
-import static main.java.config.GuiConfig.COLOR_DANGER;
 
 /**
  * @author Sina
@@ -28,6 +24,7 @@ public class LoginMenu extends JFrame {
     public LoginMenu(JFrame LoginRegisterMenu) {
         this.LoginRegisterMenu = LoginRegisterMenu;
         initComponents();
+      this.setVisible(true);
     }
 
     private void PreviousButtonActionPerformed(ActionEvent e) {
@@ -41,7 +38,7 @@ public class LoginMenu extends JFrame {
         if (!username.isBlank()) {
             User user = Database.getUserByUsername(username);
             if (user != null && user.password.equals(password)) {
-                new Dashbord(LoginRegisterMenu,user);
+                new Dashboard(LoginRegisterMenu,user);
                 this.dispose();
                 return;
             }
@@ -83,7 +80,6 @@ public class LoginMenu extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setResizable(false);
-        setVisible(true);
         setName("LoginMenu");
         addWindowListener(new WindowAdapter() {
             @Override
