@@ -1,6 +1,8 @@
 
 package main.java.gui.Dashord.setting;
 
+import main.java.app.Main;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -28,10 +30,23 @@ public class SettingPanel extends JFrame {
         dashboard.setVisible(true);
     }
 
+    private void musicButtonActionPerformed(ActionEvent e) {
+        if (musicButton.getText().equals("ON")) {
+            musicButton.setText("OFF");
+            Main.mp3Player.pause();
+        }else {
+            musicButton.setText("ON");
+            Main.mp3Player.play();
+        }
+    }
+
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         MainBackground = new JPanel();
         previousButton = new JButton();
+        musiclabel = new JLabel();
+        musicButton = new JButton();
 
         //======== this ========
         setResizable(false);
@@ -41,7 +56,7 @@ public class SettingPanel extends JFrame {
         setTitle("Setting");
         setFont(new Font("Calibri", Font.PLAIN, 14));
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -63,13 +78,32 @@ public class SettingPanel extends JFrame {
             previousButton.setBorder(null);
             previousButton.addActionListener(e -> previousButtonActionPerformed(e));
 
+            //---- musiclabel ----
+            musiclabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/musicCat@2x.png")));
+
+            //---- musicButton ----
+            musicButton.setBackground(new Color(0, 112, 192));
+            musicButton.setForeground(Color.white);
+            musicButton.setFont(new Font("Segoe UI", Font.BOLD, 19));
+            musicButton.setText("ON");
+            musicButton.setBorder(null);
+            musicButton.setFocusable(false);
+            musicButton.addActionListener(e -> musicButtonActionPerformed(e));
+
             GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
             MainBackground.setLayout(MainBackgroundLayout);
             MainBackgroundLayout.setHorizontalGroup(
                 MainBackgroundLayout.createParallelGroup()
                     .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(MainBackgroundLayout.createParallelGroup()
+                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(musiclabel)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             MainBackgroundLayout.setVerticalGroup(
@@ -77,6 +111,10 @@ public class SettingPanel extends JFrame {
                     .addGroup(MainBackgroundLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(previousButton)
+                        .addGap(41, 41, 41)
+                        .addGroup(MainBackgroundLayout.createParallelGroup()
+                            .addComponent(musiclabel)
+                            .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
@@ -99,5 +137,7 @@ public class SettingPanel extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel MainBackground;
     private JButton previousButton;
+    private JLabel musiclabel;
+    private JButton musicButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
