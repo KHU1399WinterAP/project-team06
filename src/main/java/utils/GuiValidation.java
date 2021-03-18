@@ -41,6 +41,7 @@ class Field {
 	public int maximumLength;
 	public GuiError fieldIsEmptyError;
 	public GuiError fieldHasInvalidLength;
+
 	
 	public Field(int minimumLength, int maximumLength, GuiError fieldIsEmptyError, GuiError fieldHasInvalidLength) {
 		this.minimumLength = minimumLength;

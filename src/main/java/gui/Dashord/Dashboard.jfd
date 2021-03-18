@@ -7,19 +7,18 @@ new FormModel {
 			"$horizontalGroup": "par l {comp Panel::l:::x}"
 			"$verticalGroup": "par l {comp Panel::l:::x}"
 		} ) {
-			name: "DashbordFrame"
+			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
-			"name": "Dashbord"
+			"name": "Dashboard"
 			"maximizedBounds": new java.awt.Rectangle( 580, 60, 380, 605 )
 			"resizable": false
-			"title": "Dashbord"
+			"title": "Dashboard"
 			"background": new java.awt.Color( 0, 112, 192, 255 )
-			"visible": true
-			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Logo (1).jpg" )
-			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "DashbordFrameWindowClosed", true ) )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "dashboardFrameWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {par l {seq {space :p:9:p, comp ProfileButton:::p:46:p, space :::p, comp ProfileName:::p:86:p, space :::p, comp SettingsIcon:::p:41:p, space ::102:x, comp NumberOfCoins:::p:40:p}, seq {space ::52:x, comp MultiplayerButton:::p:133:p, space s:::p, comp SingleplayerButton:::p:133:p}}, space :::p, comp CoinIcon:::p::p, space :::p}}"
-				"$verticalGroup": "par l {seq l {space :p:24:p, par l {seq {par t {comp CoinIcon::t:p::p, par b:t {comp NumberOfCoins::b:p::p, comp ProfileName::b:::x}}, space :p:71:p}, seq l {par l {seq l {space :3:3:p, comp SettingsIcon:::p::p}, seq l {space :p:6:p, comp ProfileButton:::p::p}}, space :::x}}, par b {comp MultiplayerButton::b:p:69:p, comp SingleplayerButton::b:p:69:p}, space ::380:x}}"
+				"$horizontalGroup": "par l {seq t {space :::p, par l {seq l {par l {seq l {comp ProfileButton:::p:46:p, space :p:15:p, comp SettingsIcon:::p:41:p, space ::195:x, comp label1:::p:33:p}, seq t {space :0:43:x, comp MultiplayerButton:::p:133:p, space u:::p, comp SingleplayerButton:::p:133:p, space :p:9:p}}, space :p:6:p, comp CoinIcon:::p::p, space :::p}, seq l {comp profile:::p::p, space s:::p, comp username::::324:x, space :p:30:p}}}}"
+				"$verticalGroup": "par l {seq l {space :::p, par l {comp ProfileButton:::p::p, comp SettingsIcon::l:p::p, seq l {space :p:5:p, par l {comp CoinIcon:::p::p, comp label1:::::x}}}, space ::25:x, par t {comp profile:::p:70:p, comp username:::p:53:p}, space s:::p, par b {comp MultiplayerButton::b:p:69:p, comp SingleplayerButton::b:p:69:p}, space :p:337:p}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -27,23 +26,20 @@ new FormModel {
 					name: "CoinIcon"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/smallCoin.png" )
 				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "NumberOfCoins"
-					"background": new java.awt.Color( 255, 255, 51, 255 )
-					"foreground": new java.awt.Color( 255, 255, 51, 255 )
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "ProfileName"
-				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "ProfileButton"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/profile.png" )
 					"background": new java.awt.Color( 0, 112, 192, 255 )
+					"focusable": false
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "ProfileButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "SettingsIcon"
 					"background": new java.awt.Color( 0, 112, 192, 255 )
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/settingUB.png" )
+					"focusable": false
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "MultiplayerButton"
@@ -51,6 +47,7 @@ new FormModel {
 					"background": &Color0 new java.awt.Color( 255, 153, 0, 255 )
 					"foreground": &Color1 new java.awt.Color( 0, 204, 153, 255 )
 					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 4, false )
+					"focusable": false
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "SingleplayerButton"
@@ -58,10 +55,25 @@ new FormModel {
 					"background": #Color0
 					"foreground": #Color1
 					"font": #SwingDerivedFont0
+					"focusable": false
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "profile"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "username"
+					"background": sfield java.awt.Color white
+					"font": new java.awt.Font( "Segoe UI", 1, 18 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"background": new java.awt.Color( 255, 255, 51, 255 )
+					"foreground": new java.awt.Color( 255, 152, 0, 255 )
+					"text": "0"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 450, 50 )
+			"location": new java.awt.Point( 155, 80 )
 			"size": new java.awt.Dimension( 380, 605 )
 		} )
 	}
