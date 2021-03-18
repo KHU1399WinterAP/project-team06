@@ -98,31 +98,90 @@ public class profilesettings extends JFrame {
     }
 
     private void face1ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
         Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,1);
     }
 
     private void face2ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
         Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,2);
     }
 
     private void face3ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face3.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
         Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,3);
     }
 
     private void face4ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face4.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
         Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,4);
     }
 
     private void face5ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face5.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
         Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,5);
     }
 
     private void face6ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face6.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
         Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,6);
     }
 
     private void face7ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face7.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
         Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,7);
+    }
+
+    private void selectAPhoto(){
+        face1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face1.png")));
+        face2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
+        face3.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face3.png")));
+        face4.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face4.png")));
+        face5.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face5.png")));
+        face6.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face6.png")));
+        face7.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face7.png")));
+        face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face8.png")));
+        face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face9.png")));
+        face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face10.png")));
+        face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face11.png")));
+        face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face12.png")));
+    }
+
+    private void face8ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
+        Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,8);
+    }
+
+    private void face9ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
+        Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,9);
+    }
+
+    private void face10ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
+        Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,10);
+    }
+
+    private void face11ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
+        Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,11);
+    }
+
+    private void face12ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
+        Database.UpdateDatabaseProfilePicture(Dashbord.activeUser.username,12);
     }
 
     private void initComponents() {
@@ -221,31 +280,36 @@ public class profilesettings extends JFrame {
 
             //---- face8 ----
             face8.setBackground(new Color(0, 112, 192));
-            face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
+            face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face8.png")));
             face8.setFocusable(false);
+            face8.addActionListener(e -> face8ActionPerformed(e));
 
             //---- face10 ----
             face10.setBackground(new Color(0, 112, 192));
-            face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
+            face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face10.png")));
             face10.setFocusable(false);
+            face10.addActionListener(e -> face10ActionPerformed(e));
 
             //---- face9 ----
             face9.setBackground(new Color(0, 112, 192));
-            face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
+            face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face9.png")));
             face9.setFocusable(false);
+            face9.addActionListener(e -> face9ActionPerformed(e));
 
             //---- face11 ----
             face11.setBackground(new Color(0, 112, 192));
-            face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
+            face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face11.png")));
             face11.setFocusable(false);
+            face11.addActionListener(e -> face11ActionPerformed(e));
 
             //---- face12 ----
             face12.setBackground(new Color(0, 112, 192));
-            face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
+            face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face12.png")));
             face12.setFocusable(false);
+            face12.addActionListener(e -> face12ActionPerformed(e));
 
             //---- changeUsernameButton ----
-            changeUsernameButton.setText("Change username :");
+            changeUsernameButton.setText("Change username ");
             changeUsernameButton.setFont(new Font("Segoe UI", Font.BOLD, 10));
             changeUsernameButton.setBackground(new Color(0, 32, 96));
             changeUsernameButton.setForeground(Color.white);
@@ -253,7 +317,7 @@ public class profilesettings extends JFrame {
             changeUsernameButton.addActionListener(e -> changeUsernameButtonActionPerformed(e));
 
             //---- changePasswordButton ----
-            changePasswordButton.setText("Change password :");
+            changePasswordButton.setText("Change password ");
             changePasswordButton.setFont(new Font("Segoe UI", Font.BOLD, 10));
             changePasswordButton.setBackground(new Color(0, 32, 96));
             changePasswordButton.setFocusable(false);
@@ -278,9 +342,12 @@ public class profilesettings extends JFrame {
 
             //---- usernameErrorLabel ----
             usernameErrorLabel.setForeground(Color.red);
+            usernameErrorLabel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 13));
+            usernameErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             //---- passwordErrorLabel ----
             passwordErrorLabel.setForeground(Color.red);
+            passwordErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             //---- logoutButton ----
             logoutButton.setText("Log out");
@@ -295,7 +362,7 @@ public class profilesettings extends JFrame {
             InputNewUserName.setLineWrap(true);
             InputNewUserName.setTabSize(5);
             InputNewUserName.setText("new username");
-            InputNewUserName.setFont(new Font("Microsoft Yi Baiti", Font.BOLD, 18));
+            InputNewUserName.setFont(new Font("Calibri Light", Font.BOLD, 14));
             InputNewUserName.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
@@ -314,18 +381,8 @@ public class profilesettings extends JFrame {
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup()
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(changePasswordButton)
-                                .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup()
-                                    .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(passwordErrorLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(panelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addGroup(panelLayout.createParallelGroup()
@@ -356,12 +413,24 @@ public class profilesettings extends JFrame {
                                             .addComponent(face8, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(face12, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(changeUsernameButton)
-                                .addGap(18, 18, 18)
+                                .addGap(112, 112, 112)
+                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
                                 .addGroup(panelLayout.createParallelGroup()
-                                    .addComponent(InputNewUserName, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(25, Short.MAX_VALUE))
+                                    .addComponent(passwordErrorLabel, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(usernameErrorLabel, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                        .addComponent(InputNewUserName, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(39, 39, 39)
+                                        .addGroup(panelLayout.createParallelGroup()
+                                            .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(changeUsernameButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))))))
+                        .addContainerGap(31, Short.MAX_VALUE))
             );
             panelLayout.setVerticalGroup(
                 panelLayout.createParallelGroup()
@@ -386,21 +455,20 @@ public class profilesettings extends JFrame {
                             .addComponent(face10, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                             .addComponent(face11, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                             .addComponent(face12, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-                        .addGap(72, 72, 72)
-                        .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(changeUsernameButton, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(InputNewUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(InputNewUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup()
-                            .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addComponent(changeUsernameButton, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(logoutButton)
-                        .addGap(15, 15, 15))
+                        .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(logoutButton))
             );
         }
 
