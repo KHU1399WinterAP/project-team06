@@ -13,12 +13,15 @@ import javax.swing.GroupLayout;
  * @author Alireza
  */
 public class Questions extends JFrame {
-    public Questions() {
+    public final JFrame singlePlayer;
+    public Questions(JFrame singlePlayer) {
+        this.singlePlayer=singlePlayer;
         initComponents();
     }
 
-    private void DashbordFrameWindowClosed(WindowEvent e) {
-        // TODO add your code here
+    private void questionsWindowClosing(WindowEvent e) {
+        this.dispose();
+        singlePlayer.setVisible(true);
     }
 
     private void initComponents() {
@@ -41,6 +44,12 @@ public class Questions extends JFrame {
         setBackground(new Color(0, 112, 192));
         setVisible(true);
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                questionsWindowClosing(e);
+            }
+        });
         var contentPane = getContentPane();
 
         //======== Panel ========

@@ -20,8 +20,8 @@ new FormModel {
 			"name": "LoginMenu"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::x, comp label1:::p::p, space :p:44:p}, seq {par l {seq l {space :p:138:p, comp PreviousButton:::p:100:p}, seq l {space :p:84:p, par l {comp InputPassword:::p:200:p, comp loginButton:::p:200:p, comp PasswordLabel::l:p::p, comp scrollPane1::l:p:200:p, comp UsernameLabel::l:p::p}}}, space :0:0:x}, seq l {space :p:110:p, comp label2:::p:154:p, space :::x}}"
-				"$verticalGroup": "par l {seq t {space :p:18:p, comp label2:::p:141:p, space :::p, comp label1:::p::p, space :::p, comp UsernameLabel:::p:35:p, space :::p, comp scrollPane1:::p::p, space :::p, comp PasswordLabel:::p:39:p, space :::p, comp InputPassword:::::p, space :p:12:p, comp loginButton:::p:47:p, space :::x, comp PreviousButton:::p:30:p, space :::p}}"
+				"$horizontalGroup": "par l {seq {par l {seq {space :p:23:p, comp textLabel:::p::p}, seq l {space :p:107:p, comp faceLabel:::p:154:p}}, space :::x}, seq t {space :0:0:x, par l {seq t {comp previousButton:::p:100:p, space :p:137:p}, seq t {par l {comp inputPassword:::p:200:p, comp loginButton:::p:200:p, comp passwordLabel::l:p::p, comp scrollPane1::l:p:200:p, comp usernameLabel::l:p::p}, space :p:88:p}}}}"
+				"$verticalGroup": "par l {seq t {space :p:18:p, comp faceLabel:::p:141:p, space :::p, comp textLabel:::p::p, space :p:27:p, comp usernameLabel:::p:35:p, space :::p, comp scrollPane1:::p::p, space :::p, comp passwordLabel:::p:39:p, space :::p, comp inputPassword:::::p, space :p:12:p, comp loginButton:::p:47:p, space :::x, comp previousButton:::p:30:p}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -29,27 +29,28 @@ new FormModel {
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				"focusable": false
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
+					name: "textLabel"
 					"text": "Quiz Of Kings"
-					"font": new java.awt.Font( "Calibri", 0, 54 )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 50 )
 					"foreground": sfield java.awt.Color white
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
+					name: "faceLabel"
 					"text": "text"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/SmallLogo.jpg" )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "UsernameLabel"
+					name: "usernameLabel"
 					"text": "Username"
 					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
 				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
 					add( new FormComponent( "javax.swing.JTextArea" ) {
-						name: "InputUserName"
+						name: "inputUsername"
 						"background": sfield java.awt.Color white
-						"foreground": sfield java.awt.Color darkGray
+						"foreground": new java.awt.Color( 0, 32, 96, 255 )
 						"lineWrap": true
 						"tabSize": 10
 						"alignmentX": 1.5f
@@ -57,29 +58,31 @@ new FormModel {
 					} )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "PasswordLabel"
+					name: "passwordLabel"
 					"text": "Password"
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
 				} )
 				add( new FormComponent( "javax.swing.JPasswordField" ) {
-					name: "InputPassword"
+					name: "inputPassword"
 					"background": sfield java.awt.Color white
-					"foreground": sfield java.awt.Color darkGray
+					"foreground": new java.awt.Color( 0, 32, 96, 255 )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "loginButton"
-					"text": "Login"
-					"foreground": sfield java.awt.Color gray
+					"text": "LOGIN"
+					"foreground": sfield java.awt.Color white
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
+					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "loginButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "PreviousButton"
-					"text": "previous"
+					name: "previousButton"
+					"text": "PREVIOUS"
 					"background": new java.awt.Color( 137, 0, 0, 209 )
-					"font": new java.awt.Font( "Lucida Sans Unicode", 3, 12 )
-					"foreground": sfield java.awt.Color lightGray
+					"font": new java.awt.Font( "Comic Sans MS", 3, 12 )
+					"foreground": sfield java.awt.Color white
 					"alignmentX": 16.0f
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "PreviousButtonActionPerformed", true ) )

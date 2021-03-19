@@ -2,6 +2,7 @@
 package main.java.gui.Dashord.setting;
 
 import main.java.app.Main;
+import main.java.config.FontConfig;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -17,7 +18,12 @@ public class SettingPanel extends JFrame {
     public SettingPanel(JFrame dashboard) {
         this.dashboard = dashboard;
         initComponents();
+        initComponentsProperties();
         this.setVisible(true);
+    }
+
+    private void initComponentsProperties() {
+        musicButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
     }
 
     private void SettingFrameWindowClosing(WindowEvent e) {
@@ -84,7 +90,7 @@ public class SettingPanel extends JFrame {
             //---- musicButton ----
             musicButton.setBackground(new Color(0, 112, 192));
             musicButton.setForeground(Color.white);
-            musicButton.setFont(new Font("Segoe UI", Font.BOLD, 19));
+            musicButton.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
             musicButton.setText("ON");
             musicButton.setBorder(null);
             musicButton.setFocusable(false);

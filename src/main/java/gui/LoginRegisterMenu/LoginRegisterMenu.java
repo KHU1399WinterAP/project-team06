@@ -4,6 +4,7 @@
 
 package main.java.gui.LoginRegisterMenu;
 
+import main.java.config.FontConfig;
 import main.java.gui.LoginMenu.LoginMenu;
 import main.java.gui.RegisterMenu.RegisterMenu;
 
@@ -19,9 +20,11 @@ public class LoginRegisterMenu extends JFrame {
 
     public LoginRegisterMenu() {
         initComponents();
+        initComponentsProperties();
         this.setVisible(true);
 
     }
+
 
     private void RegisterActionPerformed(ActionEvent e) {
         new RegisterMenu(this);
@@ -34,12 +37,17 @@ public class LoginRegisterMenu extends JFrame {
         this.setVisible(false);
     }
 
+    private void initComponentsProperties() {
+        loginButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 25));
+        registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 25));
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         MainBackground = new JPanel();
         Banner = new JLabel();
-        Login = new JButton();
-        Register = new JButton();
+        loginButton = new JButton();
+        registerButton = new JButton();
 
         //======== this ========
         setResizable(false);
@@ -63,21 +71,21 @@ public class LoginRegisterMenu extends JFrame {
             Banner.setForeground(Color.white);
             Banner.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/CropedBanner2.jpg")));
 
-            //---- Login ----
-            Login.setText("Login");
-            Login.setFont(Login.getFont().deriveFont(Font.PLAIN, Login.getFont().getSize() + 15f));
-            Login.setBackground(new Color(0, 32, 96));
-            Login.setFocusable(false);
-            Login.setForeground(Color.white);
-            Login.addActionListener(e -> LoginActionPerformed(e));
+            //---- loginButton ----
+            loginButton.setText("LOGIN");
+            loginButton.setFont(loginButton.getFont().deriveFont(Font.PLAIN, loginButton.getFont().getSize() + 15f));
+            loginButton.setBackground(new Color(0, 32, 96));
+            loginButton.setFocusable(false);
+            loginButton.setForeground(Color.white);
+            loginButton.addActionListener(e -> LoginActionPerformed(e));
 
-            //---- Register ----
-            Register.setText("Register");
-            Register.setFont(Register.getFont().deriveFont(Font.PLAIN, Register.getFont().getSize() + 15f));
-            Register.setBackground(new Color(0, 32, 96));
-            Register.setFocusable(false);
-            Register.setForeground(Color.white);
-            Register.addActionListener(e -> RegisterActionPerformed(e));
+            //---- registerButton ----
+            registerButton.setText("REGISTER");
+            registerButton.setFont(registerButton.getFont().deriveFont(Font.PLAIN, registerButton.getFont().getSize() + 15f));
+            registerButton.setBackground(new Color(0, 32, 96));
+            registerButton.setFocusable(false);
+            registerButton.setForeground(Color.white);
+            registerButton.addActionListener(e -> RegisterActionPerformed(e));
 
             GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
             MainBackground.setLayout(MainBackgroundLayout);
@@ -85,14 +93,13 @@ public class LoginRegisterMenu extends JFrame {
                 MainBackgroundLayout.createParallelGroup()
                     .addGroup(MainBackgroundLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(Banner)
+                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(registerButton, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                            .addComponent(Banner))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(Login, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Register, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
             );
             MainBackgroundLayout.setVerticalGroup(
                 MainBackgroundLayout.createParallelGroup()
@@ -101,8 +108,8 @@ public class LoginRegisterMenu extends JFrame {
                         .addComponent(Banner)
                         .addGap(115, 115, 115)
                         .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(Login, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Register, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
@@ -125,7 +132,7 @@ public class LoginRegisterMenu extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel MainBackground;
     private JLabel Banner;
-    private JButton Login;
-    private JButton Register;
+    private JButton loginButton;
+    private JButton registerButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

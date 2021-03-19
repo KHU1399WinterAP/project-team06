@@ -4,9 +4,12 @@
 
 package main.java.gui.Dashord;
 
+import main.java.config.FontConfig;
 import main.java.config.profileConfig;
 import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.gui.Dashord.setting.SettingPanel;
+import main.java.gui.Multiplayer.Multiplayer;
+import main.java.gui.Singleplayer.SinglePlayer;
 import main.java.models.User;
 
 import java.awt.*;
@@ -22,13 +25,22 @@ public class Dashboard extends JFrame {
         Dashboard.activeUser = activeUser;
         this.LoginRegisterMenu = LoginRegisterMenu;
         initComponents();
+        initComponentsProperties();
         this.setVisible(true);
         setCurrentUsername();
         initProfilePicture(activeUser);
     }
 
+    private void initComponentsProperties() {
+        multiplayerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
+        singlePlayerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
+        usernameLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 14));
+        coinLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 13));
+
+    }
+
     private void setCurrentUsername(){
-        username.setText(activeUser.username);
+        usernameLabel.setText(activeUser.username);
     }
 
     private void ProfileButtonActionPerformed(ActionEvent e) {
@@ -43,11 +55,6 @@ public class Dashboard extends JFrame {
         });
     }
 
-    private void SettingButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new SettingPanel(this);
-    }
-
     private void dashboardFrameWindowClosing(WindowEvent e) {
         this.dispose();
         LoginRegisterMenu.setVisible(true);
@@ -57,17 +64,32 @@ public class Dashboard extends JFrame {
         profile.setIcon(new ImageIcon(getClass().getResource(profileConfig.profilePicture(user))));
     }
 
+    private void settingsIconActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new SettingPanel(this);
+    }
+
+    private void singlePlayerButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new SinglePlayer(this);
+    }
+
+    private void multiplayerButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new Multiplayer(this);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
-        CoinIcon = new JLabel();
-        ProfileButton = new JButton();
-        SettingsIcon = new JButton();
-        MultiplayerButton = new JButton();
-        SingleplayerButton = new JButton();
+        coinIcon = new JLabel();
+        profileButton = new JButton();
+        settingsIcon = new JButton();
+        multiplayerButton = new JButton();
+        singlePlayerButton = new JButton();
         profile = new JLabel();
-        username = new JLabel();
-        label1 = new JLabel();
+        usernameLabel = new JLabel();
+        coinLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -89,96 +111,101 @@ public class Dashboard extends JFrame {
         {
             Panel.setBackground(new Color(0, 112, 192));
 
-            //---- CoinIcon ----
-            CoinIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/smallCoin.png")));
+            //---- coinIcon ----
+            coinIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/smallCoin.png")));
 
-            //---- ProfileButton ----
-            ProfileButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/profile.png")));
-            ProfileButton.setBackground(new Color(0, 112, 192));
-            ProfileButton.setFocusable(false);
-            ProfileButton.setBorder(null);
-            ProfileButton.addActionListener(e -> ProfileButtonActionPerformed(e));
+            //---- profileButton ----
+            profileButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/profile.png")));
+            profileButton.setBackground(new Color(0, 112, 192));
+            profileButton.setFocusable(false);
+            profileButton.setBorder(null);
+            profileButton.addActionListener(e -> ProfileButtonActionPerformed(e));
 
-            //---- SettingsIcon ----
-            SettingsIcon.setBackground(new Color(0, 112, 192));
-            SettingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settingUB.png")));
-            SettingsIcon.setFocusable(false);
-            SettingsIcon.setBorder(null);
-            SettingsIcon.addActionListener(e -> SettingButtonActionPerformed(e));
+            //---- settingsIcon ----
+            settingsIcon.setBackground(new Color(0, 112, 192));
+            settingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settingUB.png")));
+            settingsIcon.setFocusable(false);
+            settingsIcon.setBorder(null);
+            settingsIcon.addActionListener(e -> settingsIconActionPerformed(e));
 
-            //---- MultiplayerButton ----
-            MultiplayerButton.setText("Multiplayer");
-            MultiplayerButton.setBackground(new Color(255, 153, 0));
-            MultiplayerButton.setForeground(new Color(0, 204, 153));
-            MultiplayerButton.setFont(MultiplayerButton.getFont().deriveFont(MultiplayerButton.getFont().getSize() + 4f));
-            MultiplayerButton.setFocusable(false);
+            //---- multiplayerButton ----
+            multiplayerButton.setText("Multiplayer");
+            multiplayerButton.setBackground(new Color(0, 32, 96));
+            multiplayerButton.setForeground(Color.white);
+            multiplayerButton.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+            multiplayerButton.setFocusable(false);
+            multiplayerButton.addActionListener(e -> multiplayerButtonActionPerformed(e));
 
-            //---- SingleplayerButton ----
-            SingleplayerButton.setText("Singleplayer");
-            SingleplayerButton.setBackground(new Color(255, 153, 0));
-            SingleplayerButton.setForeground(new Color(0, 204, 153));
-            SingleplayerButton.setFont(SingleplayerButton.getFont().deriveFont(SingleplayerButton.getFont().getSize() + 4f));
-            SingleplayerButton.setFocusable(false);
+            //---- singlePlayerButton ----
+            singlePlayerButton.setText("Singleplayer");
+            singlePlayerButton.setBackground(new Color(0, 32, 96));
+            singlePlayerButton.setForeground(Color.white);
+            singlePlayerButton.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+            singlePlayerButton.setFocusable(false);
+            singlePlayerButton.addActionListener(e -> singlePlayerButtonActionPerformed(e));
 
-            //---- username ----
-            username.setBackground(Color.white);
-            username.setFont(new Font("Segoe UI", Font.BOLD, 18));
+            //---- usernameLabel ----
+            usernameLabel.setBackground(Color.white);
+            usernameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+            usernameLabel.setForeground(Color.white);
 
-            //---- label1 ----
-            label1.setBackground(new Color(255, 255, 51));
-            label1.setForeground(new Color(255, 152, 0));
-            label1.setText("0");
+            //---- coinLabel ----
+            coinLabel.setBackground(new Color(255, 255, 51));
+            coinLabel.setForeground(new Color(255, 152, 0));
+            coinLabel.setText("0");
+            coinLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
                 PanelLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                    .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup()
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addComponent(ProfileButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(15, 15, 15)
-                                        .addComponent(SettingsIcon, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                        .addGap(0, 43, Short.MAX_VALUE)
-                                        .addComponent(MultiplayerButton, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(SingleplayerButton, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(9, 9, 9)))
+                                .addComponent(profileButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(settingsIcon, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                                .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
-                                .addComponent(CoinIcon)
-                                .addContainerGap())
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(profile)
-                                .addGap(18, 18, 18)
-                                .addComponent(username, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                                .addGap(30, 30, 30))))
+                                .addComponent(coinIcon))
+                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addGap(0, 7, Short.MAX_VALUE)
+                                .addGroup(PanelLayout.createParallelGroup()
+                                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                        .addComponent(singlePlayerButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(multiplayerButton, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                        .addComponent(profile, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap())
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(ProfileButton)
-                            .addComponent(SettingsIcon)
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(5, 5, 5)
+                                .addGap(11, 11, 11)
                                 .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(CoinIcon)
-                                    .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(profile, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(username, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(coinIcon)
+                                    .addComponent(coinLabel, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
+                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(profileButton)
+                                    .addComponent(settingsIcon))))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addGroup(PanelLayout.createParallelGroup()
+                            .addComponent(usernameLabel, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(profile, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(MultiplayerButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SingleplayerButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(singlePlayerButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(multiplayerButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
                         .addGap(337, 337, 337))
             );
         }
@@ -200,13 +227,13 @@ public class Dashboard extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
-    private JLabel CoinIcon;
-    private JButton ProfileButton;
-    private JButton SettingsIcon;
-    private JButton MultiplayerButton;
-    private JButton SingleplayerButton;
+    private JLabel coinIcon;
+    private JButton profileButton;
+    private JButton settingsIcon;
+    private JButton multiplayerButton;
+    private JButton singlePlayerButton;
     private JLabel profile;
-    private JLabel username;
-    private JLabel label1;
+    private JLabel usernameLabel;
+    private JLabel coinLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

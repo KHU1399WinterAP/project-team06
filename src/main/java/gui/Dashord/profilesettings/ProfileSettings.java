@@ -4,6 +4,7 @@
 
 package main.java.gui.Dashord.profilesettings;
 
+import main.java.config.FontConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.gui.Dashord.Dashboard;
@@ -22,9 +23,20 @@ public class ProfileSettings extends JFrame {
     public ProfileSettings(JFrame LoginRegisterMenu, JFrame dashboard) {
         this.dashboard = dashboard;
         this.LoginRegisterMenu = LoginRegisterMenu;
-        this.setVisible(false);
         initComponents();
+        initComponentsProperties();
         this.setVisible(true);
+    }
+
+    private void initComponentsProperties() {
+        inputNewPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        inputNewUsername.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        changePasswordButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 15));
+        changeUsernameButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 15));
+        usernameErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
+        passwordErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
+        logoutButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 13));
+
     }
 
     private void logoutButtonActionPerformed(ActionEvent e) {
@@ -43,7 +55,7 @@ public class ProfileSettings extends JFrame {
     }
 
     private void InputNewUserNameFocusGained(FocusEvent e) {
-        if (InputNewUserName.getText().equals("new username")) InputNewUserName.setText("");
+        if (inputNewUsername.getText().equals("new username")) inputNewUsername.setText("");
     }
 
     private void inputNewPasswordFocusGained(FocusEvent e) {
@@ -51,7 +63,7 @@ public class ProfileSettings extends JFrame {
     }
 
     private void InputNewUserNameFocusLost(FocusEvent e) {
-        if (InputNewUserName.getText().equals("")) InputNewUserName.setText("new username");
+        if (inputNewUsername.getText().equals("")) inputNewUsername.setText("new username");
     }
 
     private void inputNewPasswordFocusLost(FocusEvent e) {
@@ -59,17 +71,17 @@ public class ProfileSettings extends JFrame {
     }
 
     private void changeUsernameButtonActionPerformed(ActionEvent e) {
-        if (InputNewUserName.getText().equals("new username")) InputNewUserName.setText("");
-        var usernameError = GuiValidation.validateUsername(InputNewUserName.getText());
-        if (Database.AlreadyExisted(InputNewUserName.getText())){
+        if (inputNewUsername.getText().equals("new username")) inputNewUsername.setText("");
+        var usernameError = GuiValidation.validateUsername(inputNewUsername.getText());
+        if (Database.AlreadyExisted(inputNewUsername.getText())){
             usernameErrorLabel.setText("Username already exists");
             RegisterMenu.runMainPanelBackgroundColorAnimation(panel);
         }
         else if (usernameError == null) {
-            Database.UpdateDatabaseUsername(Dashboard.activeUser.username,InputNewUserName.getText());
+            Database.UpdateDatabaseUsername(Dashboard.activeUser.username,inputNewUsername.getText());
             changeUsernameButton.setBackground(Color.GREEN);
             changeUsernameButton.setText("changed successfully !");
-            Dashboard.activeUser.username=InputNewUserName.getText();
+            Dashboard.activeUser.username=inputNewUsername.getText();
         } else {
             RegisterMenu.runMainPanelBackgroundColorAnimation(panel);
             updateErrorLabel(usernameError, usernameErrorLabel);
@@ -219,7 +231,7 @@ public class ProfileSettings extends JFrame {
         usernameErrorLabel = new JLabel();
         passwordErrorLabel = new JLabel();
         logoutButton = new JButton();
-        InputNewUserName = new JTextArea();
+        inputNewUsername = new JTextArea();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -335,7 +347,7 @@ public class ProfileSettings extends JFrame {
 
             //---- changeUsernameButton ----
             changeUsernameButton.setText("Change username ");
-            changeUsernameButton.setFont(new Font("Segoe UI", Font.BOLD, 10));
+            changeUsernameButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             changeUsernameButton.setBackground(new Color(0, 32, 96));
             changeUsernameButton.setForeground(Color.white);
             changeUsernameButton.setFocusable(false);
@@ -343,7 +355,7 @@ public class ProfileSettings extends JFrame {
 
             //---- changePasswordButton ----
             changePasswordButton.setText("Change password ");
-            changePasswordButton.setFont(new Font("Segoe UI", Font.BOLD, 10));
+            changePasswordButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             changePasswordButton.setBackground(new Color(0, 32, 96));
             changePasswordButton.setFocusable(false);
             changePasswordButton.setForeground(Color.white);
@@ -351,9 +363,9 @@ public class ProfileSettings extends JFrame {
 
             //---- inputNewPassword ----
             inputNewPassword.setBackground(Color.white);
-            inputNewPassword.setForeground(new Color(0, 112, 192));
+            inputNewPassword.setForeground(new Color(0, 32, 96));
             inputNewPassword.setText("new password");
-            inputNewPassword.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
+            inputNewPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
             inputNewPassword.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
@@ -367,29 +379,32 @@ public class ProfileSettings extends JFrame {
 
             //---- usernameErrorLabel ----
             usernameErrorLabel.setForeground(Color.red);
-            usernameErrorLabel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 13));
+            usernameErrorLabel.setFont(new Font("Comic Sans MS", Font.ITALIC, 14));
             usernameErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            usernameErrorLabel.setBackground(new Color(0, 112, 192));
 
             //---- passwordErrorLabel ----
             passwordErrorLabel.setForeground(Color.red);
             passwordErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            passwordErrorLabel.setBackground(new Color(0, 112, 192));
+            passwordErrorLabel.setFont(new Font("Comic Sans MS", Font.ITALIC, 14));
 
             //---- logoutButton ----
-            logoutButton.setText("Log out");
-            logoutButton.setBackground(new Color(0, 112, 192));
-            logoutButton.setForeground(Color.red);
+            logoutButton.setText("LOG OUT");
+            logoutButton.setBackground(new Color(137, 0, 0, 209));
+            logoutButton.setForeground(Color.white);
             logoutButton.setFocusable(false);
             logoutButton.setBorder(null);
             logoutButton.addActionListener(e -> logoutButtonActionPerformed(e));
 
-            //---- InputNewUserName ----
-            InputNewUserName.setBackground(Color.white);
-            InputNewUserName.setForeground(new Color(0, 112, 192));
-            InputNewUserName.setLineWrap(true);
-            InputNewUserName.setTabSize(5);
-            InputNewUserName.setText("new username");
-            InputNewUserName.setFont(new Font("Calibri Light", Font.BOLD, 14));
-            InputNewUserName.addFocusListener(new FocusAdapter() {
+            //---- inputNewUsername ----
+            inputNewUsername.setBackground(Color.white);
+            inputNewUsername.setForeground(new Color(0, 32, 96));
+            inputNewUsername.setLineWrap(true);
+            inputNewUsername.setTabSize(5);
+            inputNewUsername.setText("new username");
+            inputNewUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            inputNewUsername.addFocusListener(new FocusAdapter() {
                 @Override
                 public void focusGained(FocusEvent e) {
                     InputNewUserNameFocusGained(e);
@@ -404,13 +419,33 @@ public class ProfileSettings extends JFrame {
             panel.setLayout(panelLayout);
             panelLayout.setHorizontalGroup(
                 panelLayout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                        .addGap(0, 63, Short.MAX_VALUE)
+                        .addGroup(panelLayout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup()
+                                    .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(39, 39, 39)
+                                        .addGroup(panelLayout.createParallelGroup()
+                                            .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(changeUsernameButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(inputNewUsername, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))))
+                                .addGap(50, 50, 50))
+                            .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+                                .addGap(121, 121, 121))))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup()
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(37, 37, 37)
+                                .addGap(31, 31, 31)
                                 .addGroup(panelLayout.createParallelGroup()
                                     .addGroup(panelLayout.createSequentialGroup()
                                         .addComponent(face1, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
@@ -437,26 +472,8 @@ public class ProfileSettings extends JFrame {
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(panelLayout.createParallelGroup()
                                             .addComponent(face8, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(face12, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addGroup(panelLayout.createParallelGroup()
-                                    .addComponent(passwordErrorLabel, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameErrorLabel, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                        .addComponent(InputNewUserName, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(37, 37, 37))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(39, 39, 39)
-                                        .addGroup(panelLayout.createParallelGroup()
-                                            .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(changeUsernameButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))))))
-                        .addContainerGap(31, Short.MAX_VALUE))
+                                            .addComponent(face12, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))))))
+                        .addContainerGap(37, Short.MAX_VALUE))
             );
             panelLayout.setVerticalGroup(
                 panelLayout.createParallelGroup()
@@ -481,11 +498,11 @@ public class ProfileSettings extends JFrame {
                             .addComponent(face10, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                             .addComponent(face11, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                             .addComponent(face12, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(InputNewUserName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(inputNewUsername, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(changeUsernameButton, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
@@ -493,8 +510,8 @@ public class ProfileSettings extends JFrame {
                         .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(logoutButton))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
             );
         }
 
@@ -533,6 +550,6 @@ public class ProfileSettings extends JFrame {
     private JLabel usernameErrorLabel;
     private JLabel passwordErrorLabel;
     private JButton logoutButton;
-    private JTextArea InputNewUserName;
+    private JTextArea inputNewUsername;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

@@ -16,6 +16,7 @@ new FormModel {
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"visible": true
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq t {space :::x, comp QuestionPlace:::p:269:p, space :p:53:p}, seq {space :p:43:p, par t {seq t {par t {seq {comp Answer4:::p:140:p, space :::p, comp Answer3:::p:140:p}, seq {comp Answer1:::p:140:p, space :::p, comp Answer2:::p:140:p}}, space :::x}, seq t {comp PowerUp1:::p:144:p, space :::p, comp PowerUp2:::p:144:p, space :p:41:p}}}}"
 				"$verticalGroup": "par l {seq l {space :p:33:p, comp QuestionPlace:::p:164:p, space :p:26:p, par b {comp Answer1::b:p:98:p, comp Answer2::b:p:98:p}, space s:::p, par b {comp Answer3::b:p:98:p, comp Answer4::b:p:98:p}, space ::40:x, par b {comp PowerUp1::b:p:53:p, comp PowerUp2::b:p:53:p}, space :p:35:p}}"

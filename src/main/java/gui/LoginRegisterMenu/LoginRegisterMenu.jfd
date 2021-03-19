@@ -17,8 +17,8 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			"defaultCloseOperation": 3
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :p:14:p, comp Banner:::p::p, space :::x}, seq l {space :p:28:p, comp Login:::p:148:p, space :::x, comp Register:::p:148:p, space :p:25:p}}"
-				"$verticalGroup": "par l {seq {space :p:72:p, comp Banner:::p::p, space :p:115:p, par b {comp Login::b:p:77:p, comp Register::b:p:77:p}, space :::x}}"
+				"$horizontalGroup": "par l {seq l {space :p:14:p, par l:::p {seq {comp loginButton:::p:174:p, space :::p, comp registerButton::::0:x}, comp Banner:::p::p}, space :::x}}"
+				"$verticalGroup": "par l {seq {space :p:72:p, comp Banner:::p::p, space :p:115:p, par b {comp registerButton::b:p:77:p, comp loginButton::b:p:77:p}, space :::x}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -31,8 +31,8 @@ new FormModel {
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/CropedBanner2.jpg" )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "Login"
-					"text": "Login"
+					name: "loginButton"
+					"text": "LOGIN"
 					"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 196608, 15, false )
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
@@ -40,8 +40,8 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "LoginActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "Register"
-					"text": "Register"
+					name: "registerButton"
+					"text": "REGISTER"
 					"font": #SwingDerivedFont0
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
@@ -50,7 +50,7 @@ new FormModel {
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 300, 130 )
+			"location": new java.awt.Point( 165, 55 )
 			"size": new java.awt.Dimension( 380, 605 )
 		} )
 	}

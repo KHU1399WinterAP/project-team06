@@ -4,6 +4,7 @@
 
 package main.java.gui.LoginMenu;
 
+import main.java.config.FontConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.RegisterMenu.RegisterMenu;
@@ -24,7 +25,19 @@ public class LoginMenu extends JFrame {
     public LoginMenu(JFrame LoginRegisterMenu) {
         this.LoginRegisterMenu = LoginRegisterMenu;
         initComponents();
+        initComponentsProperties();
       this.setVisible(true);
+    }
+
+    private void initComponentsProperties() {
+        inputPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        inputUsername.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        textLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 50));
+        usernameLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        passwordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        loginButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
+        previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 10));
+
     }
 
     private void PreviousButtonActionPerformed(ActionEvent e) {
@@ -33,8 +46,8 @@ public class LoginMenu extends JFrame {
     }
 
     private void loginButtonActionPerformed(ActionEvent e) {
-        String username = InputUserName.getText();
-        String password = String.valueOf(InputPassword.getPassword());
+        String username = inputUsername.getText();
+        String password = String.valueOf(inputPassword.getPassword());
         if (!username.isBlank()) {
             User user = Database.getUserByUsername(username);
             if (user != null && user.password.equals(password)) {
@@ -46,12 +59,6 @@ public class LoginMenu extends JFrame {
         RegisterMenu.runMainPanelBackgroundColorAnimation(MainBackground);
     }
 
-//    private void runMainPanelBackgroundColorAnimation() {
-//        Consumer<Color> stepCallback = (color) -> MainBackground.setBackground(color);
-//        Runnable endCallback = () -> MainBackground.setBackground(new Color(0, 112, 192));
-//        new ColorChangeAnimation(MainBackground.getBackground(), COLOR_DANGER, stepCallback, endCallback).start();
-//    }
-
     private void thisWindowClosing(WindowEvent e) {
         this.dispose();
         LoginRegisterMenu.setVisible(true);
@@ -60,15 +67,15 @@ public class LoginMenu extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         MainBackground = new JPanel();
-        label1 = new JLabel();
-        label2 = new JLabel();
-        UsernameLabel = new JLabel();
+        textLabel = new JLabel();
+        faceLabel = new JLabel();
+        usernameLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-        InputUserName = new JTextArea();
-        PasswordLabel = new JLabel();
-        InputPassword = new JPasswordField();
+        inputUsername = new JTextArea();
+        passwordLabel = new JLabel();
+        inputPassword = new JPasswordField();
         loginButton = new JButton();
-        PreviousButton = new JButton();
+        previousButton = new JButton();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -96,103 +103,106 @@ public class LoginMenu extends JFrame {
             MainBackground.setBackground(new Color(0, 112, 192));
             MainBackground.setFocusable(false);
 
-            //---- label1 ----
-            label1.setText("Quiz Of Kings");
-            label1.setFont(new Font("Calibri", Font.PLAIN, 54));
-            label1.setForeground(Color.white);
+            //---- textLabel ----
+            textLabel.setText("Quiz Of Kings");
+            textLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
+            textLabel.setForeground(Color.white);
 
-            //---- label2 ----
-            label2.setText("text");
-            label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/SmallLogo.jpg")));
+            //---- faceLabel ----
+            faceLabel.setText("text");
+            faceLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/SmallLogo.jpg")));
 
-            //---- UsernameLabel ----
-            UsernameLabel.setText("Username");
-            UsernameLabel.setForeground(Color.white);
+            //---- usernameLabel ----
+            usernameLabel.setText("Username");
+            usernameLabel.setForeground(Color.white);
+            usernameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
             //======== scrollPane1 ========
             {
 
-                //---- InputUserName ----
-                InputUserName.setBackground(Color.white);
-                InputUserName.setForeground(Color.darkGray);
-                InputUserName.setLineWrap(true);
-                InputUserName.setTabSize(10);
-                InputUserName.setAlignmentX(1.5F);
-                InputUserName.setAlignmentY(1.5F);
-                scrollPane1.setViewportView(InputUserName);
+                //---- inputUsername ----
+                inputUsername.setBackground(Color.white);
+                inputUsername.setForeground(new Color(0, 32, 96));
+                inputUsername.setLineWrap(true);
+                inputUsername.setTabSize(10);
+                inputUsername.setAlignmentX(1.5F);
+                inputUsername.setAlignmentY(1.5F);
+                scrollPane1.setViewportView(inputUsername);
             }
 
-            //---- PasswordLabel ----
-            PasswordLabel.setText("Password");
-            PasswordLabel.setForeground(Color.white);
+            //---- passwordLabel ----
+            passwordLabel.setText("Password");
+            passwordLabel.setForeground(Color.white);
+            passwordLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
-            //---- InputPassword ----
-            InputPassword.setBackground(Color.white);
-            InputPassword.setForeground(Color.darkGray);
+            //---- inputPassword ----
+            inputPassword.setBackground(Color.white);
+            inputPassword.setForeground(new Color(0, 32, 96));
 
             //---- loginButton ----
-            loginButton.setText("Login");
-            loginButton.setForeground(Color.gray);
+            loginButton.setText("LOGIN");
+            loginButton.setForeground(Color.white);
             loginButton.setBackground(new Color(0, 32, 96));
             loginButton.setFocusable(false);
+            loginButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             loginButton.addActionListener(e -> loginButtonActionPerformed(e));
 
-            //---- PreviousButton ----
-            PreviousButton.setText("previous");
-            PreviousButton.setBackground(new Color(137, 0, 0, 209));
-            PreviousButton.setFont(new Font("Lucida Sans Unicode", Font.BOLD | Font.ITALIC, 12));
-            PreviousButton.setForeground(Color.lightGray);
-            PreviousButton.setAlignmentX(16.0F);
-            PreviousButton.setFocusable(false);
-            PreviousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
+            //---- previousButton ----
+            previousButton.setText("PREVIOUS");
+            previousButton.setBackground(new Color(137, 0, 0, 209));
+            previousButton.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 12));
+            previousButton.setForeground(Color.white);
+            previousButton.setAlignmentX(16.0F);
+            previousButton.setFocusable(false);
+            previousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
 
             GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
             MainBackground.setLayout(MainBackgroundLayout);
             MainBackgroundLayout.setHorizontalGroup(
                 MainBackgroundLayout.createParallelGroup()
                     .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(label1)
-                        .addGap(44, 44, 44))
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
                         .addGroup(MainBackgroundLayout.createParallelGroup()
                             .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                                .addGap(23, 23, 23)
+                                .addComponent(textLabel))
                             .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addGroup(MainBackgroundLayout.createParallelGroup()
-                                    .addComponent(InputPassword, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PasswordLabel)
-                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(UsernameLabel))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)
+                                .addComponent(faceLabel, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(MainBackgroundLayout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                .addGap(137, 137, 137))
+                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                                .addGroup(MainBackgroundLayout.createParallelGroup()
+                                    .addComponent(inputPassword, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(passwordLabel)
+                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(usernameLabel))
+                                .addGap(88, 88, 88))))
             );
             MainBackgroundLayout.setVerticalGroup(
                 MainBackgroundLayout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(faceLabel, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label1)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textLabel)
+                        .addGap(27, 27, 27)
+                        .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(InputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
             );
         }
 
@@ -214,14 +224,14 @@ public class LoginMenu extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel MainBackground;
-    private JLabel label1;
-    private JLabel label2;
-    private JLabel UsernameLabel;
+    private JLabel textLabel;
+    private JLabel faceLabel;
+    private JLabel usernameLabel;
     private JScrollPane scrollPane1;
-    private JTextArea InputUserName;
-    private JLabel PasswordLabel;
-    private JPasswordField InputPassword;
+    private JTextArea inputUsername;
+    private JLabel passwordLabel;
+    private JPasswordField inputPassword;
     private JButton loginButton;
-    private JButton PreviousButton;
+    private JButton previousButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

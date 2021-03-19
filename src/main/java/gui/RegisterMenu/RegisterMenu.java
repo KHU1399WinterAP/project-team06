@@ -1,6 +1,7 @@
 package main.java.gui.RegisterMenu;
 
 import main.java.animations.ColorChangeAnimation;
+import main.java.config.FontConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.models.User;
@@ -18,48 +19,60 @@ import static main.java.config.GuiConfig.COLOR_DANGER;
 public class RegisterMenu extends JFrame {
     private final JFrame PreviousFrame;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel MainBackground;
-    private JLabel label1;
-    private JLabel label2;
-    private JLabel UsernameLabel;
+    private JPanel mainBackground;
+    private JLabel textLabel;
+    private JLabel faceLabel;
+    private JLabel usernameLabel;
     private JScrollPane scrollPane1;
-    private JTextArea InputUserName;
-    private JLabel PasswordLabel;
-    private JPasswordField InputPassword;
-    private JButton RegisterButton;
-    private JButton PreviousButton;
-    private JButton tryAgainButton;
+    private JTextArea inputUserName;
+    private JLabel passwordLabel;
+    private JPasswordField inputPassword;
+    private JButton registerButton;
     private JLabel usernameErrorLabel;
     private JLabel passwordErrorLabel;
+    private JButton previousButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public RegisterMenu(JFrame PreviousFrame) {
         this.PreviousFrame = PreviousFrame;
         initComponents();
+        initComponentsProperties();
         this.setVisible(true);
+    }
+
+    private void initComponentsProperties() {
+        inputPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        inputUserName.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        textLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 50));
+        usernameErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
+        passwordErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
+        usernameLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        passwordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
+        previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 10));
+
+
     }
 
     private void RegisterButtonActionPerformed(ActionEvent e) {
 
-        var usernameError = GuiValidation.validateUsername(InputUserName.getText());
-        var passwordError = GuiValidation.validatePassword(String.valueOf(InputPassword.getPassword()));
+        var usernameError = GuiValidation.validateUsername(inputUserName.getText());
+        var passwordError = GuiValidation.validatePassword(String.valueOf(inputPassword.getPassword()));
 
-        if (Database.AlreadyExisted(InputUserName.getText())) {
+        if (Database.AlreadyExisted(inputUserName.getText())) {
 
-            RegisterButton.setBackground(Color.red);
-            RegisterButton.setForeground(Color.BLACK);
-            RegisterButton.setText("Username Already exists !");
-            tryAgainButton.setVisible(true);
+            usernameErrorLabel.setText("username already exists");
+            runMainPanelBackgroundColorAnimation(mainBackground);
 
         } else if (usernameError == null && passwordError == null) {
 
-            User user = new User(InputUserName.getText(), InputPassword.getPassword(),1);
+            User user = new User(inputUserName.getText(), inputPassword.getPassword(),1);
             Database.InsertInToUsers(user);
-            RegisterButton.setBackground(Color.GREEN);
-            RegisterButton.setText("Registered successfully !");
+            registerButton.setBackground(Color.GREEN);
+            registerButton.setText("Registered successfully !");
 
         } else {
-            runMainPanelBackgroundColorAnimation(MainBackground);
+            runMainPanelBackgroundColorAnimation(mainBackground);
             updateErrorLabel(usernameError, usernameErrorLabel);
             updateErrorLabel(passwordError, passwordErrorLabel);
         }
@@ -88,26 +101,20 @@ public class RegisterMenu extends JFrame {
         PreviousFrame.setVisible(true);
     }
 
-    private void tryAgainButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new RegisterMenu(PreviousFrame);
-    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        MainBackground = new JPanel();
-        label1 = new JLabel();
-        label2 = new JLabel();
-        UsernameLabel = new JLabel();
+        mainBackground = new JPanel();
+        textLabel = new JLabel();
+        faceLabel = new JLabel();
+        usernameLabel = new JLabel();
         scrollPane1 = new JScrollPane();
-        InputUserName = new JTextArea();
-        PasswordLabel = new JLabel();
-        InputPassword = new JPasswordField();
-        RegisterButton = new JButton();
-        PreviousButton = new JButton();
-        tryAgainButton = new JButton();
+        inputUserName = new JTextArea();
+        passwordLabel = new JLabel();
+        inputPassword = new JPasswordField();
+        registerButton = new JButton();
         usernameErrorLabel = new JLabel();
         passwordErrorLabel = new JLabel();
+        previousButton = new JButton();
 
         //======== this ========
         setResizable(false);
@@ -128,67 +135,57 @@ public class RegisterMenu extends JFrame {
         });
         var contentPane = getContentPane();
 
-        //======== MainBackground ========
+        //======== mainBackground ========
         {
-            MainBackground.setMaximumSize(new Dimension(380, 605));
-            MainBackground.setMinimumSize(new Dimension(380, 605));
-            MainBackground.setBackground(new Color(0, 112, 192));
-            MainBackground.setFocusable(false);
+            mainBackground.setMaximumSize(new Dimension(380, 605));
+            mainBackground.setMinimumSize(new Dimension(380, 605));
+            mainBackground.setBackground(new Color(0, 112, 192));
+            mainBackground.setFocusable(false);
 
-            //---- label1 ----
-            label1.setText("Quiz Of Kings");
-            label1.setFont(new Font("Calibri", Font.PLAIN, 54));
-            label1.setForeground(Color.white);
+            //---- textLabel ----
+            textLabel.setText("Quiz Of Kings");
+            textLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
+            textLabel.setForeground(Color.white);
 
-            //---- label2 ----
-            label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/SmallLogo.jpg")));
+            //---- faceLabel ----
+            faceLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/SmallLogo.jpg")));
 
-            //---- UsernameLabel ----
-            UsernameLabel.setText("Username");
-            UsernameLabel.setForeground(Color.white);
+            //---- usernameLabel ----
+            usernameLabel.setText("Username");
+            usernameLabel.setForeground(Color.white);
+            usernameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
             //======== scrollPane1 ========
             {
 
-                //---- InputUserName ----
-                InputUserName.setBackground(Color.white);
-                InputUserName.setForeground(Color.darkGray);
-                InputUserName.setLineWrap(true);
-                InputUserName.setTabSize(10);
-                InputUserName.setAlignmentX(1.5F);
-                InputUserName.setAlignmentY(1.5F);
-                scrollPane1.setViewportView(InputUserName);
+                //---- inputUserName ----
+                inputUserName.setBackground(Color.white);
+                inputUserName.setForeground(new Color(0, 32, 96));
+                inputUserName.setLineWrap(true);
+                inputUserName.setTabSize(10);
+                inputUserName.setAlignmentX(1.5F);
+                inputUserName.setAlignmentY(1.5F);
+                inputUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+                scrollPane1.setViewportView(inputUserName);
             }
 
-            //---- PasswordLabel ----
-            PasswordLabel.setText("Password");
-            PasswordLabel.setForeground(Color.white);
+            //---- passwordLabel ----
+            passwordLabel.setText("Password");
+            passwordLabel.setForeground(Color.white);
+            passwordLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
-            //---- InputPassword ----
-            InputPassword.setBackground(Color.white);
-            InputPassword.setForeground(Color.darkGray);
+            //---- inputPassword ----
+            inputPassword.setBackground(Color.white);
+            inputPassword.setForeground(new Color(0, 32, 96));
+            inputPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
-            //---- RegisterButton ----
-            RegisterButton.setText("Register");
-            RegisterButton.setForeground(Color.gray);
-            RegisterButton.setBackground(new Color(0, 32, 96));
-            RegisterButton.setFocusable(false);
-            RegisterButton.addActionListener(e -> RegisterButtonActionPerformed(e));
-
-            //---- PreviousButton ----
-            PreviousButton.setText("previous");
-            PreviousButton.setBackground(new Color(137, 0, 0, 209));
-            PreviousButton.setFont(new Font("Lucida Sans Unicode", Font.BOLD | Font.ITALIC, 12));
-            PreviousButton.setForeground(Color.lightGray);
-            PreviousButton.setAlignmentX(16.0F);
-            PreviousButton.setFocusable(false);
-            PreviousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
-
-            //---- tryAgainButton ----
-            tryAgainButton.setText("Try again");
-            tryAgainButton.setFocusable(false);
-            tryAgainButton.setVisible(false);
-            tryAgainButton.addActionListener(e -> tryAgainButtonActionPerformed(e));
+            //---- registerButton ----
+            registerButton.setText("REGISTER");
+            registerButton.setForeground(Color.white);
+            registerButton.setBackground(new Color(0, 32, 96));
+            registerButton.setFocusable(false);
+            registerButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+            registerButton.addActionListener(e -> RegisterButtonActionPerformed(e));
 
             //---- usernameErrorLabel ----
             usernameErrorLabel.setForeground(Color.red);
@@ -198,68 +195,73 @@ public class RegisterMenu extends JFrame {
             passwordErrorLabel.setForeground(Color.red);
             passwordErrorLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 
-            GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
-            MainBackground.setLayout(MainBackgroundLayout);
-            MainBackgroundLayout.setHorizontalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap(49, Short.MAX_VALUE)
-                        .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                .addGroup(MainBackgroundLayout.createParallelGroup()
-                                    .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                                .addGap(136, 136, 136))
-                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                .addComponent(label1)
-                                .addGap(44, 44, 44))
-                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                .addComponent(UsernameLabel)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createParallelGroup()
-                                .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(PasswordLabel)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+            //---- previousButton ----
+            previousButton.setText("PREVIOUS");
+            previousButton.setBackground(new Color(137, 0, 0, 209));
+            previousButton.setFont(new Font("Comic Sans MS", Font.ITALIC, 12));
+            previousButton.setForeground(Color.white);
+            previousButton.setAlignmentX(16.0F);
+            previousButton.setFocusable(false);
+            previousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
+
+            GroupLayout mainBackgroundLayout = new GroupLayout(mainBackground);
+            mainBackground.setLayout(mainBackgroundLayout);
+            mainBackgroundLayout.setHorizontalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
+                        .addContainerGap(23, Short.MAX_VALUE)
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
+                                .addComponent(faceLabel)
+                                .addGap(119, 119, 119))
+                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
+                                .addComponent(textLabel)
+                                .addGap(29, 29, 29))
+                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createParallelGroup()
+                                .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap())
-                                .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                    .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(InputPassword, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(RegisterButton, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(85, 85, 85)))
-                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                .addComponent(label2)
-                                .addGap(111, 111, 111))))
+                                .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
+                                    .addGroup(mainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
+                                            .addComponent(usernameLabel)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createParallelGroup()
+                                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                                .addComponent(passwordLabel)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(inputPassword, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(16, 16, 16)))
+                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                                .addGap(136, 136, 136))))
             );
-            MainBackgroundLayout.setVerticalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+            mainBackgroundLayout.setVerticalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(faceLabel, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label1)
-                        .addGap(18, 18, 18)
-                        .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addComponent(UsernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textLabel)
+                        .addGap(26, 26, 26)
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                             .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addComponent(PasswordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(InputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(RegisterButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tryAgainButton)
+                        .addComponent(inputPassword, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PreviousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
             );
         }
 
@@ -267,11 +269,11 @@ public class RegisterMenu extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());

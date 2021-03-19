@@ -1,7 +1,3 @@
-/*
- * Created by JFormDesigner on Tue Mar 16 19:24:25 IRST 2021
- */
-
 package main.java.gui.Multiplayer;
 
 import java.awt.*;
@@ -9,36 +5,42 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
-/**
- * @author Alireza
- */
 public class Multiplayer extends JFrame {
-    public Multiplayer() {
+    public final JFrame dashboard;
+    public Multiplayer(JFrame dashboard) {
+        this.dashboard=dashboard;
         initComponents();
     }
 
-    private void DashbordFrameWindowClosed(WindowEvent e) {
-        // TODO add your code here
+    private void previousButtonActionPerformed(ActionEvent e) {
+        this.dispose();
+        dashboard.setVisible(true);
+    }
+
+    private void MultiplayerWindowClosing(WindowEvent e) {
+        this.dispose();
+        dashboard.setVisible(true);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
         QuestionMark = new JLabel();
+        previousButton = new JButton();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
-        setName("Dashbord");
         setMaximizedBounds(new Rectangle(580, 60, 380, 605));
         setResizable(false);
-        setTitle("Dashbord");
+        setTitle("Multiplayer");
         setBackground(new Color(0, 112, 192));
         setVisible(true);
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
+        setName("Multiplayer");
         addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e) {
-                DashbordFrameWindowClosed(e);
+            public void windowClosing(WindowEvent e) {
+                MultiplayerWindowClosing(e);
             }
         });
         var contentPane = getContentPane();
@@ -51,19 +53,33 @@ public class Multiplayer extends JFrame {
             QuestionMark.setEnabled(false);
             QuestionMark.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/QuestionMark.jpg")));
 
+            //---- previousButton ----
+            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
+            previousButton.setBackground(new Color(0, 112, 192));
+            previousButton.setFocusable(false);
+            previousButton.setBorder(null);
+            previousButton.addActionListener(e -> previousButtonActionPerformed(e));
+
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
                 PanelLayout.createParallelGroup()
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(QuestionMark)
+                        .addGroup(PanelLayout.createParallelGroup()
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(QuestionMark))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(29, Short.MAX_VALUE))
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addContainerGap()
+                        .addComponent(previousButton)
+                        .addGap(28, 28, 28)
                         .addComponent(QuestionMark)
                         .addContainerGap(163, Short.MAX_VALUE))
             );
@@ -87,5 +103,6 @@ public class Multiplayer extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
     private JLabel QuestionMark;
+    private JButton previousButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
