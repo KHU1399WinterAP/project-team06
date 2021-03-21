@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -16,10 +16,10 @@ new FormModel {
 			"font": new java.awt.Font( "Calibri", 0, 14 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			"defaultCloseOperation": 2
-			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "SettingFrameWindowClosing", true ) )
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "AboutFrameWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq l {space :::p, comp Banner:::::x}, seq l {par t {par l {seq l {space :::p, comp previousButton:::p:60:p}, seq l {space :p:64:p, par l {comp Text3::l:p::p, comp Text4::l:p::p, comp Text5::l:p::p, seq {space :6:6:p, comp Text6:::p::p}}}}, comp Text1::t:p:274:p, comp Text2::t:p::p}, space :0:46:x}}, space :::p}, seq l {space :p:98:p, comp AboutLabel:::p::p, space :0:116:x}, seq t {space ::25:x, comp RepoLabel:::p::p, space :p:18:p}, seq l {space :p:110:p, comp DevelopersLabel:::p::p, space ::111:x}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :::p, comp Banner:::p::p, space :::p, comp AboutLabel:::p:25:p, space :::p, comp Text1:::p:28:p, space :::p, comp Text2:::p::p, space :::p, comp DevelopersLabel:::p::p, space :::p, comp Text3:::p::p, space :::p, comp Text4:::p::p, space :::p, comp Text5:::p::p, space u:::p, comp Text6:::p:34:p, space :::p, comp RepoLabel:::p::p, space :::p}}"
+				"$horizontalGroup": "par l {seq l {space :p:98:p, comp aboutLabel:::p::p, space :0:111:x}, seq t {space ::30:x, comp repoLabel:::p::p, space :p:18:p}, seq {par l {seq l {space :p:64:p, par l {comp text3::l:p::p, comp text4::l:p::p, comp text5::l:p::p, seq {space :6:6:p, comp text6:::p::p}, comp text1::l:p:274:p, comp text2::l:p::p}}, seq l {space :::p, par l {seq {space :6:6:p, comp Banner:::p::p}, comp previousButton:::p:60:p}}, seq l {space :p:110:p, comp developersLabel:::p::p}}, space ::18:x}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :::p, comp Banner:::p::p, space :::p, comp aboutLabel:::p:25:p, space :::p, comp text1:::p:28:p, space u:::p, comp text2:::p::p, space :::p, comp developersLabel:::p::p, space :::p, comp text3:::p::p, space :::p, comp text4:::p::p, space :::p, comp text5:::p::p, space u:::p, comp text6:::p:34:p, space :::p, comp repoLabel:::p::p, space :::p}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -34,7 +34,7 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "AboutLabel"
+					name: "aboutLabel"
 					"text": "   About us  "
 					"background": &Color0 new java.awt.Color( 255, 153, 0, 255 )
 					"foreground": new java.awt.Color( 255, 153, 0, 255 )
@@ -47,56 +47,56 @@ new FormModel {
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/CropedBanner2.jpg" )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "Text1"
+					name: "text1"
 					"text": "KHU University 1399 Winter"
 					"background": #Color0
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					"font": new java.awt.Font( "Comic Sans MS", 0, 20 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "Text2"
+					name: "text2"
 					"text": "Advanced Programing Project"
 					"background": #Color0
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					"font": &Font0 new java.awt.Font( "Comic Sans MS", 0, 20 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "DevelopersLabel"
+					name: "developersLabel"
 					"text": "Developers :"
 					"background": #Color0
 					"foreground": &Color1 new java.awt.Color( 255, 153, 0, 255 )
 					"font": &Font1 new java.awt.Font( "Comic Sans MS", 0, 28 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "Text3"
+					name: "text3"
 					"text": "Seyed Hossein Borghei "
 					"background": #Color0
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					"font": #Font0
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "Text4"
+					name: "text4"
 					"text": "Alireza Reghabi"
 					"background": #Color0
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					"font": #Font0
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "Text5"
+					name: "text5"
 					"text": "Sina Omidvar"
 					"background": #Color0
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					"font": #Font0
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "RepoLabel"
+					name: "repoLabel"
 					"text": "KHU1399WinterAP/project-team06"
 					"background": #Color0
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					"font": new java.awt.Font( "Comic Sans MS", 0, 20 )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "Text6"
+					name: "text6"
 					"text": "Github Repository : "
 					"background": #Color0
 					"foreground": #Color1

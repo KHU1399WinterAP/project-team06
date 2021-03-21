@@ -3,6 +3,7 @@ package main.java.gui.Dashord.setting;
 
 import main.java.app.Main;
 import main.java.config.FontConfig;
+import main.java.gui.Dashord.setting.About.About;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -24,6 +25,8 @@ public class SettingPanel extends JFrame {
 
     private void initComponentsProperties() {
         musicButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
+        musiclabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 24));
+        aboutButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
     }
 
     private void SettingFrameWindowClosing(WindowEvent e) {
@@ -58,8 +61,8 @@ public class SettingPanel extends JFrame {
         previousButton = new JButton();
         musiclabel = new JLabel();
         musicButton = new JButton();
-        MusicLabel = new JLabel();
-        AboutButton = new JButton();
+        musicLabel = new JLabel();
+        aboutButton = new JButton();
 
         //======== this ========
         setResizable(false);
@@ -103,32 +106,24 @@ public class SettingPanel extends JFrame {
             musicButton.setFocusable(false);
             musicButton.addActionListener(e -> musicButtonActionPerformed(e));
 
-            //---- MusicLabel ----
-            MusicLabel.setText("   Music  ");
-            MusicLabel.setBackground(new Color(255, 153, 0));
-            MusicLabel.setForeground(new Color(255, 153, 0));
-            MusicLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+            //---- musicLabel ----
+            musicLabel.setText("   Music  ");
+            musicLabel.setBackground(new Color(255, 153, 0));
+            musicLabel.setForeground(new Color(255, 153, 0));
+            musicLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 
-            //---- AboutButton ----
-            AboutButton.setText("About");
-            AboutButton.setBackground(new Color(0, 32, 96));
-            AboutButton.setForeground(Color.white);
-            AboutButton.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
-            AboutButton.setFocusable(false);
-            AboutButton.addActionListener(e -> AboutButtonActionPerformed(e));
+            //---- aboutButton ----
+            aboutButton.setText("About");
+            aboutButton.setBackground(new Color(0, 32, 96));
+            aboutButton.setForeground(Color.white);
+            aboutButton.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+            aboutButton.setFocusable(false);
+            aboutButton.addActionListener(e -> AboutButtonActionPerformed(e));
 
             GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
             MainBackground.setLayout(MainBackgroundLayout);
             MainBackgroundLayout.setHorizontalGroup(
                 MainBackgroundLayout.createParallelGroup()
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(MusicLabel)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
                     .addGroup(MainBackgroundLayout.createSequentialGroup()
                         .addGroup(MainBackgroundLayout.createParallelGroup()
                             .addGroup(MainBackgroundLayout.createSequentialGroup()
@@ -136,7 +131,14 @@ public class SettingPanel extends JFrame {
                                 .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
                             .addGroup(MainBackgroundLayout.createSequentialGroup()
                                 .addGap(114, 114, 114)
-                                .addComponent(AboutButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(musicLabel)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             MainBackgroundLayout.setVerticalGroup(
@@ -147,11 +149,11 @@ public class SettingPanel extends JFrame {
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MainBackgroundLayout.createParallelGroup()
                             .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(MusicLabel))
+                                .addComponent(musicLabel)
+                                .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
                             .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(AboutButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
                         .addGap(141, 141, 141))
             );
         }
@@ -176,7 +178,7 @@ public class SettingPanel extends JFrame {
     private JButton previousButton;
     private JLabel musiclabel;
     private JButton musicButton;
-    private JLabel MusicLabel;
-    private JButton AboutButton;
+    private JLabel musicLabel;
+    private JButton aboutButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
