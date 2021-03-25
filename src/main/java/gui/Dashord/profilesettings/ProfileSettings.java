@@ -102,7 +102,7 @@ public class ProfileSettings extends JFrame {
         if (passwordError == null) {
             Database.UpdateDatabasePassword(Dashboard.activeUser.username,newPassword);
             changePasswordButton.setBackground(Color.GREEN);
-            changePasswordButton.setText("changed successfully !");
+            changePasswordButton.setText("Changed successfully !");
             Dashboard.activeUser.password=newPassword;
         } else {
             RegisterMenu.runMainPanelBackgroundColorAnimation(panel);

@@ -7,9 +7,12 @@ package main.java.gui.Singleplayer;
 import main.java.config.FontConfig;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.Questions.Questions;
+import main.java.models.Question;
+import main.java.questionTypes.QuestionTypes;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -42,33 +45,33 @@ public class SinglePlayer extends JFrame {
         dashboard.setVisible(true);
     }
 
-    private void whenCategoryIsSelected(){
+    private void whenCategoryIsSelected(ArrayList<Question> questions){
         this.setVisible(false);
-        new Questions(this);
+        new Questions(this,questions);
     }
 
     private void category1ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected();
+        whenCategoryIsSelected(QuestionTypes.english);
     }
 
     private void category2ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected();
+        whenCategoryIsSelected(QuestionTypes.mathematics);
     }
 
     private void category3ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected();
+        whenCategoryIsSelected(QuestionTypes.foodAndDrink);
     }
 
     private void category4ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected();
+        whenCategoryIsSelected(QuestionTypes.science);
     }
 
     private void category5ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected();
+        whenCategoryIsSelected(QuestionTypes.commonKnowledge);
     }
 
     private void category6ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected();
+        whenCategoryIsSelected(QuestionTypes.geography);
     }
 
     private void singlePlayerWindowClosing(WindowEvent e) {
@@ -124,7 +127,7 @@ public class SinglePlayer extends JFrame {
 
             //---- category1 ----
             category1.setText("English");
-            category1.setBackground(new Color(153, 0, 255));
+            category1.setBackground(new Color(0, 32, 96));
             category1.setForeground(new Color(51, 255, 51));
             category1.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             category1.setFocusable(false);
@@ -132,7 +135,7 @@ public class SinglePlayer extends JFrame {
 
             //---- category2 ----
             category2.setText("Mathematics");
-            category2.setBackground(new Color(153, 0, 255));
+            category2.setBackground(new Color(0, 32, 96));
             category2.setForeground(new Color(51, 255, 51));
             category2.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             category2.setFocusable(false);
@@ -140,7 +143,7 @@ public class SinglePlayer extends JFrame {
 
             //---- category3 ----
             category3.setText("Food & Drink");
-            category3.setBackground(new Color(153, 0, 255));
+            category3.setBackground(new Color(0, 32, 96));
             category3.setForeground(new Color(51, 255, 51));
             category3.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             category3.setFocusable(false);
@@ -148,7 +151,7 @@ public class SinglePlayer extends JFrame {
 
             //---- category5 ----
             category5.setText("Common Knowledge");
-            category5.setBackground(new Color(153, 0, 255));
+            category5.setBackground(new Color(0, 32, 96));
             category5.setForeground(new Color(51, 255, 51));
             category5.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             category5.setFocusable(false);
@@ -156,7 +159,7 @@ public class SinglePlayer extends JFrame {
 
             //---- category4 ----
             category4.setText("Science");
-            category4.setBackground(new Color(153, 0, 255));
+            category4.setBackground(new Color(0, 32, 96));
             category4.setForeground(new Color(51, 255, 51));
             category4.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             category4.setFocusable(false);
@@ -164,7 +167,7 @@ public class SinglePlayer extends JFrame {
 
             //---- category6 ----
             category6.setText("Geography");
-            category6.setBackground(new Color(153, 0, 255));
+            category6.setBackground(new Color(0, 32, 96));
             category6.setForeground(new Color(51, 255, 51));
             category6.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             category6.setFocusable(false);

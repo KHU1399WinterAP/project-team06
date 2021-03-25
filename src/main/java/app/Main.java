@@ -5,6 +5,7 @@ import main.java.config.FontConfig;
 import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
 
 import java.io.File;
+import java.util.Random;
 
 public class Main {
 
@@ -18,7 +19,6 @@ public class Main {
         mp3Player = new MP3Player(new File(song));
         mp3Player.play();
         mp3Player.setRepeat(true);
-
         new LoginRegisterMenu();
     }
 }

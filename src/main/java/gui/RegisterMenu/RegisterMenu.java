@@ -69,7 +69,7 @@ public class RegisterMenu extends JFrame {
             User user = new User(inputUserName.getText(), inputPassword.getPassword(),1);
             Database.InsertInToUsers(user);
             registerButton.setBackground(Color.GREEN);
-            registerButton.setText("Registered successfully !");
+            registerButton.setText("Registered !");
 
         } else {
             runMainPanelBackgroundColorAnimation(mainBackground);

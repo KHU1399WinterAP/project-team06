@@ -1,6 +1,7 @@
 package main.java.database;
 
 import main.java.config.DatabaseConfig;
+import main.java.models.Question;
 import main.java.models.User;
 
 import java.sql.*;
@@ -32,25 +33,28 @@ public class Database {
         return null;
     }
 
-//    public static ArrayList<User> SelectAllUsers() {
-//        try {
-//            var users = new ArrayList<User>();
-//            Statement statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery("SELECT * FROM user ");
-//
-//            while (resultSet.next()) {
-//                User user = new User(resultSet.getString("username"), resultSet.getString("password"));
-//                users.add(user);
-//            }
-//            return users;
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//            return new ArrayList<>();
-//        }
-//    }
+    public static ArrayList<Question> SelectAllQuestions(int category) {
+        try {
+            ArrayList<Question> questions = new ArrayList<>();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM questions WHERE category=?");
+            statement.setInt(1,category);
+            ResultSet resultSet=statement.executeQuery();
+            while (resultSet.next()){
+                Question question=new Question(resultSet.getInt("category"),
+                        resultSet.getInt("QuestionIndex"),resultSet.getString("answer1"),
+                        resultSet.getString("answer2"),resultSet.getString("answer3"),
+                        resultSet.getString("correctanswer"),resultSet.getString("question"));
+                questions.add(question);
+            }
+            return questions;
 
-    public static void InsertInToUsers(User user) {
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+        public static void InsertInToUsers(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES(?,?,?)");
             statement.setString(1, user.username);
