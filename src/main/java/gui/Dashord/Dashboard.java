@@ -28,6 +28,7 @@ public class Dashboard extends JFrame {
         initComponentsProperties();
         this.setVisible(true);
         setCurrentUsername();
+        setCurrentCoins();
         initProfilePicture(activeUser);
     }
 
@@ -43,10 +44,13 @@ public class Dashboard extends JFrame {
         usernameLabel.setText(activeUser.username);
     }
 
+    private void setCurrentCoins(){
+        coinLabel.setText(String.valueOf(activeUser.coins));
+    }
     private void ProfileButtonActionPerformed(ActionEvent e) {
         this.setVisible(false);
-        var prof = new ProfileSettings(LoginRegisterMenu, this);
-        prof.addWindowListener(new WindowAdapter() {
+        var profileSettings = new ProfileSettings(LoginRegisterMenu, this);
+        profileSettings.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 setCurrentUsername();
@@ -71,7 +75,13 @@ public class Dashboard extends JFrame {
 
     private void singlePlayerButtonActionPerformed(ActionEvent e) {
         this.setVisible(false);
-        new SinglePlayer(this);
+       var singlePlayer=new SinglePlayer(this);
+       singlePlayer.addWindowListener(new WindowAdapter() {
+           @Override
+           public void windowClosed(WindowEvent e) {
+               setCurrentCoins();
+           }
+       });
     }
 
     private void multiplayerButtonActionPerformed(ActionEvent e) {
@@ -152,7 +162,6 @@ public class Dashboard extends JFrame {
             //---- coinLabel ----
             coinLabel.setBackground(new Color(255, 255, 51));
             coinLabel.setForeground(new Color(255, 152, 0));
-            coinLabel.setText("0");
             coinLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             GroupLayout PanelLayout = new GroupLayout(Panel);

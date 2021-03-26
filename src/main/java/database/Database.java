@@ -26,7 +26,8 @@ public class Database {
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
-                return new User(resultSet.getString("username"), resultSet.getString("password"),resultSet.getInt("profilepicture"));
+                return new User(resultSet.getString("username"), resultSet.getString("password"),
+                        resultSet.getInt("profilepicture"),resultSet.getInt(("coins")));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -56,10 +57,11 @@ public class Database {
 
         public static void InsertInToUsers(User user) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES(?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES(?,?,?,?)");
             statement.setString(1, user.username);
             statement.setString(2, user.password);
             statement.setInt(3,user.profilePicture);
+            statement.setInt(4,user.coins);
             statement.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -111,5 +113,17 @@ public class Database {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static void updateDatabaseUserCoins(String username,int newCoin){
+        try {
+            PreparedStatement statement=connection.prepareStatement("UPDATE user SET coins=? WHERE username=?");
+            statement.setInt(1,newCoin);
+            statement.setString(2,username);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }

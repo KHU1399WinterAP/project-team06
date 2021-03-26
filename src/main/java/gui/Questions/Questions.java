@@ -5,6 +5,8 @@
 package main.java.gui.Questions;
 
 import main.java.config.FontConfig;
+import main.java.database.Database;
+import main.java.gui.Dashord.Dashboard;
 import main.java.models.Question;
 
 import java.awt.*;
@@ -26,6 +28,7 @@ public class Questions extends JFrame {
         this.questions = questions;
         this.singlePlayer = singlePlayer;
         initComponents();
+        coinAmountLabel.setText(String.valueOf(Dashboard.activeUser.coins));
         initComponentsProperties();
         showQuestion(questions);
         this.setVisible(true);
@@ -68,6 +71,9 @@ public class Questions extends JFrame {
 
     private void isCorrect(JButton inputAnswer) {
         if (inputAnswer.getText().equals(question.correctAnswer)) {
+            Dashboard.activeUser.coins+=20;
+            Database.updateDatabaseUserCoins(Dashboard.activeUser.username,Dashboard.activeUser.coins);
+            coinAmountLabel.setText(String.valueOf(Dashboard.activeUser.coins));
             inputAnswer.setBackground(Color.GREEN);
             try {
                 Thread.sleep(1000);
@@ -83,8 +89,8 @@ public class Questions extends JFrame {
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
-//            this.dispose();
-//            singlePlayer.setVisible(true);
+            this.dispose();
+            singlePlayer.setVisible(true);
         }
     }
 
@@ -124,6 +130,8 @@ public class Questions extends JFrame {
         answerButton2 = new JButton();
         answerButton4 = new JButton();
         answerButton1 = new JButton();
+        coinLabel = new JLabel();
+        coinAmountLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -193,6 +201,12 @@ public class Questions extends JFrame {
             answerButton1.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             answerButton1.addActionListener(e -> answerButton1ActionPerformed(e));
 
+            //---- coinLabel ----
+            coinLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/smallCoin.png")));
+
+            //---- coinAmountLabel ----
+            coinAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
@@ -215,11 +229,21 @@ public class Questions extends JFrame {
                                     .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(powerUp2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26))))
+                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                        .addContainerGap(293, Short.MAX_VALUE)
+                        .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addContainerGap()
+                        .addGroup(PanelLayout.createParallelGroup()
+                            .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -241,11 +265,11 @@ public class Questions extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -261,5 +285,7 @@ public class Questions extends JFrame {
     private JButton answerButton2;
     private JButton answerButton4;
     private JButton answerButton1;
+    private JLabel coinLabel;
+    private JLabel coinAmountLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

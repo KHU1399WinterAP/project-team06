@@ -66,7 +66,7 @@ public class RegisterMenu extends JFrame {
 
         } else if (usernameError == null && passwordError == null) {
 
-            User user = new User(inputUserName.getText(), inputPassword.getPassword(),1);
+            User user = new User(inputUserName.getText(), inputPassword.getPassword(),1,100);
             Database.InsertInToUsers(user);
             registerButton.setBackground(Color.GREEN);
             registerButton.setText("Registered !");

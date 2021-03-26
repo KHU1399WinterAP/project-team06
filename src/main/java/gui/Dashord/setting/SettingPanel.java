@@ -3,6 +3,7 @@ package main.java.gui.Dashord.setting;
 
 import main.java.app.Main;
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.gui.Dashord.setting.About.About;
 
 import java.awt.*;
@@ -42,10 +43,10 @@ public class SettingPanel extends JFrame {
     private void musicButtonActionPerformed(ActionEvent e) {
         if (musicButton.getText().equals("ON")) {
             musicButton.setText("OFF");
-            Main.mp3Player.pause();
+            MusicConfig.mp3Player.pause();
         }else {
             musicButton.setText("ON");
-            Main.mp3Player.play();
+            MusicConfig.mp3Player.play();
         }
     }
 
@@ -54,14 +55,12 @@ public class SettingPanel extends JFrame {
         new About(this);
     }
 
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         MainBackground = new JPanel();
         previousButton = new JButton();
         musiclabel = new JLabel();
         musicButton = new JButton();
-        musicLabel = new JLabel();
         aboutButton = new JButton();
 
         //======== this ========
@@ -106,12 +105,6 @@ public class SettingPanel extends JFrame {
             musicButton.setFocusable(false);
             musicButton.addActionListener(e -> musicButtonActionPerformed(e));
 
-            //---- musicLabel ----
-            musicLabel.setText("   Music  ");
-            musicLabel.setBackground(new Color(255, 153, 0));
-            musicLabel.setForeground(new Color(255, 153, 0));
-            musicLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
-
             //---- aboutButton ----
             aboutButton.setText("About");
             aboutButton.setBackground(new Color(0, 32, 96));
@@ -133,10 +126,8 @@ public class SettingPanel extends JFrame {
                                 .addGap(114, 114, 114)
                                 .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
                             .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                .addGap(67, 67, 67)
+                                .addGap(79, 79, 79)
                                 .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(musicLabel)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -148,9 +139,7 @@ public class SettingPanel extends JFrame {
                         .addComponent(previousButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(musicLabel)
-                                .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
                             .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
@@ -178,7 +167,6 @@ public class SettingPanel extends JFrame {
     private JButton previousButton;
     private JLabel musiclabel;
     private JButton musicButton;
-    private JLabel musicLabel;
     private JButton aboutButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
