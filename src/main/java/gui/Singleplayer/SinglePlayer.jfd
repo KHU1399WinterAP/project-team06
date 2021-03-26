@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp Panel::l:::x}"
-			"$verticalGroup": "par l {comp Panel::l:::x}"
+			"$horizontalGroup": "par l {comp Panel::t:::x}"
+			"$verticalGroup": "par l {comp Panel::t:::x}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
@@ -18,8 +18,8 @@ new FormModel {
 			"defaultCloseOperation": 2
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "singlePlayerWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq {space :::p, comp previousButton:::p:57:p, space :p:15:p, comp title:::p::p}, seq l {space :p:19:p, par l {seq l {comp categoriesLabel:::p::p, space ::40:p}, seq t {space :p:22:p, par t {comp category1:::p:305:p, comp category6::t:p:305:p, comp category5::t:p:305:p, comp category4::t:p:305:p, comp category3::t:p:305:p, comp category2::t:p:305:p}}}}}, space ::32:x}}"
-				"$verticalGroup": "par l {seq l {space :::p, par t {comp title:::p::p, comp previousButton:::p::p}, space ::42:x, comp categoriesLabel:::p::p, space :p:26:p, comp category1:::p:49:p, space s:::p, comp category2:::p:49:p, space s:::p, comp category3:::p:49:p, space s:::p, comp category4:::p:49:p, space s:::p, comp category5:::p:49:p, space s:::p, comp category6:::p:49:p, space :p:18:p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par l {comp label2::t:p:58:p, seq l {space :p:6:p, par l {seq {space :p:13:p, par t:::p {comp category1:::p:162:p, comp category4::t::163:x, comp category3::t::163:x, comp category2::t::163:x, comp category6::t::163:x, comp category5::t::163:x}, space s:::p, par l {comp bestRecordEnglishLabel:::p:58:p, comp bestRecordCommonLabel::l:p:58:p, comp bestRecordGeographyLabel::l:p:58:p, comp bestRecordScienceLabel::l:p:58:p, comp bestRecordFoodLabel::l:p:58:p, comp bestRecordMathLabel::l:p:58:p}}, seq {comp categoriesLabel:::p::p, space :69:69:p, comp label1:::p:58:p}}}}, space :36:36:p, par l:::p {comp yourRecordEnglishLabel::::58:x, comp label4::l::58:x, comp yourRecordGeographyLabel::l::58:x, comp yourRecordScienceLabel::l::58:x, comp yourRecordCommonLabel::t::58:x, comp yourRecordFoodLabel::l::58:x, comp yourRecordMathLabel::t::58:x, comp label3::l::58:x}}, seq {comp previousButton:::p:57:p, space :p:15:p, comp title:::p::p}}, space :38::x}}"
+				"$verticalGroup": "par l {seq l {space :::p, par t {comp title:::p::p, comp previousButton:::p::p}, space s:::p, par b {comp categoriesLabel::b:p::p, comp label1::b:p:27:p, comp label3::b:p:27:p}, space :p:3:p, par b {comp label4::b:p::p, comp label2::b:p::p}, space u:::p, par l:::p {seq {par l {comp bestRecordEnglishLabel:::p:49:p, comp category1:::p:49:p}, space :p:13:p, par t {comp bestRecordMathLabel:::p:49:p, comp category2:::p:49:p}}, seq {comp yourRecordEnglishLabel:::p:49:p, space :::x, comp yourRecordMathLabel:::p:49:p}}, par l {seq l {space u:::p, par l {seq t {comp category3:::p:49:p, space u:::p, comp category4:::p:49:p}, seq t {comp bestRecordFoodLabel:::p:49:p, space :p:12:p, comp bestRecordScienceLabel:::p:49:p}}, space s:::p, par l {comp bestRecordCommonLabel:::p:49:p, comp category5:::p:49:p}}, seq t {space :p:11:p, comp yourRecordFoodLabel:::p:49:p, space u:::p, comp yourRecordScienceLabel:::p:49:p, space s:::p, comp yourRecordCommonLabel:::p:49:p}}, space s:::p, par l {seq {comp yourRecordGeographyLabel:::p:49:p, space :0:49:x}, seq {par l {comp bestRecordGeographyLabel:::p:49:p, comp category6:::p:49:p}, space ::49:x}}}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -41,8 +41,8 @@ new FormModel {
 					name: "category1"
 					"text": "English"
 					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": &Color0 new java.awt.Color( 51, 255, 51, 255 )
-					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 16 )
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "category1ActionPerformed", true ) )
 				} )
@@ -50,8 +50,8 @@ new FormModel {
 					name: "category2"
 					"text": "Mathematics"
 					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": #Color0
-					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 16 )
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "category2ActionPerformed", true ) )
 				} )
@@ -59,8 +59,8 @@ new FormModel {
 					name: "category3"
 					"text": "Food & Drink"
 					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": #Color0
-					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 16 )
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "category3ActionPerformed", true ) )
 				} )
@@ -68,8 +68,8 @@ new FormModel {
 					name: "category5"
 					"text": "Common Knowledge"
 					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": #Color0
-					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 11 )
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "category5ActionPerformed", true ) )
 				} )
@@ -77,8 +77,8 @@ new FormModel {
 					name: "category4"
 					"text": "Science"
 					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": #Color0
-					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 16 )
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "category4ActionPerformed", true ) )
 				} )
@@ -86,8 +86,8 @@ new FormModel {
 					name: "category6"
 					"text": "Geography"
 					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": #Color0
-					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 16 )
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "category6ActionPerformed", true ) )
 				} )
@@ -98,6 +98,106 @@ new FormModel {
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": " best "
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "record"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "your"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": &Font0 new java.awt.Font( "Comic Sans MS", 0, 14 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "record"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "bestRecordEnglishLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "bestRecordMathLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "bestRecordFoodLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "bestRecordScienceLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "bestRecordCommonLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "bestRecordGeographyLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "yourRecordEnglishLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "yourRecordMathLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "yourRecordFoodLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "yourRecordScienceLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "yourRecordCommonLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "yourRecordGeographyLabel"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": #Font0
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

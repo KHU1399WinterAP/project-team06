@@ -17,8 +17,8 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp questionLabel:::::x, space :::p}, seq t {space :0:19:x, par l:::p {comp answerButton3::t::150:x, comp answerButton4::t::150:x, comp powerUp1::t::150:x}, space :p:27:p, par t {comp answerButton1:::p:150:p, comp answerButton2:::p:150:p, comp powerUp2:::p:150:p}, space :p:26:p}}}, seq t {space ::293:x, comp coinAmountLabel:::p:38:p, space :::p, comp coinLabel:::p:35:p, space :::p}}"
-				"$verticalGroup": "par l {seq l {space :::p, par l {comp coinLabel:::p:37:p, comp coinAmountLabel:::::x}, space u:::p, comp questionLabel:::p:183:p, space :p:43:p, par b {comp answerButton3::b:p:76:p, comp answerButton2::b:p:76:p}, space s:::p, par b {comp answerButton4::b:p:76:p, comp answerButton1::b:p:76:p}, space ::26:x, par b {comp powerUp2::b:p:53:p, comp powerUp1::b:p:53:p}, space :p:35:p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp questionLabel:::::x, space :::p}, seq t {space :0:19:x, par l:::p {comp answerButton3::t::150:x, comp answerButton4::t::150:x, comp powerUp1::t::150:x}, space :p:27:p, par t {comp answerButton1:::p:150:p, comp answerButton2:::p:150:p, comp powerUp2:::p:150:p}, space :p:26:p}, seq t {comp label1:::p::p, space :::p, comp currentScoreLable:::p:43:p, space ::191:x, comp coinAmountLabel:::p:45:p, space :::p, comp coinLabel:::p:35:p, space :::p}}}}"
+				"$verticalGroup": "par l {seq l {space :::p, par l {seq {par l {comp coinLabel:::p:37:p, comp label1::l:p:43:p}, space :0:0:x}, comp currentScoreLable::l:::x, comp coinAmountLabel::l:::x}, space :::p, comp questionLabel:::p:183:p, space :p:43:p, par b {comp answerButton3::b:p:76:p, comp answerButton2::b:p:76:p}, space s:::p, par b {comp answerButton4::b:p:76:p, comp answerButton1::b:p:76:p}, space :p:26:p, par b {comp powerUp2::b:p:53:p, comp powerUp1::b:p:53:p}, space :p:35:p}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -84,6 +84,16 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "coinAmountLabel"
 					"horizontalAlignment": 0
+					"foreground": new java.awt.Color( 255, 255, 51, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Score :"
+					"foreground": sfield java.awt.Color white
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "currentScoreLable"
+					"foreground": sfield java.awt.Color white
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

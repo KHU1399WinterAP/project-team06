@@ -6,8 +6,11 @@ package main.java.gui.Questions;
 
 import main.java.config.FontConfig;
 import main.java.database.Database;
+import main.java.gui.Break.Break;
 import main.java.gui.Dashord.Dashboard;
+import main.java.gui.GameOver.GameOver;
 import main.java.models.Question;
+import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,13 +26,18 @@ public class Questions extends JFrame {
     Question question;
     public final JFrame singlePlayer;
     ArrayList<Question> questions;
+    int score=0;
+    int category;
+    User activeUser=Dashboard.activeUser;
 
-    public Questions(JFrame singlePlayer, ArrayList<Question> questions) {
+    public Questions(JFrame singlePlayer, ArrayList<Question> questions,int category) {
+        this.category=category;
         this.questions = questions;
         this.singlePlayer = singlePlayer;
         initComponents();
         coinAmountLabel.setText(String.valueOf(Dashboard.activeUser.coins));
         initComponentsProperties();
+        currentScoreLable.setText(String.valueOf(score));
         showQuestion(questions);
         this.setVisible(true);
     }
@@ -70,27 +78,67 @@ public class Questions extends JFrame {
     }
 
     private void isCorrect(JButton inputAnswer) {
+
         if (inputAnswer.getText().equals(question.correctAnswer)) {
+            score++;
+            switch (category){
+                case 1 -> {
+                    if (activeUser.recordEnglish<score) {
+                        activeUser.recordEnglish=score;
+                        Database.UpdateDatabaseUserRecord(activeUser.username,"recordEnglish",score);
+                    }
+                }
+                case 2->{
+                    if (activeUser.recordMath<score){
+                        activeUser.recordMath=score;
+                        Database.UpdateDatabaseUserRecord(activeUser.username,"recordMath",score);
+                    }
+                }
+                case 3->{
+                    if (activeUser.recordFood<score) {
+                        activeUser.recordFood=score;
+                        Database.UpdateDatabaseUserRecord(activeUser.username,"recordFood",score);
+                    }
+                }
+                case 4->{
+                    if (activeUser.recordScience<score){
+                        activeUser.recordScience=score;
+                        Database.UpdateDatabaseUserRecord(activeUser.username,"recordScience",score);
+                    }
+                }
+                case 5->{
+                    if (activeUser.recordCommon<score){
+                        activeUser.recordCommon=score;
+                        Database.UpdateDatabaseUserRecord(activeUser.username,"recordCommon",score);
+                    }
+                }
+                default -> {
+                    if (activeUser.recordGeography<score) {
+                        activeUser.recordGeography=score;
+                        Database.UpdateDatabaseUserRecord(activeUser.username,"recordGeography",score);
+                    }
+                }
+            }
+
+            currentScoreLable.setText(String.valueOf(score));
             Dashboard.activeUser.coins+=20;
             Database.updateDatabaseUserCoins(Dashboard.activeUser.username,Dashboard.activeUser.coins);
             coinAmountLabel.setText(String.valueOf(Dashboard.activeUser.coins));
             inputAnswer.setBackground(Color.GREEN);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            this.setVisible(false);
+            new Break(singlePlayer,score,this,category);
+            // // //
+            // //
+            //
             inputAnswer.setBackground(new Color(0, 32, 96));
             showQuestion(questions);
         } else {
             inputAnswer.setBackground(Color.RED);
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            // // //
+            // //
+            //
             this.dispose();
-            singlePlayer.setVisible(true);
+            new GameOver(singlePlayer,score,category);
         }
     }
 
@@ -132,6 +180,8 @@ public class Questions extends JFrame {
         answerButton1 = new JButton();
         coinLabel = new JLabel();
         coinAmountLabel = new JLabel();
+        label1 = new JLabel();
+        currentScoreLable = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -206,6 +256,14 @@ public class Questions extends JFrame {
 
             //---- coinAmountLabel ----
             coinAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            coinAmountLabel.setForeground(new Color(255, 255, 51));
+
+            //---- label1 ----
+            label1.setText("Score :");
+            label1.setForeground(Color.white);
+
+            //---- currentScoreLable ----
+            currentScoreLable.setForeground(Color.white);
 
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
@@ -228,22 +286,30 @@ public class Questions extends JFrame {
                                     .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(powerUp2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26))))
-                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addContainerGap(293, Short.MAX_VALUE)
-                        .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                                .addGap(26, 26, 26))
+                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addComponent(label1)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                                .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGroup(PanelLayout.createParallelGroup()
+                                    .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(currentScoreLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -253,7 +319,7 @@ public class Questions extends JFrame {
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(answerButton4, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                             .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGap(26, 26, 26)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(powerUp2, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
                             .addComponent(powerUp1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
@@ -287,5 +353,7 @@ public class Questions extends JFrame {
     private JButton answerButton1;
     private JLabel coinLabel;
     private JLabel coinAmountLabel;
+    private JLabel label1;
+    private JLabel currentScoreLable;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
