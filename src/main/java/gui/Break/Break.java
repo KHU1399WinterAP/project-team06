@@ -48,7 +48,6 @@ public class Break extends JFrame {
     private void nextButtonActionPerformed(ActionEvent e) {
         this.dispose();
         questions.setVisible(true);
-
     }
 
     private void stopButtonActionPerformed(ActionEvent e) {
