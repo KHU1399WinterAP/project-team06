@@ -85,7 +85,7 @@ public class SinglePlayer extends JFrame {
 
     private void whenCategoryIsSelected(ArrayList<Question> questions,int category){
         this.setVisible(false);
-       var questionPanel = new Questions(this,questions,category);
+       Questions questionPanel = new Questions(this,questions,category);
        questionPanel.addWindowListener(new WindowAdapter() {
            @Override
            public void windowClosed(WindowEvent e) {
@@ -115,7 +115,7 @@ public class SinglePlayer extends JFrame {
     }
 
     private void category6ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.geography,5);
+        whenCategoryIsSelected(QuestionTypes.geography,6);
     }
 
     private void singlePlayerWindowClosing(WindowEvent e) {

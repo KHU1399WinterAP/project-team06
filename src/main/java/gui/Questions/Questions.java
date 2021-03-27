@@ -28,6 +28,7 @@ public class Questions extends JFrame {
     Question question;
     public final JFrame singlePlayer;
     ArrayList<Question> questions;
+    ArrayList<Question> questions2;
     int score=0;
     int category;
     User activeUser=Dashboard.activeUser;
@@ -45,22 +46,23 @@ public class Questions extends JFrame {
         }
     });
 
-
     public Questions(JFrame singlePlayer, ArrayList<Question> questions, int category) {
         this.category=category;
         this.questions = questions;
         this.singlePlayer = singlePlayer;
+        questions2=new ArrayList<>(questions);
+
         initComponents();
         coinAmountLabel.setText(String.valueOf(Dashboard.activeUser.coins));
         initComponentsProperties();
         currentScoreLable.setText(String.valueOf(score));
-        showQuestion(questions);
+        showQuestion(questions2);
         this.setVisible(true);
     }
 
-    private void showQuestion(ArrayList<Question> questions) {
+    private void showQuestion(ArrayList<Question> questions2) {
         countdown.start();
-        question = randomQuestion(questions);
+        question = randomQuestion(questions2);
         questionLabel.setText(question.question);
         ArrayList<String> answers = new ArrayList<>();
         answers.add(question.answer1);
@@ -81,17 +83,18 @@ public class Questions extends JFrame {
         return answer;
     }
 
-    private Question randomQuestion(ArrayList<Question> questions) {
+    private Question randomQuestion(ArrayList<Question> questions2) {
         Random random = new Random();
-        int rand = random.nextInt(questions.size());
-        Question question = questions.get(rand);
-        questions.remove(rand);
+        int rand = random.nextInt(questions2.size());
+        Question question = questions2.get(rand);
+        questions2.remove(rand);
         return question;
     }
 
     private void questionsWindowClosing(WindowEvent e) {
         this.dispose();
-        singlePlayer.setVisible(true);
+        countdown.stop();
+        new GameOver(singlePlayer,score,category);
     }
 
     private void isCorrect(JButton inputAnswer) {
@@ -153,7 +156,7 @@ public class Questions extends JFrame {
                     //CurrentFrame.setVisible(false);
                     seconds = 10;
                     //new Break(singlePlayer,score,CurrentFrame,category);
-                    showQuestion(questions);
+                    showQuestion(questions2);
 
                 }
             });
@@ -183,7 +186,7 @@ public class Questions extends JFrame {
     }
 
     private void initComponentsProperties() {
-        questionLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 18));
+        questionLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
         answerButton1.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
         answerButton2.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
         answerButton3.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
@@ -311,6 +314,7 @@ public class Questions extends JFrame {
             timelabel.setForeground(new Color(255, 153, 0));
             timelabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
             timelabel.setText("10");
+            timelabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
@@ -340,9 +344,9 @@ public class Questions extends JFrame {
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
                                         .addGap(75, 75, 75)
-                                        .addComponent(timelabel)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                                        .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(timelabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                        .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))
                                 .addGap(26, 26, 26))))
@@ -355,14 +359,16 @@ public class Questions extends JFrame {
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addGroup(PanelLayout.createParallelGroup()
                                     .addComponent(currentScoreLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(timelabel, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                                    .addGroup(PanelLayout.createSequentialGroup()
+                                        .addComponent(timelabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(2, 2, 2)))
                                 .addGap(4, 4, 4))
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
