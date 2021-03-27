@@ -37,6 +37,7 @@ public class Questions extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             seconds--;
+            timeProgressBar.setValue(10-seconds);
             timelabel.setText(String.valueOf(seconds));
             if (seconds<=0){
                 CurrentFrame.dispose();
@@ -51,16 +52,20 @@ public class Questions extends JFrame {
         this.questions = questions;
         this.singlePlayer = singlePlayer;
         questions2=new ArrayList<>(questions);
-
         initComponents();
         coinAmountLabel.setText(String.valueOf(Dashboard.activeUser.coins));
         initComponentsProperties();
+        timeProgressBar.setMaximum(10);
+        timeProgressBar.setMinimum(0);
+
         currentScoreLable.setText(String.valueOf(score));
         showQuestion(questions2);
+
         this.setVisible(true);
     }
 
     private void showQuestion(ArrayList<Question> questions2) {
+        timeProgressBar.setValue(0);
         countdown.start();
         question = randomQuestion(questions2);
         questionLabel.setText(question.question);
@@ -226,6 +231,7 @@ public class Questions extends JFrame {
         label1 = new JLabel();
         currentScoreLable = new JLabel();
         timelabel = new JLabel();
+        timeProgressBar = new JProgressBar();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -316,6 +322,9 @@ public class Questions extends JFrame {
             timelabel.setText("10");
             timelabel.setHorizontalAlignment(SwingConstants.CENTER);
 
+            //---- timeProgressBar ----
+            timeProgressBar.setBackground(Color.red);
+
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
@@ -326,8 +335,8 @@ public class Questions extends JFrame {
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addComponent(questionLabel, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                                 .addContainerGap())
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                     .addGroup(PanelLayout.createSequentialGroup()
                                         .addGap(0, 19, Short.MAX_VALUE)
                                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
@@ -340,13 +349,18 @@ public class Questions extends JFrame {
                                             .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(powerUp2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(PanelLayout.createSequentialGroup()
-                                        .addComponent(label1)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(75, 75, 75)
-                                        .addComponent(timelabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                                        .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(timelabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(timeProgressBar, GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                .addComponent(label1)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))
                                 .addGap(26, 26, 26))))
@@ -357,23 +371,20 @@ public class Questions extends JFrame {
                         .addContainerGap()
                         .addGroup(PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(currentScoreLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addComponent(timelabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(2, 2, 2)))
+                                .addComponent(currentScoreLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(4, 4, 4))
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelLayout.createParallelGroup()
+                            .addComponent(timelabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)))
+                        .addGap(7, 7, 7)
+                        .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(answerButton3, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                             .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
@@ -397,7 +408,7 @@ public class Questions extends JFrame {
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -418,5 +429,6 @@ public class Questions extends JFrame {
     private JLabel label1;
     private JLabel currentScoreLable;
     private JLabel timelabel;
+    private JProgressBar timeProgressBar;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
