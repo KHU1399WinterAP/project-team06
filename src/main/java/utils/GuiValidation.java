@@ -1,7 +1,6 @@
 package main.java.utils;
 
 import main.java.errors.GuiError;
-import org.jetbrains.annotations.NotNull;
 
 import static main.java.config.ValidationConfig.*;
 
@@ -31,7 +30,7 @@ public class GuiValidation {
 		return value == null || value.isEmpty();
 	}
 	
-	private static boolean checkInvalidLength(@NotNull String value, int minimumLength, int maximumLength) {
+	private static boolean checkInvalidLength(String value, int minimumLength, int maximumLength) {
 		return minimumLength > value.length() || value.length() > maximumLength;
 	}
 }
@@ -41,7 +40,6 @@ class Field {
 	public int maximumLength;
 	public GuiError fieldIsEmptyError;
 	public GuiError fieldHasInvalidLength;
-
 	
 	public Field(int minimumLength, int maximumLength, GuiError fieldIsEmptyError, GuiError fieldHasInvalidLength) {
 		this.minimumLength = minimumLength;
