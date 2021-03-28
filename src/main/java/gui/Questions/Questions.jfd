@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {comp Panel::t:::x}"
-			"$verticalGroup": "par l {comp Panel::t::567:x}"
+			"$verticalGroup": "par l {comp Panel::t::573:x}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
@@ -17,8 +17,8 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :::p, par l {seq l {comp questionLabel::::366:x, space :::p}, seq t {par t {seq {space :0:19:x, par l:::p {comp answerButton3::t::150:x, comp answerButton4::t::150:x, comp powerUp1::t::150:x}, space :p:27:p, par t {comp answerButton1:::p:150:p, comp answerButton2:::p:150:p, comp powerUp2:::p:150:p}}, seq t {par t {seq {space :6:6:p, comp timelabel:::p:46:p, space :::p, comp timeProgressBar::::247:x}, seq {comp label1:::p::p, space :::p, comp currentScoreLable:::p:43:p, space :::x, comp coinAmountLabel:::p:57:p}}, space :::p, comp coinLabel:::p:35:p}}, space :p:26:p}}}}"
-				"$verticalGroup": "par l {seq l {space :::p, par l {seq {comp currentScoreLable:::::x, space :p:4:p}, comp label1::l:p:43:p, comp coinLabel::l:p:37:p, comp coinAmountLabel:::::x}, space :::p, par l {comp timelabel:::::x, seq {space :0:0:x, comp timeProgressBar:::p:13:p}}, space :p:7:p, comp questionLabel:::p:188:p, space u:::p, par b {comp answerButton3::b:p:76:p, comp answerButton2::b:p:76:p}, space s:::p, par b {comp answerButton4::b:p:76:p, comp answerButton1::b:p:76:p}, space :p:26:p, par b {comp powerUp2::b:p:53:p, comp powerUp1::b:p:53:p}, space :p:35:p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par t {seq {space :0:19:x, par l:::p {comp answerButton3::t::150:x, comp answerButton4::t::150:x, comp Freezer::t::150:x}, space :p:27:p, par t {comp answerButton1:::p:150:p, comp answerButton2:::p:150:p, comp Helper::t:p:150:p}}, seq t {par t {seq {space :6:6:p, comp timelabel:::p:46:p, space :::p, comp timeProgressBar::::247:x}, seq {comp label1:::p::p, space :::p, comp currentScoreLable:::p:43:p, space :::x, comp coinAmountLabel:::p:57:p}}, space :::p, comp coinLabel:::p:35:p}}, space :p:26:p}, seq t {comp questionLabel::::366:x, space :::p}}}}"
+				"$verticalGroup": "par l {seq l {space :::p, par l {seq {comp currentScoreLable:::::x, space :p:4:p}, comp label1::l:p:43:p, comp coinLabel::l:p:37:p, comp coinAmountLabel:::::x}, space :::p, par l {comp timelabel:::::x, seq {space :0:0:x, comp timeProgressBar:::p:13:p}}, space :p:1:p, comp questionLabel:::p:188:p, space s:::p, par b {comp answerButton3::b:p:76:p, comp answerButton2::b:p:76:p}, space s:::p, par b {comp answerButton4::b:p:76:p, comp answerButton1::b:p:76:p}, space :p:37:p, par t {comp Freezer:::p:53:p, comp Helper:::p:53:p}, space :p:35:p}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -30,20 +30,22 @@ new FormModel {
 					"background": new java.awt.Color( 0, 0, 204, 255 )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "powerUp1"
-					"text": "Power UP 1"
+					name: "Freezer"
+					"text": "<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins </html>"
 					"background": &Color0 new java.awt.Color( 0, 153, 51, 255 )
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "FreezerActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "powerUp2"
-					"text": "Power UP 2"
+					name: "Helper"
+					"text": "<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>"
 					"background": #Color0
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "HelperActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "answerButton3"
@@ -105,7 +107,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JProgressBar" ) {
 					name: "timeProgressBar"
-					"background": sfield java.awt.Color red
+					"background": sfield java.awt.Color green
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

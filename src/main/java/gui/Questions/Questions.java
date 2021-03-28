@@ -23,6 +23,8 @@ import javax.swing.GroupLayout;
  * @author Alireza
  */
 public class Questions extends JFrame {
+    ArrayList<String> Outanswers = new ArrayList<>();
+    ArrayList<JButton> Outbuttons = new ArrayList<>();
     int seconds = 10;
     JFrame CurrentFrame = this;
     Question question;
@@ -31,14 +33,23 @@ public class Questions extends JFrame {
     ArrayList<Question> questions2;
     int score=0;
     int category;
-    User activeUser=Dashboard.activeUser;
+    User activeUser = Dashboard.activeUser;
 
     Timer countdown = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            timelabel.setText(String.valueOf(seconds));
             seconds--;
             timeProgressBar.setValue(10-seconds);
-            timelabel.setText(String.valueOf(seconds));
+            if (seconds>6){
+                timeProgressBar.setBackground(Color.green);
+            }
+            if (seconds>3 && seconds<7){
+                timeProgressBar.setBackground(Color.yellow);
+            }
+            if (seconds>0 && seconds<4){
+                timeProgressBar.setBackground(Color.red);
+            }
             if (seconds<=0){
                 CurrentFrame.dispose();
                 new GameOver(singlePlayer,score,category);
@@ -60,6 +71,10 @@ public class Questions extends JFrame {
 
         currentScoreLable.setText(String.valueOf(score));
         showQuestion(questions2);
+        Outbuttons.add(answerButton1);
+        Outbuttons.add(answerButton2);
+        Outbuttons.add(answerButton3);
+        Outbuttons.add(answerButton4);
 
         this.setVisible(true);
     }
@@ -67,17 +82,33 @@ public class Questions extends JFrame {
     private void showQuestion(ArrayList<Question> questions2) {
         timeProgressBar.setValue(0);
         countdown.start();
+        for (JButton b : Outbuttons) {
+            b.setVisible(true);
+        }
+        Outanswers.clear();
         question = randomQuestion(questions2);
-        questionLabel.setText(question.question);
-        ArrayList<String> answers = new ArrayList<>();
-        answers.add(question.answer1);
-        answers.add(question.answer2);
-        answers.add(question.answer3);
-        answers.add(question.correctAnswer);
-        answerButton1.setText(randomAnswer(answers));
-        answerButton2.setText(randomAnswer(answers));
-        answerButton3.setText(randomAnswer(answers));
-        answerButton4.setText(randomAnswer(answers));
+        if(question!=null) {
+
+            questionLabel.setText(question.question);
+            ArrayList<String> answers = new ArrayList<>();
+            answers.add(question.answer1);
+            Outanswers.add(question.answer1);
+            answers.add(question.answer2);
+            Outanswers.add(question.answer2);
+            answers.add(question.answer3);
+            Outanswers.add(question.answer3);
+            answers.add(question.correctAnswer);
+            Outanswers.remove(randomAnswer(Outanswers));
+            answerButton1.setText(randomAnswer(answers));
+            answerButton2.setText(randomAnswer(answers));
+            answerButton3.setText(randomAnswer(answers));
+            answerButton4.setText(randomAnswer(answers));
+        }
+        else{
+            countdown.stop();
+            CurrentFrame.dispose();
+            new GameOver(singlePlayer,score,category);
+        }
     }
 
     private String randomAnswer(ArrayList<String> answers) {
@@ -89,11 +120,17 @@ public class Questions extends JFrame {
     }
 
     private Question randomQuestion(ArrayList<Question> questions2) {
-        Random random = new Random();
-        int rand = random.nextInt(questions2.size());
-        Question question = questions2.get(rand);
-        questions2.remove(rand);
-        return question;
+        if(questions2.size()>0) {
+            Random random = new Random();
+            int rand = random.nextInt(questions2.size());
+            Question question = questions2.get(rand);
+            questions2.remove(rand);
+            return question;
+        }
+        else{
+            return null;
+        }
+
     }
 
     private void questionsWindowClosing(WindowEvent e) {
@@ -196,8 +233,8 @@ public class Questions extends JFrame {
         answerButton2.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
         answerButton3.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
         answerButton4.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-        powerUp1.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-        powerUp2.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
+        Freezer.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
+        Helper.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
     }
 
     private void answerButton3ActionPerformed(ActionEvent e) {
@@ -216,12 +253,102 @@ public class Questions extends JFrame {
         isCorrect(answerButton1);
     }
 
+    private void FreezerActionPerformed(ActionEvent e) {
+        Freezer.setBackground(new Color(200, 10, 50));
+        Freezer.setForeground(Color.black);
+        Freezer.setEnabled(false);
+        if(activeUser.coins>=100){
+            activeUser.coins -= 100;
+            Database.updateDatabaseUserCoins(activeUser.username,activeUser.coins);
+            coinAmountLabel.setText(String.valueOf(activeUser.coins));
+            countdown.stop();
+            Freezer.setText("Freezed");
+            Timer delay = new Timer(5000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Freezer.setEnabled(true);
+                    Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
+                    Freezer.setBackground(new Color(0, 153, 51));
+                    Freezer.setForeground(Color.white);
+                    countdown.restart();
+                }
+            });
+            delay.setRepeats(false);
+            delay.start();
+        }
+        else{
+            Freezer.setText("Not Enough Coin");
+            Timer delay = new Timer(2000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Freezer.setEnabled(true);
+                    Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
+                    Freezer.setBackground(new Color(0, 153, 51));
+                    Freezer.setForeground(Color.white);
+                }
+            });
+            delay.setRepeats(false);
+            delay.start();
+
+        }
+
+    }
+
+    private void HelperActionPerformed(ActionEvent e) {
+        Helper.setBackground(new Color(200, 10, 50));
+        Helper.setForeground(Color.black);
+        Helper.setEnabled(false);
+        if(activeUser.coins>= 0){
+            activeUser.coins -= 0;
+            Database.updateDatabaseUserCoins(activeUser.username,activeUser.coins);
+            coinAmountLabel.setText(String.valueOf(activeUser.coins));
+            Helper.setText("Out !");
+            String firstout = Outanswers.get(0);
+            String secdtout = Outanswers.get(1);
+            for (JButton b : Outbuttons) {
+                if(firstout == b.getText()){
+                    b.setVisible(false);
+                }
+                if(secdtout == b.getText()){
+                    b.setVisible(false);
+                }
+            }
+            // Outanswers.clear();
+            Timer delay = new Timer(2000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Helper.setEnabled(true);
+                    Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+                    Helper.setBackground(new Color(0, 153, 51));
+                    Helper.setForeground(Color.white);
+                }
+        });
+            delay.setRepeats(false);
+            delay.start();
+
+        }
+        else {
+            Helper.setText("Not Enough Coin");
+            Timer delay = new Timer(2000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Helper.setEnabled(true);
+                    Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+                    Helper.setBackground(new Color(0, 153, 51));
+                    Helper.setForeground(Color.white);
+                }
+            });
+            delay.setRepeats(false);
+            delay.start();
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
         questionLabel = new JLabel();
-        powerUp1 = new JButton();
-        powerUp2 = new JButton();
+        Freezer = new JButton();
+        Helper = new JButton();
         answerButton3 = new JButton();
         answerButton2 = new JButton();
         answerButton4 = new JButton();
@@ -259,19 +386,21 @@ public class Questions extends JFrame {
             questionLabel.setForeground(Color.white);
             questionLabel.setBackground(new Color(0, 0, 204));
 
-            //---- powerUp1 ----
-            powerUp1.setText("Power UP 1");
-            powerUp1.setBackground(new Color(0, 153, 51));
-            powerUp1.setFocusable(false);
-            powerUp1.setForeground(Color.white);
-            powerUp1.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+            //---- Freezer ----
+            Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins </html>");
+            Freezer.setBackground(new Color(0, 153, 51));
+            Freezer.setFocusable(false);
+            Freezer.setForeground(Color.white);
+            Freezer.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+            Freezer.addActionListener(e -> FreezerActionPerformed(e));
 
-            //---- powerUp2 ----
-            powerUp2.setText("Power UP 2");
-            powerUp2.setBackground(new Color(0, 153, 51));
-            powerUp2.setFocusable(false);
-            powerUp2.setForeground(Color.white);
-            powerUp2.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+            //---- Helper ----
+            Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+            Helper.setBackground(new Color(0, 153, 51));
+            Helper.setFocusable(false);
+            Helper.setForeground(Color.white);
+            Helper.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+            Helper.addActionListener(e -> HelperActionPerformed(e));
 
             //---- answerButton3 ----
             answerButton3.setBackground(new Color(0, 32, 96));
@@ -323,7 +452,7 @@ public class Questions extends JFrame {
             timelabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             //---- timeProgressBar ----
-            timeProgressBar.setBackground(Color.red);
+            timeProgressBar.setBackground(Color.green);
 
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
@@ -333,21 +462,18 @@ public class Questions extends JFrame {
                         .addContainerGap()
                         .addGroup(PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(questionLabel, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                                .addContainerGap())
-                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                                 .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                     .addGroup(PanelLayout.createSequentialGroup()
                                         .addGap(0, 19, Short.MAX_VALUE)
                                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                             .addComponent(answerButton3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                             .addComponent(answerButton4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(powerUp1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                            .addComponent(Freezer, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                                         .addGap(27, 27, 27)
                                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                             .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(powerUp2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(PanelLayout.createSequentialGroup()
                                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                             .addGroup(PanelLayout.createSequentialGroup()
@@ -363,7 +489,10 @@ public class Questions extends JFrame {
                                                 .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(26, 26, 26))))
+                                .addGap(26, 26, 26))
+                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addComponent(questionLabel, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                                .addContainerGap())))
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
@@ -382,9 +511,9 @@ public class Questions extends JFrame {
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(7, 7, 7)
+                        .addGap(1, 1, 1)
                         .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(answerButton3, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                             .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
@@ -392,10 +521,10 @@ public class Questions extends JFrame {
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(answerButton4, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
                             .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(powerUp2, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(powerUp1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(Freezer, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35))
             );
         }
@@ -408,7 +537,7 @@ public class Questions extends JFrame {
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -418,8 +547,8 @@ public class Questions extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
     private JLabel questionLabel;
-    private JButton powerUp1;
-    private JButton powerUp2;
+    private JButton Freezer;
+    private JButton Helper;
     private JButton answerButton3;
     private JButton answerButton2;
     private JButton answerButton4;
