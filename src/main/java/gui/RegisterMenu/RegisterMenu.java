@@ -1,6 +1,7 @@
 package main.java.gui.RegisterMenu;
 
 import main.java.animations.ColorChangeAnimation;
+import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
@@ -9,6 +10,7 @@ import main.java.utils.GuiValidation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
 import java.util.function.Consumer;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -50,8 +52,6 @@ public class RegisterMenu extends JFrame {
         passwordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
         registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
         previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 10));
-
-
     }
 
     private void RegisterButtonActionPerformed(ActionEvent e) {
@@ -62,26 +62,22 @@ public class RegisterMenu extends JFrame {
         if (Database.AlreadyExisted(inputUserName.getText())) {
 
             usernameErrorLabel.setText("username already exists");
-            runMainPanelBackgroundColorAnimation(mainBackground);
+            RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
 
         } else if (usernameError == null && passwordError == null) {
 
-            User user = new User(inputUserName.getText(), inputPassword.getPassword(),1,100,0,0,0,0,0,0);
+            User user = new User(inputUserName.getText(), Objects.hash(String.valueOf(inputPassword.getPassword())),
+                    1, 100, 0, 0, 0, 0, 0, 0);
             Database.InsertInToUsers(user);
+
             registerButton.setBackground(Color.GREEN);
-            registerButton.setText("Registered !");
+            registerButton.setText("Registered !!");
 
         } else {
-            runMainPanelBackgroundColorAnimation(mainBackground);
+            RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
             updateErrorLabel(usernameError, usernameErrorLabel);
             updateErrorLabel(passwordError, passwordErrorLabel);
         }
-    }
-
-    public static void  runMainPanelBackgroundColorAnimation(JPanel MainBackground) {
-        Consumer<Color> stepCallback = MainBackground::setBackground;
-        Runnable endCallback = () -> MainBackground.setBackground(new Color(0, 112, 192));
-        new ColorChangeAnimation(MainBackground.getBackground(), COLOR_DANGER, stepCallback, endCallback).start();
     }
 
     private void updateErrorLabel(GuiError error, JLabel errorLabel) {
@@ -92,11 +88,14 @@ public class RegisterMenu extends JFrame {
     }
 
     private void PreviousButtonActionPerformed(ActionEvent e) {
-        this.dispose();
-        PreviousFrame.setVisible(true);
+        previousPage();
     }
 
     private void RegisterFrameWindowClosed(WindowEvent e) {
+        previousPage();
+    }
+
+    private void previousPage() {
         this.dispose();
         PreviousFrame.setVisible(true);
     }

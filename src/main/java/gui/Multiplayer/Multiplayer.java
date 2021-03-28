@@ -10,6 +10,7 @@ public class Multiplayer extends JFrame {
     public Multiplayer(JFrame dashboard) {
         this.dashboard=dashboard;
         initComponents();
+        this.setVisible(true);
     }
 
     private void previousButtonActionPerformed(ActionEvent e) {
@@ -34,7 +35,6 @@ public class Multiplayer extends JFrame {
         setResizable(false);
         setTitle("Multiplayer");
         setBackground(new Color(0, 112, 192));
-        setVisible(true);
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
         setName("Multiplayer");
         addWindowListener(new WindowAdapter() {

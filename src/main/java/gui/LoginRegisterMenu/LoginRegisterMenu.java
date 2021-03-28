@@ -17,6 +17,12 @@ import javax.swing.GroupLayout;
  * @author Alireza
  */
 public class LoginRegisterMenu extends JFrame {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JPanel MainBackground;
+    private JLabel Banner;
+    private JButton loginButton;
+    private JButton registerButton;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public LoginRegisterMenu() {
         initComponents();
@@ -24,7 +30,6 @@ public class LoginRegisterMenu extends JFrame {
         this.setVisible(true);
 
     }
-
 
     private void RegisterActionPerformed(ActionEvent e) {
         new RegisterMenu(this);
@@ -128,11 +133,4 @@ public class LoginRegisterMenu extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel MainBackground;
-    private JLabel Banner;
-    private JButton loginButton;
-    private JButton registerButton;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

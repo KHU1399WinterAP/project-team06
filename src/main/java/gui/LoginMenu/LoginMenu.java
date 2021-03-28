@@ -4,6 +4,7 @@
 
 package main.java.gui.LoginMenu;
 
+import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
@@ -12,6 +13,7 @@ import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -26,7 +28,7 @@ public class LoginMenu extends JFrame {
         this.LoginRegisterMenu = LoginRegisterMenu;
         initComponents();
         initComponentsProperties();
-      this.setVisible(true);
+        this.setVisible(true);
     }
 
     private void initComponentsProperties() {
@@ -37,36 +39,38 @@ public class LoginMenu extends JFrame {
         passwordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
         loginButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
         previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 10));
-
     }
 
     private void PreviousButtonActionPerformed(ActionEvent e) {
-        this.dispose();
-        LoginRegisterMenu.setVisible(true);
+        previousPage();
     }
 
     private void loginButtonActionPerformed(ActionEvent e) {
         String username = inputUsername.getText();
-        String password = String.valueOf(inputPassword.getPassword());
+        int password = Objects.hash(String.valueOf(inputPassword.getPassword()));
         if (!username.isBlank()) {
             User user = Database.getUserByUsername(username);
-            if (user != null && user.password.equals(password)) {
-                new Dashboard(LoginRegisterMenu,user);
+            if (user != null && user.password == password) {
+                new Dashboard(LoginRegisterMenu, user);
                 this.dispose();
                 return;
             }
         }
-        RegisterMenu.runMainPanelBackgroundColorAnimation(MainBackground);
+        RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
     }
 
-    private void thisWindowClosing(WindowEvent e) {
+    private void loginMenuWindowClosing(WindowEvent e) {
+        previousPage();
+    }
+
+    private void previousPage() {
         this.dispose();
         LoginRegisterMenu.setVisible(true);
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        MainBackground = new JPanel();
+        mainBackground = new JPanel();
         textLabel = new JLabel();
         faceLabel = new JLabel();
         usernameLabel = new JLabel();
@@ -91,17 +95,17 @@ public class LoginMenu extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                thisWindowClosing(e);
+                loginMenuWindowClosing(e);
             }
         });
         var contentPane = getContentPane();
 
-        //======== MainBackground ========
+        //======== mainBackground ========
         {
-            MainBackground.setMaximumSize(new Dimension(380, 605));
-            MainBackground.setMinimumSize(new Dimension(380, 605));
-            MainBackground.setBackground(new Color(0, 112, 192));
-            MainBackground.setFocusable(false);
+            mainBackground.setMaximumSize(new Dimension(380, 605));
+            mainBackground.setMinimumSize(new Dimension(380, 605));
+            mainBackground.setBackground(new Color(0, 112, 192));
+            mainBackground.setFocusable(false);
 
             //---- textLabel ----
             textLabel.setText("Quiz Of Kings");
@@ -156,27 +160,27 @@ public class LoginMenu extends JFrame {
             previousButton.setFocusable(false);
             previousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
 
-            GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
-            MainBackground.setLayout(MainBackgroundLayout);
-            MainBackgroundLayout.setHorizontalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+            GroupLayout mainBackgroundLayout = new GroupLayout(mainBackground);
+            mainBackground.setLayout(mainBackgroundLayout);
+            mainBackgroundLayout.setHorizontalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(textLabel))
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addComponent(faceLabel, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
                                 .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                                 .addGap(137, 137, 137))
-                            .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
-                                .addGroup(MainBackgroundLayout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
+                                .addGroup(mainBackgroundLayout.createParallelGroup()
                                     .addComponent(inputPassword, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(passwordLabel)
@@ -184,9 +188,9 @@ public class LoginMenu extends JFrame {
                                     .addComponent(usernameLabel))
                                 .addGap(88, 88, 88))))
             );
-            MainBackgroundLayout.setVerticalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+            mainBackgroundLayout.setVerticalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(faceLabel, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -210,11 +214,11 @@ public class LoginMenu extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -223,7 +227,7 @@ public class LoginMenu extends JFrame {
 
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel MainBackground;
+    private JPanel mainBackground;
     private JLabel textLabel;
     private JLabel faceLabel;
     private JLabel usernameLabel;

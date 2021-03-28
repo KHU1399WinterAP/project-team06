@@ -1,7 +1,5 @@
-
 package main.java.gui.Dashord.setting;
 
-import main.java.app.Main;
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
 import main.java.gui.Dashord.setting.About.About;
@@ -31,11 +29,14 @@ public class SettingPanel extends JFrame {
     }
 
     private void SettingFrameWindowClosing(WindowEvent e) {
-        this.dispose();
-        dashboard.setVisible(true);
+        previousPage();
     }
 
     private void previousButtonActionPerformed(ActionEvent e) {
+        previousPage();
+    }
+
+    private void previousPage(){
         this.dispose();
         dashboard.setVisible(true);
     }

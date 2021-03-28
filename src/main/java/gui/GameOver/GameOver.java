@@ -7,6 +7,7 @@ package main.java.gui.GameOver;
 import main.java.config.FontConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
+import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,7 +17,9 @@ import javax.swing.GroupLayout;
 /**
  * @author Brainrain
  */
+
 public class GameOver extends JFrame {
+    User activeUser = Dashboard.activeUser;
     JFrame singlePlayer;
     int score;
     int category;
@@ -33,14 +36,14 @@ public class GameOver extends JFrame {
 
     private void initLabels() {
         currentScoreLable.setText(String.valueOf(score));
-        coinAmountLabel.setText(String.valueOf(Dashboard.activeUser.coins));
+        coinAmountLabel.setText(String.valueOf(activeUser.coins));
         switch (category) {
-            case 1 -> recordLabel.setText(String.valueOf(Dashboard.activeUser.recordEnglish));
-            case 2 -> recordLabel.setText(String.valueOf(Dashboard.activeUser.recordMath));
-            case 3 -> recordLabel.setText(String.valueOf(Dashboard.activeUser.recordFood));
-            case 4 -> recordLabel.setText(String.valueOf(Dashboard.activeUser.recordScience));
-            case 5 -> recordLabel.setText(String.valueOf(Dashboard.activeUser.recordCommon));
-            default -> recordLabel.setText(String.valueOf(Dashboard.activeUser.recordGeography));
+            case 1 -> recordLabel.setText(String.valueOf(activeUser.recordEnglish));
+            case 2 -> recordLabel.setText(String.valueOf(activeUser.recordMath));
+            case 3 -> recordLabel.setText(String.valueOf(activeUser.recordFood));
+            case 4 -> recordLabel.setText(String.valueOf(activeUser.recordScience));
+            case 5 -> recordLabel.setText(String.valueOf(activeUser.recordCommon));
+            default -> recordLabel.setText(String.valueOf(activeUser.recordGeography));
         }
     }
 
@@ -52,12 +55,16 @@ public class GameOver extends JFrame {
         recordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
         tryAgainButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
     }
+
     private void questionsWindowClosing(WindowEvent e) {
-        this.dispose();
-        singlePlayer.setVisible(true);
+        singlePlayerPage();
     }
 
     private void tryAgainButtonActionPerformed(ActionEvent e) {
+        singlePlayerPage();
+    }
+
+    private void singlePlayerPage() {
         this.dispose();
         singlePlayer.setVisible(true);
     }
@@ -134,67 +141,66 @@ public class GameOver extends JFrame {
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(122, 122, 122)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
+                                    .addContainerGap(139, Short.MAX_VALUE))
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(139, Short.MAX_VALUE))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(yourRecordLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(recordLabel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 120, Short.MAX_VALUE))
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addGap(63, 63, 63)
+                                                    .addComponent(yourRecordLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(recordLabel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
+                                                    .addGap(121, 121, 121)
+                                                    .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(0, 120, Short.MAX_VALUE))
             );
             PanelLayout.setVerticalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                            .addComponent(coinLabel, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(yourRecordLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(recordLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
-                        .addGap(90, 90, 90)
-                        .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104))
+                    PanelLayout.createParallelGroup()
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                    .addGap(116, 116, 116)
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                                            .addComponent(coinLabel, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(28, 28, 28)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(yourRecordLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(recordLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(90, 90, 90)
+                                    .addComponent(tryAgainButton, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(104, 104, 104))
             );
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
     private JLabel coinLabel;

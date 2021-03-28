@@ -10,8 +10,7 @@ public class Question implements Cloneable {
     public String question;
 
     public Question(int category, int questionIndex,
-                    String answer1, String answer2, String answer3,
-                    String correctAnswer, String question) {
+                    String answer1, String answer2, String answer3, String correctAnswer, String question) {
         this.category = category;
         this.questionIndex = questionIndex;
         this.answer1 = answer1;
@@ -26,7 +25,6 @@ public class Question implements Cloneable {
         Object clone = super.clone();
 
         Question question2 = (Question) clone;
-
         question2.answer1 = answer1;
         question2.question = question;
         question2.answer2 = answer2;
@@ -35,18 +33,5 @@ public class Question implements Cloneable {
         question2.correctAnswer = correctAnswer;
         question2.category = category;
         return question2;
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "category=" + category +
-                ", questionIndex=" + questionIndex +
-                ", answer1='" + answer1 + '\'' +
-                ", answer2='" + answer2 + '\'' +
-                ", answer3='" + answer3 + '\'' +
-                ", correctAnswer='" + correctAnswer + '\'' +
-                ", question='" + question + '\'' +
-                '}';
     }
 }

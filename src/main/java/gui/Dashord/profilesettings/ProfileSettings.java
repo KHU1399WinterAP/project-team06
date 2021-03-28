@@ -4,19 +4,24 @@
 
 package main.java.gui.Dashord.profilesettings;
 
+import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
+import main.java.config.ProfileConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.RegisterMenu.RegisterMenu;
+import main.java.models.User;
 import main.java.utils.GuiValidation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
 public class ProfileSettings extends JFrame {
+    User activeUser=Dashboard.activeUser;
     public final JFrame LoginRegisterMenu;
     public final JFrame dashboard;
 
@@ -36,7 +41,6 @@ public class ProfileSettings extends JFrame {
         usernameErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
         passwordErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
         logoutButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 13));
-
     }
 
     private void logoutButtonActionPerformed(ActionEvent e) {
@@ -45,11 +49,14 @@ public class ProfileSettings extends JFrame {
     }
 
     private void previousButtonActionPerformed(ActionEvent e) {
-        this.dispose();
-        dashboard.setVisible(true);
+        previousPage();
     }
 
     private void ProfileSettingsFrameWindowClosing(WindowEvent e) {
+        previousPage();
+    }
+
+    private void previousPage(){
         this.dispose();
         dashboard.setVisible(true);
     }
@@ -72,18 +79,20 @@ public class ProfileSettings extends JFrame {
 
     private void changeUsernameButtonActionPerformed(ActionEvent e) {
         if (inputNewUsername.getText().equals("new username")) inputNewUsername.setText("");
+
         var usernameError = GuiValidation.validateUsername(inputNewUsername.getText());
+
         if (Database.AlreadyExisted(inputNewUsername.getText())){
             usernameErrorLabel.setText("Username already exists");
-            RegisterMenu.runMainPanelBackgroundColorAnimation(panel);
+            RunAnimation.runMainPanelBackgroundColorAnimation(panel);
         }
         else if (usernameError == null) {
-            Database.UpdateDatabaseUsername(Dashboard.activeUser.username,inputNewUsername.getText());
+            Database.updateDatabaseUsername(activeUser.username,inputNewUsername.getText());
             changeUsernameButton.setBackground(Color.GREEN);
             changeUsernameButton.setText("changed successfully !");
-            Dashboard.activeUser.username=inputNewUsername.getText();
+           activeUser.username=inputNewUsername.getText();
         } else {
-            RegisterMenu.runMainPanelBackgroundColorAnimation(panel);
+            RunAnimation.runMainPanelBackgroundColorAnimation(panel);
             updateErrorLabel(usernameError, usernameErrorLabel);
         }
     }
@@ -98,14 +107,15 @@ public class ProfileSettings extends JFrame {
     private void changePasswordButtonActionPerformed(ActionEvent e) {
         String newPassword=String.valueOf(inputNewPassword.getPassword());
         if (newPassword.equals("new password")) newPassword="";
+
         var passwordError = GuiValidation.validatePassword(newPassword);
         if (passwordError == null) {
-            Database.UpdateDatabasePassword(Dashboard.activeUser.username,newPassword);
+            Database.updateDatabasePassword(activeUser.username,newPassword);
             changePasswordButton.setBackground(Color.GREEN);
             changePasswordButton.setText("Changed successfully !");
-            Dashboard.activeUser.password=newPassword;
+            activeUser.password= Objects.hash(newPassword);
         } else {
-            RegisterMenu.runMainPanelBackgroundColorAnimation(panel);
+            RunAnimation.runMainPanelBackgroundColorAnimation(panel);
             updateErrorLabel(passwordError, passwordErrorLabel);
         }
     }
@@ -113,50 +123,85 @@ public class ProfileSettings extends JFrame {
     private void face1ActionPerformed(ActionEvent e) {
         selectAPhoto();
         face1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,1);
-        Dashboard.activeUser.profilePicture=1;
+        Database.updateDatabaseProfilePicture(activeUser.username,1);
+        activeUser.profilePicture=1;
     }
 
     private void face2ActionPerformed(ActionEvent e) {
         selectAPhoto();
-        face2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,2);
-        Dashboard.activeUser.profilePicture=2;
+        face2.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,2);
+        activeUser.profilePicture=2;
     }
 
     private void face3ActionPerformed(ActionEvent e) {
         selectAPhoto();
-        face3.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,3);
-        Dashboard.activeUser.profilePicture=3;
+        face3.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,3);
+       activeUser.profilePicture=3;
     }
 
     private void face4ActionPerformed(ActionEvent e) {
         selectAPhoto();
-        face4.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,4);
-        Dashboard.activeUser.profilePicture=4;
+        face4.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,4);
+        activeUser.profilePicture=4;
     }
 
     private void face5ActionPerformed(ActionEvent e) {
         selectAPhoto();
-        face5.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,5);
-        Dashboard.activeUser.profilePicture=5;
+        face5.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,5);
+       activeUser.profilePicture=5;
     }
 
     private void face6ActionPerformed(ActionEvent e) {
         selectAPhoto();
-        face6.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,6);
-        Dashboard.activeUser.profilePicture=6;
+        face6.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,6);
+        activeUser.profilePicture=6;
     }
 
     private void face7ActionPerformed(ActionEvent e) {
         selectAPhoto();
-        face7.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,7);
-        Dashboard.activeUser.profilePicture=7;
+        face7.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,7);
+        activeUser.profilePicture=7;
+    }
+
+    private void face8ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face8.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,8);
+        activeUser.profilePicture=8;
+    }
+
+    private void face9ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face9.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,9);
+        activeUser.profilePicture=9;
+    }
+
+    private void face10ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face10.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,10);
+        activeUser.profilePicture=10;
+    }
+
+    private void face11ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face11.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,11);
+        activeUser.profilePicture=11;
+    }
+
+    private void face12ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face12.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        Database.updateDatabaseProfilePicture(activeUser.username,12);
+       activeUser.profilePicture=12;
     }
 
     private void selectAPhoto(){
@@ -172,41 +217,6 @@ public class ProfileSettings extends JFrame {
         face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face10.png")));
         face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face11.png")));
         face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face12.png")));
-    }
-
-    private void face8ActionPerformed(ActionEvent e) {
-        selectAPhoto();
-        face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,8);
-        Dashboard.activeUser.profilePicture=8;
-    }
-
-    private void face9ActionPerformed(ActionEvent e) {
-        selectAPhoto();
-        face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,9);
-        Dashboard.activeUser.profilePicture=9;
-    }
-
-    private void face10ActionPerformed(ActionEvent e) {
-        selectAPhoto();
-        face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,10);
-        Dashboard.activeUser.profilePicture=10;
-    }
-
-    private void face11ActionPerformed(ActionEvent e) {
-        selectAPhoto();
-        face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,11);
-        Dashboard.activeUser.profilePicture=11;
-    }
-
-    private void face12ActionPerformed(ActionEvent e) {
-        selectAPhoto();
-        face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-        Database.UpdateDatabaseProfilePicture(Dashboard.activeUser.username,12);
-        Dashboard.activeUser.profilePicture=12;
     }
 
     private void initComponents() {

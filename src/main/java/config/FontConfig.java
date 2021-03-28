@@ -16,7 +16,6 @@ public class FontConfig {
                 throw new FileNotFoundException();
 
             comic = Font.createFont(Font.TRUETYPE_FONT, stream);
-
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }

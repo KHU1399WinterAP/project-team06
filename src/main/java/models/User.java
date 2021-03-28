@@ -2,7 +2,7 @@ package main.java.models;
 
 public class User {
     public String username;
-    public String password;
+    public int password;
     public int profilePicture;
     public int coins;
     public int recordEnglish;
@@ -12,7 +12,7 @@ public class User {
     public int recordCommon;
     public int recordGeography;
 
-    public User(String username,String password,int profilePicture,int coins,int recordEnglish,int recordMath,
+    public User(String username,int password,int profilePicture,int coins,int recordEnglish,int recordMath,
                 int recordFood,int recordScience,int recordCommon,int recordGeography){
         this.recordCommon=recordCommon;
         this.recordEnglish=recordEnglish;
@@ -25,10 +25,4 @@ public class User {
         this.profilePicture=profilePicture;
         this.coins=coins;
     }
-    public User(String username,char[] password,int profilePicture,int coins,int recordEnglish,int recordMath,
-                int recordFood,int recordScience,int recordCommon,int recordGeography) {
-        this(username,String.valueOf(password),profilePicture,coins,recordEnglish,recordMath,recordFood,recordScience,recordCommon,
-                recordGeography);
-    }
-
 }

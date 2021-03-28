@@ -16,6 +16,7 @@ import javax.swing.GroupLayout;
  */
 public class About extends JFrame {
     public final JFrame setting;
+
     public About(JFrame setting) {
         this.setting = setting;
         initComponents();
@@ -35,11 +36,14 @@ public class About extends JFrame {
     }
 
     private void AboutFrameWindowClosing(WindowEvent e) {
-        this.dispose();
-        setting.setVisible(true);
+        previousPage();
     }
 
     private void previousButtonActionPerformed(ActionEvent e) {
+       previousPage();
+    }
+
+    private void previousPage(){
         this.dispose();
         setting.setVisible(true);
     }
@@ -228,7 +232,6 @@ public class About extends JFrame {
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel MainBackground;
     private JButton previousButton;

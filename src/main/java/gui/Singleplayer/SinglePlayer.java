@@ -9,6 +9,7 @@ import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.Questions.Questions;
 import main.java.models.Question;
+import main.java.models.User;
 import main.java.questionTypes.QuestionTypes;
 
 import java.awt.*;
@@ -22,7 +23,10 @@ import javax.swing.GroupLayout;
  * @author Alireza
  */
 public class SinglePlayer extends JFrame {
+
+    User activeUser=Dashboard.activeUser;
     public final JFrame dashboard;
+
     public SinglePlayer(JFrame dashboard) {
         this.dashboard=dashboard;
         initComponents();
@@ -32,12 +36,12 @@ public class SinglePlayer extends JFrame {
     }
 
     private void initRecords(){
-        yourRecordEnglishLabel.setText(String.valueOf(Dashboard.activeUser.recordEnglish));
-        yourRecordMathLabel.setText(String.valueOf(Dashboard.activeUser.recordMath));
-        yourRecordFoodLabel.setText(String.valueOf(Dashboard.activeUser.recordFood));
-        yourRecordScienceLabel.setText(String.valueOf(Dashboard.activeUser.recordScience));
-        yourRecordCommonLabel.setText(String.valueOf(Dashboard.activeUser.recordCommon));
-        yourRecordGeographyLabel.setText(String.valueOf(Dashboard.activeUser.recordGeography));
+        yourRecordEnglishLabel.setText(String.valueOf(activeUser.recordEnglish));
+        yourRecordMathLabel.setText(String.valueOf(activeUser.recordMath));
+        yourRecordFoodLabel.setText(String.valueOf(activeUser.recordFood));
+        yourRecordScienceLabel.setText(String.valueOf(activeUser.recordScience));
+        yourRecordCommonLabel.setText(String.valueOf(activeUser.recordCommon));
+        yourRecordGeographyLabel.setText(String.valueOf(activeUser.recordGeography));
 
         bestRecordEnglishLabel.setText(String.valueOf(Database.getTheBestRecord("recordEnglish")));
         bestRecordMathLabel.setText(String.valueOf(Database.getTheBestRecord("recordMath")));
@@ -57,6 +61,16 @@ public class SinglePlayer extends JFrame {
         category5.setFont(FontConfig.comic.deriveFont(Font.BOLD, 11));
         category6.setFont(FontConfig.comic.deriveFont(Font.BOLD, 16));
 
+        initLabelFonts(yourRecordEnglishLabel, yourRecordGeographyLabel, yourRecordCommonLabel, yourRecordScienceLabel,
+                yourRecordFoodLabel, yourRecordMathLabel, bestRecordEnglishLabel, bestRecordCommonLabel);
+
+        initLabelFonts(bestRecordFoodLabel, bestRecordGeographyLabel, bestRecordScienceLabel, bestRecordMathLabel, label1,
+                label2, label3, label4);
+    }
+
+    private void initLabelFonts(JLabel yourRecordEnglishLabel, JLabel yourRecordGeographyLabel, JLabel yourRecordCommonLabel,
+                      JLabel yourRecordScienceLabel, JLabel yourRecordFoodLabel, JLabel yourRecordMathLabel,
+                      JLabel bestRecordEnglishLabel, JLabel bestRecordCommonLabel) {
         yourRecordEnglishLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
         yourRecordGeographyLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
         yourRecordCommonLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
@@ -66,21 +80,6 @@ public class SinglePlayer extends JFrame {
 
         bestRecordEnglishLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
         bestRecordCommonLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-        bestRecordFoodLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-        bestRecordGeographyLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-        bestRecordScienceLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-        bestRecordMathLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-
-        label1.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-        label2.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-        label3.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-        label4.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-
-    }
-
-    private void previousButtonActionPerformed(ActionEvent e) {
-        this.dispose();
-        dashboard.setVisible(true);
     }
 
     private void whenCategoryIsSelected(ArrayList<Question> questions,int category){
@@ -119,6 +118,14 @@ public class SinglePlayer extends JFrame {
     }
 
     private void singlePlayerWindowClosing(WindowEvent e) {
+        previousPage();
+    }
+
+    private void previousButtonActionPerformed(ActionEvent e) {
+        previousPage();
+    }
+
+    private void previousPage(){
         this.dispose();
         dashboard.setVisible(true);
     }
