@@ -298,8 +298,8 @@ public class Questions extends JFrame {
         Helper.setBackground(new Color(200, 10, 50));
         Helper.setForeground(Color.black);
         Helper.setEnabled(false);
-        if(activeUser.coins>= 0){
-            activeUser.coins -= 0;
+        if(activeUser.coins>= 200){
+            activeUser.coins -= 200;
             Database.updateDatabaseUserCoins(activeUser.username,activeUser.coins);
             coinAmountLabel.setText(String.valueOf(activeUser.coins));
             Helper.setText("Out !");
