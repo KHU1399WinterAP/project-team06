@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp Panel::l:::x}"
-			"$verticalGroup": "par l {comp Panel::l:::x}"
+			"$horizontalGroup": "par l {comp Panel::t:::x}"
+			"$verticalGroup": "par l {comp Panel::t::567:x}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
@@ -14,49 +14,103 @@ new FormModel {
 			"resizable": false
 			"title": "Questions"
 			"background": new java.awt.Color( 0, 112, 192, 255 )
-			"visible": true
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :::x, comp QuestionPlace:::p:269:p, space :p:53:p}, seq {space :p:43:p, par t {seq t {par t {seq {comp Answer4:::p:140:p, space :::p, comp Answer3:::p:140:p}, seq {comp Answer1:::p:140:p, space :::p, comp Answer2:::p:140:p}}, space :::x}, seq t {comp PowerUp1:::p:144:p, space :::p, comp PowerUp2:::p:144:p, space :p:41:p}}}}"
-				"$verticalGroup": "par l {seq l {space :p:33:p, comp QuestionPlace:::p:164:p, space :p:26:p, par b {comp Answer1::b:p:98:p, comp Answer2::b:p:98:p}, space s:::p, par b {comp Answer3::b:p:98:p, comp Answer4::b:p:98:p}, space ::40:x, par b {comp PowerUp1::b:p:53:p, comp PowerUp2::b:p:53:p}, space :p:35:p}}"
+				"$horizontalGroup": "par l {seq l {space :::p, par l {seq l {comp questionLabel::::366:x, space :::p}, seq t {par t {seq {space :0:19:x, par l:::p {comp answerButton3::t::150:x, comp answerButton4::t::150:x, comp powerUp1::t::150:x}, space :p:27:p, par t {comp answerButton1:::p:150:p, comp answerButton2:::p:150:p, comp powerUp2:::p:150:p}}, seq t {par t {seq {space :6:6:p, comp timelabel:::p:46:p, space :::p, comp timeProgressBar::::247:x}, seq {comp label1:::p::p, space :::p, comp currentScoreLable:::p:43:p, space :::x, comp coinAmountLabel:::p:57:p}}, space :::p, comp coinLabel:::p:35:p}}, space :p:26:p}}}}"
+				"$verticalGroup": "par l {seq l {space :::p, par l {seq {comp currentScoreLable:::::x, space :p:4:p}, comp label1::l:p:43:p, comp coinLabel::l:p:37:p, comp coinAmountLabel:::::x}, space :::p, par l {comp timelabel:::::x, seq {space :0:0:x, comp timeProgressBar:::p:13:p}}, space :p:7:p, comp questionLabel:::p:188:p, space u:::p, par b {comp answerButton3::b:p:76:p, comp answerButton2::b:p:76:p}, space s:::p, par b {comp answerButton4::b:p:76:p, comp answerButton1::b:p:76:p}, space :p:26:p, par b {comp powerUp2::b:p:53:p, comp powerUp1::b:p:53:p}, space :p:35:p}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "QuestionPlace"
-					"text": "Question Goes Here"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "questionLabel"
 					"horizontalAlignment": 0
-					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
-					"foreground": new java.awt.Color( 255, 153, 51, 255 )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 18 )
+					"foreground": sfield java.awt.Color white
 					"background": new java.awt.Color( 0, 0, 204, 255 )
 				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "Answer1"
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "Answer2"
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "Answer3"
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "Answer4"
-				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "PowerUp1"
+					name: "powerUp1"
 					"text": "Power UP 1"
 					"background": &Color0 new java.awt.Color( 0, 153, 51, 255 )
+					"focusable": false
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "PowerUp2"
+					name: "powerUp2"
 					"text": "Power UP 2"
 					"background": #Color0
+					"focusable": false
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "answerButton3"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"focusable": false
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton3ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "answerButton2"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"focusable": false
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton2ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "answerButton4"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"focusable": false
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton4ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "answerButton1"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"focusable": false
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton1ActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "coinLabel"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/smallCoin.png" )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "coinAmountLabel"
+					"horizontalAlignment": 0
+					"foreground": new java.awt.Color( 255, 255, 51, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Score :"
+					"foreground": sfield java.awt.Color white
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "currentScoreLable"
+					"foreground": sfield java.awt.Color white
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "timelabel"
+					"background": new java.awt.Color( 255, 153, 0, 255 )
+					"foreground": new java.awt.Color( 255, 153, 0, 255 )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 24 )
+					"text": "10"
+					"horizontalAlignment": 0
+				} )
+				add( new FormComponent( "javax.swing.JProgressBar" ) {
+					name: "timeProgressBar"
+					"background": sfield java.awt.Color red
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 380, 605 )
-			"location": new java.awt.Point( 535, 80 )
+			"location": new java.awt.Point( 35, 20 )
 		} )
 	}
 }

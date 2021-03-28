@@ -28,6 +28,7 @@ public class Dashboard extends JFrame {
         initComponentsProperties();
         this.setVisible(true);
         setCurrentUsername();
+        setCurrentCoins();
         initProfilePicture(activeUser);
     }
 
@@ -43,10 +44,13 @@ public class Dashboard extends JFrame {
         usernameLabel.setText(activeUser.username);
     }
 
+    private void setCurrentCoins(){
+        coinLabel.setText(String.valueOf(activeUser.coins));
+    }
     private void ProfileButtonActionPerformed(ActionEvent e) {
         this.setVisible(false);
-        var prof = new ProfileSettings(LoginRegisterMenu, this);
-        prof.addWindowListener(new WindowAdapter() {
+        var profileSettings = new ProfileSettings(LoginRegisterMenu, this);
+        profileSettings.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 setCurrentUsername();
@@ -71,7 +75,13 @@ public class Dashboard extends JFrame {
 
     private void singlePlayerButtonActionPerformed(ActionEvent e) {
         this.setVisible(false);
-        new SinglePlayer(this);
+       var singlePlayer=new SinglePlayer(this);
+       singlePlayer.addWindowListener(new WindowAdapter() {
+           @Override
+           public void windowClosed(WindowEvent e) {
+               setCurrentCoins();
+           }
+       });
     }
 
     private void multiplayerButtonActionPerformed(ActionEvent e) {
@@ -152,7 +162,6 @@ public class Dashboard extends JFrame {
             //---- coinLabel ----
             coinLabel.setBackground(new Color(255, 255, 51));
             coinLabel.setForeground(new Color(255, 152, 0));
-            coinLabel.setText("0");
             coinLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
             GroupLayout PanelLayout = new GroupLayout(Panel);
@@ -166,9 +175,9 @@ public class Dashboard extends JFrame {
                                 .addComponent(profileButton, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(settingsIcon, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
-                                .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                                .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(coinIcon))
                             .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                                 .addGap(0, 7, Short.MAX_VALUE)
@@ -191,7 +200,9 @@ public class Dashboard extends JFrame {
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addGap(11, 11, 11)
                                 .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(coinIcon)
+                                    .addGroup(PanelLayout.createSequentialGroup()
+                                        .addComponent(coinIcon)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE))
                                     .addComponent(coinLabel, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)))
                             .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

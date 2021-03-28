@@ -18,8 +18,8 @@ new FormModel {
 			"defaultCloseOperation": 2
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "SettingFrameWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq {space :::p, comp previousButton:::p:57:p}, seq l {space :p:114:p, comp aboutButton:::p:151:p}, seq l {space :p:67:p, comp musiclabel:::p:65:p, space :::p, comp musicLabel:::p::p, space :::p, comp musicButton:::p:65:p}}, space :::x}}"
-				"$verticalGroup": "par l {seq {space :::p, comp previousButton:::p::p, space :::p, par l {par b:l {comp musicLabel::b:p::p, comp musicButton::b:p:65:p}, comp musiclabel:::p:65:p}, space :::x, comp aboutButton:::p:69:p, space :p:141:p}}"
+				"$horizontalGroup": "par l {seq {par l {seq {space :::p, comp previousButton:::p:57:p}, seq l {space :p:114:p, comp aboutButton:::p:151:p}, seq l {space :p:79:p, comp musiclabel:::p:65:p, space :::p, comp musicButton:::p:65:p}}, space :::x}}"
+				"$verticalGroup": "par l {seq {space :::p, comp previousButton:::p::p, space :::p, par l {comp musicButton:::p:65:p, comp musiclabel:::p:65:p}, space :::x, comp aboutButton:::p:69:p, space :p:141:p}}"
 			} ) {
 				name: "MainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -46,13 +46,6 @@ new FormModel {
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "musicButtonActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "musicLabel"
-					"text": "   Music  "
-					"background": new java.awt.Color( 255, 153, 0, 255 )
-					"foreground": new java.awt.Color( 255, 153, 0, 255 )
-					"font": new java.awt.Font( "Comic Sans MS", 0, 24 )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "aboutButton"

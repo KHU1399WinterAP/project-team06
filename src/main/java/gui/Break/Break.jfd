@@ -1,0 +1,72 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp Panel::t:::x}"
+			"$verticalGroup": "par l {comp Panel::t:::x}"
+		} ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 380, 605 )
+			"name": "Questions"
+			"maximizedBounds": new java.awt.Rectangle( 580, 60, 380, 605 )
+			"resizable": false
+			"title": "Questions"
+			"background": new java.awt.Color( 0, 112, 192, 255 )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {par l {seq l {space :p:136:p, comp stopButton:::p:101:p}, seq l {space :p:117:p, par l {seq {comp label1:::p::p, space s:::p, comp currentScoreLable:::p:43:p}, seq {comp coinLabel:::p:47:p, space :::p, comp coinAmountLabel:::p:64:p}, comp nextButton:::p:137:p}}}, space ::124:x}}"
+				"$verticalGroup": "par l {seq l {space :p:110:p, par l {comp coinAmountLabel::::51:x, comp coinLabel::::51:x}, space s:::p, par l {comp label1:::p:43:p, comp currentScoreLable:::p:43:p}, space :p:164:p, comp nextButton:::p:74:p, space :p:49:p, comp stopButton:::p:50:p, space :::p}}"
+			} ) {
+				name: "Panel"
+				"background": new java.awt.Color( 0, 112, 192, 255 )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "coinLabel"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/smallCoin.png" )
+					"horizontalAlignment": 0
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "coinAmountLabel"
+					"horizontalAlignment": 0
+					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+					"foreground": new java.awt.Color( 255, 255, 51, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Score :"
+					"font": new java.awt.Font( "Comic Sans MS", 0, 16 )
+					"foreground": sfield java.awt.Color white
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "currentScoreLable"
+					"horizontalAlignment": 0
+					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+					"foreground": sfield java.awt.Color white
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "nextButton"
+					"text": "next"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"foreground": sfield java.awt.Color white
+					"focusable": false
+					"font": new java.awt.Font( "Comic Sans MS", 1, 18 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "nextButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "stopButton"
+					"text": "stop"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"foreground": sfield java.awt.Color white
+					"focusable": false
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "stopButtonActionPerformed", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 380, 605 )
+			"location": new java.awt.Point( 360, 255 )
+		} )
+	}
+}
