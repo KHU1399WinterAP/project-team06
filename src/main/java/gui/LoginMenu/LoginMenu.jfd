@@ -65,7 +65,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JPasswordField" ) {
 					name: "inputPassword"
-					"background": new java.awt.Color( 255, 255, 255, 0 )
+					"background": new java.awt.Color( 255, 255, 255, 255 )
 					"foreground": new java.awt.Color( 0, 32, 96, 255 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 				} )

@@ -5,12 +5,15 @@ import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
+import main.java.gui.Dashord.Dashboard;
+import main.java.gui.GameOver.GameOver;
 import main.java.models.User;
 import main.java.utils.GuiValidation;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
+import java.util.Timer;
 import java.util.function.Consumer;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -18,7 +21,7 @@ import javax.swing.GroupLayout;
 import static main.java.config.GuiConfig.COLOR_DANGER;
 
 public class RegisterMenu extends JFrame {
-	private final JFrame PreviousFrame;
+	private final JFrame loginRegisterMenu;
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
 	private JPanel mainBackground;
 	private JLabel textLabel;
@@ -34,8 +37,8 @@ public class RegisterMenu extends JFrame {
 	private JButton previousButton;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
-	public RegisterMenu(JFrame PreviousFrame) {
-		this.PreviousFrame = PreviousFrame;
+	public RegisterMenu(JFrame loginRegisterMenu) {
+		this.loginRegisterMenu = loginRegisterMenu;
 		initComponents();
 		initComponentsProperties();
 		this.setVisible(true);
@@ -66,6 +69,15 @@ public class RegisterMenu extends JFrame {
 			
 			registerButton.setBackground(Color.GREEN);
 			registerButton.setText("Registered !!");
+
+			javax.swing.Timer pause = new javax.swing.Timer(500, e1 -> {
+				registerButton.setBackground(new Color(0, 32, 96));
+				new Dashboard(loginRegisterMenu,user);
+				this.setVisible(false);
+			});
+			pause.setRepeats(false);
+			pause.start();
+
 		} else {
 			RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
 			updateErrorLabel(usernameError, usernameErrorLabel);
@@ -90,7 +102,7 @@ public class RegisterMenu extends JFrame {
 	
 	private void previousPage() {
 		this.dispose();
-		PreviousFrame.setVisible(true);
+		loginRegisterMenu.setVisible(true);
 	}
 	
 	private void initComponents() {

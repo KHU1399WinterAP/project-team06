@@ -13,7 +13,7 @@ public class User {
 	public int recordGeography;
 	
 	public User(String username, int password) {
-		this(username, password, 0, 100, 0, 0, 0, 0, 0, 0);
+		this(username, password, 1, 100, 0, 0, 0, 0, 0, 0);
 	}
 	
 	public User(String username, int password, int profilePicture, int coins,
