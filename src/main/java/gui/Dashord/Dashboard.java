@@ -58,17 +58,6 @@ public class Dashboard extends JFrame {
         coinLabel.setText(String.valueOf(activeUser.coins));
     }
 
-    private void ProfileButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        var profileSettings = new ProfileSettings(LoginRegisterMenu, this);
-        profileSettings.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                setCurrentInformation();
-            }
-        });
-    }
-
     private void setCurrentInformation(){
         profileButton.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.profilePicture(activeUser))));
         usernameLabel.setText(activeUser.username);
