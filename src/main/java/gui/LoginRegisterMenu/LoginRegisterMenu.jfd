@@ -37,6 +37,8 @@ new FormModel {
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": &Cursor0 new java.awt.Cursor( 12 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "LoginActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -46,6 +48,8 @@ new FormModel {
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RegisterActionPerformed", true ) )
 				} )
 			} )

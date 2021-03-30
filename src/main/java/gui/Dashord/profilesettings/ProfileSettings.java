@@ -16,211 +16,191 @@ import main.java.utils.GuiValidation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
 public class ProfileSettings extends JFrame {
-	User activeUser = Dashboard.activeUser;
-	public final JFrame LoginRegisterMenu;
-	public final JFrame dashboard;
-	
-	public ProfileSettings(JFrame LoginRegisterMenu, JFrame dashboard) {
-		this.dashboard = dashboard;
-		this.LoginRegisterMenu = LoginRegisterMenu;
-		initComponents();
-		initProfilePictures();
-		initComponentsProperties();
-		this.setVisible(true);
-	}
-	
-	private void initComponentsProperties() {
-		inputNewPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		inputNewUsername.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		changePasswordButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 15));
-		changeUsernameButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 15));
-		usernameErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
-		passwordErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
-		logoutButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 13));
-	}
-	
-	private void logoutButtonActionPerformed(ActionEvent e) {
-		this.dispose();
-		LoginRegisterMenu.setVisible(true);
-	}
-	
-	private void previousButtonActionPerformed(ActionEvent e) {
-		previousPage();
-	}
-	
-	private void ProfileSettingsFrameWindowClosing(WindowEvent e) {
-		previousPage();
-	}
-	
-	private void previousPage() {
-		this.dispose();
-		dashboard.setVisible(true);
-	}
-	
-	private void InputNewUserNameFocusGained(FocusEvent e) {
-		if (inputNewUsername.getText().equals("new username")) inputNewUsername.setText("");
-	}
-	
-	private void inputNewPasswordFocusGained(FocusEvent e) {
-		if (String.valueOf(inputNewPassword.getPassword()).equals("new password")) inputNewPassword.setText("");
-	}
-	
-	private void InputNewUserNameFocusLost(FocusEvent e) {
-		if (inputNewUsername.getText().equals("")) inputNewUsername.setText("new username");
-	}
-	
-	private void inputNewPasswordFocusLost(FocusEvent e) {
-		if (String.valueOf(inputNewPassword.getPassword()).equals("")) inputNewPassword.setText("new password");
-	}
-	
-	private void changeUsernameButtonActionPerformed(ActionEvent e) {
-		if (inputNewUsername.getText().equals("new username")) inputNewUsername.setText("");
-		
-		var usernameError = GuiValidation.validateUsername(inputNewUsername.getText());
-		
-		if (Database.AlreadyExisted(inputNewUsername.getText())) {
-			usernameErrorLabel.setText("Username already exists");
-			RunAnimation.runMainPanelBackgroundColorAnimation(panel);
-		} else if (usernameError == null) {
-			Database.updateDatabaseUsername(activeUser.username, inputNewUsername.getText());
-			changeUsernameButton.setBackground(Color.GREEN);
-			changeUsernameButton.setText("changed successfully !");
-			activeUser.username = inputNewUsername.getText();
-		} else {
-			RunAnimation.runMainPanelBackgroundColorAnimation(panel);
-			updateErrorLabel(usernameError, usernameErrorLabel);
-		}
-	}
-	
-	private void updateErrorLabel(GuiError error, JLabel errorLabel) {
-		if (error != null)
-			errorLabel.setText(error.getMessage());
-		else
-			errorLabel.setText("");
-	}
-	
-	private void changePasswordButtonActionPerformed(ActionEvent e) {
-		String newPassword = String.valueOf(inputNewPassword.getPassword());
-		if (newPassword.equals("new password")) newPassword = "";
-		
-		var passwordError = GuiValidation.validatePassword(newPassword);
-		if (passwordError == null) {
-			Database.updateDatabasePassword(activeUser.username, newPassword);
-			changePasswordButton.setBackground(Color.GREEN);
-			changePasswordButton.setText("Changed successfully !");
-			activeUser.password = Objects.hash(newPassword);
-		} else {
-			RunAnimation.runMainPanelBackgroundColorAnimation(panel);
-			updateErrorLabel(passwordError, passwordErrorLabel);
-		}
-	}
-	
-	private void face1ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/check3.png")));
-		Database.updateDatabaseProfilePicture(activeUser.username, 1);
-		activeUser.profilePicture = 1;
-	}
-	
-	private void face2ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face2.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 2);
-		activeUser.profilePicture = 2;
-	}
-	
-	private void face3ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face3.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 3);
-		activeUser.profilePicture = 3;
-	}
-	
-	private void face4ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face4.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 4);
-		activeUser.profilePicture = 4;
-	}
-	
-	private void face5ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face5.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 5);
-		activeUser.profilePicture = 5;
-	}
-	
-	private void face6ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face6.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 6);
-		activeUser.profilePicture = 6;
-	}
-	
-	private void face7ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face7.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 7);
-		activeUser.profilePicture = 7;
-	}
-	
-	private void face8ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face8.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 8);
-		activeUser.profilePicture = 8;
-	}
-	
-	private void face9ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face9.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 9);
-		activeUser.profilePicture = 9;
-	}
-	
-	private void face10ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face10.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 10);
-		activeUser.profilePicture = 10;
-	}
-	
-	private void face11ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face11.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 11);
-		activeUser.profilePicture = 11;
-	}
-	
-	private void face12ActionPerformed(ActionEvent e) {
-		selectAPhoto();
-		face12.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
-		Database.updateDatabaseProfilePicture(activeUser.username, 12);
-		activeUser.profilePicture = 12;
-	}
-	
-	private void selectAPhoto() {
-		face1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face1.png")));
-		face2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
-		face3.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face3.png")));
-		face4.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face4.png")));
-		face5.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face5.png")));
-		face6.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face6.png")));
-		face7.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face7.png")));
-		face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face8.png")));
-		face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face9.png")));
-		face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face10.png")));
-		face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face11.png")));
-		face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face12.png")));
-	}
-	
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+    User activeUser = Dashboard.activeUser;
+    public final JFrame LoginRegisterMenu;
+    public final JFrame dashboard;
+    public static int profilePicture;
+
+    public ProfileSettings(JFrame LoginRegisterMenu, JFrame dashboard) {
+        profilePicture = activeUser.profilePicture;
+        this.dashboard = dashboard;
+        this.LoginRegisterMenu = LoginRegisterMenu;
+        initComponents();
+        initProfilePictures();
+        initComponentsProperties();
+        inputNewPassword.setText(Dashboard.password);
+        inputNewUsername.setText(activeUser.username);
+        this.setVisible(true);
+    }
+
+    private void initComponentsProperties() {
+        inputNewPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        inputNewUsername.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        logoutButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 13));
+    }
+
+    private void logoutButtonActionPerformed(ActionEvent e) {
+        this.dispose();
+        LoginRegisterMenu.setVisible(true);
+    }
+
+    private void previousButtonActionPerformed(ActionEvent e) {
+        previousPage();
+    }
+
+    private void ProfileSettingsFrameWindowClosing(WindowEvent e) {
+        previousPage();
+    }
+
+    private void previousPage() {
+        this.dispose();
+        dashboard.setVisible(true);
+    }
+
+    private void face1ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face1.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 1;
+    }
+
+    private void face2ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face2.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 2;
+    }
+
+    private void face3ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face3.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 3;
+    }
+
+    private void face4ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face4.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 4;
+    }
+
+    private void face5ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face5.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 5;
+    }
+
+    private void face6ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face6.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 6;
+    }
+
+    private void face7ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face7.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 7;
+    }
+
+    private void face8ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face8.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 8;
+    }
+
+    private void face9ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face9.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 9;
+    }
+
+    private void face10ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face10.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 10;
+    }
+
+    private void face11ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face11.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 11;
+    }
+
+    private void face12ActionPerformed(ActionEvent e) {
+        selectAPhoto();
+        face12.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+        profilePicture = 12;
+    }
+
+    private void selectAPhoto() {
+        face1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face1.png")));
+        face2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
+        face3.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face3.png")));
+        face4.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face4.png")));
+        face5.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face5.png")));
+        face6.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face6.png")));
+        face7.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face7.png")));
+        face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face8.png")));
+        face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face9.png")));
+        face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face10.png")));
+        face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face11.png")));
+        face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face12.png")));
+    }
+
+    private void applyChanges() {
+        applyChangesButton.setText("changed !");
+        applyChangesButton.setBackground(Color.GREEN);
+        this.dispose();
+        dashboard.setVisible(true);
+    }
+
+    private void applyChangesButtonActionPerformed(ActionEvent e) {
+        String newPassword = String.valueOf(inputNewPassword.getPassword());
+        String newUsername = inputNewUsername.getText();
+
+        if (activeUser.username.equals(newUsername) && newPassword.equals(Dashboard.password) &&
+                profilePicture == activeUser.profilePicture) {
+            errorLabel.setText("");
+            RunAnimation.runMainPanelBackgroundColorAnimation(panel);
+        } else {
+            var usernameError = GuiValidation.validateUsername(newUsername);
+            var passwordError = GuiValidation.validatePassword(newPassword);
+            if (usernameError==null && passwordError==null) {
+                if (activeUser.profilePicture!=profilePicture){
+                    activeUser.profilePicture=profilePicture;
+                    Database.updateDatabaseProfilePicture(activeUser.username,profilePicture);
+                }
+                if (!activeUser.username.equals(newUsername)){
+                    Database.updateDatabaseUsername(activeUser.username,newUsername);
+                    activeUser.username=newUsername;
+                }
+                if (activeUser.password!=Objects.hash(newPassword)){
+                    activeUser.password=Objects.hash(newPassword);
+                    Database.updateDatabasePassword(activeUser.username,newPassword);
+                    Dashboard.password=newPassword;
+                }
+                applyChanges();
+            }else error();
+        }
+    }
+
+    private void error() {
+        errorLabel.setText("Password or username cannot be replaced !");
+        RunAnimation.runMainPanelBackgroundColorAnimation(panel);
+    }
+
+    private void init(){
+        ArrayList<JButton> facesButton=new ArrayList<>();
+        for (int i=1;i<=12;i++){
+            facesButton.add(new JButton());
+        }
+    }
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel = new JPanel();
         previousButton = new JButton();
         face1 = new JButton();
@@ -235,12 +215,14 @@ public class ProfileSettings extends JFrame {
         face9 = new JButton();
         face11 = new JButton();
         face12 = new JButton();
-        changePasswordButton = new JButton();
+        applyChangesButton = new JButton();
         inputNewPassword = new JPasswordField();
-        ErrorLabel = new JLabel();
+        errorLabel = new JLabel();
         logoutButton = new JButton();
         inputNewUsername = new JTextArea();
         label1 = new JLabel();
+        newUsernameLabel = new JLabel();
+        newpasswordLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -268,6 +250,7 @@ public class ProfileSettings extends JFrame {
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);
+            previousButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             previousButton.addActionListener(e -> previousButtonActionPerformed(e));
 
             //---- face1 ----
@@ -275,6 +258,7 @@ public class ProfileSettings extends JFrame {
             face1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face1.png")));
             face1.setFocusable(false);
             face1.setBorder(null);
+            face1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face1.addActionListener(e -> face1ActionPerformed(e));
 
             //---- face2 ----
@@ -282,6 +266,7 @@ public class ProfileSettings extends JFrame {
             face2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face2.png")));
             face2.setFocusable(false);
             face2.setBorder(null);
+            face2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face2.addActionListener(e -> face2ActionPerformed(e));
 
             //---- face3 ----
@@ -289,6 +274,7 @@ public class ProfileSettings extends JFrame {
             face3.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face3.png")));
             face3.setFocusable(false);
             face3.setBorder(null);
+            face3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face3.addActionListener(e -> face3ActionPerformed(e));
 
             //---- face5 ----
@@ -296,6 +282,7 @@ public class ProfileSettings extends JFrame {
             face5.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face5.png")));
             face5.setFocusable(false);
             face5.setBorder(null);
+            face5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face5.addActionListener(e -> face5ActionPerformed(e));
 
             //---- face6 ----
@@ -303,6 +290,7 @@ public class ProfileSettings extends JFrame {
             face6.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face6.png")));
             face6.setFocusable(false);
             face6.setBorder(null);
+            face6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face6.addActionListener(e -> face6ActionPerformed(e));
 
             //---- face4 ----
@@ -310,6 +298,7 @@ public class ProfileSettings extends JFrame {
             face4.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face4.png")));
             face4.setFocusable(false);
             face4.setBorder(null);
+            face4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face4.addActionListener(e -> face4ActionPerformed(e));
 
             //---- face7 ----
@@ -317,6 +306,7 @@ public class ProfileSettings extends JFrame {
             face7.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face7.png")));
             face7.setFocusable(false);
             face7.setBorder(null);
+            face7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face7.addActionListener(e -> face7ActionPerformed(e));
 
             //---- face8 ----
@@ -324,6 +314,7 @@ public class ProfileSettings extends JFrame {
             face8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face8.png")));
             face8.setFocusable(false);
             face8.setBorder(null);
+            face8.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face8.addActionListener(e -> face8ActionPerformed(e));
 
             //---- face10 ----
@@ -331,6 +322,7 @@ public class ProfileSettings extends JFrame {
             face10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face10.png")));
             face10.setFocusable(false);
             face10.setBorder(null);
+            face10.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face10.addActionListener(e -> face10ActionPerformed(e));
 
             //---- face9 ----
@@ -338,6 +330,7 @@ public class ProfileSettings extends JFrame {
             face9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face9.png")));
             face9.setFocusable(false);
             face9.setBorder(null);
+            face9.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face9.addActionListener(e -> face9ActionPerformed(e));
 
             //---- face11 ----
@@ -345,6 +338,7 @@ public class ProfileSettings extends JFrame {
             face11.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face11.png")));
             face11.setFocusable(false);
             face11.setBorder(null);
+            face11.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face11.addActionListener(e -> face11ActionPerformed(e));
 
             //---- face12 ----
@@ -352,37 +346,29 @@ public class ProfileSettings extends JFrame {
             face12.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face12.png")));
             face12.setFocusable(false);
             face12.setBorder(null);
+            face12.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             face12.addActionListener(e -> face12ActionPerformed(e));
 
-            //---- changePasswordButton ----
-            changePasswordButton.setText("Apply Changes");
-            changePasswordButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-            changePasswordButton.setBackground(new Color(0, 32, 96));
-            changePasswordButton.setFocusable(false);
-            changePasswordButton.setForeground(Color.white);
-            changePasswordButton.addActionListener(e -> changePasswordButtonActionPerformed(e));
+            //---- applyChangesButton ----
+            applyChangesButton.setText("Apply Changes");
+            applyChangesButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+            applyChangesButton.setBackground(new Color(0, 32, 96));
+            applyChangesButton.setFocusable(false);
+            applyChangesButton.setForeground(Color.white);
+            applyChangesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            applyChangesButton.setBorder(null);
+            applyChangesButton.addActionListener(e -> applyChangesButtonActionPerformed(e));
 
             //---- inputNewPassword ----
             inputNewPassword.setBackground(Color.white);
             inputNewPassword.setForeground(new Color(0, 32, 96));
-            inputNewPassword.setText("new password");
             inputNewPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-            inputNewPassword.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    inputNewPasswordFocusGained(e);
-                }
-                @Override
-                public void focusLost(FocusEvent e) {
-                    inputNewPasswordFocusLost(e);
-                }
-            });
 
-            //---- ErrorLabel ----
-            ErrorLabel.setForeground(Color.red);
-            ErrorLabel.setFont(new Font("Comic Sans MS", Font.ITALIC, 14));
-            ErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            ErrorLabel.setBackground(new Color(0, 112, 192));
+            //---- errorLabel ----
+            errorLabel.setForeground(Color.red);
+            errorLabel.setFont(new Font("Comic Sans MS", Font.ITALIC, 14));
+            errorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            errorLabel.setBackground(new Color(0, 112, 192));
 
             //---- logoutButton ----
             logoutButton.setText("LOG OUT");
@@ -390,6 +376,7 @@ public class ProfileSettings extends JFrame {
             logoutButton.setForeground(Color.white);
             logoutButton.setFocusable(false);
             logoutButton.setBorder(null);
+            logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             logoutButton.addActionListener(e -> logoutButtonActionPerformed(e));
 
             //---- inputNewUsername ----
@@ -397,80 +384,80 @@ public class ProfileSettings extends JFrame {
             inputNewUsername.setForeground(new Color(0, 32, 96));
             inputNewUsername.setLineWrap(true);
             inputNewUsername.setTabSize(5);
-            inputNewUsername.setText("new username");
             inputNewUsername.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-            inputNewUsername.addFocusListener(new FocusAdapter() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    InputNewUserNameFocusGained(e);
-                }
-                @Override
-                public void focusLost(FocusEvent e) {
-                    InputNewUserNameFocusLost(e);
-                }
-            });
 
             //---- label1 ----
-            label1.setText("Choose your avatar:");
-            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 10f));
+            label1.setText("Change your avatar:");
+            label1.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+            label1.setForeground(Color.white);
+
+            //---- newUsernameLabel ----
+            newUsernameLabel.setText("new username");
+            newUsernameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+
+            //---- newpasswordLabel ----
+            newpasswordLabel.setText("new password");
+            newpasswordLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
             GroupLayout panelLayout = new GroupLayout(panel);
             panel.setLayout(panelLayout);
             panelLayout.setHorizontalGroup(
                 panelLayout.createParallelGroup()
                     .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(panelLayout.createParallelGroup()
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(face1, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(face2, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(face3, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(face4, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(face5, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(face9, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelLayout.createParallelGroup()
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(face6, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(face7, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(face10, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(face11, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelLayout.createParallelGroup()
+                                    .addComponent(face8, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(face12, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 37, Short.MAX_VALUE))
+                    .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup()
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(label1))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(panelLayout.createParallelGroup()
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addComponent(face1, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(face2, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(face3, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(face4, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addComponent(face5, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(face9, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelLayout.createParallelGroup()
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addComponent(face6, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(face7, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addComponent(face10, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(face11, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelLayout.createParallelGroup()
-                                            .addComponent(face8, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(face12, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(panelLayout.createSequentialGroup()
                                 .addGap(125, 125, 125)
-                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(34, Short.MAX_VALUE))
+                                .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(label1)))
+                        .addContainerGap(130, Short.MAX_VALUE))
                     .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addGap(41, 60, Short.MAX_VALUE)
+                        .addContainerGap(100, Short.MAX_VALUE)
                         .addGroup(panelLayout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup()
-                                    .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputNewUsername, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE))
-                                .addGap(87, 87, 87))
-                            .addGroup(GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addComponent(ErrorLabel, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53))))
+                            .addComponent(inputNewUsername, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(applyChangesButton, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newUsernameLabel, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newpasswordLabel, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+                        .addGap(88, 88, 88))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(errorLabel, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                        .addContainerGap())
             );
             panelLayout.setVerticalGroup(
                 panelLayout.createParallelGroup()
@@ -479,7 +466,7 @@ public class ProfileSettings extends JFrame {
                         .addComponent(previousButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label1)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelLayout.createParallelGroup()
                             .addComponent(face1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                             .addComponent(face2, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
@@ -497,15 +484,19 @@ public class ProfileSettings extends JFrame {
                             .addComponent(face10, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                             .addComponent(face11, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
                             .addComponent(face12, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newUsernameLabel)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputNewUsername, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(newpasswordLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputNewPassword, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(applyChangesButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(errorLabel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(changePasswordButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ErrorLabel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
                         .addComponent(logoutButton, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
             );
@@ -522,16 +513,16 @@ public class ProfileSettings extends JFrame {
                 .addComponent(panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-	}
-	
-	private void initProfilePictures() {
-		// TODO: add profile picture to GUI
-		
-		JButton[] faces = new JButton[12];
-	}
-	
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    private void initProfilePictures() {
+        // TODO: add profile picture to GUI
+
+        JButton[] faces = new JButton[12];
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel;
     private JButton previousButton;
     private JButton face1;
@@ -546,11 +537,13 @@ public class ProfileSettings extends JFrame {
     private JButton face9;
     private JButton face11;
     private JButton face12;
-    private JButton changePasswordButton;
+    private JButton applyChangesButton;
     private JPasswordField inputNewPassword;
-    private JLabel ErrorLabel;
+    private JLabel errorLabel;
     private JButton logoutButton;
     private JTextArea inputNewUsername;
     private JLabel label1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+    private JLabel newUsernameLabel;
+    private JLabel newpasswordLabel;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

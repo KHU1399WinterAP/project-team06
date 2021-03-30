@@ -31,6 +31,7 @@ new FormModel {
 					"background": new java.awt.Color( 0, 112, 192, 255 )
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": &Cursor0 new java.awt.Cursor( 12 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -45,6 +46,7 @@ new FormModel {
 					"text": "ON"
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"focusable": false
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "musicButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -54,6 +56,8 @@ new FormModel {
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 1, 18 )
 					"focusable": false
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "AboutButtonActionPerformed", true ) )
 				} )
 			} )

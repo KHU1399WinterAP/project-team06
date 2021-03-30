@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -36,6 +36,8 @@ new FormModel {
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": &Cursor0 new java.awt.Cursor( 12 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "FreezerActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -45,6 +47,8 @@ new FormModel {
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "HelperActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -53,6 +57,8 @@ new FormModel {
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton3ActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -61,6 +67,8 @@ new FormModel {
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton2ActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -69,6 +77,8 @@ new FormModel {
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton4ActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -77,6 +87,8 @@ new FormModel {
 					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton1ActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {

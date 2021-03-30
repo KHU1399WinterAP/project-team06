@@ -51,7 +51,7 @@ public class LoginMenu extends JFrame {
         if (!username.isBlank()) {
             User user = Database.getUserByUsername(username);
             if (user != null && user.password == password) {
-                new Dashboard(LoginRegisterMenu, user);
+                new Dashboard(LoginRegisterMenu, user,String.valueOf(inputPassword.getPassword()));
                 this.dispose();
                 return;
             }
@@ -136,6 +136,8 @@ public class LoginMenu extends JFrame {
             loginButton.setBackground(new Color(0, 32, 96));
             loginButton.setFocusable(false);
             loginButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+            loginButton.setBorder(null);
+            loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             loginButton.addActionListener(e -> loginButtonActionPerformed(e));
 
             //---- previousButton ----
@@ -145,6 +147,8 @@ public class LoginMenu extends JFrame {
             previousButton.setForeground(Color.white);
             previousButton.setAlignmentX(16.0F);
             previousButton.setFocusable(false);
+            previousButton.setBorder(null);
+            previousButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             previousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
 
             //---- inputUsername ----

@@ -80,6 +80,8 @@ public class LoginRegisterMenu extends JFrame {
             loginButton.setBackground(new Color(0, 32, 96));
             loginButton.setFocusable(false);
             loginButton.setForeground(Color.white);
+            loginButton.setBorder(null);
+            loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             loginButton.addActionListener(e -> LoginActionPerformed(e));
 
             //---- registerButton ----
@@ -88,6 +90,8 @@ public class LoginRegisterMenu extends JFrame {
             registerButton.setBackground(new Color(0, 32, 96));
             registerButton.setFocusable(false);
             registerButton.setForeground(Color.white);
+            registerButton.setBorder(null);
+            registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             registerButton.addActionListener(e -> RegisterActionPerformed(e));
 
             GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);

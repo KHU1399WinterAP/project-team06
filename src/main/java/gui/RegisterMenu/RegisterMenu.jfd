@@ -21,7 +21,7 @@ new FormModel {
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "RegisterFrameWindowClosed", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq {space ::23:x, par l {seq t {comp faceLabel:::p::p, space :p:119:p}, seq t {comp textLabel:::p::p, space :p:29:p}, par l:t {seq l {comp scrollPane1:::p:203:p, space :::p}, seq t {par l:::p {seq t {comp usernameLabel:::p::p, space :::p, comp usernameErrorLabel:::p:203:p}, par l:t {seq l {comp passwordLabel:::p::p, space :::p, comp passwordErrorLabel:::p:207:p}, comp inputPassword:::p:202:p, comp registerButton::l:p:202:p}}, space :p:16:p}}, seq t {comp previousButton:::p:100:p, space :p:136:p}}}}"
-				"$verticalGroup": "par l {seq t {space :p:12:p, comp faceLabel:::p:147:p, space :::p, comp textLabel:::p::p, space :p:26:p, par l {comp usernameLabel:::p:35:p, comp usernameErrorLabel:::p:33:p}, space :::p, comp scrollPane1:::p::p, space :::p, par l {comp passwordLabel:::p:39:p, comp passwordErrorLabel:::p:33:p}, space :::p, comp inputPassword:::::p, space u:::p, comp registerButton:::p:47:p, space :::x, comp previousButton:::p:30:p}}"
+				"$verticalGroup": "par l {seq t {space :p:12:p, comp faceLabel:::p:147:p, space :::p, comp textLabel:::p::p, space :p:26:p, par l {comp usernameLabel:::p:35:p, comp usernameErrorLabel:::p:33:p}, space :::p, comp scrollPane1:::p::p, space :::p, par l {comp passwordLabel:::p:39:p, comp passwordErrorLabel:::p:33:p}, space :::p, comp inputPassword:::::p, space u:::p, comp registerButton:::p:47:p, space :::x, comp previousButton:::p:30:p, space :::p}}"
 			} ) {
 				name: "mainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -76,6 +76,8 @@ new FormModel {
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
 					"font": new java.awt.Font( "Comic Sans MS", 1, 20 )
+					"cursor": &Cursor0 new java.awt.Cursor( 12 )
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RegisterButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -96,6 +98,8 @@ new FormModel {
 					"foreground": sfield java.awt.Color white
 					"alignmentX": 16.0f
 					"focusable": false
+					"cursor": #Cursor0
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "PreviousButtonActionPerformed", true ) )
 				} )
 			} )
