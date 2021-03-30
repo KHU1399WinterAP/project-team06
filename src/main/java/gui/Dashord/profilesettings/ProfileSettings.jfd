@@ -19,8 +19,8 @@ new FormModel {
 			"$sizePolicy": 2
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "ProfileSettingsFrameWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space :0:63:x, par l {seq t {par l {par t:l {comp passwordErrorLabel:::p:265:p, comp usernameErrorLabel:::p:265:p}, seq l {space :39:39:p, par l {par l:l::p {comp changeUsernameButton::l:::x, comp inputNewPassword::l:p:188:p}, comp inputNewUsername::l:p:190:p, comp changePasswordButton::l:p:188:p}}}, space :p:50:p}, seq t {comp logoutButton:::p:123:p, space :p:121:p}}}, seq {par l {seq {space :::p, comp previousButton:::p:57:p}, seq l {space :p:31:p, par l {seq l {comp face1:::p:73:p, space :::p, comp face2:::p:73:p, space :::p, comp face3:::p:73:p, space :::p, comp face4:::p:73:p}, seq l {par t {comp face5:::p:73:p, comp face9:::p:73:p}, space :::p, par l {seq l {comp face6:::p:73:p, space :::p, comp face7:::p:73:p}, seq l {comp face10:::p:73:p, space :::p, comp face11:::p:73:p}}, space :::p, par l {comp face8:::p:73:p, comp face12:::p:73:p}}}}}, space ::37:x}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :::p, par l {comp face1::l:p:64:p, comp face2::l:p:64:p, comp face3::l:p:64:p, comp face4::l:p:64:p}, space :::p, par l {comp face5:::p:64:p, comp face6::l:p:64:p, comp face7::l:p:64:p, comp face8::l:p:64:p}, space :::p, par l {comp face9::l:p:64:p, comp face10::l:p:64:p, comp face11::l:p:64:p, comp face12::l:p:64:p}, space :p:30:p, comp inputNewUsername:::p::p, space :::p, comp usernameErrorLabel:::p:24:p, space :::p, comp changeUsernameButton:::p:32:p, space :::p, comp inputNewPassword:::p:27:p, space :::p, comp passwordErrorLabel:::p:20:p, space :::p, comp changePasswordButton:::p:30:p, space ::39:x, comp logoutButton:::p:40:p}}"
+				"$horizontalGroup": "par l {seq {par l {seq {space :::p, comp previousButton:::p:57:p}, seq l {space :p:39:p, comp label1:::p::p}, seq l {space :p:34:p, par l {seq l {comp face1:::p:73:p, space :::p, comp face2:::p:73:p, space :::p, comp face3:::p:73:p, space :::p, comp face4:::p:73:p}, seq l {par t {comp face5:::p:73:p, comp face9:::p:73:p}, space :::p, par l {seq l {comp face6:::p:73:p, space :::p, comp face7:::p:73:p}, seq l {comp face10:::p:73:p, space :::p, comp face11:::p:73:p}}, space :::p, par l {comp face8:::p:73:p, comp face12:::p:73:p}}}}, seq l {space :p:125:p, comp logoutButton:::p:123:p}}, space ::34:x}, seq t {space :41:60:x, par l {seq t {par l {comp inputNewPassword:::p:190:p, comp inputNewUsername:::p:190:p, comp changePasswordButton::l:p:188:p}, space :p:87:p}, seq t {comp ErrorLabel:::p:265:p, space :p:53:p}}}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :::p, comp label1:::p::p, space u:::p, par l {comp face1::l:p:64:p, comp face2::l:p:64:p, comp face3::l:p:64:p, comp face4::l:p:64:p}, space :::p, par l {comp face5:::p:64:p, comp face6::l:p:64:p, comp face7::l:p:64:p, comp face8::l:p:64:p}, space :::p, par l {comp face9::l:p:64:p, comp face10::l:p:64:p, comp face11::l:p:64:p, comp face12::l:p:64:p}, space ::59:x, comp inputNewUsername:::p::p, space :::p, comp inputNewPassword:::p::p, space u:::p, comp changePasswordButton:::p:30:p, space u:::p, comp ErrorLabel:::p:24:p, space :p:24:p, comp logoutButton:::p:40:p, space :::p}}"
 			} ) {
 				name: "panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -129,17 +129,8 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "face12ActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "changeUsernameButton"
-					"text": "Change username "
-					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
-					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": sfield java.awt.Color white
-					"focusable": false
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "changeUsernameButtonActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "changePasswordButton"
-					"text": "Change password "
+					"text": "Apply Changes"
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
 					"background": new java.awt.Color( 0, 32, 96, 255 )
 					"focusable": false
@@ -156,18 +147,11 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "inputNewPasswordFocusLost", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "usernameErrorLabel"
+					name: "ErrorLabel"
 					"foreground": sfield java.awt.Color red
 					"font": new java.awt.Font( "Comic Sans MS", 2, 14 )
 					"horizontalAlignment": 0
 					"background": new java.awt.Color( 0, 112, 192, 255 )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "passwordErrorLabel"
-					"foreground": sfield java.awt.Color red
-					"horizontalAlignment": 0
-					"background": new java.awt.Color( 0, 112, 192, 255 )
-					"font": new java.awt.Font( "Comic Sans MS", 2, 14 )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "logoutButton"
@@ -188,6 +172,11 @@ new FormModel {
 					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
 					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "InputNewUserNameFocusGained", true ) )
 					addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "InputNewUserNameFocusLost", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Choose your avatar:"
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

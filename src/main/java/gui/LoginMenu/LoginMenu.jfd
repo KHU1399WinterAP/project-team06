@@ -20,8 +20,8 @@ new FormModel {
 			"name": "LoginMenu"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "loginMenuWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq {space :p:23:p, comp textLabel:::p::p}, seq l {space :p:107:p, comp faceLabel:::p:154:p}}, space :::x}, seq t {space :0:0:x, par l {seq t {comp previousButton:::p:100:p, space :p:137:p}, seq t {par l {comp inputPassword:::p:200:p, comp loginButton:::p:200:p, comp passwordLabel::l:p::p, comp scrollPane1::l:p:200:p, comp usernameLabel::l:p::p}, space :p:88:p}}}}"
-				"$verticalGroup": "par l {seq t {space :p:18:p, comp faceLabel:::p:141:p, space :::p, comp textLabel:::p::p, space :p:27:p, comp usernameLabel:::p:35:p, space :::p, comp scrollPane1:::p::p, space :::p, comp passwordLabel:::p:39:p, space :::p, comp inputPassword:::::p, space :p:12:p, comp loginButton:::p:47:p, space :::x, comp previousButton:::p:30:p}}"
+				"$horizontalGroup": "par l {seq {par l {seq {space :p:23:p, comp textLabel:::p::p}, seq l {space :p:107:p, comp faceLabel:::p:154:p}}, space :::x}, seq {space :p:87:p, par l {comp usernameLabel:::p::p, comp inputPassword:::p:198:p, comp loginButton::l:p:200:p, comp inputUsername:::p:198:p, comp passwordLabel::l:p::p}, space :0:0:x}, seq t {space :0:0:x, comp previousButton:::p:100:p, space :p:136:p}}"
+				"$verticalGroup": "par l {seq t {space :p:18:p, comp faceLabel:::p:141:p, space :::p, comp textLabel:::p::p, space u:::p, comp usernameLabel:::p:35:p, space :::p, comp inputUsername:::p::p, space u:::p, comp passwordLabel:::p:39:p, space :p:12:p, comp inputPassword:::::p, space :p:40:p, comp loginButton:::p:47:p, space :::x, comp previousButton:::p:30:p, space :p:30:p}}"
 			} ) {
 				name: "mainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
@@ -44,18 +44,6 @@ new FormModel {
 					"text": "Username"
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
-				} )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPane1"
-					add( new FormComponent( "javax.swing.JTextArea" ) {
-						name: "inputUsername"
-						"background": sfield java.awt.Color white
-						"foreground": new java.awt.Color( 0, 32, 96, 255 )
-						"lineWrap": true
-						"tabSize": 10
-						"alignmentX": 1.5f
-						"alignmentY": 1.5f
-					} )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "passwordLabel"
@@ -88,10 +76,19 @@ new FormModel {
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "PreviousButtonActionPerformed", true ) )
 				} )
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "inputUsername"
+					"background": sfield java.awt.Color white
+					"foreground": new java.awt.Color( 0, 32, 96, 255 )
+					"lineWrap": true
+					"tabSize": 10
+					"alignmentX": 1.5f
+					"alignmentY": 1.5f
+				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 380, 605 )
-			"location": new java.awt.Point( 300, 130 )
+			"location": new java.awt.Point( 500, 85 )
 		} )
 	}
 }
