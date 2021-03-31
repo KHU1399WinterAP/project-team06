@@ -31,8 +31,14 @@ public class GameOver extends JFrame {
 		initComponents();
 		initLabels();
 		initComponentsProperties();
+		initCustomTheme();
 		this.setVisible(true);
 	}
+
+	private void initCustomTheme(){
+	    Panel.setBackground(Dashboard.background);
+	    tryAgainButton.setBackground(Dashboard.button);
+    }
 	
 	private void initLabels() {
 		currentScoreLable.setText(String.valueOf(score));

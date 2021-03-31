@@ -34,9 +34,19 @@ public class ProfileSettings extends JFrame {
         this.LoginRegisterMenu = LoginRegisterMenu;
         init();
         initComponentsProperties();
+        initCustomTheme();
         inputNewPassword.setText(Dashboard.password);
         inputNewUsername.setText(activeUser.username);
         this.setVisible(true);
+    }
+
+    private void initCustomTheme(){
+        panel.setBackground(Dashboard.background);
+        for (int i=0;i<facesButton.size();i++){
+            facesButton.get(i).setBackground(Dashboard.background);
+        }
+        applyChangesButton.setBackground(Dashboard.button);
+        previousButton.setBackground(Dashboard.background);
     }
 
     private void initComponentsProperties() {
@@ -138,15 +148,15 @@ public class ProfileSettings extends JFrame {
         }
 
         panel = new JPanel();
-        JButton previousButton = new JButton();
+        previousButton = new JButton();
         applyChangesButton = new JButton();
         inputNewPassword = new JPasswordField();
         errorLabel = new JLabel();
         logoutButton = new JButton();
         inputNewUsername = new JTextArea();
-        JLabel label1 = new JLabel();
-        JLabel newUsernameLabel = new JLabel();
-        JLabel newPasswordLabel = new JLabel();
+        label1 = new JLabel();
+        newUsernameLabel = new JLabel();
+        newPasswordLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -336,6 +346,10 @@ public class ProfileSettings extends JFrame {
         setLocationRelativeTo(getOwner());
     }
 
+    private JLabel newPasswordLabel;
+    private JLabel newUsernameLabel;
+    private JButton previousButton;
+    private JLabel label1;
     private JPanel panel;
     private JButton applyChangesButton;
     private JPasswordField inputNewPassword;

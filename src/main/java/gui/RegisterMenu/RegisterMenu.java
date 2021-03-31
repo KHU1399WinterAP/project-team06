@@ -7,6 +7,7 @@ import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.GameOver.GameOver;
+import main.java.models.Settings;
 import main.java.models.User;
 import main.java.utils.GuiValidation;
 
@@ -50,8 +51,8 @@ public class RegisterMenu extends JFrame {
 		textLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 50));
 		usernameErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
 		passwordErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
-		usernameLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		passwordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+		usernameLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
+		passwordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
 		registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
 		previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 10));
 	}
@@ -64,14 +65,16 @@ public class RegisterMenu extends JFrame {
 			usernameErrorLabel.setText("username already exists");
 			RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
 		} else if (usernameError == null && passwordError == null) {
-			User user = new User(inputUserName.getText(), Objects.hash(String.valueOf(inputPassword.getPassword())));
-			Database.InsertInToUsers(user);
+            Settings settings=new Settings(Database.getTheMaxSettingId()+1);
+            Database.insertInToSettings(settings);
+			User user = new User(inputUserName.getText(), Objects.hash(String.valueOf(inputPassword.getPassword())),Database.getTheMaxSettingId()+1);
+			Database.insertInToUsers(user);
 			
-			registerButton.setBackground(Color.GREEN);
+			registerButton.setBackground(Color.decode("#00FF00"));
 			registerButton.setText("Registered !!");
 
 			javax.swing.Timer pause = new javax.swing.Timer(500, e1 -> {
-				registerButton.setBackground(new Color(0, 32, 96));
+				registerButton.setBackground(new Color(0 ,32 ,96));
 				new Dashboard(loginRegisterMenu,user,String.valueOf(inputPassword.getPassword()));
 				this.setVisible(false);
 			});

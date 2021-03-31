@@ -5,6 +5,7 @@
 package main.java.gui.Dashord.setting.About;
 
 import main.java.config.FontConfig;
+import main.java.gui.Dashord.Dashboard;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -21,8 +22,14 @@ public class About extends JFrame {
 		this.setting = setting;
 		initComponents();
 		initComponentsProperties();
+		initCustomTheme();
 		this.setVisible(true);
 	}
+
+	private void initCustomTheme(){
+	    mainBackground.setBackground(Dashboard.background);
+	    previousButton.setBackground(Dashboard.button);
+    }
 	
 	private void initComponentsProperties() {
 		aboutLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 30));
@@ -51,7 +58,7 @@ public class About extends JFrame {
 	
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        MainBackground = new JPanel();
+        mainBackground = new JPanel();
         previousButton = new JButton();
         aboutLabel = new JLabel();
         Banner = new JLabel();
@@ -81,11 +88,11 @@ public class About extends JFrame {
         });
         var contentPane = getContentPane();
 
-        //======== MainBackground ========
+        //======== mainBackground ========
         {
-            MainBackground.setMaximumSize(new Dimension(380, 605));
-            MainBackground.setMinimumSize(new Dimension(380, 605));
-            MainBackground.setBackground(new Color(0, 112, 192));
+            mainBackground.setMaximumSize(new Dimension(380, 605));
+            mainBackground.setMinimumSize(new Dimension(380, 605));
+            mainBackground.setBackground(new Color(0, 112, 192));
 
             //---- previousButton ----
             previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
@@ -154,46 +161,46 @@ public class About extends JFrame {
             text6.setForeground(new Color(255, 153, 0));
             text6.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
 
-            GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
-            MainBackground.setLayout(MainBackgroundLayout);
-            MainBackgroundLayout.setHorizontalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
+            GroupLayout mainBackgroundLayout = new GroupLayout(mainBackground);
+            mainBackground.setLayout(mainBackgroundLayout);
+            mainBackgroundLayout.setHorizontalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(aboutLabel)
                         .addGap(0, 111, Short.MAX_VALUE))
-                    .addGroup(GroupLayout.Alignment.TRAILING, MainBackgroundLayout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
                         .addContainerGap(30, Short.MAX_VALUE)
                         .addComponent(repoLabel)
                         .addGap(18, 18, 18))
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
-                        .addGroup(MainBackgroundLayout.createParallelGroup()
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
                                 .addGap(64, 64, 64)
-                                .addGroup(MainBackgroundLayout.createParallelGroup()
+                                .addGroup(mainBackgroundLayout.createParallelGroup()
                                     .addComponent(text3)
                                     .addComponent(text4)
                                     .addComponent(text5)
-                                    .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                    .addGroup(mainBackgroundLayout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(text6))
                                     .addComponent(text1, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(text2)))
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(MainBackgroundLayout.createParallelGroup()
-                                    .addGroup(MainBackgroundLayout.createSequentialGroup()
+                                .addGroup(mainBackgroundLayout.createParallelGroup()
+                                    .addGroup(mainBackgroundLayout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(Banner))
                                     .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
                                 .addGap(110, 110, 110)
                                 .addComponent(developersLabel)))
                         .addContainerGap(18, Short.MAX_VALUE))
             );
-            MainBackgroundLayout.setVerticalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
+            mainBackgroundLayout.setVerticalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(previousButton)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -224,11 +231,11 @@ public class About extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -236,7 +243,7 @@ public class About extends JFrame {
 	}
 	
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel MainBackground;
+    private JPanel mainBackground;
     private JButton previousButton;
     private JLabel aboutLabel;
     private JLabel Banner;

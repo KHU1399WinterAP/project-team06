@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp MainBackground::t:::x}"
-			"$verticalGroup": "par l {comp MainBackground::t::573:x}"
+			"$horizontalGroup": "par l {comp mainBackground::t:::x}"
+			"$verticalGroup": "par l {comp mainBackground::t::573:x}"
 		} ) {
 			name: "this"
 			"resizable": false
@@ -21,7 +21,7 @@ new FormModel {
 				"$horizontalGroup": "par l {seq l {space :p:98:p, comp aboutLabel:::p::p, space :0:111:x}, seq t {space ::30:x, comp repoLabel:::p::p, space :p:18:p}, seq {par l {seq l {space :p:64:p, par l {comp text3::l:p::p, comp text4::l:p::p, comp text5::l:p::p, seq {space :6:6:p, comp text6:::p::p}, comp text1::l:p:274:p, comp text2::l:p::p}}, seq l {space :::p, par l {seq {space :6:6:p, comp Banner:::p::p}, comp previousButton:::p:60:p}}, seq l {space :p:110:p, comp developersLabel:::p::p}}, space ::18:x}}"
 				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :::p, comp Banner:::p::p, space :::p, comp aboutLabel:::p:25:p, space :::p, comp text1:::p:28:p, space u:::p, comp text2:::p::p, space :::p, comp developersLabel:::p::p, space :::p, comp text3:::p::p, space :::p, comp text4:::p::p, space :::p, comp text5:::p::p, space u:::p, comp text6:::p:34:p, space :::p, comp repoLabel:::p::p, space :::p}}"
 			} ) {
-				name: "MainBackground"
+				name: "mainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
 				"minimumSize": new java.awt.Dimension( 380, 605 )
 				"background": new java.awt.Color( 0, 112, 192, 255 )

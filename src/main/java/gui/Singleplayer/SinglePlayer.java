@@ -30,9 +30,21 @@ public class SinglePlayer extends JFrame {
 		this.dashboard = dashboard;
 		initComponents();
 		initRecords();
+		initCustomTheme();
 		initComponentsProperties();
 		this.setVisible(true);
 	}
+
+	private void initCustomTheme(){
+	    Panel.setBackground(Dashboard.background);
+	    category1.setBackground(Dashboard.button);
+        category2.setBackground(Dashboard.button);
+        category3.setBackground(Dashboard.button);
+        category4.setBackground(Dashboard.button);
+        category5.setBackground(Dashboard.button);
+        category6.setBackground(Dashboard.button);
+        previousButton.setBackground(Dashboard.background);
+    }
 	
 	private void initRecords() {
 		yourRecordEnglishLabel.setText(String.valueOf(activeUser.recordEnglish));

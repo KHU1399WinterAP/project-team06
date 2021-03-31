@@ -2,6 +2,8 @@ package main.java.database;
 
 import main.java.config.DatabaseConfig;
 import main.java.models.Question;
+import main.java.models.Settings;
+import main.java.models.Theme;
 import main.java.models.User;
 
 import java.sql.*;
@@ -30,18 +32,19 @@ public class Database {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
 
-                int password=resultSet.getInt("password");
-                int profilePicture=resultSet.getInt("profilepicture");
-                int coins=resultSet.getInt(("coins"));
-                int recordEnglish=resultSet.getInt("recordEnglish");
-                int recordMath=resultSet.getInt("recordMath");
-                int recordFood=resultSet.getInt("recordFood");
-                int recordScience=resultSet.getInt("recordScience");
-                int recordCommon=resultSet.getInt("recordCommon");
-                int recordGeography=resultSet.getInt("recordGeography");
+                int password = resultSet.getInt("password");
+                int profilePicture = resultSet.getInt("profilepicture");
+                int settingsId = resultSet.getInt("settingId");
+                int coins = resultSet.getInt(("coins"));
+                int recordEnglish = resultSet.getInt("recordEnglish");
+                int recordMath = resultSet.getInt("recordMath");
+                int recordFood = resultSet.getInt("recordFood");
+                int recordScience = resultSet.getInt("recordScience");
+                int recordCommon = resultSet.getInt("recordCommon");
+                int recordGeography = resultSet.getInt("recordGeography");
 
-                return new User(username,password,profilePicture,coins,recordEnglish,
-                        recordMath,recordFood,recordScience,recordCommon,recordGeography);
+                return new User(username, password, settingsId, profilePicture, coins, recordEnglish,
+                        recordMath, recordFood, recordScience, recordCommon, recordGeography);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -57,13 +60,13 @@ public class Database {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
 
-                int questionIndex=resultSet.getInt("QuestionIndex");
-                String answer1=resultSet.getString("answer1");
-                String answer2= resultSet.getString("answer2");
-                String answer3=resultSet.getString("answer3");
-                String correctAnswer=resultSet.getString("correctanswer");
-                String questionText=resultSet.getString("question");
-                Question question = new Question(category,questionIndex,answer1,answer2,answer3,correctAnswer,questionText);
+                int questionIndex = resultSet.getInt("QuestionIndex");
+                String answer1 = resultSet.getString("answer1");
+                String answer2 = resultSet.getString("answer2");
+                String answer3 = resultSet.getString("answer3");
+                String correctAnswer = resultSet.getString("correctanswer");
+                String questionText = resultSet.getString("question");
+                Question question = new Question(category, questionIndex, answer1, answer2, answer3, correctAnswer, questionText);
 
                 questions.add(question);
             }
@@ -75,11 +78,13 @@ public class Database {
         }
     }
 
-    public static void InsertInToUsers(User user) {
+
+    public static void insertInToUsers(User user) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, user.username);
             statement.setInt(2, user.password);
+            statement.setInt(11, user.settingId);
             statement.setInt(3, user.profilePicture);
             statement.setInt(4, user.coins);
             statement.setInt(5, user.recordEnglish);
@@ -93,6 +98,53 @@ public class Database {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static ArrayList<Theme> getAllTheme() {
+        ArrayList<Theme> themes = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT theme.* FROM user,setting,theme;");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                themes.add(convertResultSetToTheme(resultSet));
+            }
+            return themes;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    private static Theme convertResultSetToTheme(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String background = resultSet.getString("background");
+        String button = resultSet.getString("button");
+        return new Theme(id, background, button);
+    }
+
+    public static void updateThemeByUsername(String username, int themeId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE user,setting SET setting.themeId=? WHERE user.username=? AND user.settingId=setting.id;");
+            statement.setInt(1, themeId);
+            statement.setString(2, username);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static int getThemeIdByUsername(String username){
+        try {
+            PreparedStatement statement=connection.prepareStatement("SELECT setting.themeId FROM user,setting WHERE user.username=? AND user.settingId=setting.id;");
+            statement.setString(1,username);
+            ResultSet resultSet=statement.executeQuery();
+            if (resultSet.next())
+                return resultSet.getInt("themeId");
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
     }
 
     public static boolean AlreadyExisted(String username) {
@@ -182,5 +234,28 @@ public class Database {
             throwables.printStackTrace();
         }
         return 0;
+    }
+
+    public static int getTheMaxSettingId() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT MAX(settingId) as settingId FROM user");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next())
+                return resultSet.getInt("settingId");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static void insertInToSettings(Settings settings) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO setting VALUES (?,?)");
+            statement.setInt(1,settings.id);
+            statement.setInt(2,settings.themeId);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

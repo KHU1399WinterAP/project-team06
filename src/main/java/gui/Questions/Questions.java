@@ -42,7 +42,16 @@ public class Questions extends JFrame {
 		questions2 = new ArrayList<>(questions);
 		initComponents();
 		init();
+		initCustomTheme();
 		this.setVisible(true);
+	}
+
+	private void initCustomTheme(){
+		Panel.setBackground(Dashboard.background);
+		answerButton1.setBackground(Dashboard.button);
+		answerButton2.setBackground(Dashboard.button);
+		answerButton3.setBackground(Dashboard.button);
+		answerButton4.setBackground(Dashboard.button);
 	}
 	
 	Timer countdown = new Timer(1000, new ActionListener() {
@@ -144,7 +153,7 @@ public class Questions extends JFrame {
 			inputAnswer.setForeground(Color.BLACK);
 			
 			Timer pause = new Timer(500, e -> {
-				inputAnswer.setBackground(new Color(0, 32, 96));
+				inputAnswer.setBackground(Dashboard.button);
 				inputAnswer.setForeground(Color.white);
 				seconds = 10;
 				showQuestion(questions2);
@@ -157,7 +166,7 @@ public class Questions extends JFrame {
 			countdown.stop();
 			
 			Timer pause = new Timer(500, e -> {
-				inputAnswer.setBackground(new Color(0, 32, 96));
+				inputAnswer.setBackground(Dashboard.button);
 				inputAnswer.setForeground(Color.white);
 				seconds = 10;
 				CurrentFrame.dispose();

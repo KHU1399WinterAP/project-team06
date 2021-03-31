@@ -2,7 +2,11 @@ package main.java.gui.Dashord.setting;
 
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
+import main.java.database.Database;
+import main.java.gui.Dashord.Dashboard;
 import main.java.gui.Dashord.setting.About.About;
+import main.java.gui.theme.Themes;
+import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,12 +18,24 @@ import javax.swing.GroupLayout;
  */
 public class SettingPanel extends JFrame {
     public final JFrame dashboard;
+    User activeUser = Dashboard.activeUser;
 
     public SettingPanel(JFrame dashboard) {
         this.dashboard = dashboard;
         initComponents();
         initComponentsProperties();
+        initCustomTheme();
+        if (Dashboard.themeId == 2) themeButton.setText(Themes.DARK.theme);
+        else themeButton.setText(Themes.BLUE.theme);
         this.setVisible(true);
+    }
+
+    private void initCustomTheme() {
+        previousButton.setBackground(Dashboard.background);
+        aboutButton.setBackground(Dashboard.button);
+        mainBackground.setBackground(Dashboard.background);
+        musicButton.setBackground(Dashboard.background);
+        themeButton.setBackground(Dashboard.background);
     }
 
     private void initComponentsProperties() {
@@ -56,13 +72,29 @@ public class SettingPanel extends JFrame {
         new About(this);
     }
 
+    private void themeButtonActionPerformed(ActionEvent e) {
+        if (themeButton.getText().equals(Themes.BLUE.theme)) {
+            Dashboard.themeId = 2;
+            themeButton.setText(Themes.DARK.theme);
+            Database.updateThemeByUsername(activeUser.username, 2);
+        } else {
+            Dashboard.themeId = 1;
+            themeButton.setText(Themes.BLUE.theme);
+            Database.updateThemeByUsername(activeUser.username, 1);
+        }
+        Dashboard.initTheme();
+        initCustomTheme();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        MainBackground = new JPanel();
+        mainBackground = new JPanel();
         previousButton = new JButton();
         musiclabel = new JLabel();
         musicButton = new JButton();
         aboutButton = new JButton();
+        label1 = new JLabel();
+        themeButton = new JButton();
 
         //======== this ========
         setResizable(false);
@@ -81,11 +113,11 @@ public class SettingPanel extends JFrame {
         });
         var contentPane = getContentPane();
 
-        //======== MainBackground ========
+        //======== mainBackground ========
         {
-            MainBackground.setMaximumSize(new Dimension(380, 605));
-            MainBackground.setMinimumSize(new Dimension(380, 605));
-            MainBackground.setBackground(new Color(0, 112, 192));
+            mainBackground.setMaximumSize(new Dimension(380, 605));
+            mainBackground.setMinimumSize(new Dimension(380, 605));
+            mainBackground.setBackground(new Color(0, 112, 192));
 
             //---- previousButton ----
             previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
@@ -118,49 +150,74 @@ public class SettingPanel extends JFrame {
             aboutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             aboutButton.addActionListener(e -> AboutButtonActionPerformed(e));
 
-            GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
-            MainBackground.setLayout(MainBackgroundLayout);
-            MainBackgroundLayout.setHorizontalGroup(
-                    MainBackgroundLayout.createParallelGroup()
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                    .addGroup(MainBackgroundLayout.createParallelGroup()
-                                            .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                                    .addContainerGap()
-                                                    .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                                    .addGap(114, 114, 114)
-                                                    .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                                    .addGap(79, 79, 79)
-                                                    .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))
-                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            //---- label1 ----
+            label1.setText("Theme  ");
+            label1.setForeground(Color.white);
+            label1.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
+            label1.setHorizontalAlignment(SwingConstants.CENTER);
+
+            //---- themeButton ----
+            themeButton.setBackground(new Color(0, 112, 192));
+            themeButton.setBorder(null);
+            themeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            themeButton.setFocusable(false);
+            themeButton.setForeground(Color.white);
+            themeButton.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
+            themeButton.addActionListener(e -> themeButtonActionPerformed(e));
+
+            GroupLayout mainBackgroundLayout = new GroupLayout(mainBackground);
+            mainBackground.setLayout(mainBackgroundLayout);
+            mainBackgroundLayout.setHorizontalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                .addGap(112, 112, 112)
+                                .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addGroup(mainBackgroundLayout.createParallelGroup()
+                                    .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                        .addComponent(label1)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(themeButton))
+                                    .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                        .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
-            MainBackgroundLayout.setVerticalGroup(
-                    MainBackgroundLayout.createParallelGroup()
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(previousButton)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(MainBackgroundLayout.createParallelGroup()
-                                            .addComponent(musicButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(musiclabel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(141, 141, 141))
+            mainBackgroundLayout.setVerticalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(previousButton)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(mainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addComponent(musiclabel, GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                            .addComponent(musicButton, GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(mainBackgroundLayout.createParallelGroup()
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(themeButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(aboutButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84))
             );
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-                contentPaneLayout.createParallelGroup()
-                        .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+            contentPaneLayout.createParallelGroup()
+                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
-                contentPaneLayout.createParallelGroup()
-                        .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+            contentPaneLayout.createParallelGroup()
+                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -168,11 +225,13 @@ public class SettingPanel extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel MainBackground;
+    private JPanel mainBackground;
     private JButton previousButton;
     private JLabel musiclabel;
     private JButton musicButton;
     private JButton aboutButton;
+    private JLabel label1;
+    private JButton themeButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
 
