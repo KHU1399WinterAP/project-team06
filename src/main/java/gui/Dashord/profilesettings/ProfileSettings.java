@@ -10,7 +10,6 @@ import main.java.config.ProfileConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.gui.Dashord.Dashboard;
-import main.java.gui.RegisterMenu.RegisterMenu;
 import main.java.models.User;
 import main.java.utils.GuiValidation;
 
@@ -179,7 +178,7 @@ public class ProfileSettings extends JFrame {
         {
             panel.setBackground(new Color(0, 112, 192));
 
-            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
+            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);

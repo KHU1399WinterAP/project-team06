@@ -120,7 +120,7 @@ public class SettingPanel extends JFrame {
             mainBackground.setBackground(new Color(0, 112, 192));
 
             //---- previousButton ----
-            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
+            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);
@@ -128,7 +128,7 @@ public class SettingPanel extends JFrame {
             previousButton.addActionListener(e -> previousButtonActionPerformed(e));
 
             //---- musiclabel ----
-            musiclabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/musicCat@2x.png")));
+            musiclabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/music.png")));
 
             //---- musicButton ----
             musicButton.setBackground(new Color(0, 112, 192));

@@ -72,7 +72,7 @@ public class LoginRegisterMenu extends JFrame {
             //---- Banner ----
             Banner.setFont(new Font("Calibri", Font.PLAIN, 54));
             Banner.setForeground(Color.white);
-            Banner.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/CropedBanner2.jpg")));
+            Banner.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/banner.png")));
 
             //---- loginButton ----
             loginButton.setText("LOGIN");
@@ -129,7 +129,7 @@ public class LoginRegisterMenu extends JFrame {
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());

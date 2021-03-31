@@ -15,7 +15,6 @@ import main.java.questionTypes.QuestionTypes;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Objects;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -269,7 +268,7 @@ public class SinglePlayer extends JFrame {
             category6.addActionListener(e -> category6ActionPerformed(e));
 
             //---- previousButton ----
-            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
+            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);

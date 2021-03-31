@@ -95,7 +95,7 @@ public class About extends JFrame {
             mainBackground.setBackground(new Color(0, 112, 192));
 
             //---- previousButton ----
-            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
+            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);
@@ -111,7 +111,7 @@ public class About extends JFrame {
             //---- Banner ----
             Banner.setFont(new Font("Calibri", Font.PLAIN, 54));
             Banner.setForeground(Color.white);
-            Banner.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/CropedBanner2.jpg")));
+            Banner.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/banner.png")));
 
             //---- text1 ----
             text1.setText("KHU University 1399 Winter");
@@ -168,9 +168,9 @@ public class About extends JFrame {
                     .addGroup(mainBackgroundLayout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(aboutLabel)
-                        .addGap(0, 111, Short.MAX_VALUE))
+                        .addGap(0, 116, Short.MAX_VALUE))
                     .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap(30, Short.MAX_VALUE)
+                        .addContainerGap(25, Short.MAX_VALUE)
                         .addComponent(repoLabel)
                         .addGap(18, 18, 18))
                     .addGroup(mainBackgroundLayout.createSequentialGroup()

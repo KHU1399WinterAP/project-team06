@@ -54,7 +54,7 @@ public class Multiplayer extends JFrame {
             QuestionMark.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/QuestionMark.jpg")));
 
             //---- previousButton ----
-            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/leftArrow@2x.png")));
+            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);
