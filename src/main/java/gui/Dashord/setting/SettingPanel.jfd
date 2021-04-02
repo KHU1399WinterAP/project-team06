@@ -27,7 +27,7 @@ new FormModel {
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "previousButton"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/leftArrow@2x.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/previous.png" )
 					"background": new java.awt.Color( 0, 112, 192, 255 )
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -36,7 +36,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "musiclabel"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/musicCat@2x.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/music.png" )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "musicButton"

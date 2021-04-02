@@ -81,7 +81,7 @@ public class Multiplayer extends JFrame {
                         .addComponent(previousButton)
                         .addGap(28, 28, 28)
                         .addComponent(QuestionMark)
-                        .addContainerGap(163, Short.MAX_VALUE))
+                        .addContainerGap(181, Short.MAX_VALUE))
             );
         }
 

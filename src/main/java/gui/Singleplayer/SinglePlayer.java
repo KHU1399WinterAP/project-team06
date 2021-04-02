@@ -6,8 +6,10 @@ package main.java.gui.Singleplayer;
 
 import main.java.config.FontConfig;
 import main.java.database.Database;
+import main.java.gui.Category.Categories;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.Questions.Questions;
+import main.java.gui.Singleplayer.ScoreBoard.ScoreBoard;
 import main.java.models.Question;
 import main.java.models.User;
 import main.java.questionTypes.QuestionTypes;
@@ -15,6 +17,7 @@ import main.java.questionTypes.QuestionTypes;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -22,131 +25,147 @@ import javax.swing.GroupLayout;
  * @author Alireza
  */
 public class SinglePlayer extends JFrame {
-	User activeUser = Dashboard.activeUser;
-	public final JFrame dashboard;
-	
-	public SinglePlayer(JFrame dashboard) {
-		this.dashboard = dashboard;
-		initComponents();
-		initRecords();
-		initCustomTheme();
-		initComponentsProperties();
-		this.setVisible(true);
-	}
+    User activeUser = Dashboard.activeUser;
+    public final JFrame dashboard;
 
-	private void initCustomTheme(){
-	    Panel.setBackground(Dashboard.background);
-	    category1.setBackground(Dashboard.button);
-        category2.setBackground(Dashboard.button);
-        category3.setBackground(Dashboard.button);
-        category4.setBackground(Dashboard.button);
-        category5.setBackground(Dashboard.button);
-        category6.setBackground(Dashboard.button);
-        previousButton.setBackground(Dashboard.background);
+    public SinglePlayer(JFrame dashboard) {
+        this.dashboard = dashboard;
+        initComponents();
+        initRecords();
+        initCustomTheme();
+        initComponentsProperties();
+        this.setVisible(true);
     }
-	
-	private void initRecords() {
-		yourRecordEnglishLabel.setText(String.valueOf(activeUser.recordEnglish));
-		yourRecordMathLabel.setText(String.valueOf(activeUser.recordMath));
-		yourRecordFoodLabel.setText(String.valueOf(activeUser.recordFood));
-		yourRecordScienceLabel.setText(String.valueOf(activeUser.recordScience));
-		yourRecordCommonLabel.setText(String.valueOf(activeUser.recordCommon));
-		yourRecordGeographyLabel.setText(String.valueOf(activeUser.recordGeography));
-		
-		bestRecordEnglishLabel.setText(String.valueOf(Database.getTheBestRecord("recordEnglish")));
-		bestRecordMathLabel.setText(String.valueOf(Database.getTheBestRecord("recordMath")));
-		bestRecordFoodLabel.setText(String.valueOf(Database.getTheBestRecord("recordFood")));
-		bestRecordScienceLabel.setText(String.valueOf(Database.getTheBestRecord("recordScience")));
-		bestRecordCommonLabel.setText(String.valueOf(Database.getTheBestRecord("recordCommon")));
-		bestRecordGeographyLabel.setText(String.valueOf(Database.getTheBestRecord("recordGeography")));
-	}
-	
-	private void initComponentsProperties() {
-		title.setFont(FontConfig.comic.deriveFont(Font.BOLD, 30));
-		categoriesLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 24));
-		category1.setFont(FontConfig.comic.deriveFont(Font.BOLD, 16));
-		category2.setFont(FontConfig.comic.deriveFont(Font.BOLD, 16));
-		category3.setFont(FontConfig.comic.deriveFont(Font.BOLD, 16));
-		category4.setFont(FontConfig.comic.deriveFont(Font.BOLD, 16));
-		category5.setFont(FontConfig.comic.deriveFont(Font.BOLD, 11));
-		category6.setFont(FontConfig.comic.deriveFont(Font.BOLD, 16));
-		
-		initLabelFonts(yourRecordEnglishLabel, yourRecordGeographyLabel, yourRecordCommonLabel, yourRecordScienceLabel,
-				yourRecordFoodLabel, yourRecordMathLabel, bestRecordEnglishLabel, bestRecordCommonLabel);
-		
-		initLabelFonts(bestRecordFoodLabel, bestRecordGeographyLabel, bestRecordScienceLabel, bestRecordMathLabel, label1,
-				label2, label3, label4);
-	}
-	
-	private void initLabelFonts(JLabel yourRecordEnglishLabel, JLabel yourRecordGeographyLabel, JLabel yourRecordCommonLabel,
-	                            JLabel yourRecordScienceLabel, JLabel yourRecordFoodLabel, JLabel yourRecordMathLabel,
-	                            JLabel bestRecordEnglishLabel, JLabel bestRecordCommonLabel) {
-		yourRecordEnglishLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		yourRecordGeographyLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		yourRecordCommonLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		yourRecordScienceLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		yourRecordFoodLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		yourRecordMathLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		
-		bestRecordEnglishLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		bestRecordCommonLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-	}
-	
-	private void whenCategoryIsSelected(ArrayList<Question> questions, int category) {
-		this.setVisible(false);
-		Questions questionPanel = new Questions(this, questions, category);
-		questionPanel.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent e) {
-				initRecords();
-			}
-		});
-	}
-	
-	// TODO:
-//	private void categoryActionPerformed(ActionEvent e , Category category ) {
-//		whenCategoryIsSelected(category.questions, category.id);
-//	}
-	
-	private void category1ActionPerformed(ActionEvent e) {
-		whenCategoryIsSelected(QuestionTypes.english, 1);
-	}
-	
-	private void category2ActionPerformed(ActionEvent e) {
-		whenCategoryIsSelected(QuestionTypes.mathematics, 2);
-	}
-	
-	private void category3ActionPerformed(ActionEvent e) {
-		whenCategoryIsSelected(QuestionTypes.foodAndDrink, 3);
-	}
-	
-	private void category4ActionPerformed(ActionEvent e) {
-		whenCategoryIsSelected(QuestionTypes.science, 4);
-	}
-	
-	private void category5ActionPerformed(ActionEvent e) {
-		whenCategoryIsSelected(QuestionTypes.commonKnowledge, 5);
-	}
-	
-	private void category6ActionPerformed(ActionEvent e) {
-		whenCategoryIsSelected(QuestionTypes.geography, 6);
-	}
-	
-	private void singlePlayerWindowClosing(WindowEvent e) {
-		previousPage();
-	}
-	
-	private void previousButtonActionPerformed(ActionEvent e) {
-		previousPage();
-	}
-	
-	private void previousPage() {
-		this.dispose();
-		dashboard.setVisible(true);
-	}
-	
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+
+    private void initCustomTheme() {
+        for (JButton jButton : Arrays.asList(previousButton, bestRecordEnglishButton,
+                bestRecordMathButton, bestRecordFoodButton, bestRecordScienceButton,
+                bestRecordCommonButton, bestRecordGeographyButton)) {
+            jButton.setBackground(Dashboard.background);
+        }
+        Panel.setBackground(Dashboard.background);
+        for (JButton jButton : Arrays.asList(category1, category2, category3, category4, category5, category6)){
+            jButton.setBackground(Dashboard.button);
+        }
+    }
+
+    private void initRecords() {
+        yourRecordEnglishLabel.setText(String.valueOf(activeUser.recordEnglish));
+        yourRecordMathLabel.setText(String.valueOf(activeUser.recordMath));
+        yourRecordFoodLabel.setText(String.valueOf(activeUser.recordFood));
+        yourRecordScienceLabel.setText(String.valueOf(activeUser.recordScience));
+        yourRecordCommonLabel.setText(String.valueOf(activeUser.recordCommon));
+        yourRecordGeographyLabel.setText(String.valueOf(activeUser.recordGeography));
+
+        bestRecordEnglishButton.setText(String.valueOf(Database.getTheBestRecord("recordEnglish")));
+        bestRecordMathButton.setText(String.valueOf(Database.getTheBestRecord("recordMath")));
+        bestRecordFoodButton.setText(String.valueOf(Database.getTheBestRecord("recordFood")));
+        bestRecordScienceButton.setText(String.valueOf(Database.getTheBestRecord("recordScience")));
+        bestRecordCommonButton.setText(String.valueOf(Database.getTheBestRecord("recordCommon")));
+        bestRecordGeographyButton.setText(String.valueOf(Database.getTheBestRecord("recordGeography")));
+    }
+
+    private void initComponentsProperties() {
+        title.setFont(FontConfig.comic.deriveFont(Font.BOLD, 30));
+        categoriesLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 24));
+
+        for (JLabel jLabel : Arrays.asList(yourRecordEnglishLabel, yourRecordGeographyLabel, yourRecordCommonLabel,
+                yourRecordScienceLabel, yourRecordFoodLabel, yourRecordMathLabel)) {
+            jLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        }
+        for (JButton jButton : Arrays.asList(bestRecordCommonButton, bestRecordFoodButton,
+                bestRecordEnglishButton, bestRecordMathButton, bestRecordGeographyButton,
+                bestRecordScienceButton,category1,category2,category3,category4,category5,category6)) {
+            jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
+        }
+    }
+
+    private void whenCategoryIsSelected(ArrayList<Question> questions, int category) {
+        this.setVisible(false);
+        Questions questionPanel = new Questions(this, questions, category);
+        questionPanel.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                initRecords();
+            }
+        });
+    }
+
+    private void category1ActionPerformed(ActionEvent e) {
+        whenCategoryIsSelected(QuestionTypes.english, 1);
+    }
+
+    private void category2ActionPerformed(ActionEvent e) {
+        whenCategoryIsSelected(QuestionTypes.mathematics, 2);
+    }
+
+    private void category3ActionPerformed(ActionEvent e) {
+        whenCategoryIsSelected(QuestionTypes.foodAndDrink, 3);
+    }
+
+    private void category4ActionPerformed(ActionEvent e) {
+        whenCategoryIsSelected(QuestionTypes.science, 4);
+    }
+
+    private void category5ActionPerformed(ActionEvent e) {
+        whenCategoryIsSelected(QuestionTypes.commonKnowledge, 5);
+    }
+
+    private void category6ActionPerformed(ActionEvent e) {
+        whenCategoryIsSelected(QuestionTypes.geography, 6);
+    }
+
+    private void singlePlayerWindowClosing(WindowEvent e) {
+        previousPage();
+    }
+
+    private void previousButtonActionPerformed(ActionEvent e) {
+        previousPage();
+    }
+
+    private void previousPage() {
+        this.dispose();
+        dashboard.setVisible(true);
+    }
+
+    private void bestRecordEnglishButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new ScoreBoard(this, Database.getUserOrderedByRecords
+                ("recordEnglish"), Categories.ENGLISH.category);
+    }
+
+    private void bestRecordMathButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new ScoreBoard(this, Database.getUserOrderedByRecords
+                ("recordMath"),Categories.MATHEMATICS.category);
+    }
+
+    private void bestRecordFoodButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new ScoreBoard(this, Database.getUserOrderedByRecords
+                ("recordFood"),Categories.FOOD_DRINK.category);
+    }
+
+    private void bestRecordScienceButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new ScoreBoard(this, Database.getUserOrderedByRecords
+                ("recordScience"),Categories.SCIENCE.category);
+    }
+
+    private void bestRecordCommonButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new ScoreBoard(this, Database.getUserOrderedByRecords
+                ("recordCommon"),Categories.COMMON_KNOWLEDGE.category);
+    }
+
+    private void bestRecordGeographyButtonActionPerformed(ActionEvent e) {
+        this.setVisible(false);
+        new ScoreBoard(this, Database.getUserOrderedByRecords
+                ("recordGeography"),Categories.GEOGRAPHY.category);
+    }
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
         title = new JLabel();
         categoriesLabel = new JLabel();
@@ -161,12 +180,12 @@ public class SinglePlayer extends JFrame {
         label2 = new JLabel();
         label3 = new JLabel();
         label4 = new JLabel();
-        bestRecordEnglishLabel = new JLabel();
-        bestRecordMathLabel = new JLabel();
-        bestRecordFoodLabel = new JLabel();
-        bestRecordScienceLabel = new JLabel();
-        bestRecordCommonLabel = new JLabel();
-        bestRecordGeographyLabel = new JLabel();
+        bestRecordEnglishButton = new JButton();
+        bestRecordMathButton = new JButton();
+        bestRecordFoodButton = new JButton();
+        bestRecordScienceButton = new JButton();
+        bestRecordCommonButton = new JButton();
+        bestRecordGeographyButton = new JButton();
         yourRecordEnglishLabel = new JLabel();
         yourRecordMathLabel = new JLabel();
         yourRecordFoodLabel = new JLabel();
@@ -299,35 +318,59 @@ public class SinglePlayer extends JFrame {
             label4.setForeground(Color.white);
             label4.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 
-            //---- bestRecordEnglishLabel ----
-            bestRecordEnglishLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            bestRecordEnglishLabel.setForeground(Color.white);
-            bestRecordEnglishLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            //---- bestRecordEnglishButton ----
+            bestRecordEnglishButton.setHorizontalAlignment(SwingConstants.CENTER);
+            bestRecordEnglishButton.setForeground(Color.white);
+            bestRecordEnglishButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            bestRecordEnglishButton.setBorder(null);
+            bestRecordEnglishButton.setFocusable(false);
+            bestRecordEnglishButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            bestRecordEnglishButton.addActionListener(e -> bestRecordEnglishButtonActionPerformed(e));
 
-            //---- bestRecordMathLabel ----
-            bestRecordMathLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            bestRecordMathLabel.setForeground(Color.white);
-            bestRecordMathLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            //---- bestRecordMathButton ----
+            bestRecordMathButton.setHorizontalAlignment(SwingConstants.CENTER);
+            bestRecordMathButton.setForeground(Color.white);
+            bestRecordMathButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            bestRecordMathButton.setBorder(null);
+            bestRecordMathButton.setFocusable(false);
+            bestRecordMathButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            bestRecordMathButton.addActionListener(e -> bestRecordMathButtonActionPerformed(e));
 
-            //---- bestRecordFoodLabel ----
-            bestRecordFoodLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            bestRecordFoodLabel.setForeground(Color.white);
-            bestRecordFoodLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            //---- bestRecordFoodButton ----
+            bestRecordFoodButton.setHorizontalAlignment(SwingConstants.CENTER);
+            bestRecordFoodButton.setForeground(Color.white);
+            bestRecordFoodButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            bestRecordFoodButton.setBorder(null);
+            bestRecordFoodButton.setFocusable(false);
+            bestRecordFoodButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            bestRecordFoodButton.addActionListener(e -> bestRecordFoodButtonActionPerformed(e));
 
-            //---- bestRecordScienceLabel ----
-            bestRecordScienceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            bestRecordScienceLabel.setForeground(Color.white);
-            bestRecordScienceLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            //---- bestRecordScienceButton ----
+            bestRecordScienceButton.setHorizontalAlignment(SwingConstants.CENTER);
+            bestRecordScienceButton.setForeground(Color.white);
+            bestRecordScienceButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            bestRecordScienceButton.setBorder(null);
+            bestRecordScienceButton.setFocusable(false);
+            bestRecordScienceButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            bestRecordScienceButton.addActionListener(e -> bestRecordScienceButtonActionPerformed(e));
 
-            //---- bestRecordCommonLabel ----
-            bestRecordCommonLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            bestRecordCommonLabel.setForeground(Color.white);
-            bestRecordCommonLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            //---- bestRecordCommonButton ----
+            bestRecordCommonButton.setHorizontalAlignment(SwingConstants.CENTER);
+            bestRecordCommonButton.setForeground(Color.white);
+            bestRecordCommonButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            bestRecordCommonButton.setBorder(null);
+            bestRecordCommonButton.setFocusable(false);
+            bestRecordCommonButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            bestRecordCommonButton.addActionListener(e -> bestRecordCommonButtonActionPerformed(e));
 
-            //---- bestRecordGeographyLabel ----
-            bestRecordGeographyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            bestRecordGeographyLabel.setForeground(Color.white);
-            bestRecordGeographyLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            //---- bestRecordGeographyButton ----
+            bestRecordGeographyButton.setHorizontalAlignment(SwingConstants.CENTER);
+            bestRecordGeographyButton.setForeground(Color.white);
+            bestRecordGeographyButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            bestRecordGeographyButton.setBorder(null);
+            bestRecordGeographyButton.setFocusable(false);
+            bestRecordGeographyButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            bestRecordGeographyButton.addActionListener(e -> bestRecordGeographyButtonActionPerformed(e));
 
             //---- yourRecordEnglishLabel ----
             yourRecordEnglishLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -367,32 +410,28 @@ public class SinglePlayer extends JFrame {
                         .addContainerGap()
                         .addGroup(PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(label2, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
+                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
+                                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(category4, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(category3, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(category2, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(category6, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(category5, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                            .addComponent(category1, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
                                         .addGroup(PanelLayout.createParallelGroup()
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addGap(13, 13, 13)
-                                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(category1, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(category4, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                                    .addComponent(category3, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                                    .addComponent(category2, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                                    .addComponent(category6, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                                                    .addComponent(category5, GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(PanelLayout.createParallelGroup()
-                                                    .addComponent(bestRecordEnglishLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(bestRecordCommonLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(bestRecordGeographyLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(bestRecordScienceLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(bestRecordFoodLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(bestRecordMathLabel, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addComponent(categoriesLabel)
-                                                .addGap(69, 69, 69)
-                                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(bestRecordEnglishButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(bestRecordCommonButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(bestRecordGeographyButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(bestRecordScienceButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(bestRecordFoodButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(bestRecordMathButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
+                                        .addComponent(categoriesLabel)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
                                 .addGap(36, 36, 36)
                                 .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addComponent(yourRecordEnglishLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
@@ -407,7 +446,7 @@ public class SinglePlayer extends JFrame {
                                 .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(title)))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
@@ -419,8 +458,8 @@ public class SinglePlayer extends JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(categoriesLabel)
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(label3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(label4)
@@ -429,11 +468,11 @@ public class SinglePlayer extends JFrame {
                         .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(bestRecordEnglishLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bestRecordEnglishButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(category1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
                                 .addGap(13, 13, 13)
                                 .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(bestRecordMathLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bestRecordMathButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(category2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addComponent(yourRecordEnglishLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
@@ -448,12 +487,12 @@ public class SinglePlayer extends JFrame {
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(category4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
                                     .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                        .addComponent(bestRecordFoodLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(bestRecordFoodButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
-                                        .addComponent(bestRecordScienceLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(bestRecordScienceButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
                                 .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(bestRecordCommonLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bestRecordCommonButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(category5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
                             .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
                                 .addGap(11, 11, 11)
@@ -469,7 +508,7 @@ public class SinglePlayer extends JFrame {
                                 .addGap(0, 41, Short.MAX_VALUE))
                             .addGroup(PanelLayout.createSequentialGroup()
                                 .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(bestRecordGeographyLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(bestRecordGeographyButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
                                     .addComponent(category6, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(41, Short.MAX_VALUE))))
             );
@@ -487,10 +526,10 @@ public class SinglePlayer extends JFrame {
         );
         pack();
         setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-	}
-	
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
     private JLabel title;
     private JLabel categoriesLabel;
@@ -505,17 +544,17 @@ public class SinglePlayer extends JFrame {
     private JLabel label2;
     private JLabel label3;
     private JLabel label4;
-    private JLabel bestRecordEnglishLabel;
-    private JLabel bestRecordMathLabel;
-    private JLabel bestRecordFoodLabel;
-    private JLabel bestRecordScienceLabel;
-    private JLabel bestRecordCommonLabel;
-    private JLabel bestRecordGeographyLabel;
+    private JButton bestRecordEnglishButton;
+    private JButton bestRecordMathButton;
+    private JButton bestRecordFoodButton;
+    private JButton bestRecordScienceButton;
+    private JButton bestRecordCommonButton;
+    private JButton bestRecordGeographyButton;
     private JLabel yourRecordEnglishLabel;
     private JLabel yourRecordMathLabel;
     private JLabel yourRecordFoodLabel;
     private JLabel yourRecordScienceLabel;
     private JLabel yourRecordCommonLabel;
     private JLabel yourRecordGeographyLabel;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
