@@ -1,10 +1,8 @@
-package main.java.gui.Singleplayer.ScoreBoard;
-
-import java.util.ArrayList;
+package main.java.models;
 
 public class ScoreBoardInformation {
-    String username;
-    int record;
+    public String username;
+    public int record;
 
     public ScoreBoardInformation(String username, int record) {
         this.username = username;

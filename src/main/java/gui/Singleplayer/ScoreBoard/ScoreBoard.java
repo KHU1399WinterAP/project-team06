@@ -5,8 +5,8 @@
 package main.java.gui.Singleplayer.ScoreBoard;
 
 import main.java.config.FontConfig;
-import main.java.database.Database;
-import main.java.gui.Dashord.Dashboard;
+import main.java.config.ThemeConfig;
+import main.java.models.ScoreBoardInformation;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -42,8 +42,8 @@ public class ScoreBoard extends JFrame {
     }
 
     private void initCustomTheme(){
-        panel.setBackground(Dashboard.background);
-        previousButton.setBackground(Dashboard.background);
+        panel.setBackground(ThemeConfig.background);
+        previousButton.setBackground(ThemeConfig.background);
     }
     private void init() {
         scrollPane1 = new JScrollPane();

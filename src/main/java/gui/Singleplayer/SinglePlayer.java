@@ -5,6 +5,7 @@
 package main.java.gui.Singleplayer;
 
 import main.java.config.FontConfig;
+import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Category.Categories;
 import main.java.gui.Dashord.Dashboard;
@@ -12,6 +13,7 @@ import main.java.gui.Questions.Questions;
 import main.java.gui.Singleplayer.ScoreBoard.ScoreBoard;
 import main.java.models.Question;
 import main.java.models.User;
+import main.java.models.UserColumns;
 import main.java.questionTypes.QuestionTypes;
 
 import java.awt.*;
@@ -41,11 +43,11 @@ public class SinglePlayer extends JFrame {
         for (JButton jButton : Arrays.asList(previousButton, bestRecordEnglishButton,
                 bestRecordMathButton, bestRecordFoodButton, bestRecordScienceButton,
                 bestRecordCommonButton, bestRecordGeographyButton)) {
-            jButton.setBackground(Dashboard.background);
+            jButton.setBackground(ThemeConfig.background);
         }
-        Panel.setBackground(Dashboard.background);
+        Panel.setBackground(ThemeConfig.background);
         for (JButton jButton : Arrays.asList(category1, category2, category3, category4, category5, category6)){
-            jButton.setBackground(Dashboard.button);
+            jButton.setBackground(ThemeConfig.button);
         }
     }
 
@@ -57,12 +59,12 @@ public class SinglePlayer extends JFrame {
         yourRecordCommonLabel.setText(String.valueOf(activeUser.recordCommon));
         yourRecordGeographyLabel.setText(String.valueOf(activeUser.recordGeography));
 
-        bestRecordEnglishButton.setText(String.valueOf(Database.getTheBestRecord("recordEnglish")));
-        bestRecordMathButton.setText(String.valueOf(Database.getTheBestRecord("recordMath")));
-        bestRecordFoodButton.setText(String.valueOf(Database.getTheBestRecord("recordFood")));
-        bestRecordScienceButton.setText(String.valueOf(Database.getTheBestRecord("recordScience")));
-        bestRecordCommonButton.setText(String.valueOf(Database.getTheBestRecord("recordCommon")));
-        bestRecordGeographyButton.setText(String.valueOf(Database.getTheBestRecord("recordGeography")));
+        bestRecordEnglishButton.setText(String.valueOf(Database.getTheBestRecord(UserColumns.ENGLISH.column)));
+        bestRecordMathButton.setText(String.valueOf(Database.getTheBestRecord(UserColumns.MATHEMATICS.column)));
+        bestRecordFoodButton.setText(String.valueOf(Database.getTheBestRecord(UserColumns.FOOD_DRINK.column)));
+        bestRecordScienceButton.setText(String.valueOf(Database.getTheBestRecord(UserColumns.SCIENCE.column)));
+        bestRecordCommonButton.setText(String.valueOf(Database.getTheBestRecord(UserColumns.COMMON_KNOWLEDGE.column)));
+        bestRecordGeographyButton.setText(String.valueOf(Database.getTheBestRecord(UserColumns.GEOGRAPHY.column)));
     }
 
     private void initComponentsProperties() {
@@ -80,9 +82,9 @@ public class SinglePlayer extends JFrame {
         }
     }
 
-    private void whenCategoryIsSelected(ArrayList<Question> questions, int category) {
+    private void whenCategoryIsSelected(ArrayList<Question> questions, String column,int category) {
         this.setVisible(false);
-        Questions questionPanel = new Questions(this, questions, category);
+        Questions questionPanel = new Questions(this, questions, column,category);
         questionPanel.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -92,27 +94,27 @@ public class SinglePlayer extends JFrame {
     }
 
     private void category1ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.english, 1);
+        whenCategoryIsSelected(QuestionTypes.english, UserColumns.ENGLISH.column,1);
     }
 
     private void category2ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.mathematics, 2);
+        whenCategoryIsSelected(QuestionTypes.mathematics, UserColumns.MATHEMATICS.column,2);
     }
 
     private void category3ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.foodAndDrink, 3);
+        whenCategoryIsSelected(QuestionTypes.foodAndDrink, UserColumns.FOOD_DRINK.column,3);
     }
 
     private void category4ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.science, 4);
+        whenCategoryIsSelected(QuestionTypes.science, UserColumns.SCIENCE.column,4);
     }
 
     private void category5ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.commonKnowledge, 5);
+        whenCategoryIsSelected(QuestionTypes.commonKnowledge, UserColumns.COMMON_KNOWLEDGE.column,5);
     }
 
     private void category6ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.geography, 6);
+        whenCategoryIsSelected(QuestionTypes.geography, UserColumns.GEOGRAPHY.column,6);
     }
 
     private void singlePlayerWindowClosing(WindowEvent e) {

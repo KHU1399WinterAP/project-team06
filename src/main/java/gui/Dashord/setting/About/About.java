@@ -5,10 +5,12 @@
 package main.java.gui.Dashord.setting.About;
 
 import main.java.config.FontConfig;
+import main.java.config.ThemeConfig;
 import main.java.gui.Dashord.Dashboard;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -27,20 +29,17 @@ public class About extends JFrame {
 	}
 
 	private void initCustomTheme(){
-	    mainBackground.setBackground(Dashboard.background);
-	    previousButton.setBackground(Dashboard.button);
+	    mainBackground.setBackground(ThemeConfig.background);
+	    previousButton.setBackground(ThemeConfig.background);
     }
 	
 	private void initComponentsProperties() {
+	    for (JLabel jLabel: Arrays.asList(text1,text2,text3,text4,text5,repoLabel)){
+	        jLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 20));
+        }
 		aboutLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 30));
-		text1.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 20));
-		text2.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 20));
-		text3.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 20));
-		text4.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 20));
-		text5.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 20));
 		text6.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 28));
 		developersLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 28));
-		repoLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 20));
 	}
 	
 	private void AboutFrameWindowClosing(WindowEvent e) {

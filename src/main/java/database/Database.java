@@ -1,7 +1,7 @@
 package main.java.database;
 
 import main.java.config.DatabaseConfig;
-import main.java.gui.Singleplayer.ScoreBoard.ScoreBoardInformation;
+import main.java.models.ScoreBoardInformation;
 import main.java.models.Question;
 import main.java.models.Settings;
 import main.java.models.Theme;
@@ -9,7 +9,6 @@ import main.java.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.Objects;
 
 public class Database {

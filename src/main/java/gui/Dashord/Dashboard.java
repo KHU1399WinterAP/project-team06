@@ -6,6 +6,7 @@ package main.java.gui.Dashord;
 
 import main.java.config.FontConfig;
 import main.java.config.ProfileConfig;
+import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.gui.Dashord.setting.SettingPanel;
@@ -24,9 +25,6 @@ public class Dashboard extends JFrame {
     public static User activeUser;
     private final JFrame LoginRegisterMenu;
     public static String password;
-    public static Color background;
-    public static Color button;
-    public static int themeId;
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
     private JLabel coinIcon;
@@ -42,32 +40,20 @@ public class Dashboard extends JFrame {
         Dashboard.password = password;
         Dashboard.activeUser = activeUser;
         this.LoginRegisterMenu = LoginRegisterMenu;
-        themeId=Database.getThemeIdByUsername(activeUser.username);
+        ThemeConfig.themeId=Database.getThemeIdByUsername(activeUser.username);
         initComponents();
         init();
-        initTheme();
+        ThemeConfig.initTheme();
         initCustomTheme();
         this.setVisible(true);
     }
 
-    public static void initTheme() {
-        Theme theme = null;
-        for (int i = 0; i < ThemeTypes.themes.size(); i++) {
-            if (themeId == ThemeTypes.themes.get(i).id) {
-                theme = ThemeTypes.themes.get(i);
-            }
-        }
-        assert theme != null;
-        background = Color.decode(theme.background);
-        button = Color.decode(theme.button);
-    }
-
     private void initCustomTheme() {
-        Panel.setBackground(background);
-        settingsIcon.setBackground(background);
-        multiplayerButton.setBackground(button);
-        singlePlayerButton.setBackground(button);
-        profileButton.setBackground(background);
+        Panel.setBackground(ThemeConfig.background);
+        settingsIcon.setBackground(ThemeConfig.background);
+        multiplayerButton.setBackground(ThemeConfig.button);
+        singlePlayerButton.setBackground(ThemeConfig.button);
+        profileButton.setBackground(ThemeConfig.background);
     }
 
     private void init() {

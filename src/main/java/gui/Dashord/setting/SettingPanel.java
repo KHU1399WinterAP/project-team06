@@ -2,6 +2,7 @@ package main.java.gui.Dashord.setting;
 
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
+import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.Dashord.setting.About.About;
@@ -25,17 +26,17 @@ public class SettingPanel extends JFrame {
         initComponents();
         initComponentsProperties();
         initCustomTheme();
-        if (Dashboard.themeId == 2) themeButton.setText(Themes.DARK.theme);
+        if (ThemeConfig.themeId == 2) themeButton.setText(Themes.DARK.theme);
         else themeButton.setText(Themes.BLUE.theme);
         this.setVisible(true);
     }
 
     private void initCustomTheme() {
-        previousButton.setBackground(Dashboard.background);
-        aboutButton.setBackground(Dashboard.button);
-        mainBackground.setBackground(Dashboard.background);
-        musicButton.setBackground(Dashboard.background);
-        themeButton.setBackground(Dashboard.background);
+        previousButton.setBackground(ThemeConfig.background);
+        aboutButton.setBackground(ThemeConfig.button);
+        mainBackground.setBackground(ThemeConfig.background);
+        musicButton.setBackground(ThemeConfig.background);
+        themeButton.setBackground(ThemeConfig.background);
     }
 
     private void initComponentsProperties() {
@@ -74,15 +75,15 @@ public class SettingPanel extends JFrame {
 
     private void themeButtonActionPerformed(ActionEvent e) {
         if (themeButton.getText().equals(Themes.BLUE.theme)) {
-            Dashboard.themeId = 2;
+            ThemeConfig.themeId = 2;
             themeButton.setText(Themes.DARK.theme);
             Database.updateThemeByUsername(activeUser.username, 2);
         } else {
-            Dashboard.themeId = 1;
+            ThemeConfig.themeId = 1;
             themeButton.setText(Themes.BLUE.theme);
             Database.updateThemeByUsername(activeUser.username, 1);
         }
-        Dashboard.initTheme();
+        ThemeConfig.initTheme();
         initCustomTheme();
     }
 

@@ -7,6 +7,7 @@ package main.java.gui.Dashord.profilesettings;
 import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
 import main.java.config.ProfileConfig;
+import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.gui.Dashord.Dashboard;
@@ -40,12 +41,12 @@ public class ProfileSettings extends JFrame {
     }
 
     private void initCustomTheme(){
-        panel.setBackground(Dashboard.background);
-        for (int i=0;i<facesButton.size();i++){
-            facesButton.get(i).setBackground(Dashboard.background);
+        panel.setBackground(ThemeConfig.background);
+        for (JButton jButton : facesButton) {
+            jButton.setBackground(ThemeConfig.background);
         }
-        applyChangesButton.setBackground(Dashboard.button);
-        previousButton.setBackground(Dashboard.background);
+        applyChangesButton.setBackground(ThemeConfig.button);
+        previousButton.setBackground(ThemeConfig.background);
     }
 
     private void initComponentsProperties() {
@@ -153,9 +154,9 @@ public class ProfileSettings extends JFrame {
         errorLabel = new JLabel();
         logoutButton = new JButton();
         inputNewUsername = new JTextArea();
-        label1 = new JLabel();
-        newUsernameLabel = new JLabel();
-        newPasswordLabel = new JLabel();
+        JLabel label1 = new JLabel();
+        JLabel newUsernameLabel = new JLabel();
+        JLabel newPasswordLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -345,15 +346,11 @@ public class ProfileSettings extends JFrame {
         setLocationRelativeTo(getOwner());
     }
 
-    private JLabel newPasswordLabel;
-    private JLabel newUsernameLabel;
     private JButton previousButton;
-    private JLabel label1;
     private JPanel panel;
     private JButton applyChangesButton;
     private JPasswordField inputNewPassword;
     private JLabel errorLabel;
     private JButton logoutButton;
     private JTextArea inputNewUsername;
-
 }

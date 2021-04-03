@@ -54,7 +54,7 @@ new FormModel {
 						"tabSize": 10
 						"alignmentX": 1.5f
 						"alignmentY": 1.5f
-						"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+						"font": new java.awt.Font( "Comic Sans MS", 0, 12 )
 					} )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -67,7 +67,7 @@ new FormModel {
 					name: "inputPassword"
 					"background": sfield java.awt.Color white
 					"foreground": new java.awt.Color( 0, 32, 96, 255 )
-					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 12 )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "registerButton"
