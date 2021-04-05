@@ -27,7 +27,7 @@ public class SettingPanel extends JFrame {
         initComponentsProperties();
         initCustomTheme();
         if (ThemeConfig.themeId == 2) themeButton.setText(Themes.DARK.theme);
-        if (ThemeConfig.themeId == 3) themeButton.setText(Themes.PURPLE.theme);
+        else if (ThemeConfig.themeId == 3) themeButton.setText(Themes.PURPLE.theme);
         else themeButton.setText(Themes.BLUE.theme);
         this.setVisible(true);
     }
