@@ -26,9 +26,7 @@ public class SettingPanel extends JFrame {
         initComponents();
         initComponentsProperties();
         initCustomTheme();
-        if (ThemeConfig.themeId == 2) themeButton.setText(Themes.DARK.theme);
-        else if (ThemeConfig.themeId == 3) themeButton.setText(Themes.PURPLE.theme);
-        else themeButton.setText(Themes.BLUE.theme);
+        themeButton.setText(ThemeConfig.name);
         this.setVisible(true);
     }
 
@@ -75,20 +73,11 @@ public class SettingPanel extends JFrame {
     }
 
     private void themeButtonActionPerformed(ActionEvent e) {
-        if (themeButton.getText().equals(Themes.BLUE.theme)) {
-            ThemeConfig.themeId = 2;
-            themeButton.setText(Themes.DARK.theme);
-            Database.updateThemeByUsername(activeUser.username, 2);
-        } else if (themeButton.getText().equals(Themes.DARK.theme)) {
-            ThemeConfig.themeId = 3;
-            themeButton.setText(Themes.PURPLE.theme);
-            Database.updateThemeByUsername(activeUser.username, 3);
-        } else {
-            ThemeConfig.themeId = 1;
-            themeButton.setText(Themes.BLUE.theme);
-            Database.updateThemeByUsername(activeUser.username, 1);
-        }
+        if (ThemeConfig.themeId==4) ThemeConfig.themeId=0;
+        ThemeConfig.themeId++;
         ThemeConfig.initTheme();
+        themeButton.setText(ThemeConfig.name);
+        Database.updateThemeByUsername(activeUser.username,ThemeConfig.themeId);
         initCustomTheme();
     }
 

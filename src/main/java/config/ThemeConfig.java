@@ -9,6 +9,7 @@ public class ThemeConfig {
     public static Color background;
     public static Color button;
     public static int themeId;
+    public static String name;
 
     public static void initTheme(){
         Theme theme = null;
@@ -20,5 +21,6 @@ public class ThemeConfig {
         assert theme != null;
         background = Color.decode(theme.background);
         button = Color.decode(theme.button);
+        name= theme.name;
     }
 }

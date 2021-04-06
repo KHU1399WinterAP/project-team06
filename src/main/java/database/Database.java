@@ -119,7 +119,8 @@ public class Database {
         int id = resultSet.getInt("id");
         String background = resultSet.getString("background");
         String button = resultSet.getString("button");
-        return new Theme(id, background, button);
+        String name=resultSet.getString("name");
+        return new Theme(id, background, button,name);
     }
 
     public static void updateThemeByUsername(String username, int themeId) {
