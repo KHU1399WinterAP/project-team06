@@ -3,6 +3,7 @@ package main.java.gui.RegisterMenu;
 import main.java.animations.ColorChangeAnimation;
 import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
+import main.java.config.GuiConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.gui.Dashord.Dashboard;
@@ -63,18 +64,18 @@ public class RegisterMenu extends JFrame {
 		
 		if (Database.AlreadyExisted(inputUserName.getText())) {
 			usernameErrorLabel.setText("username already exists");
-			RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
+			RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground, GuiConfig.COLOR_DEFAULT_BLUE);
 		} else if (usernameError == null && passwordError == null) {
             Settings settings=new Settings(Database.getTheMaxSettingId()+1);
             Database.insertInToSettings(settings);
 			User user = new User(inputUserName.getText(), Objects.hash(String.valueOf(inputPassword.getPassword())),Database.getTheMaxSettingId()+1);
 			Database.insertInToUsers(user);
 			
-			registerButton.setBackground(Color.decode("#00FF00"));
+			registerButton.setBackground(Color.green);
 			registerButton.setText("Registered !!");
 
-			javax.swing.Timer pause = new javax.swing.Timer(500, e1 -> {
-				registerButton.setBackground(new Color(0 ,32 ,96));
+			javax.swing.Timer pause = new javax.swing.Timer(400, e1 -> {
+				registerButton.setBackground(GuiConfig.COLOR_DEFAULT_DARK_BLUE);
 				new Dashboard(loginRegisterMenu,user,String.valueOf(inputPassword.getPassword()));
 				this.setVisible(false);
 			});
@@ -82,7 +83,7 @@ public class RegisterMenu extends JFrame {
 			pause.start();
 
 		} else {
-			RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
+			RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground,GuiConfig.COLOR_DEFAULT_BLUE);
 			updateErrorLabel(usernameError, usernameErrorLabel);
 			updateErrorLabel(passwordError, passwordErrorLabel);
 		}
@@ -220,20 +221,18 @@ public class RegisterMenu extends JFrame {
             mainBackgroundLayout.setHorizontalGroup(
                 mainBackgroundLayout.createParallelGroup()
                     .addGroup(mainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap(23, Short.MAX_VALUE)
                         .addGroup(mainBackgroundLayout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
-                                .addComponent(faceLabel)
-                                .addGap(119, 119, 119))
-                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
-                                .addComponent(textLabel)
-                                .addGap(29, 29, 29))
-                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createParallelGroup()
-                                .addGroup(mainBackgroundLayout.createSequentialGroup()
-                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())
-                                .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
-                                    .addGroup(mainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(mainBackgroundLayout.createParallelGroup()
+                                    .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
+                                        .addComponent(faceLabel)
+                                        .addGap(90, 90, 90))
+                                    .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createParallelGroup()
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 203, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
                                             .addComponent(usernameLabel)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -245,19 +244,17 @@ public class RegisterMenu extends JFrame {
                                                 .addComponent(passwordErrorLabel, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
                                             .addComponent(inputPassword, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
                                             .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(16, 16, 16)))
-                            .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
-                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                .addGap(136, 136, 136))))
+                                    .addComponent(textLabel, GroupLayout.Alignment.TRAILING))))
+                        .addGap(0, 32, Short.MAX_VALUE))
             );
             mainBackgroundLayout.setVerticalGroup(
                 mainBackgroundLayout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, mainBackgroundLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addGap(32, 32, 32)
                         .addComponent(faceLabel, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textLabel)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addGroup(mainBackgroundLayout.createParallelGroup()
                             .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                             .addComponent(usernameErrorLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))

@@ -10,6 +10,7 @@ import main.java.gui.RegisterMenu.RegisterMenu;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -18,7 +19,7 @@ import javax.swing.GroupLayout;
  */
 public class LoginRegisterMenu extends JFrame {
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel MainBackground;
+    private JPanel mainBackground;
     private JLabel Banner;
     private JButton loginButton;
     private JButton registerButton;
@@ -34,7 +35,7 @@ public class LoginRegisterMenu extends JFrame {
 		new RegisterMenu(this);
 		this.setVisible(false);
 	}
-	
+
 	private void LoginActionPerformed(ActionEvent e) {
 		new LoginMenu(this);
 		this.setVisible(false);
@@ -47,7 +48,7 @@ public class LoginRegisterMenu extends JFrame {
 	
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        MainBackground = new JPanel();
+        mainBackground = new JPanel();
         Banner = new JLabel();
         loginButton = new JButton();
         registerButton = new JButton();
@@ -63,11 +64,11 @@ public class LoginRegisterMenu extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         var contentPane = getContentPane();
 
-        //======== MainBackground ========
+        //======== mainBackground ========
         {
-            MainBackground.setMaximumSize(new Dimension(380, 605));
-            MainBackground.setMinimumSize(new Dimension(380, 605));
-            MainBackground.setBackground(new Color(0, 112, 192));
+            mainBackground.setMaximumSize(new Dimension(380, 605));
+            mainBackground.setMinimumSize(new Dimension(380, 605));
+            mainBackground.setBackground(new Color(0, 112, 192));
 
             //---- Banner ----
             Banner.setFont(new Font("Calibri", Font.PLAIN, 54));
@@ -94,27 +95,27 @@ public class LoginRegisterMenu extends JFrame {
             registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             registerButton.addActionListener(e -> RegisterActionPerformed(e));
 
-            GroupLayout MainBackgroundLayout = new GroupLayout(MainBackground);
-            MainBackground.setLayout(MainBackgroundLayout);
-            MainBackgroundLayout.setHorizontalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
+            GroupLayout mainBackgroundLayout = new GroupLayout(mainBackground);
+            mainBackground.setLayout(mainBackgroundLayout);
+            mainBackgroundLayout.setHorizontalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addGroup(MainBackgroundLayout.createSequentialGroup()
+                        .addGroup(mainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
                                 .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(registerButton, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
                             .addComponent(Banner))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
-            MainBackgroundLayout.setVerticalGroup(
-                MainBackgroundLayout.createParallelGroup()
-                    .addGroup(MainBackgroundLayout.createSequentialGroup()
+            mainBackgroundLayout.setVerticalGroup(
+                mainBackgroundLayout.createParallelGroup()
+                    .addGroup(mainBackgroundLayout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(Banner)
                         .addGap(115, 115, 115)
-                        .addGroup(MainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addGroup(mainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                             .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
                             .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -125,11 +126,11 @@ public class LoginRegisterMenu extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(MainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());

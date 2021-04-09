@@ -19,11 +19,7 @@ public class ColorChangeAnimation extends Thread {
 	private int differenceRed;
 	private int differenceGreen;
 	private int differenceBlue;
-	
-	public ColorChangeAnimation(Color originalColor, Color pulseColor, Consumer<Color> stepCallback) {
-		this(originalColor, pulseColor, stepCallback, null, AnimationConfig.ERROR_BACKGROUND_ANIMATION_DEFAULT_HALF_DURATION);
-	}
-	
+
 	public ColorChangeAnimation(Color originalColor, Color pulseColor, Consumer<Color> stepCallback, Runnable endCallback) {
 		this(originalColor, pulseColor, stepCallback, endCallback, AnimationConfig.ERROR_BACKGROUND_ANIMATION_DEFAULT_HALF_DURATION);
 	}

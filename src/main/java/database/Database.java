@@ -78,7 +78,6 @@ public class Database {
         }
     }
 
-
     public static void insertInToUsers(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO user VALUES(?,?,?,?,?,?,?,?,?,?,?)");
@@ -265,11 +264,13 @@ public class Database {
             PreparedStatement statement=connection.prepareStatement("SELECT * FROM user ORDER BY "+column+" desc");
             ResultSet resultSet=statement.executeQuery();
             ArrayList<ScoreBoardInformation> usersOrderedByRecords=new ArrayList<>();
-            while (resultSet.next()){
+            int max=20;
+            while (resultSet.next() && max>0){
                 String username=resultSet.getString("username");
                 int record=resultSet.getInt(column);
                 ScoreBoardInformation scoreBoardInformation=new ScoreBoardInformation(username,record);
                 usersOrderedByRecords.add(scoreBoardInformation);
+                max--;
             }
             return usersOrderedByRecords;
         } catch (SQLException throwables) {

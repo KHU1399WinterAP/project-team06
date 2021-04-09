@@ -101,7 +101,7 @@ public class ProfileSettings extends JFrame {
         if (activeUser.username.equals(newUsername) && newPassword.equals(Dashboard.password) &&
                 profilePicture == activeUser.profilePicture) {
             errorLabel.setText("");
-            RunAnimation.runMainPanelBackgroundColorAnimation(panel);
+            RunAnimation.runMainPanelBackgroundColorAnimation(panel,ThemeConfig.background);
         } else {
             if (Database.AlreadyExisted(newUsername) && !activeUser.username.equals(newUsername)) {
                  error();
@@ -126,7 +126,7 @@ public class ProfileSettings extends JFrame {
 
     private void error() {
         errorLabel.setText("Password or username cannot be replaced !");
-        RunAnimation.runMainPanelBackgroundColorAnimation(panel);
+        RunAnimation.runMainPanelBackgroundColorAnimation(panel,ThemeConfig.background);
     }
 
     private void init() {

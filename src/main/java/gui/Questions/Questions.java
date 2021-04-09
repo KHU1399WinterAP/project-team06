@@ -5,6 +5,7 @@
 package main.java.gui.Questions;
 
 import main.java.config.FontConfig;
+import main.java.config.GuiConfig;
 import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
@@ -210,6 +211,8 @@ public class Questions extends JFrame {
 			jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
 		}
 		questionLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
+		coinAmountLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
+		currentScoreLable.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
 	}
 	
 	private void answerButton3ActionPerformed(ActionEvent e) {
@@ -229,7 +232,7 @@ public class Questions extends JFrame {
 	}
 	
 	private void FreezerActionPerformed(ActionEvent e) {
-		Freezer.setBackground(new Color(200, 10, 50));
+		Freezer.setBackground(GuiConfig.COLOR_DARK_RED);
 		Freezer.setForeground(Color.black);
 		Freezer.setEnabled(false);
 		if (activeUser.coins >= 100) {
@@ -241,7 +244,7 @@ public class Questions extends JFrame {
 			Timer delay = new Timer(5000, e1 -> {
 				Freezer.setEnabled(true);
 				Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
-				Freezer.setBackground(new Color(0, 153, 51));
+				Freezer.setBackground(GuiConfig.COLOR_GREEN);
 				Freezer.setForeground(Color.white);
 				countdown.restart();
 			});
@@ -252,7 +255,7 @@ public class Questions extends JFrame {
 			Timer delay = new Timer(2000, e12 -> {
 				Freezer.setEnabled(true);
 				Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
-				Freezer.setBackground(new Color(0, 153, 51));
+				Freezer.setBackground(GuiConfig.COLOR_GREEN);
 				Freezer.setForeground(Color.white);
 			});
 			delay.setRepeats(false);
@@ -261,7 +264,7 @@ public class Questions extends JFrame {
 	}
 	
 	private void HelperActionPerformed(ActionEvent e) {
-		Helper.setBackground(new Color(200, 10, 50));
+		Helper.setBackground(GuiConfig.COLOR_DARK_RED);
 		Helper.setForeground(Color.black);
 		Helper.setEnabled(false);
 		if (activeUser.coins >= 200) {
@@ -283,7 +286,7 @@ public class Questions extends JFrame {
 			Timer delay = new Timer(2000, e1 -> {
 				Helper.setEnabled(true);
 				Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
-				Helper.setBackground(new Color(0, 153, 51));
+				Helper.setBackground(GuiConfig.COLOR_GREEN);
 				Helper.setForeground(Color.white);
 			});
 			delay.setRepeats(false);
@@ -293,7 +296,7 @@ public class Questions extends JFrame {
 			Timer delay = new Timer(2000, e12 -> {
 				Helper.setEnabled(true);
 				Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
-				Helper.setBackground(new Color(0, 153, 51));
+				Helper.setBackground(GuiConfig.COLOR_GREEN);
 				Helper.setForeground(Color.white);
 			});
 			delay.setRepeats(false);
@@ -404,7 +407,7 @@ public class Questions extends JFrame {
             coinLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/smallCoin.png")));
 
             //---- coinAmountLabel ----
-            coinAmountLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            coinAmountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             coinAmountLabel.setForeground(new Color(255, 255, 51));
 
             //---- label1 ----

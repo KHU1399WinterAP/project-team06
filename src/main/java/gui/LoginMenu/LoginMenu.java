@@ -6,6 +6,7 @@ package main.java.gui.LoginMenu;
 
 import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
+import main.java.config.GuiConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.RegisterMenu.RegisterMenu;
@@ -56,7 +57,7 @@ public class LoginMenu extends JFrame {
                 return;
             }
         }
-        RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground);
+        RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground, GuiConfig.COLOR_DEFAULT_BLUE);
     }
 
     private void loginMenuWindowClosing(WindowEvent e) {

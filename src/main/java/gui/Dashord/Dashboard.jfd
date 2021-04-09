@@ -17,8 +17,8 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "dashboardFrameWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:12:p, comp settingsIcon:::p:41:p, space :::p, comp profileButton:::p:58:p, space :::p, comp usernameLabel:::p:98:p, space ::42:x, comp coinLabel:::p:62:p, space :::p, comp coinIcon:::p::p, space :p:12:p}, seq t {space ::22:x, comp singlePlayerButton:::p:151:p, space s:::p, comp multiplayerButton:::p:154:p, space :p:28:p}}"
-				"$verticalGroup": "par l {seq {par l {seq t {space ::20:x, par t {comp coinLabel:::p:29:p, comp coinIcon:::p::p}, space :p:56:p}, seq l {par t {comp usernameLabel:::p:37:p, par l {seq l {space :::p, comp profileButton:::p:53:p}, seq l {space :p:21:p, comp settingsIcon:::p::p}}}, space ::46:x}}, par b {comp multiplayerButton::b:p:69:p, comp singlePlayerButton::b:p:69:p}, space :p:416:p}}"
+				"$horizontalGroup": "par l {seq l {space :p:12:p, comp settingsIcon:::p:41:p, space :::p, comp profileButton:::p:58:p, space :::p, comp usernameLabel::::134:x, space :::p, comp coinLabel:::p:62:p, space :::p, comp coinIcon:::p::p, space :p:12:p}, seq l {space :p:22:p, comp singlePlayerButton:::p:151:p, space s:::p, comp multiplayerButton:::p:154:p, space ::28:x}}"
+				"$verticalGroup": "par l {seq {par l {seq l {space :::p, par t {comp profileButton:::p:61:p, par l:t {par t {comp coinLabel:::p:29:p, comp coinIcon:::p::p}, comp usernameLabel:::p:37:p}}}, seq l {space :p:29:p, comp settingsIcon:::p::p}}, space :p:48:p, par b {comp multiplayerButton::b:p:69:p, comp singlePlayerButton::b:p:69:p}, space ::406:x}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -74,7 +74,7 @@ new FormModel {
 					name: "coinLabel"
 					"background": new java.awt.Color( 255, 255, 51, 255 )
 					"foreground": new java.awt.Color( 255, 152, 0, 255 )
-					"horizontalAlignment": 0
+					"horizontalAlignment": 4
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

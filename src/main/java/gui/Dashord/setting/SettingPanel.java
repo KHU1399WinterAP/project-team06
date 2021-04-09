@@ -26,6 +26,8 @@ public class SettingPanel extends JFrame {
         initComponents();
         initComponentsProperties();
         initCustomTheme();
+        if (MusicConfig.mp3Player.isPaused()) musicButton.setText(MusicPlayerStatus.OFF.labelText);
+        else musicButton.setText(MusicPlayerStatus.ON.labelText);
         themeButton.setText(ThemeConfig.name);
         this.setVisible(true);
     }

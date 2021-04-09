@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp MainBackground::t::378:x}"
-			"$verticalGroup": "par l {comp MainBackground::l::573:x}"
+			"$horizontalGroup": "par l {comp mainBackground::t::378:x}"
+			"$verticalGroup": "par l {comp mainBackground::l::573:x}"
 		} ) {
 			name: "this"
 			"resizable": false
@@ -20,7 +20,7 @@ new FormModel {
 				"$horizontalGroup": "par l {seq l {space :p:14:p, par l:::p {seq {comp loginButton:::p:174:p, space :::p, comp registerButton::::0:x}, comp Banner:::p::p}, space :::x}}"
 				"$verticalGroup": "par l {seq {space :p:72:p, comp Banner:::p::p, space :p:115:p, par b {comp registerButton::b:p:77:p, comp loginButton::b:p:77:p}, space :::x}}"
 			} ) {
-				name: "MainBackground"
+				name: "mainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
 				"minimumSize": new java.awt.Dimension( 380, 605 )
 				"background": new java.awt.Color( 0, 112, 192, 255 )
