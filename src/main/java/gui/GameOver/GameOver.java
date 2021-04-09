@@ -5,12 +5,14 @@
 package main.java.gui.GameOver;
 
 import main.java.config.FontConfig;
+import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
 import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -36,8 +38,8 @@ public class GameOver extends JFrame {
 	}
 
 	private void initCustomTheme(){
-	    Panel.setBackground(Dashboard.background);
-	    tryAgainButton.setBackground(Dashboard.button);
+	    Panel.setBackground(ThemeConfig.background);
+	    tryAgainButton.setBackground(ThemeConfig.button);
     }
 	
 	private void initLabels() {
@@ -58,11 +60,9 @@ public class GameOver extends JFrame {
 	}
 	
 	private void initComponentsProperties() {
-		coinAmountLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		label1.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
-		currentScoreLable.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-		yourRecordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
-		recordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
+	    for (JLabel jLabel : Arrays.asList(coinAmountLabel,label1,currentScoreLable,yourRecordLabel,recordLabel)){
+	        jLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
+        }
 		tryAgainButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
 	}
 	

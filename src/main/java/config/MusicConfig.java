@@ -5,7 +5,7 @@ import jaco.mp3.player.MP3Player;
 import java.io.File;
 
 public class MusicConfig {
-    public static final String song = "src\\main\\resources\\music\\AlanWalker- Faded.mp3";
+    public static final String song = "src\\main\\resources\\music\\Imagine_Dragons_Believer_320.mp3";
     public static MP3Player mp3Player;
 
     public static void initMusic(){

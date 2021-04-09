@@ -13,6 +13,7 @@ import main.java.utils.GuiValidation;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.function.Consumer;
@@ -46,13 +47,12 @@ public class RegisterMenu extends JFrame {
 	}
 	
 	private void initComponentsProperties() {
-		inputPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
-		inputUserName.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+	    for (JLabel jLabel : Arrays.asList(usernameLabel,passwordLabel,usernameErrorLabel,passwordErrorLabel)){
+	        jLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 12));
+        }
+		inputPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
+		inputUserName.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
 		textLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 50));
-		usernameErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
-		passwordErrorLabel.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 14));
-		usernameLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
-		passwordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
 		registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
 		previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 10));
 	}
@@ -172,7 +172,7 @@ public class RegisterMenu extends JFrame {
                 inputUserName.setTabSize(10);
                 inputUserName.setAlignmentX(1.5F);
                 inputUserName.setAlignmentY(1.5F);
-                inputUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+                inputUserName.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
                 scrollPane1.setViewportView(inputUserName);
             }
 
@@ -184,7 +184,7 @@ public class RegisterMenu extends JFrame {
             //---- inputPassword ----
             inputPassword.setBackground(Color.white);
             inputPassword.setForeground(new Color(0, 32, 96));
-            inputPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+            inputPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
 
             //---- registerButton ----
             registerButton.setText("REGISTER");

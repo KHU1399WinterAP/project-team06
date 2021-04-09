@@ -2,7 +2,8 @@ package main.java.gui.theme;
 
 public enum Themes {
     BLUE("BLUE"),
-    DARK("DARK");
+    DARK("DARK"),
+    PURPLE("PURPLE");
     public String theme;
 
     Themes(String theme) {

@@ -5,15 +5,18 @@
 package main.java.gui.Questions;
 
 import main.java.config.FontConfig;
+import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
 import main.java.gui.GameOver.GameOver;
 import main.java.models.Question;
 import main.java.models.User;
+import main.java.models.UserColumns;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -33,10 +36,12 @@ public class Questions extends JFrame {
 	Question question;
 	int seconds = 10;
 	int score = 0;
+	String recordColumn;
 	int category;
 	
-	public Questions(JFrame singlePlayer, ArrayList<Question> questions, int category) {
-		this.category = category;
+	public Questions(JFrame singlePlayer, ArrayList<Question> questions,String recordColumn,int category) {
+		this.recordColumn = recordColumn;
+		this.category=category;
 		this.questions = questions;
 		this.singlePlayer = singlePlayer;
 		questions2 = new ArrayList<>(questions);
@@ -47,11 +52,10 @@ public class Questions extends JFrame {
 	}
 
 	private void initCustomTheme(){
-		Panel.setBackground(Dashboard.background);
-		answerButton1.setBackground(Dashboard.button);
-		answerButton2.setBackground(Dashboard.button);
-		answerButton3.setBackground(Dashboard.button);
-		answerButton4.setBackground(Dashboard.button);
+		Panel.setBackground(ThemeConfig.background);
+		for (JButton jButton : Arrays.asList(answerButton1,answerButton2,answerButton3,answerButton4)){
+			jButton.setBackground(ThemeConfig.button);
+		}
 	}
 	
 	Timer countdown = new Timer(1000, new ActionListener() {
@@ -103,10 +107,9 @@ public class Questions extends JFrame {
 			outAnswers.add(question.answer3);
 			answers.add(question.correctAnswer);
 			outAnswers.remove(randomAnswer(outAnswers));
-			answerButton1.setText(randomAnswer(answers));
-			answerButton2.setText(randomAnswer(answers));
-			answerButton3.setText(randomAnswer(answers));
-			answerButton4.setText(randomAnswer(answers));
+			for (JButton jButton :Arrays.asList(answerButton1,answerButton2,answerButton3,answerButton4)){
+				jButton.setText(randomAnswer(answers));
+			}
 		} else {
 			countdown.stop();
 			CurrentFrame.dispose();
@@ -153,7 +156,7 @@ public class Questions extends JFrame {
 			inputAnswer.setForeground(Color.BLACK);
 			
 			Timer pause = new Timer(500, e -> {
-				inputAnswer.setBackground(Dashboard.button);
+				inputAnswer.setBackground(ThemeConfig.button);
 				inputAnswer.setForeground(Color.white);
 				seconds = 10;
 				showQuestion(questions2);
@@ -166,7 +169,7 @@ public class Questions extends JFrame {
 			countdown.stop();
 			
 			Timer pause = new Timer(500, e -> {
-				inputAnswer.setBackground(Dashboard.button);
+				inputAnswer.setBackground(ThemeConfig.button);
 				inputAnswer.setForeground(Color.white);
 				seconds = 10;
 				CurrentFrame.dispose();
@@ -178,54 +181,35 @@ public class Questions extends JFrame {
 	}
 	
 	private void updateUserRecord() {
+		Database.updateDatabaseUserRecord(activeUser.username, recordColumn, score);
 		switch (category) {
 			case 1 -> {
-				if (activeUser.recordEnglish < score) {
-					activeUser.recordEnglish = score;
-					Database.updateDatabaseUserRecord(activeUser.username, "recordEnglish", score);
-				}
+				if (activeUser.recordEnglish < score) activeUser.recordEnglish = score;
 			}
 			case 2 -> {
-				if (activeUser.recordMath < score) {
-					activeUser.recordMath = score;
-					Database.updateDatabaseUserRecord(activeUser.username, "recordMath", score);
-				}
+				if (activeUser.recordMath < score) activeUser.recordMath = score;
 			}
 			case 3 -> {
-				if (activeUser.recordFood < score) {
-					activeUser.recordFood = score;
-					Database.updateDatabaseUserRecord(activeUser.username, "recordFood", score);
-				}
+				if (activeUser.recordFood < score) activeUser.recordFood = score;
 			}
 			case 4 -> {
-				if (activeUser.recordScience < score) {
-					activeUser.recordScience = score;
-					Database.updateDatabaseUserRecord(activeUser.username, "recordScience", score);
-				}
+				if (activeUser.recordScience < score) activeUser.recordScience = score;
 			}
 			case 5 -> {
-				if (activeUser.recordCommon < score) {
-					activeUser.recordCommon = score;
-					Database.updateDatabaseUserRecord(activeUser.username, "recordCommon", score);
-				}
+				if (activeUser.recordCommon < score) activeUser.recordCommon = score;
 			}
 			default -> {
-				if (activeUser.recordGeography < score) {
-					activeUser.recordGeography = score;
-					Database.updateDatabaseUserRecord(activeUser.username, "recordGeography", score);
-				}
+				if (activeUser.recordGeography < score) activeUser.recordGeography = score;
 			}
 		}
 	}
 	
 	private void initComponentsProperties() {
+		for (JButton jButton : Arrays.asList(answerButton1,answerButton2,answerButton3,
+				answerButton4,Freezer,Helper)){
+			jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
+		}
 		questionLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
-		answerButton1.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-		answerButton2.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-		answerButton3.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-		answerButton4.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-		Freezer.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-		Helper.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
 	}
 	
 	private void answerButton3ActionPerformed(ActionEvent e) {
@@ -296,27 +280,21 @@ public class Questions extends JFrame {
 				}
 			}
 			
-			Timer delay = new Timer(2000, new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Helper.setEnabled(true);
-					Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
-					Helper.setBackground(new Color(0, 153, 51));
-					Helper.setForeground(Color.white);
-				}
+			Timer delay = new Timer(2000, e1 -> {
+				Helper.setEnabled(true);
+				Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+				Helper.setBackground(new Color(0, 153, 51));
+				Helper.setForeground(Color.white);
 			});
 			delay.setRepeats(false);
 			delay.start();
 		} else {
 			Helper.setText("Not Enough Coin");
-			Timer delay = new Timer(2000, new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Helper.setEnabled(true);
-					Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
-					Helper.setBackground(new Color(0, 153, 51));
-					Helper.setForeground(Color.white);
-				}
+			Timer delay = new Timer(2000, e12 -> {
+				Helper.setEnabled(true);
+				Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+				Helper.setBackground(new Color(0, 153, 51));
+				Helper.setForeground(Color.white);
 			});
 			delay.setRepeats(false);
 			delay.start();

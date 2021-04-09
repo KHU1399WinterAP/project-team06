@@ -18,8 +18,8 @@ new FormModel {
 			"defaultCloseOperation": 2
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "singlePlayerWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par l {comp label2::t:p:58:p, seq l {space :p:6:p, par l {seq {space :p:13:p, par t:::p {comp category1:::p:162:p, comp category4::t::163:x, comp category3::t::163:x, comp category2::t::163:x, comp category6::t::163:x, comp category5::t::163:x}, space s:::p, par l {comp bestRecordEnglishLabel:::p:58:p, comp bestRecordCommonLabel::l:p:58:p, comp bestRecordGeographyLabel::l:p:58:p, comp bestRecordScienceLabel::l:p:58:p, comp bestRecordFoodLabel::l:p:58:p, comp bestRecordMathLabel::l:p:58:p}}, seq {comp categoriesLabel:::p::p, space :69:69:p, comp label1:::p:58:p}}}}, space :36:36:p, par l:::p {comp yourRecordEnglishLabel::::58:x, comp label4::l::58:x, comp yourRecordGeographyLabel::l::58:x, comp yourRecordScienceLabel::l::58:x, comp yourRecordCommonLabel::t::58:x, comp yourRecordFoodLabel::l::58:x, comp yourRecordMathLabel::t::58:x, comp label3::l::58:x}}, seq {comp previousButton:::p:57:p, space u:::p, comp title:::p::p}}, space :38::x}}"
-				"$verticalGroup": "par l {seq l {space :p:13:p, par l {comp previousButton:::p::p, comp title:::p::p}, space s:::p, par b {comp categoriesLabel::b:p::p, comp label1::b:p:27:p, comp label3::b:p:27:p}, space :p:3:p, par b {comp label4::b:p::p, comp label2::b:p::p}, space u:::p, par l:::p {seq {par l {comp bestRecordEnglishLabel:::p:49:p, comp category1:::p:49:p}, space :p:13:p, par t {comp bestRecordMathLabel:::p:49:p, comp category2:::p:49:p}}, seq {comp yourRecordEnglishLabel:::p:49:p, space :::x, comp yourRecordMathLabel:::p:49:p}}, par l {seq l {space u:::p, par l {seq t {comp category3:::p:49:p, space u:::p, comp category4:::p:49:p}, seq t {comp bestRecordFoodLabel:::p:49:p, space :p:12:p, comp bestRecordScienceLabel:::p:49:p}}, space s:::p, par l {comp bestRecordCommonLabel:::p:49:p, comp category5:::p:49:p}}, seq t {space :p:11:p, comp yourRecordFoodLabel:::p:49:p, space u:::p, comp yourRecordScienceLabel:::p:49:p, space s:::p, comp yourRecordCommonLabel:::p:49:p}}, space s:::p, par l {seq {comp yourRecordGeographyLabel:::p:49:p, space :0:41:x}, seq {par l {comp bestRecordGeographyLabel:::p:49:p, comp category6:::p:49:p}, space ::41:x}}}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par t {comp label2:::p:58:p, seq l {par t {comp category4::t::196:x, comp category3::t::196:x, comp category2::t::196:x, comp category6::t::196:x, comp category5::t::196:x, comp category1::t::196:x}, space s:::p, par l {comp bestRecordEnglishButton:::p:58:p, comp bestRecordCommonButton::l:p:58:p, comp bestRecordGeographyButton::l:p:58:p, comp bestRecordScienceButton::l:p:58:p, comp bestRecordFoodButton::l:p:58:p, comp bestRecordMathButton::l:p:58:p}}, seq l {comp categoriesLabel:::p::p, space ::89:x, comp label1:::p:58:p}}, space :36:36:p, par l:::p {comp yourRecordEnglishLabel::::58:x, comp label4::l::58:x, comp yourRecordGeographyLabel::l::58:x, comp yourRecordScienceLabel::l::58:x, comp yourRecordCommonLabel::t::58:x, comp yourRecordFoodLabel::l::58:x, comp yourRecordMathLabel::t::58:x, comp label3::l::58:x}}, seq {comp previousButton:::p:57:p, space u:::p, comp title:::p::p}}, space :p::p}}"
+				"$verticalGroup": "par l {seq l {space :p:13:p, par l {comp previousButton:::p::p, comp title:::p::p}, space s:::p, par b {comp categoriesLabel::b:p::p, comp label3::b:p:27:p, comp label1::b:p:27:p}, space :p:3:p, par b {comp label4::b:p::p, comp label2::b:p::p}, space u:::p, par l:::p {seq {par l {comp bestRecordEnglishButton:::p:49:p, comp category1:::p:49:p}, space :p:13:p, par t {comp bestRecordMathButton:::p:49:p, comp category2:::p:49:p}}, seq {comp yourRecordEnglishLabel:::p:49:p, space :::x, comp yourRecordMathLabel:::p:49:p}}, par l {seq l {space u:::p, par l {seq t {comp category3:::p:49:p, space u:::p, comp category4:::p:49:p}, seq t {comp bestRecordFoodButton:::p:49:p, space :p:12:p, comp bestRecordScienceButton:::p:49:p}}, space s:::p, par l {comp bestRecordCommonButton:::p:49:p, comp category5:::p:49:p}}, seq t {space :p:11:p, comp yourRecordFoodLabel:::p:49:p, space u:::p, comp yourRecordScienceLabel:::p:49:p, space s:::p, comp yourRecordCommonLabel:::p:49:p}}, space s:::p, par l {seq {comp yourRecordGeographyLabel:::p:49:p, space :0:41:x}, seq {par l {comp bestRecordGeographyButton:::p:49:p, comp category6:::p:49:p}, space ::41:x}}}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -105,7 +105,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "previousButton"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/leftArrow@2x.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/previous.png" )
 					"background": new java.awt.Color( 0, 112, 192, 255 )
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -140,41 +140,65 @@ new FormModel {
 					"foreground": sfield java.awt.Color white
 					"font": #Font0
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "bestRecordEnglishLabel"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "bestRecordEnglishButton"
 					"horizontalAlignment": 0
 					"foreground": sfield java.awt.Color white
 					"font": #Font0
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+					"cursor": &Cursor1 new java.awt.Cursor( 12 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bestRecordEnglishButtonActionPerformed", true ) )
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "bestRecordMathLabel"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "bestRecordMathButton"
 					"horizontalAlignment": 0
 					"foreground": sfield java.awt.Color white
 					"font": #Font0
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+					"cursor": #Cursor1
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bestRecordMathButtonActionPerformed", true ) )
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "bestRecordFoodLabel"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "bestRecordFoodButton"
 					"horizontalAlignment": 0
 					"foreground": sfield java.awt.Color white
 					"font": #Font0
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+					"cursor": #Cursor1
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bestRecordFoodButtonActionPerformed", true ) )
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "bestRecordScienceLabel"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "bestRecordScienceButton"
 					"horizontalAlignment": 0
 					"foreground": sfield java.awt.Color white
 					"font": #Font0
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+					"cursor": #Cursor1
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bestRecordScienceButtonActionPerformed", true ) )
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "bestRecordCommonLabel"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "bestRecordCommonButton"
 					"horizontalAlignment": 0
 					"foreground": sfield java.awt.Color white
 					"font": #Font0
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+					"cursor": #Cursor1
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bestRecordCommonButtonActionPerformed", true ) )
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "bestRecordGeographyLabel"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "bestRecordGeographyButton"
 					"horizontalAlignment": 0
 					"foreground": sfield java.awt.Color white
 					"font": #Font0
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"focusable": false
+					"cursor": #Cursor1
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bestRecordGeographyButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "yourRecordEnglishLabel"

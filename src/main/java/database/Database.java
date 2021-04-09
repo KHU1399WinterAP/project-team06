@@ -1,6 +1,7 @@
 package main.java.database;
 
 import main.java.config.DatabaseConfig;
+import main.java.models.ScoreBoardInformation;
 import main.java.models.Question;
 import main.java.models.Settings;
 import main.java.models.Theme;
@@ -8,7 +9,6 @@ import main.java.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.Objects;
 
 public class Database {
@@ -119,7 +119,8 @@ public class Database {
         int id = resultSet.getInt("id");
         String background = resultSet.getString("background");
         String button = resultSet.getString("button");
-        return new Theme(id, background, button);
+        String name=resultSet.getString("name");
+        return new Theme(id, background, button,name);
     }
 
     public static void updateThemeByUsername(String username, int themeId) {
@@ -257,5 +258,23 @@ public class Database {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static ArrayList<ScoreBoardInformation> getUserOrderedByRecords(String column){
+        try {
+            PreparedStatement statement=connection.prepareStatement("SELECT * FROM user ORDER BY "+column+" desc");
+            ResultSet resultSet=statement.executeQuery();
+            ArrayList<ScoreBoardInformation> usersOrderedByRecords=new ArrayList<>();
+            while (resultSet.next()){
+                String username=resultSet.getString("username");
+                int record=resultSet.getInt(column);
+                ScoreBoardInformation scoreBoardInformation=new ScoreBoardInformation(username,record);
+                usersOrderedByRecords.add(scoreBoardInformation);
+            }
+            return usersOrderedByRecords;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 }
