@@ -18,6 +18,7 @@ import main.java.models.User;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -74,7 +75,7 @@ public class Dashboard extends JFrame {
     }
 
     private void setCurrentInformation() {
-        profileButton.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.profilePicture(activeUser))));
+        profileButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(ProfileConfig.profilePicture(activeUser.profilePicture)))));
         usernameLabel.setText(activeUser.username);
     }
 

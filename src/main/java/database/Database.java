@@ -261,14 +261,15 @@ public class Database {
 
     public static ArrayList<ScoreBoardInformation> getUserOrderedByRecords(String column){
         try {
-            PreparedStatement statement=connection.prepareStatement("SELECT * FROM user ORDER BY "+column+" desc");
+            PreparedStatement statement=connection.prepareStatement("SELECT username,"+column+",profilepicture FROM user ORDER BY "+column+" desc");
             ResultSet resultSet=statement.executeQuery();
             ArrayList<ScoreBoardInformation> usersOrderedByRecords=new ArrayList<>();
             int max=20;
             while (resultSet.next() && max>0){
                 String username=resultSet.getString("username");
                 int record=resultSet.getInt(column);
-                ScoreBoardInformation scoreBoardInformation=new ScoreBoardInformation(username,record);
+                int profilePicture=resultSet.getInt("profilepicture");
+                ScoreBoardInformation scoreBoardInformation=new ScoreBoardInformation(username,record,profilePicture);
                 usersOrderedByRecords.add(scoreBoardInformation);
                 max--;
             }

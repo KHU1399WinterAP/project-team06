@@ -5,12 +5,14 @@
 package main.java.gui.Singleplayer.ScoreBoard;
 
 import main.java.config.FontConfig;
+import main.java.config.ProfileConfig;
 import main.java.config.ThemeConfig;
 import main.java.models.ScoreBoardInformation;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.*;
 
 /**
@@ -22,9 +24,9 @@ public class ScoreBoard extends JFrame {
     ArrayList<ScoreBoardInformation> scoreBoardInformation;
     String categoryName;
 
-    public ScoreBoard(JFrame singlePlayer, ArrayList<ScoreBoardInformation> scoreBoardInformation,String categoryName) {
+    public ScoreBoard(JFrame singlePlayer, ArrayList<ScoreBoardInformation> scoreBoardInformation, String categoryName) {
         this.singlePlayer = singlePlayer;
-        this.categoryName=categoryName;
+        this.categoryName = categoryName;
         this.scoreBoardInformation = scoreBoardInformation;
         init();
         initCustomTheme();
@@ -41,10 +43,11 @@ public class ScoreBoard extends JFrame {
         singlePlayer.setVisible(true);
     }
 
-    private void initCustomTheme(){
+    private void initCustomTheme() {
         panel.setBackground(ThemeConfig.background);
         previousButton.setBackground(ThemeConfig.background);
     }
+
     private void init() {
         scrollPane1 = new JScrollPane();
         panel = new JPanel();
@@ -112,36 +115,32 @@ public class ScoreBoard extends JFrame {
                 categoryNameLabel.setBounds(155, 85, 195, 35);
                 int y = 140;
                 for (int i = 0; i < scoreBoardInformation.size(); i++) {
-                    JLabel numberLabel=new JLabel();
+                    JLabel numberLabel = new JLabel();
                     JLabel usernameLabel = new JLabel();
                     JLabel recordLabel = new JLabel();
+                    JLabel profilePicture = new JLabel();
 
-                    numberLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                    numberLabel.setFocusable(false);
-                    numberLabel.setForeground(Color.white);
-                    numberLabel.setBorder(null);
-                    numberLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
-                    panel.add(numberLabel);
-                    numberLabel.setBounds(20, y, 55, 40);
+                    initLabels(numberLabel);
+                    numberLabel.setBounds(30, y, 55, 70);
 
-                    usernameLabel.setFocusable(false);
-                    usernameLabel.setForeground(Color.white);
-                    usernameLabel.setBorder(null);
-                    usernameLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
-                    panel.add(usernameLabel);
-                    usernameLabel.setBounds(75, y, 200, 30);
+                    profilePicture.setHorizontalAlignment(SwingConstants.LEADING);
+                    profilePicture.setFocusable(false);
+                    profilePicture.setBorder(null);
+                    panel.add(profilePicture);
+                    profilePicture.setBounds(58, y, 100, 70);
 
-                    recordLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                    recordLabel.setFocusable(false);
-                    recordLabel.setForeground(Color.white);
-                    recordLabel.setBorder(null);
-                    recordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
-                    panel.add(recordLabel);
-                    recordLabel.setBounds(280, y, 65, 30);
+                    initLabels(usernameLabel);
+                    usernameLabel.setBounds(130, y, 200, 70);
 
-                    y+=40;
+                    initLabels(recordLabel);
+                    recordLabel.setBounds(315, y, 45, 70);
 
-                    numberLabel.setText(i+1+" . ");
+                    y += 70;
+
+                    numberLabel.setText(i + 1 + " . ");
+                    String profilePath = ProfileConfig.profilePicture(scoreBoardInformation.get(i).profilePicture);
+                    ImageIcon profile = new ImageIcon(Objects.requireNonNull(getClass().getResource(profilePath)));
+                    profilePicture.setIcon(profile);
                     usernameLabel.setText(scoreBoardInformation.get(i).username);
                     recordLabel.setText(String.valueOf(scoreBoardInformation.get(i).record));
                 }
@@ -185,6 +184,16 @@ public class ScoreBoard extends JFrame {
 
     }
 
+    private void initLabels(JLabel recordLabel) {
+        recordLabel.setHorizontalAlignment(SwingConstants.LEADING);
+        recordLabel.setVerticalAlignment(SwingConstants.CENTER);
+        recordLabel.setFocusable(false);
+        recordLabel.setForeground(Color.white);
+        recordLabel.setBorder(null);
+        recordLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
+        panel.add(recordLabel);
+    }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JScrollPane scrollPane1;
     private JPanel panel;
@@ -192,6 +201,7 @@ public class ScoreBoard extends JFrame {
     private JLabel categoryLabel;
     private JLabel title;
     private JLabel categoryNameLabel;
+
 //    private JLabel numberLabel;
 //    private JLabel usernameLabel;
 //    private JLabel recordLabel;
