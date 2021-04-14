@@ -11,6 +11,7 @@ import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.gui.Dashord.setting.SettingPanel;
+import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
 import main.java.gui.Multiplayer.Multiplayer;
 import main.java.gui.Singleplayer.SinglePlayer;
 import main.java.gui.theme.ThemeTypes;
@@ -86,8 +87,9 @@ public class Dashboard extends JFrame {
 
     private void dashboardFrameWindowClosing(WindowEvent e) {
         MusicConfig.initShortMp3(MusicConfig.celClickSong);
+        MusicConfig.mp3PlayerLong.stop();
         this.dispose();
-        LoginRegisterMenu.setVisible(true);
+        new LoginRegisterMenu();
     }
 
     private void settingsIconActionPerformed(ActionEvent e) {

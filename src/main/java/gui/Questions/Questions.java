@@ -186,6 +186,8 @@ public class Questions extends JFrame {
             inputAnswer.setBackground(Color.RED);
             inputAnswer.setForeground(Color.BLACK);
             countdown.stop();
+            MusicConfig.mp3PlayerClockFast.stop();
+            MusicConfig.mp3PlayerClockSlow.stop();
 
             Timer pause = new Timer(500, e -> {
                 inputAnswer.setBackground(ThemeConfig.button);
