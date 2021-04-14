@@ -5,6 +5,7 @@
 package main.java.gui.Dashord.setting.About;
 
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
 import main.java.gui.Dashord.Dashboard;
 
@@ -51,6 +52,7 @@ public class About extends JFrame {
 	}
 	
 	private void previousPage() {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
 		this.dispose();
 		setting.setVisible(true);
 	}

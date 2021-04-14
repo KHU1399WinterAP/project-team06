@@ -6,6 +6,7 @@ package main.java.gui.Questions;
 
 import main.java.config.FontConfig;
 import main.java.config.GuiConfig;
+import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
@@ -27,285 +28,302 @@ import javax.swing.GroupLayout;
  */
 
 public class Questions extends JFrame {
-	public final JFrame singlePlayer;
-	JFrame CurrentFrame = this;
-	User activeUser = Dashboard.activeUser;
-	ArrayList<String> outAnswers = new ArrayList<>();
-	ArrayList<JButton> outButtons = new ArrayList<>();
-	ArrayList<Question> questions;
-	ArrayList<Question> questions2;
-	Question question;
-	int seconds = 10;
-	int score = 0;
-	String recordColumn;
-	int category;
-	
-	public Questions(JFrame singlePlayer, ArrayList<Question> questions,String recordColumn,int category) {
-		this.recordColumn = recordColumn;
-		this.category=category;
-		this.questions = questions;
-		this.singlePlayer = singlePlayer;
-		questions2 = new ArrayList<>(questions);
-		initComponents();
-		init();
-		initCustomTheme();
-		this.setVisible(true);
-	}
+    public final JFrame singlePlayer;
+    JFrame CurrentFrame = this;
+    User activeUser = Dashboard.activeUser;
+    ArrayList<String> outAnswers = new ArrayList<>();
+    ArrayList<JButton> outButtons = new ArrayList<>();
+    ArrayList<Question> questions;
+    ArrayList<Question> questions2;
+    Question question;
+    int seconds = 10;
+    int score = 0;
+    String recordColumn;
+    int category;
 
-	private void initCustomTheme(){
-		Panel.setBackground(ThemeConfig.background);
-		for (JButton jButton : Arrays.asList(answerButton1,answerButton2,answerButton3,answerButton4)){
-			jButton.setBackground(ThemeConfig.button);
-		}
-	}
-	
-	Timer countdown = new Timer(1000, new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			timelabel.setText(String.valueOf(seconds));
-			seconds--;
-			timeProgressBar.setValue(10 - seconds);
-			if (seconds > 6) timeProgressBar.setBackground(Color.green);
-			else if (seconds > 3) timeProgressBar.setBackground(Color.yellow);
-			else if (seconds > 0) timeProgressBar.setBackground(Color.red);
-			else {
-				CurrentFrame.dispose();
-				new GameOver(singlePlayer, score, category);
-				countdown.stop();
-			}
-		}
-	});
-	
-	private void init() {
-		coinAmountLabel.setText(String.valueOf(activeUser.coins));
-		timeProgressBar.setMaximum(10);
-		timeProgressBar.setMinimum(0);
-		currentScoreLable.setText(String.valueOf(score));
-		initComponentsProperties();
-		showQuestion(questions2);
-		outButtons.add(answerButton1);
-		outButtons.add(answerButton2);
-		outButtons.add(answerButton3);
-		outButtons.add(answerButton4);
-	}
-	
-	private void showQuestion(ArrayList<Question> questions2) {
-		timeProgressBar.setValue(0);
-		countdown.start();
-		for (JButton button : outButtons) {
-			button.setVisible(true);
-		}
-		outAnswers.clear();
-		question = randomQuestion(questions2);
-		if (question != null) {
-			questionLabel.setText(question.question);
-			ArrayList<String> answers = new ArrayList<>();
-			answers.add(question.answer1);
-			outAnswers.add(question.answer1);
-			answers.add(question.answer2);
-			outAnswers.add(question.answer2);
-			answers.add(question.answer3);
-			outAnswers.add(question.answer3);
-			answers.add(question.correctAnswer);
-			outAnswers.remove(randomAnswer(outAnswers));
-			for (JButton jButton :Arrays.asList(answerButton1,answerButton2,answerButton3,answerButton4)){
-				jButton.setText(randomAnswer(answers));
-			}
-		} else {
-			countdown.stop();
-			CurrentFrame.dispose();
-			new GameOver(singlePlayer, score, category);
-		}
-	}
-	
-	private String randomAnswer(ArrayList<String> answers) {
-		Random random = new Random();
-		int rand = random.nextInt(answers.size());
-		String answer = answers.get(rand);
-		answers.remove(rand);
-		return answer;
-	}
-	
-	private Question randomQuestion(ArrayList<Question> questions2) {
-		if (questions2.size() > 0) {
-			Random random = new Random();
-			int rand = random.nextInt(questions2.size());
-			Question question = questions2.get(rand);
-			questions2.remove(rand);
-			return question;
-		} else {
-			return null;
-		}
-	}
-	
-	private void questionsWindowClosing(WindowEvent e) {
-		this.dispose();
-		countdown.stop();
-		new GameOver(singlePlayer, score, category);
-	}
-	
-	private void isCorrect(JButton inputAnswer) {
-		if (inputAnswer.getText().equals(question.correctAnswer)) {
-			countdown.stop();
-			score++;
-			updateUserRecord();
-			currentScoreLable.setText(String.valueOf(score));
-			Dashboard.activeUser.coins += 20;
-			Database.updateDatabaseUserCoins(activeUser.username, activeUser.coins);
-			coinAmountLabel.setText(String.valueOf(activeUser.coins));
-			inputAnswer.setBackground(Color.GREEN);
-			inputAnswer.setForeground(Color.BLACK);
-			
-			Timer pause = new Timer(500, e -> {
-				inputAnswer.setBackground(ThemeConfig.button);
-				inputAnswer.setForeground(Color.white);
-				seconds = 10;
-				showQuestion(questions2);
-			});
-			pause.setRepeats(false);
-			pause.start();
-		} else {
-			inputAnswer.setBackground(Color.RED);
-			inputAnswer.setForeground(Color.BLACK);
-			countdown.stop();
-			
-			Timer pause = new Timer(500, e -> {
-				inputAnswer.setBackground(ThemeConfig.button);
-				inputAnswer.setForeground(Color.white);
-				seconds = 10;
-				CurrentFrame.dispose();
-				new GameOver(singlePlayer, score, category);
-			});
-			pause.setRepeats(false);
-			pause.start();
-		}
-	}
-	
-	private void updateUserRecord() {
-		Database.updateDatabaseUserRecord(activeUser.username, recordColumn, score);
-		switch (category) {
-			case 1 -> {
-				if (activeUser.recordEnglish < score) activeUser.recordEnglish = score;
-			}
-			case 2 -> {
-				if (activeUser.recordMath < score) activeUser.recordMath = score;
-			}
-			case 3 -> {
-				if (activeUser.recordFood < score) activeUser.recordFood = score;
-			}
-			case 4 -> {
-				if (activeUser.recordScience < score) activeUser.recordScience = score;
-			}
-			case 5 -> {
-				if (activeUser.recordCommon < score) activeUser.recordCommon = score;
-			}
-			default -> {
-				if (activeUser.recordGeography < score) activeUser.recordGeography = score;
-			}
-		}
-	}
-	
-	private void initComponentsProperties() {
-		for (JButton jButton : Arrays.asList(answerButton1,answerButton2,answerButton3,
-				answerButton4,Freezer,Helper)){
-			jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-		}
-		questionLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
-		coinAmountLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
-		currentScoreLable.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
-	}
-	
-	private void answerButton3ActionPerformed(ActionEvent e) {
-		isCorrect(answerButton3);
-	}
-	
-	private void answerButton2ActionPerformed(ActionEvent e) {
-		isCorrect(answerButton2);
-	}
-	
-	private void answerButton4ActionPerformed(ActionEvent e) {
-		isCorrect(answerButton4);
-	}
-	
-	private void answerButton1ActionPerformed(ActionEvent e) {
-		isCorrect(answerButton1);
-	}
-	
-	private void FreezerActionPerformed(ActionEvent e) {
-		Freezer.setBackground(GuiConfig.COLOR_DARK_RED);
-		Freezer.setForeground(Color.black);
-		Freezer.setEnabled(false);
-		if (activeUser.coins >= 100) {
-			activeUser.coins -= 100;
-			Database.updateDatabaseUserCoins(activeUser.username, activeUser.coins);
-			coinAmountLabel.setText(String.valueOf(activeUser.coins));
-			countdown.stop();
-			Freezer.setText("Froze");
-			Timer delay = new Timer(5000, e1 -> {
-				Freezer.setEnabled(true);
-				Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
-				Freezer.setBackground(GuiConfig.COLOR_GREEN);
-				Freezer.setForeground(Color.white);
-				countdown.restart();
-			});
-			delay.setRepeats(false);
-			delay.start();
-		} else {
-			Freezer.setText("Not Enough Coin");
-			Timer delay = new Timer(2000, e12 -> {
-				Freezer.setEnabled(true);
-				Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
-				Freezer.setBackground(GuiConfig.COLOR_GREEN);
-				Freezer.setForeground(Color.white);
-			});
-			delay.setRepeats(false);
-			delay.start();
-		}
-	}
-	
-	private void HelperActionPerformed(ActionEvent e) {
-		Helper.setBackground(GuiConfig.COLOR_DARK_RED);
-		Helper.setForeground(Color.black);
-		Helper.setEnabled(false);
-		if (activeUser.coins >= 200) {
-			activeUser.coins -= 200;
-			Database.updateDatabaseUserCoins(activeUser.username, activeUser.coins);
-			coinAmountLabel.setText(String.valueOf(activeUser.coins));
-			Helper.setText("Out !");
-			String firstOut = outAnswers.get(0);
-			String secondOut = outAnswers.get(1);
-			for (JButton b : outButtons) {
-				if (firstOut.equals(b.getText())) {
-					b.setVisible(false);
-				}
-				if (secondOut.equals(b.getText())) {
-					b.setVisible(false);
-				}
-			}
-			
-			Timer delay = new Timer(2000, e1 -> {
-				Helper.setEnabled(true);
-				Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
-				Helper.setBackground(GuiConfig.COLOR_GREEN);
-				Helper.setForeground(Color.white);
-			});
-			delay.setRepeats(false);
-			delay.start();
-		} else {
-			Helper.setText("Not Enough Coin");
-			Timer delay = new Timer(2000, e12 -> {
-				Helper.setEnabled(true);
-				Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
-				Helper.setBackground(GuiConfig.COLOR_GREEN);
-				Helper.setForeground(Color.white);
-			});
-			delay.setRepeats(false);
-			delay.start();
-		}
-	}
-	
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+    public Questions(JFrame singlePlayer, ArrayList<Question> questions, String recordColumn, int category) {
+        if (!MusicConfig.mp3PlayerLong.isPaused()) {
+            MusicConfig.mp3PlayerLong.stop();
+            MusicConfig.initLongMusic(MusicConfig.QuestionSong);
+        }
+        this.recordColumn = recordColumn;
+        this.category = category;
+        this.questions = questions;
+        this.singlePlayer = singlePlayer;
+        questions2 = new ArrayList<>(questions);
+        initComponents();
+        init();
+        initCustomTheme();
+        this.setVisible(true);
+    }
+
+    private void initCustomTheme() {
+        Panel.setBackground(ThemeConfig.background);
+        for (JButton jButton : Arrays.asList(answerButton1, answerButton2, answerButton3, answerButton4)) {
+            jButton.setBackground(ThemeConfig.button);
+        }
+    }
+
+    Timer countdown = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            timelabel.setText(String.valueOf(seconds));
+            seconds--;
+            timeProgressBar.setValue(10 - seconds);
+            if (seconds > 6) {
+                if (MusicConfig.mp3PlayerClockSlow.isStopped())
+                    MusicConfig.initClockMp3(MusicConfig.mp3PlayerClockSlow);
+                timeProgressBar.setBackground(Color.green);
+            } else if (seconds > 3) timeProgressBar.setBackground(Color.yellow);
+            else if (seconds > 0) {
+                if (!MusicConfig.mp3PlayerClockSlow.isStopped()) MusicConfig.mp3PlayerClockSlow.stop();
+                if (MusicConfig.mp3PlayerClockFast.isStopped())
+                    MusicConfig.initClockMp3(MusicConfig.mp3PlayerClockFast);
+                timeProgressBar.setBackground(Color.red);
+            } else {
+                CurrentFrame.dispose();
+                new GameOver(singlePlayer, score, category);
+                countdown.stop();
+                MusicConfig.mp3PlayerClockFast.stop();
+            }
+        }
+    });
+
+    private void init() {
+        coinAmountLabel.setText(String.valueOf(activeUser.coins));
+        timeProgressBar.setMaximum(10);
+        timeProgressBar.setMinimum(0);
+        currentScoreLable.setText(String.valueOf(score));
+        initComponentsProperties();
+        showQuestion(questions2);
+        outButtons.add(answerButton1);
+        outButtons.add(answerButton2);
+        outButtons.add(answerButton3);
+        outButtons.add(answerButton4);
+    }
+
+    private void showQuestion(ArrayList<Question> questions2) {
+        timeProgressBar.setValue(0);
+        countdown.start();
+        for (JButton button : outButtons) {
+            button.setVisible(true);
+        }
+        outAnswers.clear();
+        question = randomQuestion(questions2);
+        if (question != null) {
+            questionLabel.setText(question.question);
+            ArrayList<String> answers = new ArrayList<>();
+            answers.add(question.answer1);
+            outAnswers.add(question.answer1);
+            answers.add(question.answer2);
+            outAnswers.add(question.answer2);
+            answers.add(question.answer3);
+            outAnswers.add(question.answer3);
+            answers.add(question.correctAnswer);
+            outAnswers.remove(randomAnswer(outAnswers));
+            for (JButton jButton : Arrays.asList(answerButton1, answerButton2, answerButton3, answerButton4)) {
+                jButton.setText(randomAnswer(answers));
+            }
+        } else {
+            countdown.stop();
+            CurrentFrame.dispose();
+            new GameOver(singlePlayer, score, category);
+        }
+    }
+
+    private String randomAnswer(ArrayList<String> answers) {
+        Random random = new Random();
+        int rand = random.nextInt(answers.size());
+        String answer = answers.get(rand);
+        answers.remove(rand);
+        return answer;
+    }
+
+    private Question randomQuestion(ArrayList<Question> questions2) {
+        if (questions2.size() > 0) {
+            Random random = new Random();
+            int rand = random.nextInt(questions2.size());
+            Question question = questions2.get(rand);
+            questions2.remove(rand);
+            return question;
+        } else {
+            return null;
+        }
+    }
+
+    private void questionsWindowClosed(WindowEvent e) {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
+        countdown.stop();
+        new GameOver(singlePlayer, score, category);
+        CurrentFrame.dispose();
+    }
+
+    private void isCorrect(JButton inputAnswer) {
+        if (inputAnswer.getText().equals(question.correctAnswer)) {
+            MusicConfig.initShortMp3(MusicConfig.correctSong);
+            countdown.stop();
+            MusicConfig.mp3PlayerClockFast.stop();
+            MusicConfig.mp3PlayerClockSlow.stop();
+            score++;
+            updateUserRecord();
+            currentScoreLable.setText(String.valueOf(score));
+            Dashboard.activeUser.coins += 20;
+            Database.updateDatabaseUserCoins(activeUser.username, activeUser.coins);
+            coinAmountLabel.setText(String.valueOf(activeUser.coins));
+            inputAnswer.setBackground(Color.GREEN);
+            inputAnswer.setForeground(Color.BLACK);
+
+            Timer pause = new Timer(500, e -> {
+                inputAnswer.setBackground(ThemeConfig.button);
+                inputAnswer.setForeground(Color.white);
+                seconds = 10;
+                showQuestion(questions2);
+            });
+            pause.setRepeats(false);
+            pause.start();
+        } else {
+            MusicConfig.initShortMp3(MusicConfig.wrongSong);
+            inputAnswer.setBackground(Color.RED);
+            inputAnswer.setForeground(Color.BLACK);
+            countdown.stop();
+
+            Timer pause = new Timer(500, e -> {
+                inputAnswer.setBackground(ThemeConfig.button);
+                inputAnswer.setForeground(Color.white);
+                seconds = 10;
+                CurrentFrame.dispose();
+                new GameOver(singlePlayer, score, category);
+            });
+            pause.setRepeats(false);
+            pause.start();
+        }
+    }
+
+    private void updateUserRecord() {
+        Database.updateDatabaseUserRecord(activeUser.username, recordColumn, score);
+        switch (category) {
+            case 1 -> {
+                if (activeUser.recordEnglish < score) activeUser.recordEnglish = score;
+            }
+            case 2 -> {
+                if (activeUser.recordMath < score) activeUser.recordMath = score;
+            }
+            case 3 -> {
+                if (activeUser.recordFood < score) activeUser.recordFood = score;
+            }
+            case 4 -> {
+                if (activeUser.recordScience < score) activeUser.recordScience = score;
+            }
+            case 5 -> {
+                if (activeUser.recordCommon < score) activeUser.recordCommon = score;
+            }
+            default -> {
+                if (activeUser.recordGeography < score) activeUser.recordGeography = score;
+            }
+        }
+    }
+
+    private void initComponentsProperties() {
+        for (JButton jButton : Arrays.asList(answerButton1, answerButton2, answerButton3,
+                answerButton4, Freezer, Helper)) {
+            jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
+        }
+        questionLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
+        coinAmountLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
+        currentScoreLable.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
+    }
+
+    private void answerButton3ActionPerformed(ActionEvent e) {
+        isCorrect(answerButton3);
+    }
+
+    private void answerButton2ActionPerformed(ActionEvent e) {
+        isCorrect(answerButton2);
+    }
+
+    private void answerButton4ActionPerformed(ActionEvent e) {
+        isCorrect(answerButton4);
+    }
+
+    private void answerButton1ActionPerformed(ActionEvent e) {
+        isCorrect(answerButton1);
+    }
+
+    private void FreezerActionPerformed(ActionEvent e) {
+        Freezer.setBackground(GuiConfig.COLOR_DARK_RED);
+        Freezer.setForeground(Color.black);
+        Freezer.setEnabled(false);
+        if (activeUser.coins >= 100) {
+            activeUser.coins -= 100;
+            Database.updateDatabaseUserCoins(activeUser.username, activeUser.coins);
+            coinAmountLabel.setText(String.valueOf(activeUser.coins));
+            countdown.stop();
+            Freezer.setText("Froze");
+            Timer delay = new Timer(5000, e1 -> {
+                Freezer.setEnabled(true);
+                Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
+                Freezer.setBackground(GuiConfig.COLOR_GREEN);
+                Freezer.setForeground(Color.white);
+                countdown.restart();
+            });
+            delay.setRepeats(false);
+            delay.start();
+        } else {
+            Freezer.setText("Not Enough Coin");
+            Timer delay = new Timer(2000, e12 -> {
+                Freezer.setEnabled(true);
+                Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
+                Freezer.setBackground(GuiConfig.COLOR_GREEN);
+                Freezer.setForeground(Color.white);
+            });
+            delay.setRepeats(false);
+            delay.start();
+        }
+    }
+
+    private void HelperActionPerformed(ActionEvent e) {
+        Helper.setBackground(GuiConfig.COLOR_DARK_RED);
+        Helper.setForeground(Color.black);
+        Helper.setEnabled(false);
+        if (activeUser.coins >= 200) {
+            activeUser.coins -= 200;
+            Database.updateDatabaseUserCoins(activeUser.username, activeUser.coins);
+            coinAmountLabel.setText(String.valueOf(activeUser.coins));
+            Helper.setText("Out !");
+            String firstOut = outAnswers.get(0);
+            String secondOut = outAnswers.get(1);
+            for (JButton b : outButtons) {
+                if (firstOut.equals(b.getText())) {
+                    b.setVisible(false);
+                }
+                if (secondOut.equals(b.getText())) {
+                    b.setVisible(false);
+                }
+            }
+
+            Timer delay = new Timer(2000, e1 -> {
+                Helper.setEnabled(true);
+                Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+                Helper.setBackground(GuiConfig.COLOR_GREEN);
+                Helper.setForeground(Color.white);
+            });
+            delay.setRepeats(false);
+            delay.start();
+        } else {
+            Helper.setText("Not Enough Coin");
+            Timer delay = new Timer(2000, e12 -> {
+                Helper.setEnabled(true);
+                Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+                Helper.setBackground(GuiConfig.COLOR_GREEN);
+                Helper.setForeground(Color.white);
+            });
+            delay.setRepeats(false);
+            delay.start();
+        }
+    }
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
         questionLabel = new JLabel();
         Freezer = new JButton();
@@ -332,7 +350,7 @@ public class Questions extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                questionsWindowClosing(e);
+                questionsWindowClosed(e);
             }
         });
         var contentPane = getContentPane();
@@ -514,10 +532,10 @@ public class Questions extends JFrame {
         );
         pack();
         setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-	}
-	
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
     private JLabel questionLabel;
     private JButton Freezer;
@@ -532,5 +550,5 @@ public class Questions extends JFrame {
     private JLabel currentScoreLable;
     private JLabel timelabel;
     private JProgressBar timeProgressBar;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

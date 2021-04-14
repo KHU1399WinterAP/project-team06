@@ -5,9 +5,11 @@
 package main.java.gui.GameOver;
 
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.models.User;
 
 import java.awt.*;
@@ -31,9 +33,9 @@ public class GameOver extends JFrame {
 		this.category = category;
 		this.singlePlayer = singlePlayer;
 		initComponents();
+        initCustomTheme();
 		initLabels();
 		initComponentsProperties();
-		initCustomTheme();
 		this.setVisible(true);
 	}
 
@@ -75,6 +77,7 @@ public class GameOver extends JFrame {
 	}
 	
 	private void singlePlayerPage() {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
 		this.dispose();
 		singlePlayer.setVisible(true);
 	}
@@ -199,16 +202,7 @@ public class GameOver extends JFrame {
             );
         }
 
-        GroupLayout contentPaneLayout = new GroupLayout(contentPane);
-        contentPane.setLayout(contentPaneLayout);
-        contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        ProfileSettings.GroupLayoutSettings(contentPane, Panel);
         pack();
         setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents

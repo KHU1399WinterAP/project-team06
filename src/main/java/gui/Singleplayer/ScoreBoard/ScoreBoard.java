@@ -5,6 +5,7 @@
 package main.java.gui.Singleplayer.ScoreBoard;
 
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.config.ProfileConfig;
 import main.java.config.ThemeConfig;
 import main.java.models.ScoreBoardInformation;
@@ -34,11 +35,14 @@ public class ScoreBoard extends JFrame {
     }
 
     private void scoreBoardWindowClosing(WindowEvent e) {
-        this.dispose();
-        singlePlayer.setVisible(true);
+        previousPage();
     }
 
     private void previousButtonActionPerformed(ActionEvent e) {
+        previousPage();
+    }
+    private void previousPage(){
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
         this.dispose();
         singlePlayer.setVisible(true);
     }
@@ -55,7 +59,6 @@ public class ScoreBoard extends JFrame {
         categoryLabel = new JLabel();
         title = new JLabel();
         categoryNameLabel = new JLabel();
-
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));

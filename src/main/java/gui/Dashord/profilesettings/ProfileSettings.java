@@ -6,11 +6,13 @@ package main.java.gui.Dashord.profilesettings;
 
 import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.config.ProfileConfig;
 import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.errors.GuiError;
 import main.java.gui.Dashord.Dashboard;
+import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
 import main.java.models.User;
 import main.java.utils.GuiValidation;
 
@@ -56,8 +58,10 @@ public class ProfileSettings extends JFrame {
     }
 
     private void logoutButtonActionPerformed(ActionEvent e) {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
+        MusicConfig.mp3PlayerLong.stop();
         this.dispose();
-        LoginRegisterMenu.setVisible(true);
+        new LoginRegisterMenu();
     }
 
     private void previousButtonActionPerformed(ActionEvent e) {
@@ -69,13 +73,14 @@ public class ProfileSettings extends JFrame {
     }
 
     private void previousPage() {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
         this.dispose();
         dashboard.setVisible(true);
     }
 
     private void selectAPhoto() {
         for (int i = 0; i < facesButton.size(); i++) {
-            facesButton.get(i).setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face" + (i + 1) + ".png")));
+            facesButton.get(i).setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Avatars/face" + (i + 1) + ".png"))));
         }
     }
 
@@ -93,6 +98,7 @@ public class ProfileSettings extends JFrame {
     }
 
     private void applyChangesButtonActionPerformed(ActionEvent e) {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
         String newPassword = String.valueOf(inputNewPassword.getPassword());
         String newUsername = inputNewUsername.getText();
         var usernameError = GuiValidation.validateUsername(newUsername);
@@ -134,14 +140,15 @@ public class ProfileSettings extends JFrame {
         for (int i = 1; i <= 12; i++) {
             JButton face = new JButton();
             face.setBackground(new Color(0, 112, 192));
-            face.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Avatars/face" + i + ".png")));
+            face.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Avatars/face" + i + ".png"))));
             face.setFocusable(false);
             face.setBorder(null);
             face.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             int finalI = i;
             face.addActionListener(e -> {
+                MusicConfig.initShortMp3(MusicConfig.celClickSong);
                 selectAPhoto();
-                face.setIcon(new ImageIcon(getClass().getResource(ProfileConfig.selected)));
+                face.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(ProfileConfig.selected))));
                 profilePicture = finalI;
             });
             facesButton.add(face);
@@ -165,7 +172,7 @@ public class ProfileSettings extends JFrame {
         setResizable(false);
         setTitle("profile settings");
         setBackground(new Color(0, 112, 192));
-        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg"))).getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -179,12 +186,12 @@ public class ProfileSettings extends JFrame {
         {
             panel.setBackground(new Color(0, 112, 192));
 
-            previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
+            previousButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/previous.png"))));
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);
             previousButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            previousButton.addActionListener(e -> previousButtonActionPerformed(e));
+            previousButton.addActionListener(this::previousButtonActionPerformed);
 
             applyChangesButton.setText("Apply Changes");
             applyChangesButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
@@ -193,7 +200,7 @@ public class ProfileSettings extends JFrame {
             applyChangesButton.setForeground(Color.white);
             applyChangesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             applyChangesButton.setBorder(null);
-            applyChangesButton.addActionListener(e -> applyChangesButtonActionPerformed(e));
+            applyChangesButton.addActionListener(this::applyChangesButtonActionPerformed);
 
             inputNewPassword.setBackground(Color.white);
             inputNewPassword.setForeground(new Color(0, 32, 96));
@@ -210,7 +217,7 @@ public class ProfileSettings extends JFrame {
             logoutButton.setFocusable(false);
             logoutButton.setBorder(null);
             logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            logoutButton.addActionListener(e -> logoutButtonActionPerformed(e));
+            logoutButton.addActionListener(this::logoutButtonActionPerformed);
 
             inputNewUsername.setBackground(Color.white);
             inputNewUsername.setForeground(new Color(0, 32, 96));
@@ -333,6 +340,11 @@ public class ProfileSettings extends JFrame {
             );
         }
 
+        GroupLayoutSettings(contentPane, panel);
+        setLocationRelativeTo(getOwner());
+    }
+
+    public static void GroupLayoutSettings(Container contentPane, JPanel panel) {
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
@@ -343,7 +355,6 @@ public class ProfileSettings extends JFrame {
                 contentPaneLayout.createParallelGroup()
                         .addComponent(panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        setLocationRelativeTo(getOwner());
     }
 
     private JButton previousButton;

@@ -5,6 +5,7 @@
 package main.java.gui.Dashord;
 
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.config.ProfileConfig;
 import main.java.config.ThemeConfig;
 import main.java.database.Database;
@@ -38,10 +39,13 @@ public class Dashboard extends JFrame {
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public Dashboard(JFrame LoginRegisterMenu, User activeUser, String password) {
+        LoginRegisterMenu.dispose();
+        MusicConfig.mp3PlayerLong.stop();
+        MusicConfig.initLongMusic(MusicConfig.gamePLaySong);
         Dashboard.password = password;
         Dashboard.activeUser = activeUser;
         this.LoginRegisterMenu = LoginRegisterMenu;
-        ThemeConfig.themeId=Database.getThemeIdByUsername(activeUser.username);
+        ThemeConfig.themeId = Database.getThemeIdByUsername(activeUser.username);
         initComponents();
         init();
         ThemeConfig.initTheme();
@@ -75,28 +79,30 @@ public class Dashboard extends JFrame {
     }
 
     private void setCurrentInformation() {
-        profileButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource(ProfileConfig.profilePicture(activeUser.profilePicture)))));
+        profileButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass()
+                .getResource(ProfileConfig.profilePicture(activeUser.profilePicture)))));
         usernameLabel.setText(activeUser.username);
     }
 
     private void dashboardFrameWindowClosing(WindowEvent e) {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
         this.dispose();
         LoginRegisterMenu.setVisible(true);
     }
 
     private void settingsIconActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-       var settingPanel= new SettingPanel(this);
-       settingPanel.addWindowListener(new WindowAdapter() {
-           @Override
-           public void windowClosed(WindowEvent e) {
-               initCustomTheme();
-           }
-       });
+        clicked();
+        var settingPanel = new SettingPanel(this);
+        settingPanel.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                initCustomTheme();
+            }
+        });
     }
 
     private void singlePlayerButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        clicked();
         var singlePlayer = new SinglePlayer(this);
         singlePlayer.addWindowListener(new WindowAdapter() {
             @Override
@@ -107,12 +113,12 @@ public class Dashboard extends JFrame {
     }
 
     private void multiplayerButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        clicked();
         new Multiplayer(this);
     }
 
     private void profileButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        clicked();
         var profileSettings = new ProfileSettings(LoginRegisterMenu, this);
         profileSettings.addWindowListener(new WindowAdapter() {
             @Override
@@ -120,6 +126,11 @@ public class Dashboard extends JFrame {
                 setCurrentInformation();
             }
         });
+    }
+
+    private void clicked() {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
+        this.setVisible(false);
     }
 
     private void initComponents() {

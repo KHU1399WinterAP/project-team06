@@ -5,6 +5,7 @@
 package main.java.gui.LoginRegisterMenu;
 
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.gui.LoginMenu.LoginMenu;
 import main.java.gui.RegisterMenu.RegisterMenu;
 
@@ -26,6 +27,7 @@ public class LoginRegisterMenu extends JFrame {
 	// JFormDesigner - End of variables declaration  //GEN-END:variables
 	
 	public LoginRegisterMenu() {
+        MusicConfig.initLongMusic(MusicConfig.LoginSong);
 		initComponents();
 		initComponentsProperties();
 		this.setVisible(true);

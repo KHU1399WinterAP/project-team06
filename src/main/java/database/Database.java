@@ -1,6 +1,7 @@
 package main.java.database;
 
 import main.java.config.DatabaseConfig;
+import main.java.gui.theme.ThemeTypes;
 import main.java.models.ScoreBoardInformation;
 import main.java.models.Question;
 import main.java.models.Settings;
@@ -102,7 +103,7 @@ public class Database {
     public static ArrayList<Theme> getAllTheme() {
         ArrayList<Theme> themes = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT theme.* FROM user,setting,theme;");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM theme");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 themes.add(convertResultSetToTheme(resultSet));

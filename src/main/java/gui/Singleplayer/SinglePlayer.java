@@ -5,10 +5,12 @@
 package main.java.gui.Singleplayer;
 
 import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
 import main.java.database.Database;
 import main.java.gui.Category.Categories;
 import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.gui.Questions.Questions;
 import main.java.gui.Singleplayer.ScoreBoard.ScoreBoard;
 import main.java.models.Question;
@@ -46,7 +48,7 @@ public class SinglePlayer extends JFrame {
             jButton.setBackground(ThemeConfig.background);
         }
         Panel.setBackground(ThemeConfig.background);
-        for (JButton jButton : Arrays.asList(category1, category2, category3, category4, category5, category6)){
+        for (JButton jButton : Arrays.asList(category1, category2, category3, category4, category5, category6)) {
             jButton.setBackground(ThemeConfig.button);
         }
     }
@@ -77,44 +79,81 @@ public class SinglePlayer extends JFrame {
         }
         for (JButton jButton : Arrays.asList(bestRecordCommonButton, bestRecordFoodButton,
                 bestRecordEnglishButton, bestRecordMathButton, bestRecordGeographyButton,
-                bestRecordScienceButton,category1,category2,category3,category4,category5,category6)) {
+                bestRecordScienceButton, category1, category2, category3, category4, category5, category6)) {
             jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
         }
     }
 
-    private void whenCategoryIsSelected(ArrayList<Question> questions, String column,int category) {
+    private void whenCategoryIsSelected(ArrayList<Question> questions, String column, int category) {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
         this.setVisible(false);
-        Questions questionPanel = new Questions(this, questions, column,category);
+        Questions questionPanel = new Questions(this, questions, column, category);
         questionPanel.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 initRecords();
+                MusicConfig.mp3PlayerClockSlow.stop();
+                MusicConfig.mp3PlayerClockFast.stop();
+                if (!MusicConfig.mp3PlayerLong.isPaused()) {
+                    MusicConfig.mp3PlayerLong.stop();
+                    MusicConfig.initLongMusic(MusicConfig.gamePLaySong);
+                }
             }
         });
     }
 
     private void category1ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.english, UserColumns.ENGLISH.column,1);
+        whenCategoryIsSelected(QuestionTypes.english, UserColumns.ENGLISH.column, 1);
     }
 
     private void category2ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.mathematics, UserColumns.MATHEMATICS.column,2);
+        whenCategoryIsSelected(QuestionTypes.mathematics, UserColumns.MATHEMATICS.column, 2);
     }
 
     private void category3ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.foodAndDrink, UserColumns.FOOD_DRINK.column,3);
+        whenCategoryIsSelected(QuestionTypes.foodAndDrink, UserColumns.FOOD_DRINK.column, 3);
     }
 
     private void category4ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.science, UserColumns.SCIENCE.column,4);
+        whenCategoryIsSelected(QuestionTypes.science, UserColumns.SCIENCE.column, 4);
     }
 
     private void category5ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.commonKnowledge, UserColumns.COMMON_KNOWLEDGE.column,5);
+        whenCategoryIsSelected(QuestionTypes.commonKnowledge, UserColumns.COMMON_KNOWLEDGE.column, 5);
     }
 
     private void category6ActionPerformed(ActionEvent e) {
-        whenCategoryIsSelected(QuestionTypes.geography, UserColumns.GEOGRAPHY.column,6);
+        whenCategoryIsSelected(QuestionTypes.geography, UserColumns.GEOGRAPHY.column, 6);
+    }
+
+    private void bestRecordEnglishButtonActionPerformed(ActionEvent e) {
+        recordSelected(UserColumns.ENGLISH.column, Categories.ENGLISH.category);
+    }
+
+    private void bestRecordMathButtonActionPerformed(ActionEvent e) {
+        recordSelected(UserColumns.MATHEMATICS.column, Categories.MATHEMATICS.category);
+    }
+
+    private void bestRecordFoodButtonActionPerformed(ActionEvent e) {
+        recordSelected(UserColumns.FOOD_DRINK.column, Categories.FOOD_DRINK.category);
+    }
+
+    private void bestRecordScienceButtonActionPerformed(ActionEvent e) {
+        recordSelected(UserColumns.SCIENCE.column, Categories.SCIENCE.category);
+    }
+
+    private void bestRecordCommonButtonActionPerformed(ActionEvent e) {
+        recordSelected(UserColumns.COMMON_KNOWLEDGE.column, Categories.COMMON_KNOWLEDGE.category);
+    }
+
+    private void bestRecordGeographyButtonActionPerformed(ActionEvent e) {
+        recordSelected(UserColumns.GEOGRAPHY.column, Categories.GEOGRAPHY.category);
+    }
+
+    private void recordSelected(String column, String category) {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
+        this.setVisible(false);
+        new ScoreBoard(this, Database.getUserOrderedByRecords(column), category);
     }
 
     private void singlePlayerWindowClosing(WindowEvent e) {
@@ -126,44 +165,9 @@ public class SinglePlayer extends JFrame {
     }
 
     private void previousPage() {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
         this.dispose();
         dashboard.setVisible(true);
-    }
-
-    private void bestRecordEnglishButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new ScoreBoard(this, Database.getUserOrderedByRecords
-                ("recordEnglish"), Categories.ENGLISH.category);
-    }
-
-    private void bestRecordMathButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new ScoreBoard(this, Database.getUserOrderedByRecords
-                ("recordMath"),Categories.MATHEMATICS.category);
-    }
-
-    private void bestRecordFoodButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new ScoreBoard(this, Database.getUserOrderedByRecords
-                ("recordFood"),Categories.FOOD_DRINK.category);
-    }
-
-    private void bestRecordScienceButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new ScoreBoard(this, Database.getUserOrderedByRecords
-                ("recordScience"),Categories.SCIENCE.category);
-    }
-
-    private void bestRecordCommonButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new ScoreBoard(this, Database.getUserOrderedByRecords
-                ("recordCommon"),Categories.COMMON_KNOWLEDGE.category);
-    }
-
-    private void bestRecordGeographyButtonActionPerformed(ActionEvent e) {
-        this.setVisible(false);
-        new ScoreBoard(this, Database.getUserOrderedByRecords
-                ("recordGeography"),Categories.GEOGRAPHY.category);
     }
 
     private void initComponents() {
@@ -407,125 +411,116 @@ public class SinglePlayer extends JFrame {
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelLayout.createParallelGroup()
+                    PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
-                                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addComponent(category4, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                            .addComponent(category3, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                            .addComponent(category2, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                            .addComponent(category6, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                            .addComponent(category5, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                            .addComponent(category1, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(PanelLayout.createParallelGroup()
-                                            .addComponent(bestRecordEnglishButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(bestRecordCommonButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(bestRecordGeographyButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(bestRecordScienceButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(bestRecordFoodButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(bestRecordMathButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
-                                        .addComponent(categoriesLabel)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(36, 36, 36)
-                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(yourRecordEnglishLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(label4, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(yourRecordGeographyLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(yourRecordScienceLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(yourRecordCommonLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(yourRecordFoodLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(yourRecordMathLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(label3, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(title)))
-                        .addContainerGap())
+                                    .addContainerGap()
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(label2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
+                                                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                                            .addComponent(category4, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                                                            .addComponent(category3, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                                                            .addComponent(category2, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                                                            .addComponent(category6, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                                                            .addComponent(category5, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                                                            .addComponent(category1, GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                                                                    .addGap(18, 18, 18)
+                                                                    .addGroup(PanelLayout.createParallelGroup()
+                                                                            .addComponent(bestRecordEnglishButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                                                            .addComponent(bestRecordCommonButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                                                            .addComponent(bestRecordGeographyButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                                                            .addComponent(bestRecordScienceButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                                                            .addComponent(bestRecordFoodButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+                                                                            .addComponent(bestRecordMathButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
+                                                            .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
+                                                                    .addComponent(categoriesLabel)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                                                                    .addComponent(label1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
+                                                    .addGap(36, 36, 36)
+                                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                            .addComponent(yourRecordEnglishLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                            .addComponent(label4, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                            .addComponent(yourRecordGeographyLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                            .addComponent(yourRecordScienceLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                            .addComponent(yourRecordCommonLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                            .addComponent(yourRecordFoodLabel, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                            .addComponent(yourRecordMathLabel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                                            .addComponent(label3, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)))
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(title)))
+                                    .addContainerGap())
             );
             PanelLayout.setVerticalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(previousButton)
-                            .addComponent(title))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(categoriesLabel)
-                            .addComponent(label3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(label4)
-                            .addComponent(label2))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(bestRecordEnglishButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(category1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-                                .addGap(13, 13, 13)
-                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(bestRecordMathButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(category2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(yourRecordEnglishLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(yourRecordMathLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(PanelLayout.createParallelGroup()
-                                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                        .addComponent(category3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(category4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                        .addComponent(bestRecordFoodButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(bestRecordScienceButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(bestRecordCommonButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(category5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(yourRecordFoodLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(yourRecordScienceLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(yourRecordCommonLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(yourRecordGeographyLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 41, Short.MAX_VALUE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup()
-                                    .addComponent(bestRecordGeographyButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(category6, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(41, Short.MAX_VALUE))))
+                                    .addGap(13, 13, 13)
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addComponent(previousButton)
+                                            .addComponent(title))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(categoriesLabel)
+                                            .addComponent(label3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(3, 3, 3)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(label4)
+                                            .addComponent(label2))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addGroup(PanelLayout.createParallelGroup()
+                                                            .addComponent(bestRecordEnglishButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(category1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+                                                    .addGap(13, 13, 13)
+                                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                            .addComponent(bestRecordMathButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(category2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addComponent(yourRecordEnglishLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(yourRecordMathLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addGroup(PanelLayout.createParallelGroup()
+                                                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                                                    .addComponent(category3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                    .addComponent(category4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+                                                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                                                    .addComponent(bestRecordFoodButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                                    .addGap(12, 12, 12)
+                                                                    .addComponent(bestRecordScienceButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+                                                    .addGap(18, 18, 18)
+                                                    .addGroup(PanelLayout.createParallelGroup()
+                                                            .addComponent(bestRecordCommonButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(category5, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                                    .addGap(11, 11, 11)
+                                                    .addComponent(yourRecordFoodLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(yourRecordScienceLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(yourRecordCommonLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addComponent(yourRecordGeographyLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(0, 41, Short.MAX_VALUE))
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addGroup(PanelLayout.createParallelGroup()
+                                                            .addComponent(bestRecordGeographyButton, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(category6, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+                                                    .addContainerGap(41, Short.MAX_VALUE))))
             );
         }
 
-        GroupLayout contentPaneLayout = new GroupLayout(contentPane);
-        contentPane.setLayout(contentPaneLayout);
-        contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        ProfileSettings.GroupLayoutSettings(contentPane, Panel);
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

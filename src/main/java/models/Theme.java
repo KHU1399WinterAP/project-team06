@@ -12,4 +12,14 @@ public class Theme {
         this.background = background;
         this.button = button;
     }
+
+    @Override
+    public String toString() {
+        return "Theme{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", background='" + background + '\'' +
+                ", button='" + button + '\'' +
+                '}';
+    }
 }
