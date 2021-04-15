@@ -44,11 +44,11 @@ new FormModel {
 					name: "Helper"
 					"text": "<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>"
 					"background": #Color0
-					"focusable": false
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
+					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "HelperActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {

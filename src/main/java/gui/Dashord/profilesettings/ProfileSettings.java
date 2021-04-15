@@ -139,11 +139,11 @@ public class ProfileSettings extends JFrame {
         facesButton = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
             JButton face = new JButton();
-            face.setBackground(new Color(0, 112, 192));
             face.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Avatars/face" + i + ".png"))));
             face.setFocusable(false);
             face.setBorder(null);
             face.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
             int finalI = i;
             face.addActionListener(e -> {
                 MusicConfig.initShortMp3(MusicConfig.celClickSong);

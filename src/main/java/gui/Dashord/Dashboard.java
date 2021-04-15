@@ -4,10 +4,7 @@
 
 package main.java.gui.Dashord;
 
-import main.java.config.FontConfig;
-import main.java.config.MusicConfig;
-import main.java.config.ProfileConfig;
-import main.java.config.ThemeConfig;
+import main.java.config.*;
 import main.java.database.Database;
 import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.gui.Dashord.setting.SettingPanel;
@@ -134,6 +131,15 @@ public class Dashboard extends JFrame {
         MusicConfig.initShortMp3(MusicConfig.celClickSong);
         this.setVisible(false);
     }
+
+//    private void createUIComponents() {
+//        Panel = new JPanel() {
+//            @Override
+//            protected void paintComponent(Graphics g) {
+//                g.drawImage(SpriteConfig.BACKGROUND,0,0,this);
+//            }
+//        };
+//    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
