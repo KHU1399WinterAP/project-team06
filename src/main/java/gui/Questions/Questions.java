@@ -103,12 +103,7 @@ public class Questions extends JFrame {
     }
 
     private void showQuestion(ArrayList<Question> questions2) {
-        timeProgressBar.setValue(0);
-        countdown.start();
-        for (JButton button : outButtons) {
-            button.setVisible(true);
-        }
-        outAnswers.clear();
+        ResetComponents();
         question = randomQuestion(questions2);
         if (question != null) {
             questionLabel.setText(question.question);
@@ -279,24 +274,12 @@ public class Questions extends JFrame {
             countdown.stop();
             Freezer.setText("Froze");
             Timer delay = new Timer(5000, e1 -> {
-                Freezer.setEnabled(true);
-                Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
-                Freezer.setBackground(GuiConfig.COLOR_GREEN);
-                Freezer.setForeground(Color.white);
                 countdown.restart();
             });
             delay.setRepeats(false);
             delay.start();
         } else {
             Freezer.setText("Not Enough Coin");
-            Timer delay = new Timer(2000, e12 -> {
-                Freezer.setEnabled(true);
-                Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
-                Freezer.setBackground(GuiConfig.COLOR_GREEN);
-                Freezer.setForeground(Color.white);
-            });
-            delay.setRepeats(false);
-            delay.start();
         }
     }
 
@@ -323,19 +306,26 @@ public class Questions extends JFrame {
         } else {
             Helper.setText("Not Enough Coin");
         }
-        helperTimer();
+
     }
 
-    private void helperTimer() {
-        Timer delay = new Timer(2000, e1 -> {
-            Helper.setEnabled(true);
-            Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
-            Helper.setBackground(GuiConfig.COLOR_GREEN);
-            Helper.setForeground(Color.white);
-        });
-        delay.setRepeats(false);
-        delay.start();
+    private void ResetComponents(){
+        countdown.start();
+        outAnswers.clear();
+        timeProgressBar.setValue(0);
+        for (JButton button : outButtons) {
+            button.setVisible(true);
+        }
+        Helper.setEnabled(true);
+        Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
+        Helper.setBackground(GuiConfig.COLOR_GREEN);
+        Helper.setForeground(Color.white);
+        Freezer.setEnabled(true);
+        Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins</html>");
+        Freezer.setBackground(GuiConfig.COLOR_GREEN);
+        Freezer.setForeground(Color.white);
     }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
