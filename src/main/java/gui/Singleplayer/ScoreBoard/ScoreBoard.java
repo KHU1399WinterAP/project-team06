@@ -66,7 +66,7 @@ public class ScoreBoard extends JFrame {
         setResizable(false);
         setTitle("Score Boad");
         setBackground(new Color(0, 112, 192));
-        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg"))).getImage());
         setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -87,28 +87,26 @@ public class ScoreBoard extends JFrame {
                 panel.setLayout(null);
 
                 //---- previousButton ----
-                previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
+                previousButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/previous.png"))));
                 previousButton.setBackground(new Color(0, 112, 192));
                 previousButton.setFocusable(false);
                 previousButton.setBorder(null);
                 previousButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                previousButton.addActionListener(e -> previousButtonActionPerformed(e));
+                previousButton.addActionListener(this::previousButtonActionPerformed);
                 panel.add(previousButton);
                 previousButton.setBounds(5, 10, 57, 48);
 
                 //---- categoryLabel ----
                 categoryLabel.setText("Category :");
-                categoryLabel.setBackground(new Color(255, 153, 0));
-                categoryLabel.setForeground(new Color(255, 153, 0));
+                categoryLabel.setForeground(Color.white);
                 categoryLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
                 panel.add(categoryLabel);
                 categoryLabel.setBounds(10, 85, 125, 34);
 
                 //---- title ----
-                title.setText("Score Board");
+                title.setText("Leader Board");
                 title.setFont(new Font("Comic Sans MS", Font.BOLD, 39));
-                title.setBackground(new Color(153, 0, 255));
-                title.setForeground(new Color(255, 204, 102));
+                title.setForeground(Color.white);
                 panel.add(title);
                 title.setBounds(75, 10, 260, 55);
                 categoryNameLabel.setText(categoryName);
