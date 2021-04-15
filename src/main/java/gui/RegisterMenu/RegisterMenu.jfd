@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp mainBackground::t:::x}"
-			"$verticalGroup": "par l {comp mainBackground::l::565:x}"
+			"$horizontalGroup": "par l {comp mainBackground::l::388:x}"
+			"$verticalGroup": "par l {comp mainBackground::l::610:x}"
 		} ) {
 			name: "this"
 			"resizable": false
@@ -19,30 +19,22 @@ new FormModel {
 			"modalExclusionType": enum java.awt.Dialog$ModalExclusionType APPLICATION_EXCLUDE
 			"name": "RegisterMenu"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosed", "RegisterFrameWindowClosed", true ) )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq {space :p:138:p, comp previousButton:::p:100:p}, seq l {space :p:20:p, par l {seq t {comp faceLabel:::p::p, space :p:90:p}, par l:t {comp scrollPane1::l:p:203:p, seq t {comp usernameLabel:::p::p, space :::p, comp usernameErrorLabel:::p:203:p}, par l:t {seq l {comp passwordLabel:::p::p, space :::p, comp passwordErrorLabel:::p:207:p}, comp inputPassword:::p:202:p, comp registerButton::l:p:202:p}}, comp textLabel::t:p::p}}}, space :0:32:x}}"
-				"$verticalGroup": "par l {seq t {space :p:32:p, comp faceLabel:::p:147:p, space :::p, comp textLabel:::p::p, space s:::p, par l {comp usernameLabel:::p:35:p, comp usernameErrorLabel:::p:33:p}, space :::p, comp scrollPane1:::p::p, space :::p, par l {comp passwordLabel:::p:39:p, comp passwordErrorLabel:::p:33:p}, space :::p, comp inputPassword:::::p, space u:::p, comp registerButton:::p:47:p, space :::x, comp previousButton:::p:30:p, space :::p}}"
-			} ) {
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "mainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
 				"minimumSize": new java.awt.Dimension( 380, 605 )
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				"focusable": false
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "textLabel"
-					"text": "Quiz Of Kings"
-					"font": new java.awt.Font( "Comic Sans MS", 0, 50 )
-					"foreground": sfield java.awt.Color white
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "faceLabel"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/SmallLogo.jpg" )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "usernameLabel"
 					"text": "Username"
 					"foreground": sfield java.awt.Color white
 					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 85
+					"y": 250
+					"width": 72
+					"height": 35
 				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
@@ -54,20 +46,33 @@ new FormModel {
 						"tabSize": 10
 						"alignmentX": 1.5f
 						"alignmentY": 1.5f
-						"font": new java.awt.Font( "Comic Sans MS", 0, 12 )
+						"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
 					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 85
+					"y": 290
+					"width": 235
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "passwordLabel"
 					"text": "Password"
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					"font": new java.awt.Font( "Comic Sans MS", 0, 14 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 85
+					"y": 360
+					"width": 74
+					"height": 39
 				} )
 				add( new FormComponent( "javax.swing.JPasswordField" ) {
 					name: "inputPassword"
 					"background": sfield java.awt.Color white
 					"foreground": new java.awt.Color( 0, 32, 96, 255 )
-					"font": new java.awt.Font( "Comic Sans MS", 0, 12 )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 85
+					"y": 405
+					"width": 235
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "registerButton"
@@ -79,21 +84,38 @@ new FormModel {
 					"cursor": &Cursor0 new java.awt.Cursor( 12 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RegisterButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 85
+					"y": 510
+					"width": 235
+					"height": 47
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "usernameErrorLabel"
 					"foreground": sfield java.awt.Color red
-					"font": new java.awt.Font( "Segoe UI", 0, 12 )
+					"font": new java.awt.Font( "Comic Sans MS", 2, 13 )
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 45
+					"y": 325
+					"width": 315
+					"height": 33
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "passwordErrorLabel"
 					"foreground": sfield java.awt.Color red
-					"font": new java.awt.Font( "Segoe UI", 0, 12 )
+					"font": new java.awt.Font( "Comic Sans MS", 2, 13 )
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 45
+					"y": 445
+					"width": 315
+					"height": 33
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "previousButton"
 					"text": "PREVIOUS"
-					"background": new java.awt.Color( 137, 0, 0, 209 )
+					"background": new java.awt.Color( 157, 0, 0, 255 )
 					"font": new java.awt.Font( "Comic Sans MS", 2, 12 )
 					"foreground": sfield java.awt.Color white
 					"alignmentX": 16.0f
@@ -101,11 +123,32 @@ new FormModel {
 					"cursor": #Cursor0
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "PreviousButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 140
+					"y": 560
+					"width": 124
+					"height": 38
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "PictureLabel"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/icon@2x.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 40
+					"y": 35
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/appTitle.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 195
+					"y": 35
+					"width": 161
+					"height": 168
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 380, 605 )
-			"location": new java.awt.Point( 250, 40 )
+			"size": new java.awt.Dimension( 390, 650 )
+			"location": new java.awt.Point( 0, 0 )
 		} )
 	}
 }

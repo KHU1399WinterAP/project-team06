@@ -6,6 +6,7 @@ package main.java.gui.LoginRegisterMenu;
 
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
+import main.java.config.SpriteConfig;
 import main.java.gui.LoginMenu.LoginMenu;
 import main.java.gui.RegisterMenu.RegisterMenu;
 
@@ -32,6 +33,15 @@ public class LoginRegisterMenu extends JFrame {
 		initComponentsProperties();
 		this.setVisible(true);
 	}
+
+        private void createUIComponents() {
+        mainBackground = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                g.drawImage(SpriteConfig.BACKGROUND,0,0,this);
+            }
+        };
+    }
 	
 	private void RegisterActionPerformed(ActionEvent e) {
 		new RegisterMenu(this);
@@ -44,13 +54,14 @@ public class LoginRegisterMenu extends JFrame {
 	}
 	
 	private void initComponentsProperties() {
-		loginButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 25));
+		loginButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 30));
 		registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 25));
 	}
 	
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        mainBackground = new JPanel();
+        createUIComponents();
+
         Banner = new JLabel();
         loginButton = new JButton();
         registerButton = new JButton();
@@ -71,11 +82,14 @@ public class LoginRegisterMenu extends JFrame {
             mainBackground.setMaximumSize(new Dimension(380, 605));
             mainBackground.setMinimumSize(new Dimension(380, 605));
             mainBackground.setBackground(new Color(0, 112, 192));
+            mainBackground.setLayout(null);
 
             //---- Banner ----
             Banner.setFont(new Font("Calibri", Font.PLAIN, 54));
             Banner.setForeground(Color.white);
             Banner.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/banner.png")));
+            mainBackground.add(Banner);
+            Banner.setBounds(new Rectangle(new Point(14, 72), Banner.getPreferredSize()));
 
             //---- loginButton ----
             loginButton.setText("LOGIN");
@@ -86,6 +100,8 @@ public class LoginRegisterMenu extends JFrame {
             loginButton.setBorder(null);
             loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             loginButton.addActionListener(e -> LoginActionPerformed(e));
+            mainBackground.add(loginButton);
+            loginButton.setBounds(25, 350, 166, 77);
 
             //---- registerButton ----
             registerButton.setText("REGISTER");
@@ -96,32 +112,23 @@ public class LoginRegisterMenu extends JFrame {
             registerButton.setBorder(null);
             registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             registerButton.addActionListener(e -> RegisterActionPerformed(e));
+            mainBackground.add(registerButton);
+            registerButton.setBounds(195, 350, 164, 77);
 
-            GroupLayout mainBackgroundLayout = new GroupLayout(mainBackground);
-            mainBackground.setLayout(mainBackgroundLayout);
-            mainBackgroundLayout.setHorizontalGroup(
-                mainBackgroundLayout.createParallelGroup()
-                    .addGroup(mainBackgroundLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(mainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                            .addGroup(mainBackgroundLayout.createSequentialGroup()
-                                .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(registerButton, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
-                            .addComponent(Banner))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-            mainBackgroundLayout.setVerticalGroup(
-                mainBackgroundLayout.createParallelGroup()
-                    .addGroup(mainBackgroundLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(Banner)
-                        .addGap(115, 115, 115)
-                        .addGroup(mainBackgroundLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(registerButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loginButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < mainBackground.getComponentCount(); i++) {
+                    Rectangle bounds = mainBackground.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = mainBackground.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                mainBackground.setMinimumSize(preferredSize);
+                mainBackground.setPreferredSize(preferredSize);
+            }
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
@@ -132,7 +139,7 @@ public class LoginRegisterMenu extends JFrame {
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());

@@ -132,15 +132,6 @@ public class Dashboard extends JFrame {
         this.setVisible(false);
     }
 
-//    private void createUIComponents() {
-//        Panel = new JPanel() {
-//            @Override
-//            protected void paintComponent(Graphics g) {
-//                g.drawImage(SpriteConfig.BACKGROUND,0,0,this);
-//            }
-//        };
-//    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();

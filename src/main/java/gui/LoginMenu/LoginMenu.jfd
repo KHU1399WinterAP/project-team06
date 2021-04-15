@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp mainBackground::l::378:x}"
-			"$verticalGroup": "par l {comp mainBackground::t::573:x}"
+			"$horizontalGroup": "par l {comp mainBackground::l:::x}"
+			"$verticalGroup": "par l {comp mainBackground::l::575:x}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
@@ -20,25 +20,14 @@ new FormModel {
 			"name": "LoginMenu"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "loginMenuWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq {space :p:23:p, comp textLabel:::p::p}, seq l {space :p:107:p, comp faceLabel:::p:154:p}}, space :::x}, seq {space :p:87:p, par l {comp usernameLabel:::p::p, comp inputPassword:::p:198:p, comp inputUsername:::p:198:p, comp passwordLabel::l:p::p, comp loginButton::l:p:200:p}, space :0:0:x}, seq t {space :0:0:x, comp previousButton:::p:100:p, space :p:137:p}}"
-				"$verticalGroup": "par l {seq t {space :p:18:p, comp faceLabel:::p:141:p, space :::p, comp textLabel:::p::p, space u:::p, comp usernameLabel:::p:35:p, space :::p, comp inputUsername:::p::p, space :p:18:p, comp passwordLabel:::p:39:p, space :::p, comp inputPassword:::::p, space u:::p, comp loginButton:::p:47:p, space :::x, comp previousButton:::p:30:p, space :p:17:p}}"
+				"$horizontalGroup": "par l {seq {space ::35:x, comp PictureLabel:::p::p, space :::p, comp label1:::p:161:p, space :p:30:p}, seq l {space :p:91:p, par l {comp inputPassword::l:p:198:p, comp passwordLabel::l:p::p, comp inputUsername::l:p:198:p, comp usernameLabel::l:p::p, comp loginButton::l:p:200:p}, space :0:0:x}, seq l {space :p:129:p, comp previousButton:::p:123:p, space :::x}}"
+				"$verticalGroup": "par l {seq t {space :p:59:p, par l:::p {comp label1:::::x, comp PictureLabel:::::x}, space :p:43:p, comp usernameLabel:::p:35:p, space :::p, comp inputUsername:::p:22:p, space :::p, comp passwordLabel:::p:39:p, space :::p, comp inputPassword:::::p, space :::x, comp loginButton:::p:47:p, space :::p, comp previousButton:::p:42:p, space :p:20:p}}"
 			} ) {
 				name: "mainBackground"
 				"maximumSize": new java.awt.Dimension( 380, 605 )
 				"minimumSize": new java.awt.Dimension( 380, 605 )
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				"focusable": false
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "textLabel"
-					"text": "Quiz Of Kings"
-					"font": new java.awt.Font( "Comic Sans MS", 0, 50 )
-					"foreground": sfield java.awt.Color white
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "faceLabel"
-					"text": "text"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/SmallLogo.jpg" )
-				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "usernameLabel"
 					"text": "Username"
@@ -71,7 +60,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "previousButton"
 					"text": "PREVIOUS"
-					"background": new java.awt.Color( 137, 0, 0, 209 )
+					"background": new java.awt.Color( 157, 0, 0, 255 )
 					"font": new java.awt.Font( "Comic Sans MS", 3, 12 )
 					"foreground": sfield java.awt.Color white
 					"alignmentX": 16.0f
@@ -89,10 +78,18 @@ new FormModel {
 					"alignmentX": 1.5f
 					"alignmentY": 1.5f
 				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "PictureLabel"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/icon@2x.png" )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/appTitle.png" )
+				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 380, 605 )
-			"location": new java.awt.Point( 500, 85 )
+			"size": new java.awt.Dimension( 385, 615 )
+			"location": new java.awt.Point( 0, 0 )
 		} )
 	}
 }

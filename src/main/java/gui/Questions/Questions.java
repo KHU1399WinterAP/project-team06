@@ -146,7 +146,7 @@ public class Questions extends JFrame {
         }
     }
 
-    private void questionsWindowClosed(WindowEvent e) {
+    private void questionsWindowClosing(WindowEvent e) {
         MusicConfig.initShortMp3(MusicConfig.celClickSong);
         countdown.stop();
         new GameOver(singlePlayer, score, category);
@@ -199,7 +199,7 @@ public class Questions extends JFrame {
     private void updateUserRecord() {
         switch (category) {
             case 1 -> {
-                if (activeUser.recordEnglish < score){
+                if (activeUser.recordEnglish < score) {
                     activeUser.recordEnglish = score;
                     Database.updateDatabaseUserRecord(activeUser.username, recordColumn, score);
                 }
@@ -217,7 +217,7 @@ public class Questions extends JFrame {
                 }
             }
             case 4 -> {
-                if (activeUser.recordScience < score){
+                if (activeUser.recordScience < score) {
                     activeUser.recordScience = score;
                     Database.updateDatabaseUserRecord(activeUser.username, recordColumn, score);
                 }
@@ -229,7 +229,7 @@ public class Questions extends JFrame {
                 }
             }
             default -> {
-                if (activeUser.recordGeography < score){
+                if (activeUser.recordGeography < score) {
                     activeUser.recordGeography = score;
                     Database.updateDatabaseUserRecord(activeUser.username, recordColumn, score);
                 }
@@ -274,7 +274,8 @@ public class Questions extends JFrame {
             countdown.stop();
             Freezer.setText("Froze");
             Timer delay = new Timer(5000, e1 -> {
-                countdown.restart();
+                if (CurrentFrame.isActive())
+                    countdown.restart();
             });
             delay.setRepeats(false);
             delay.start();
@@ -309,7 +310,7 @@ public class Questions extends JFrame {
 
     }
 
-    private void ResetComponents(){
+    private void ResetComponents() {
         countdown.start();
         outAnswers.clear();
         timeProgressBar.setValue(0);
@@ -355,7 +356,7 @@ public class Questions extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                questionsWindowClosed(e);
+                questionsWindowClosing(e);
             }
         });
         var contentPane = getContentPane();

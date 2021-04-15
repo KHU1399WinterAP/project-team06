@@ -212,7 +212,7 @@ public class ProfileSettings extends JFrame {
             errorLabel.setBackground(new Color(0, 112, 192));
 
             logoutButton.setText("LOG OUT");
-            logoutButton.setBackground(new Color(137, 0, 0, 209));
+            logoutButton.setBackground(new Color(157, 0, 0));
             logoutButton.setForeground(Color.white);
             logoutButton.setFocusable(false);
             logoutButton.setBorder(null);

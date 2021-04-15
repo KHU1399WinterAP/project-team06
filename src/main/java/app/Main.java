@@ -6,6 +6,8 @@ import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
 import main.java.gui.theme.ThemeTypes;
 import main.java.models.User;
 
+import javax.swing.*;
+
 public class Main {
 	public static void main(String[] args) {
 		FontConfig.initFonts();
