@@ -66,7 +66,7 @@ public class ScoreBoard extends JFrame {
         setResizable(false);
         setTitle("Score Boad");
         setBackground(new Color(0, 112, 192));
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/Logo.jpg"))).getImage());
         setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

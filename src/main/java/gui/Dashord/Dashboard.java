@@ -150,7 +150,7 @@ public class Dashboard extends JFrame {
         setResizable(false);
         setTitle("Dashboard");
         setBackground(new Color(0, 112, 192));
-        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

@@ -172,7 +172,7 @@ public class ProfileSettings extends JFrame {
         setResizable(false);
         setTitle("profile settings");
         setBackground(new Color(0, 112, 192));
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg"))).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/Logo.jpg"))).getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override

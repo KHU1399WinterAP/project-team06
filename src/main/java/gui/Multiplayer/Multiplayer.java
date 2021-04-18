@@ -35,7 +35,7 @@ public class Multiplayer extends JFrame {
         setResizable(false);
         setTitle("Multiplayer");
         setBackground(new Color(0, 112, 192));
-        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
         setName("Multiplayer");
         addWindowListener(new WindowAdapter() {
             @Override
@@ -81,7 +81,7 @@ public class Multiplayer extends JFrame {
                         .addComponent(previousButton)
                         .addGap(28, 28, 28)
                         .addComponent(QuestionMark)
-                        .addContainerGap(181, Short.MAX_VALUE))
+                        .addContainerGap(163, Short.MAX_VALUE))
             );
         }
 

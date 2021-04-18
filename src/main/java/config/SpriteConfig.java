@@ -9,9 +9,6 @@ public class SpriteConfig {
     public static final URL BACKGROUND_URL = SpriteConfig.class.getResource("/main/resources/icons/Theme/Background.jpg");
     public static final BufferedImage BACKGROUND = createImage(BACKGROUND_URL);
 
-    public static final URL BACKGROUNDLogin_URL = SpriteConfig.class.getResource("/main/resources/icons/Theme/login &register.jpg");
-    public static final BufferedImage BACKGROUNDLogin = createImage(BACKGROUNDLogin_URL);
-
     private static BufferedImage createImage(URL url) {
         try {
             if (url != null) return ImageIO.read(url);

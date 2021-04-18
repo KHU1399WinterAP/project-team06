@@ -14,7 +14,7 @@ new FormModel {
 			"resizable": false
 			"title": "Questions"
 			"background": new java.awt.Color( 0, 112, 192, 255 )
-			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo (1).jpg" )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 				"$horizontalGroup": "par l {seq {space :p:122:p, par l:::p {seq l {comp label1:::::x, space u:::p, comp currentScoreLable:::p:43:p}, seq l {comp coinLabel:::p:47:p, space :::p, comp coinAmountLabel:::p:64:p}}, space ::139:x}, seq l {par t {seq {space :p:63:p, comp yourRecordLabel:::p:118:p, space :::p, comp recordLabel:::p:71:p}, seq l {space :p:121:p, comp tryAgainButton:::p:137:p}}, space :0:120:x}}"

@@ -87,7 +87,7 @@ public class LoginMenu extends JFrame {
         setBackground(new Color(0, 112, 192));
         setTitle("Login Menu");
         setFont(new Font("Calibri", Font.PLAIN, 14));
-        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo (1).jpg")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setResizable(false);
@@ -162,7 +162,7 @@ public class LoginMenu extends JFrame {
             mainBackgroundLayout.setHorizontalGroup(
                 mainBackgroundLayout.createParallelGroup()
                     .addGroup(mainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap(35, Short.MAX_VALUE)
+                        .addContainerGap(38, Short.MAX_VALUE)
                         .addComponent(PictureLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(label1, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)

@@ -198,7 +198,7 @@ public class RegisterMenu extends JFrame {
             registerButton.setBorder(null);
             registerButton.addActionListener(e -> RegisterButtonActionPerformed(e));
             mainBackground.add(registerButton);
-            registerButton.setBounds(85, 510, 235, 47);
+            registerButton.setBounds(85, 485, 235, 47);
 
             //---- usernameErrorLabel ----
             usernameErrorLabel.setForeground(Color.red);
@@ -225,7 +225,7 @@ public class RegisterMenu extends JFrame {
             previousButton.setBorder(null);
             previousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
             mainBackground.add(previousButton);
-            previousButton.setBounds(140, 560, 124, 38);
+            previousButton.setBounds(140, 535, 124, 38);
 
             //---- PictureLabel ----
             PictureLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/icon@2x.png")));
