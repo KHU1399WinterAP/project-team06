@@ -2,30 +2,30 @@
 =
 ![Logo](https://user-images.githubusercontent.com/75629695/114583155-8d9f8000-9c96-11eb-8114-dd1012e3c9bb.jpg)
 
-This game is based on competition.there are some questions that need to be answered in the period of time given. you can respond your types of questions. We have prepared verious categories that enable you to find the questions you like.
+This game is based on competition. There are some questions that need to be answered in limited time. You can select the question's category. There are various categories that you can choose based on you preference.
 
-there are some power ups to assist you play eaesir however it cost you coins !!. inorder to collect coins you need to answer the questions.
+You can use power-ups to assist you answering questions! The thing is you need coins to use them :) . Inorder to collect coins you just have to answer the questions correctly.
 
-you can find the twenty top players in the score board.
+There is a scoreboard that you can find the top 20 players there. Can you compete with them? :) .
 
 We hope you enjoy playing our game.
 
-This game is developed by university students of khurazmi university of karaj and designed by JForm Designer one of the [**intellij**](https://www.jetbrains.com/idea/download/#section=windows) plugins so we recommend you before playing make sure you have installed intellij and the plugin.
+This game is developed by Khurazmi university students. We used JForm Designer in the designing process! It's one of the [**intellij**](https://www.jetbrains.com/idea/download/#section=windows) plugins so we recommend you to install both Intellij and its plugin before playing the game.
 
 # Team 06 
-team members :
+Team Members :
 -
  - Seyed Hossein Borghei 992023005
  - Alireza Reghabi 992023018
  - Sina Omidvar 992023003
 
 
-library used :
+Used Libraries :
 -
  * annotations-5.1 ( for **download** click [here](http://www.java2s.com/Code/Jar/a/Downloadannotations51jar.htm) )
  * jaco-mp3-player-0.9.3 ( for **download** click [here](https://sourceforge.net/projects/jacomp3player/files/older%20versions/jaco-mp3-player-0.9.3.zip/download) ) this library is used to play the music in the app.
  * mysql-connector-java-8.0.23 ( for **download** click [here](https://mvnrepository.com/artifact/mysql/mysql-connector-java/8.0.23) ) 
 
-Follow the address blow inorder to add these libraries to intellij
+Follow the address below inorder to add these libraries to intellij.
 
 File > project structure > Libraries > plus(+) > java > find the jarfile you have dowmloaded from links above
