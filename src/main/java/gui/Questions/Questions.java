@@ -47,7 +47,7 @@ public class Questions extends JFrame {
         this.singlePlayer = singlePlayer;
         questions2 = new ArrayList<>(questions);
         initComponents();
-        clockAnimationSlow=new ClockAnimation(clockLabel);
+        clockAnimationSlow = new ClockAnimation(clockLabel);
         init();
         initCustomTheme();
         this.setVisible(true);
@@ -60,7 +60,7 @@ public class Questions extends JFrame {
         }
     }
 
-    private void initCustomComponents(){
+    private void initCustomComponents() {
         clockLabel.setIcon(SpriteConfig.CLOCK_PURPLE);
 
         clockAnimationSlow.start();
@@ -72,28 +72,22 @@ public class Questions extends JFrame {
             timelabel.setText(String.valueOf(seconds));
             seconds--;
             timeProgressBar.setValue(10 - seconds);
-            if (seconds > 6) {
-                if (MusicConfig.mp3PlayerClockSlow.isStopped())
-                    MusicConfig.initClockMp3(MusicConfig.mp3PlayerClockSlow);
+            if (seconds == 9) {
+                MusicConfig.initClockMp3(MusicConfig.mp3PlayerClockSlow);
                 timeProgressBar.setBackground(Color.green);
-            }
-            else if (seconds > 3){
+            } else if (seconds == 6) {
                 timeProgressBar.setBackground(Color.yellow);
-                clockAnimationSlow.time=400;
-            }
-            else if (seconds > 0) {
-                if (!MusicConfig.mp3PlayerClockSlow.isStopped())
-                    MusicConfig.mp3PlayerClockSlow.stop();
-
-                if (MusicConfig.mp3PlayerClockFast.isStopped())
-                    MusicConfig.initClockMp3(MusicConfig.mp3PlayerClockFast);
-                clockAnimationSlow.time=100;
+                clockAnimationSlow.time = 400;
+            } else if (seconds == 3) {
+                MusicConfig.mp3PlayerClockSlow.stop();
+                MusicConfig.initClockMp3(MusicConfig.mp3PlayerClockFast);
                 timeProgressBar.setBackground(Color.red);
-            }
-            else {
+                clockAnimationSlow.time=100;
+            } else if (seconds==0){
+                MusicConfig.initShortMp3(MusicConfig.wrongSong);
                 CurrentFrame.dispose();
                 countdown.stop();
-                clockAnimationSlow.time=0;
+                clockAnimationSlow.time = 0;
                 MusicConfig.mp3PlayerClockFast.stop();
                 new GameOver(singlePlayer, score, category);
             }
@@ -171,7 +165,8 @@ public class Questions extends JFrame {
 
     private void isCorrect(JButton inputAnswer) {
         if (inputAnswer.getText().equals(question.correctAnswer)) {
-            clockAnimationSlow.time=800;
+            timeProgressBar.setBackground(Color.green);
+            clockAnimationSlow.time = 800;
             MusicConfig.initShortMp3(MusicConfig.correctSong);
             countdown.stop();
             MusicConfig.mp3PlayerClockFast.stop();
@@ -198,7 +193,7 @@ public class Questions extends JFrame {
             inputAnswer.setBackground(Color.RED);
             inputAnswer.setForeground(Color.BLACK);
             countdown.stop();
-            clockAnimationSlow.time=0;
+            clockAnimationSlow.time = 0;
             MusicConfig.mp3PlayerClockFast.stop();
             MusicConfig.mp3PlayerClockSlow.stop();
 
@@ -473,88 +468,88 @@ public class Questions extends JFrame {
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelLayout.createParallelGroup()
+                    PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGap(0, 19, Short.MAX_VALUE)
-                                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(answerButton3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(answerButton4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                            .addComponent(Freezer, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                        .addGap(27, 27, 27)
-                                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addComponent(label1)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(timelabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(clockLabel, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)))
-                                .addGap(26, 26, 26))
-                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                .addComponent(questionLabel, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                                .addContainerGap())))
+                                    .addContainerGap()
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                                    .addGap(0, 19, Short.MAX_VALUE)
+                                                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                                            .addComponent(answerButton3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                                                            .addComponent(answerButton4, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                                                            .addComponent(Freezer, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                                                    .addGap(27, 27, 27)
+                                                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                                            .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                                                                            .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+                                                                            .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)))
+                                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                                    .addComponent(label1)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                    .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+                                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                                    .addGap(19, 19, 19)
+                                                                    .addComponent(timelabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(clockLabel, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)))
+                                                    .addGap(26, 26, 26))
+                                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                                    .addComponent(questionLabel, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+                                                    .addContainerGap())))
             );
             PanelLayout.setVerticalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelLayout.createParallelGroup()
+                    PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(currentScoreLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(4, 4, 4))
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(timelabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(clockLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(answerButton3, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(answerButton4, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(Freezer, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35))
+                                    .addContainerGap()
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addGroup(PanelLayout.createSequentialGroup()
+                                                    .addComponent(currentScoreLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addGap(4, 4, 4))
+                                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(PanelLayout.createParallelGroup()
+                                            .addComponent(timelabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                                    .addGap(0, 0, Short.MAX_VALUE)
+                                                    .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(clockLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(answerButton3, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(answerButton4, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(37, 37, 37)
+                                    .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                            .addComponent(Freezer, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(35, 35, 35))
             );
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
