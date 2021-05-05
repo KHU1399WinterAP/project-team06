@@ -29,11 +29,11 @@ public class Dashboard extends JFrame {
     private JPanel Panel;
     private JLabel coinIcon;
     private JButton settingsIcon;
-    private JButton multiplayerButton;
-    private JButton singlePlayerButton;
     private JButton profileButton;
     private JLabel usernameLabel;
     private JLabel coinLabel;
+    private JButton singlePlayerButton;
+    private JButton multiplayerButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public Dashboard(JFrame LoginRegisterMenu, User activeUser, String password) {
@@ -137,11 +137,11 @@ public class Dashboard extends JFrame {
         Panel = new JPanel();
         coinIcon = new JLabel();
         settingsIcon = new JButton();
-        multiplayerButton = new JButton();
-        singlePlayerButton = new JButton();
         profileButton = new JButton();
         usernameLabel = new JLabel();
         coinLabel = new JLabel();
+        singlePlayerButton = new JButton();
+        multiplayerButton = new JButton();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -162,9 +162,12 @@ public class Dashboard extends JFrame {
         //======== Panel ========
         {
             Panel.setBackground(new Color(0, 112, 192));
+            Panel.setLayout(null);
 
             //---- coinIcon ----
             coinIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/smallCoin.png")));
+            Panel.add(coinIcon);
+            coinIcon.setBounds(new Rectangle(new Point(331, 30), coinIcon.getPreferredSize()));
 
             //---- settingsIcon ----
             settingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settingsIcon.png")));
@@ -173,16 +176,30 @@ public class Dashboard extends JFrame {
             settingsIcon.setBackground(new Color(0, 112, 192));
             settingsIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             settingsIcon.addActionListener(e -> settingsIconActionPerformed(e));
+            Panel.add(settingsIcon);
+            settingsIcon.setBounds(12, 29, 41, settingsIcon.getPreferredSize().height);
 
-            //---- multiplayerButton ----
-            multiplayerButton.setText("Multiplayer");
-            multiplayerButton.setBackground(new Color(0, 32, 96));
-            multiplayerButton.setForeground(Color.white);
-            multiplayerButton.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
-            multiplayerButton.setFocusable(false);
-            multiplayerButton.setBorder(null);
-            multiplayerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            multiplayerButton.addActionListener(e -> multiplayerButtonActionPerformed(e));
+            //---- profileButton ----
+            profileButton.setFocusable(false);
+            profileButton.setBorder(null);
+            profileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            profileButton.addActionListener(e -> profileButtonActionPerformed(e));
+            Panel.add(profileButton);
+            profileButton.setBounds(59, 6, 58, 61);
+
+            //---- usernameLabel ----
+            usernameLabel.setBackground(Color.white);
+            usernameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
+            usernameLabel.setForeground(Color.white);
+            Panel.add(usernameLabel);
+            usernameLabel.setBounds(123, 30, 134, 37);
+
+            //---- coinLabel ----
+            coinLabel.setBackground(new Color(255, 255, 51));
+            coinLabel.setForeground(new Color(255, 152, 0));
+            coinLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+            Panel.add(coinLabel);
+            coinLabel.setBounds(263, 30, 62, 29);
 
             //---- singlePlayerButton ----
             singlePlayerButton.setText("Singleplayer");
@@ -193,68 +210,35 @@ public class Dashboard extends JFrame {
             singlePlayerButton.setBorder(null);
             singlePlayerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             singlePlayerButton.addActionListener(e -> singlePlayerButtonActionPerformed(e));
+            Panel.add(singlePlayerButton);
+            singlePlayerButton.setBounds(30, 135, 151, 69);
 
-            //---- profileButton ----
-            profileButton.setFocusable(false);
-            profileButton.setBorder(null);
-            profileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            profileButton.addActionListener(e -> profileButtonActionPerformed(e));
+            //---- multiplayerButton ----
+            multiplayerButton.setText("Multiplayer");
+            multiplayerButton.setBackground(new Color(0, 32, 96));
+            multiplayerButton.setForeground(Color.white);
+            multiplayerButton.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+            multiplayerButton.setFocusable(false);
+            multiplayerButton.setBorder(null);
+            multiplayerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            multiplayerButton.addActionListener(e -> multiplayerButtonActionPerformed(e));
+            Panel.add(multiplayerButton);
+            multiplayerButton.setBounds(200, 135, 154, 69);
 
-            //---- usernameLabel ----
-            usernameLabel.setBackground(Color.white);
-            usernameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 14));
-            usernameLabel.setForeground(Color.white);
-
-            //---- coinLabel ----
-            coinLabel.setBackground(new Color(255, 255, 51));
-            coinLabel.setForeground(new Color(255, 152, 0));
-            coinLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-
-            GroupLayout PanelLayout = new GroupLayout(Panel);
-            Panel.setLayout(PanelLayout);
-            PanelLayout.setHorizontalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(settingsIcon, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(profileButton, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(usernameLabel, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(coinIcon)
-                        .addGap(12, 12, 12))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(singlePlayerButton, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(multiplayerButton, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(28, Short.MAX_VALUE))
-            );
-            PanelLayout.setVerticalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(profileButton, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(PanelLayout.createParallelGroup()
-                                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(coinIcon))
-                                        .addComponent(usernameLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(settingsIcon)))
-                        .addGap(48, 48, 48)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(multiplayerButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(singlePlayerButton, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(406, Short.MAX_VALUE))
-            );
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < Panel.getComponentCount(); i++) {
+                    Rectangle bounds = Panel.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = Panel.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                Panel.setMinimumSize(preferredSize);
+                Panel.setPreferredSize(preferredSize);
+            }
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);

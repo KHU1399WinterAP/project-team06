@@ -16,15 +16,15 @@ new FormModel {
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "dashboardFrameWindowClosing", true ) )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:12:p, comp settingsIcon:::p:41:p, space :::p, comp profileButton:::p:58:p, space :::p, comp usernameLabel::::134:x, space :::p, comp coinLabel:::p:62:p, space :::p, comp coinIcon:::p::p, space :p:12:p}, seq l {space :p:22:p, comp singlePlayerButton:::p:151:p, space s:::p, comp multiplayerButton:::p:154:p, space ::28:x}}"
-				"$verticalGroup": "par l {seq {par l {seq l {space :::p, par t {comp profileButton:::p:61:p, par l:t {par t {comp coinLabel:::p:29:p, comp coinIcon:::p::p}, comp usernameLabel:::p:37:p}}}, seq l {space :p:29:p, comp settingsIcon:::p::p}}, space :p:48:p, par b {comp multiplayerButton::b:p:69:p, comp singlePlayerButton::b:p:69:p}, space ::406:x}}"
-			} ) {
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "coinIcon"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/smallCoin.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 331
+					"y": 30
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "settingsIcon"
@@ -34,17 +34,44 @@ new FormModel {
 					"background": new java.awt.Color( 0, 112, 192, 255 )
 					"cursor": &Cursor0 new java.awt.Cursor( 12 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "settingsIconActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 12
+					"y": 29
+					"width": 41
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "multiplayerButton"
-					"text": "Multiplayer"
-					"background": new java.awt.Color( 0, 32, 96, 255 )
-					"foreground": sfield java.awt.Color white
-					"font": new java.awt.Font( "Comic Sans MS", 1, 18 )
+					name: "profileButton"
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "multiplayerButtonActionPerformed", true ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "profileButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 59
+					"y": 6
+					"width": 58
+					"height": 61
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "usernameLabel"
+					"background": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 14 )
+					"foreground": sfield java.awt.Color white
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 123
+					"y": 30
+					"width": 134
+					"height": 37
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "coinLabel"
+					"background": new java.awt.Color( 255, 255, 51, 255 )
+					"foreground": new java.awt.Color( 255, 152, 0, 255 )
+					"horizontalAlignment": 4
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 263
+					"y": 30
+					"width": 62
+					"height": 29
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "singlePlayerButton"
@@ -56,25 +83,27 @@ new FormModel {
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "singlePlayerButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 151
+					"height": 69
+					"x": 30
+					"y": 135
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "profileButton"
+					name: "multiplayerButton"
+					"text": "Multiplayer"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 18 )
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "profileButtonActionPerformed", true ) )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "usernameLabel"
-					"background": sfield java.awt.Color white
-					"font": new java.awt.Font( "Comic Sans MS", 1, 14 )
-					"foreground": sfield java.awt.Color white
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "coinLabel"
-					"background": new java.awt.Color( 255, 255, 51, 255 )
-					"foreground": new java.awt.Color( 255, 152, 0, 255 )
-					"horizontalAlignment": 4
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "multiplayerButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 154
+					"height": 69
+					"x": 200
+					"y": 135
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

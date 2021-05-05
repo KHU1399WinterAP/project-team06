@@ -17,8 +17,8 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par t {seq {space :0:19:x, par l:::p {comp answerButton3::t::150:x, comp answerButton4::t::150:x, comp Freezer::t::150:x}, space :p:27:p, par t {comp answerButton1:::p:150:p, comp answerButton2:::p:150:p, comp Helper::t:p:150:p}}, seq t {par t {seq {space :6:6:p, comp timelabel:::p:46:p, space :::p, comp timeProgressBar::::247:x}, seq {comp label1:::p::p, space :::p, comp currentScoreLable:::p:43:p, space :::x, comp coinAmountLabel:::p:57:p}}, space :::p, comp coinLabel:::p:35:p}}, space :p:26:p}, seq t {comp questionLabel::::366:x, space :::p}}}}"
-				"$verticalGroup": "par l {seq l {space :::p, par l {seq {comp currentScoreLable:::::x, space :p:4:p}, comp label1::l:p:43:p, comp coinLabel::l:p:37:p, comp coinAmountLabel:::::x}, space :::p, par l {comp timelabel:::::x, seq {space :0:0:x, comp timeProgressBar:::p:13:p}}, space :p:1:p, comp questionLabel:::p:188:p, space s:::p, par b {comp answerButton3::b:p:76:p, comp answerButton2::b:p:76:p}, space s:::p, par b {comp answerButton4::b:p:76:p, comp answerButton1::b:p:76:p}, space :p:37:p, par t {comp Freezer:::p:53:p, comp Helper:::p:53:p}, space :p:35:p}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par t {seq {space :0:19:x, par l:::p {comp answerButton3::t::150:x, comp answerButton4::t::150:x, comp Freezer::t::150:x}, space :p:27:p, par t {comp answerButton1:::p:150:p, comp answerButton2:::p:150:p, comp Helper::t:p:150:p}}, seq t {comp label1:::p::p, space :::p, comp currentScoreLable:::p:43:p, space :::x, comp coinAmountLabel:::p:57:p, space :::p, comp coinLabel:::p:35:p}, seq t {space :p:19:p, comp timelabel:::p:46:p, space :::p, comp timeProgressBar:::p:220:p, space :::p, comp clockLabel::::49:x}}, space :p:26:p}, seq t {comp questionLabel::::366:x, space :::p}}}}"
+				"$verticalGroup": "par l {seq l {space :::p, par l {seq {comp currentScoreLable:::::x, space :p:4:p}, comp label1::l:p:43:p, comp coinLabel::l:p:37:p, comp coinAmountLabel:::::x}, space :::p, par l {comp timelabel:::::x, seq t {space :0:0:x, comp timeProgressBar:::p:13:p}, comp clockLabel:::::x}, space :::p, comp questionLabel:::p:188:p, space s:::p, par b {comp answerButton3::b:p:76:p, comp answerButton2::b:p:76:p}, space s:::p, par b {comp answerButton4::b:p:76:p, comp answerButton1::b:p:76:p}, space :p:37:p, par t {comp Freezer:::p:53:p, comp Helper:::p:53:p}, space :p:35:p}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -120,6 +120,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JProgressBar" ) {
 					name: "timeProgressBar"
 					"background": sfield java.awt.Color green
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "clockLabel"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
