@@ -29,6 +29,7 @@ public class LoginRegisterMenu extends JFrame {
     public Client CLIENT;
 
     public LoginRegisterMenu(Client client) {
+        FontConfig.initFonts();
         MusicConfig.initLongMusic(MusicConfig.LoginSong);
         this.CLIENT = client;
         initComponents();

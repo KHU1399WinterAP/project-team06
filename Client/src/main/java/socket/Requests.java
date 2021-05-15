@@ -2,9 +2,11 @@ package main.java.socket;
 
 public enum Requests {
     REGISTER("REGISTER"),
-    LOGIN("LOGIN");
+    LOGIN("LOGIN"),
+    GET_QUESTIONS("GET_QUESTIONS"),
+    ACCEPT("ACCEPT");
 
-    String request;
+    public String request;
 
     Requests(String request) {
         this.request = request;

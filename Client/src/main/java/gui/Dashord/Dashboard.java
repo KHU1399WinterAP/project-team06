@@ -173,7 +173,7 @@ public class Dashboard extends JFrame {
             //---- coinIcon ----
             coinIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/smallCoin.png")));
             Panel.add(coinIcon);
-            coinIcon.setBounds(new Rectangle(new Point(331, 30), coinIcon.getPreferredSize()));
+            coinIcon.setBounds(new Rectangle(new Point(325, 30), coinIcon.getPreferredSize()));
 
             //---- settingsIcon ----
             settingsIcon.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/settingsIcon.png")));
@@ -205,7 +205,7 @@ public class Dashboard extends JFrame {
             coinLabel.setForeground(new Color(255, 152, 0));
             coinLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             Panel.add(coinLabel);
-            coinLabel.setBounds(263, 30, 62, 29);
+            coinLabel.setBounds(255, 30, 62, 29);
 
             //---- singlePlayerButton ----
             singlePlayerButton.setText("Singleplayer");
@@ -217,7 +217,7 @@ public class Dashboard extends JFrame {
             singlePlayerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             singlePlayerButton.addActionListener(e -> singlePlayerButtonActionPerformed(e));
             Panel.add(singlePlayerButton);
-            singlePlayerButton.setBounds(30, 135, 151, 69);
+            singlePlayerButton.setBounds(25, 135, 151, 69);
 
             //---- multiplayerButton ----
             multiplayerButton.setText("Multiplayer");
@@ -229,12 +229,12 @@ public class Dashboard extends JFrame {
             multiplayerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             multiplayerButton.addActionListener(e -> multiplayerButtonActionPerformed(e));
             Panel.add(multiplayerButton);
-            multiplayerButton.setBounds(200, 135, 154, 69);
+            multiplayerButton.setBounds(190, 135, 154, 69);
 
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for (int i = 0; i < Panel.getComponentCount(); i++) {
+                for(int i = 0; i < Panel.getComponentCount(); i++) {
                     Rectangle bounds = Panel.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -250,12 +250,12 @@ public class Dashboard extends JFrame {
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-                contentPaneLayout.createParallelGroup()
-                        .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            contentPaneLayout.createParallelGroup()
+                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
-                contentPaneLayout.createParallelGroup()
-                        .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            contentPaneLayout.createParallelGroup()
+                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());

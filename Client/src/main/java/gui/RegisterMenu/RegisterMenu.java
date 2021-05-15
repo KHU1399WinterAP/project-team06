@@ -17,9 +17,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class RegisterMenu extends JFrame {
-	private final JFrame loginRegisterMenu;
-	private final Client CLIENT;
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private final JFrame loginRegisterMenu;
+    private final Client CLIENT;
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel mainBackground;
     private JLabel usernameLabel;
     private JScrollPane scrollPane1;
@@ -32,86 +32,96 @@ public class RegisterMenu extends JFrame {
     private JButton previousButton;
     private JLabel PictureLabel;
     private JLabel label1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
-	
-	public RegisterMenu(JFrame loginRegisterMenu, Client client) {
-		this.loginRegisterMenu = loginRegisterMenu;
-		this.CLIENT=client;
-		initComponents();
-		initComponentsProperties();
-		this.setVisible(true);
-	}
-	
-	private void initComponentsProperties() {
-	    for (JLabel jLabel : Arrays.asList(usernameLabel,passwordLabel,usernameErrorLabel,passwordErrorLabel)){
-	        jLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 13));
+    // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    public RegisterMenu(JFrame loginRegisterMenu, Client client) {
+        this.loginRegisterMenu = loginRegisterMenu;
+        this.CLIENT = client;
+        initComponents();
+        initComponentsProperties();
+        this.setVisible(true);
+    }
+
+    private void initComponentsProperties() {
+        for (JLabel jLabel : Arrays.asList(usernameLabel, passwordLabel, usernameErrorLabel, passwordErrorLabel)) {
+            jLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
         }
-		inputPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
-		inputUserName.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 12));
-		registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
-		previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 12));
-	}
-	
-	private void RegisterButtonActionPerformed(ActionEvent e) {
-	    var username=inputUserName.getText();
-	    var password=String.valueOf(inputPassword.getPassword());
+        inputPassword.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        inputUserName.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 14));
+        registerButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 20));
+        previousButton.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 12));
+    }
 
-		CLIENT.sendRequest(Requests.REGISTER.name());
-		CLIENT.sendRequest(username);
-		CLIENT.sendRequest(password);
+    private void RegisterButtonActionPerformed(ActionEvent e) {
+        var username = inputUserName.getText();
+        var password = String.valueOf(inputPassword.getPassword());
 
-        var response=CLIENT.getResponse();
+        CLIENT.sendRequest(Requests.REGISTER.request);
+        CLIENT.sendRequest(username);
+        CLIENT.sendRequest(password);
+
+        var response = CLIENT.getResponse();
         switch (response) {
-            case "ALREADY_EXIST" -> {
-                usernameErrorLabel.setText("username already exists");
-                RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground, GuiConfig.COLOR_DEFAULT_BLUE);
-            }
-            case "ACCEPT" -> {
-                var settingId = CLIENT.getResponse();
-                User user = new User(username, Objects.hash(password), Integer.parseInt(settingId));
-                registerButton.setBackground(Color.green);
-                registerButton.setText("Registered !!");
-                Timer pause = new Timer(400, e1 -> {
-                    registerButton.setBackground(GuiConfig.COLOR_DEFAULT_DARK_BLUE);
-                    new Dashboard(loginRegisterMenu, user, password,CLIENT);
-                    this.setVisible(false);
-                });
-                pause.setRepeats(false);
-                pause.start();
-            }
-            case "REJECT" -> {
-                var usernameError=CLIENT.getResponse();
-                var passwordError=CLIENT.getResponse();
-
-                RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground, GuiConfig.COLOR_DEFAULT_BLUE);
-                updateErrorLabel(usernameError, usernameErrorLabel);
-                updateErrorLabel(passwordError, passwordErrorLabel);
-            }
+            case "ALREADY_EXIST" -> alreadyExist();
+            case "ACCEPT" -> accept();
+            case "REJECT" -> reject();
         }
-	}
-	
-	private void updateErrorLabel(String error, JLabel errorLabel) {
-		if (error != null)
-			errorLabel.setText(error);
-		else
-			errorLabel.setText("");
-	}
-	
-	private void PreviousButtonActionPerformed(ActionEvent e) {
-		previousPage();
-	}
-	
-	private void RegisterFrameWindowClosed(WindowEvent e) {
-		previousPage();
-	}
-	
-	private void previousPage() {
-		this.dispose();
-		loginRegisterMenu.setVisible(true);
-	}
+    }
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+    private void alreadyExist() {
+        usernameErrorLabel.setText("username already exists");
+        RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground, GuiConfig.COLOR_DEFAULT_BLUE);
+    }
+
+    private void reject() {
+        var usernameError = CLIENT.getResponse();
+        var passwordError = CLIENT.getResponse();
+
+        RunAnimation.runMainPanelBackgroundColorAnimation(mainBackground, GuiConfig.COLOR_DEFAULT_BLUE);
+        updateErrorLabel(usernameError, usernameErrorLabel);
+        updateErrorLabel(passwordError, passwordErrorLabel);
+    }
+
+    private void accept() {
+        var settingId = CLIENT.getResponse();
+        String username = CLIENT.getResponse();
+        String password = CLIENT.getResponse();
+
+        User user = new User(username, Objects.hash(password), Integer.parseInt(settingId));
+        registerButton.setBackground(Color.green);
+        registerButton.setText("Registered !!");
+
+        Timer pause = new Timer(400, e1 -> {
+            registerButton.setBackground(GuiConfig.COLOR_DEFAULT_DARK_BLUE);
+            new Dashboard(loginRegisterMenu, user, password, CLIENT);
+            this.setVisible(false);
+        });
+        pause.setRepeats(false);
+        pause.start();
+    }
+
+    private void updateErrorLabel(String error, JLabel errorLabel) {
+        if (error != null)
+            errorLabel.setText(error);
+        else
+            errorLabel.setText("");
+    }
+
+    private void PreviousButtonActionPerformed(ActionEvent e) {
+        previousPage();
+    }
+
+    private void RegisterFrameWindowClosed(WindowEvent e) {
+        previousPage();
+    }
+
+    private void previousPage() {
+        this.dispose();
+        loginRegisterMenu.setVisible(true);
+    }
+
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         mainBackground = new JPanel();
         usernameLabel = new JLabel();
         scrollPane1 = new JScrollPane();
@@ -157,7 +167,7 @@ public class RegisterMenu extends JFrame {
             usernameLabel.setForeground(Color.white);
             usernameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
             mainBackground.add(usernameLabel);
-            usernameLabel.setBounds(85, 250, 72, 35);
+            usernameLabel.setBounds(80, 260, 72, 35);
 
             //======== scrollPane1 ========
             {
@@ -173,21 +183,21 @@ public class RegisterMenu extends JFrame {
                 scrollPane1.setViewportView(inputUserName);
             }
             mainBackground.add(scrollPane1);
-            scrollPane1.setBounds(85, 290, 235, scrollPane1.getPreferredSize().height);
+            scrollPane1.setBounds(80, 295, 215, scrollPane1.getPreferredSize().height);
 
             //---- passwordLabel ----
             passwordLabel.setText("Password");
             passwordLabel.setForeground(Color.white);
             passwordLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
             mainBackground.add(passwordLabel);
-            passwordLabel.setBounds(85, 360, 74, 39);
+            passwordLabel.setBounds(80, 360, 74, 39);
 
             //---- inputPassword ----
             inputPassword.setBackground(Color.white);
             inputPassword.setForeground(new Color(0, 32, 96));
             inputPassword.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             mainBackground.add(inputPassword);
-            inputPassword.setBounds(85, 405, 235, inputPassword.getPreferredSize().height);
+            inputPassword.setBounds(80, 400, 215, inputPassword.getPreferredSize().height);
 
             //---- registerButton ----
             registerButton.setText("REGISTER");
@@ -199,21 +209,21 @@ public class RegisterMenu extends JFrame {
             registerButton.setBorder(null);
             registerButton.addActionListener(e -> RegisterButtonActionPerformed(e));
             mainBackground.add(registerButton);
-            registerButton.setBounds(85, 485, 235, 47);
+            registerButton.setBounds(80, 505, 215, 47);
 
             //---- usernameErrorLabel ----
             usernameErrorLabel.setForeground(Color.red);
             usernameErrorLabel.setFont(new Font("Comic Sans MS", Font.ITALIC, 13));
             usernameErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
             mainBackground.add(usernameErrorLabel);
-            usernameErrorLabel.setBounds(45, 325, 315, 33);
+            usernameErrorLabel.setBounds(30, 330, 315, 33);
 
             //---- passwordErrorLabel ----
             passwordErrorLabel.setForeground(Color.red);
             passwordErrorLabel.setFont(new Font("Comic Sans MS", Font.ITALIC, 13));
             passwordErrorLabel.setHorizontalAlignment(SwingConstants.CENTER);
             mainBackground.add(passwordErrorLabel);
-            passwordErrorLabel.setBounds(45, 445, 315, 33);
+            passwordErrorLabel.setBounds(30, 435, 315, 33);
 
             //---- previousButton ----
             previousButton.setText("PREVIOUS");
@@ -226,22 +236,22 @@ public class RegisterMenu extends JFrame {
             previousButton.setBorder(null);
             previousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
             mainBackground.add(previousButton);
-            previousButton.setBounds(140, 535, 124, 38);
+            previousButton.setBounds(125, 555, 124, 38);
 
             //---- PictureLabel ----
             PictureLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/icon@2x.png")));
             mainBackground.add(PictureLabel);
-            PictureLabel.setBounds(new Rectangle(new Point(40, 35), PictureLabel.getPreferredSize()));
+            PictureLabel.setBounds(new Rectangle(new Point(35, 65), PictureLabel.getPreferredSize()));
 
             //---- label1 ----
             label1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/appTitle.png")));
             mainBackground.add(label1);
-            label1.setBounds(195, 35, 161, 168);
+            label1.setBounds(190, 65, 161, 168);
 
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for(int i = 0; i < mainBackground.getComponentCount(); i++) {
+                for (int i = 0; i < mainBackground.getComponentCount(); i++) {
                     Rectangle bounds = mainBackground.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -257,15 +267,15 @@ public class RegisterMenu extends JFrame {
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(mainBackground, GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-	}
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
 }

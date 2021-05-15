@@ -3,6 +3,7 @@ package main.java.questionTypes;
 import main.java.gui.Dashord.Dashboard;
 import main.java.models.Question;
 import main.java.socket.Client;
+import main.java.socket.Requests;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class QuestionTypes {
     public static ArrayList<Question> geography = fillingArrays(6);
 
     private static ArrayList<Question> fillingArrays(int category) {
-        client.sendRequest("GET_QUESTIONS");
+        client.sendRequest(Requests.GET_QUESTIONS.request);
         client.sendRequest(String.valueOf(category));
 
         ArrayList<Question> questions = new ArrayList<>();

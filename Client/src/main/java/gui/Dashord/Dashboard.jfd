@@ -23,7 +23,7 @@ new FormModel {
 					name: "coinIcon"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/smallCoin.png" )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 331
+					"x": 325
 					"y": 30
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -68,7 +68,7 @@ new FormModel {
 					"foreground": new java.awt.Color( 255, 152, 0, 255 )
 					"horizontalAlignment": 4
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 263
+					"x": 255
 					"y": 30
 					"width": 62
 					"height": 29
@@ -86,7 +86,7 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 151
 					"height": 69
-					"x": 30
+					"x": 25
 					"y": 135
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -102,7 +102,7 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 154
 					"height": 69
-					"x": 200
+					"x": 190
 					"y": 135
 				} )
 			} )

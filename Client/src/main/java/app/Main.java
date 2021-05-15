@@ -11,7 +11,6 @@ public class Main {
 		try {
 			Client client=new Client();
 
-			FontConfig.initFonts();
 			new LoginRegisterMenu(client);
 		} catch (IOException e) {
 			e.printStackTrace();
