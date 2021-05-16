@@ -26,12 +26,12 @@ public class LoginRegisterMenu extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-    public Client CLIENT;
+    public static Client CLIENT;
 
     public LoginRegisterMenu(Client client) {
         FontConfig.initFonts();
         MusicConfig.initLongMusic(MusicConfig.LoginSong);
-        this.CLIENT = client;
+        CLIENT = client;
         initComponents();
         initComponentsProperties();
         this.setVisible(true);
@@ -120,17 +120,7 @@ public class LoginRegisterMenu extends JFrame {
 
             {
                 // compute preferred size
-                Dimension preferredSize = new Dimension();
-                for (int i = 0; i < mainBackground.getComponentCount(); i++) {
-                    Rectangle bounds = mainBackground.getComponent(i).getBounds();
-                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                }
-                Insets insets = mainBackground.getInsets();
-                preferredSize.width += insets.right;
-                preferredSize.height += insets.bottom;
-                mainBackground.setMinimumSize(preferredSize);
-                mainBackground.setPreferredSize(preferredSize);
+                RegisterMenu.preferSize(mainBackground);
             }
         }
 

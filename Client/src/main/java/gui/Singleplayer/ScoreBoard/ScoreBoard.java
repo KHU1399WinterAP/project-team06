@@ -8,6 +8,7 @@ import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
 import main.java.config.ProfileConfig;
 import main.java.config.ThemeConfig;
+import main.java.gui.RegisterMenu.RegisterMenu;
 import main.java.models.ScoreBoardInformation;
 
 import java.awt.*;
@@ -53,12 +54,13 @@ public class ScoreBoard extends JFrame {
     }
 
     private void init() {
-        scrollPane1 = new JScrollPane();
+        // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+        JScrollPane scrollPane1 = new JScrollPane();
         panel = new JPanel();
         previousButton = new JButton();
-        categoryLabel = new JLabel();
-        title = new JLabel();
-        categoryNameLabel = new JLabel();
+        JLabel categoryLabel = new JLabel();
+        JLabel title = new JLabel();
+        JLabel categoryNameLabel = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -148,17 +150,7 @@ public class ScoreBoard extends JFrame {
 
                 {
                     // compute preferred size
-                    Dimension preferredSize = new Dimension();
-                    for (int i = 0; i < panel.getComponentCount(); i++) {
-                        Rectangle bounds = panel.getComponent(i).getBounds();
-                        preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                        preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                    }
-                    Insets insets = panel.getInsets();
-                    preferredSize.width += insets.right;
-                    preferredSize.height += insets.bottom;
-                    panel.setMinimumSize(preferredSize);
-                    panel.setPreferredSize(preferredSize);
+                    RegisterMenu.preferSize(panel);
                 }
             }
             scrollPane1.setViewportView(panel);
@@ -168,21 +160,10 @@ public class ScoreBoard extends JFrame {
 
         {
             // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for (int i = 0; i < contentPane.getComponentCount(); i++) {
-                Rectangle bounds = contentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = contentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            contentPane.setMinimumSize(preferredSize);
-            contentPane.setPreferredSize(preferredSize);
+            RegisterMenu.preferSize((JPanel) contentPane);
         }
         pack();
         setLocationRelativeTo(getOwner());
-
     }
 
     private void initLabels(JLabel recordLabel) {
@@ -195,16 +176,8 @@ public class ScoreBoard extends JFrame {
         panel.add(recordLabel);
     }
 
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JScrollPane scrollPane1;
     private JPanel panel;
     private JButton previousButton;
-    private JLabel categoryLabel;
-    private JLabel title;
-    private JLabel categoryNameLabel;
 
-//    private JLabel numberLabel;
-//    private JLabel usernameLabel;
-//    private JLabel recordLabel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

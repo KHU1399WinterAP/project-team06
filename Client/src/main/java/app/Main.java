@@ -1,6 +1,4 @@
 package main.java.app;
-
-import main.java.config.FontConfig;
 import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
 import main.java.socket.Client;
 

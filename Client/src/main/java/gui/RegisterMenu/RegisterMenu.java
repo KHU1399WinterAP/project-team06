@@ -19,10 +19,10 @@ import java.util.Objects;
 public class RegisterMenu extends JFrame {
     private final JFrame loginRegisterMenu;
     private final Client CLIENT;
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel mainBackground;
     private JLabel usernameLabel;
-    private JScrollPane scrollPane1;
     private JTextArea inputUserName;
     private JLabel passwordLabel;
     private JPasswordField inputPassword;
@@ -30,8 +30,6 @@ public class RegisterMenu extends JFrame {
     private JLabel usernameErrorLabel;
     private JLabel passwordErrorLabel;
     private JButton previousButton;
-    private JLabel PictureLabel;
-    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public RegisterMenu(JFrame loginRegisterMenu, Client client) {
@@ -124,7 +122,7 @@ public class RegisterMenu extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         mainBackground = new JPanel();
         usernameLabel = new JLabel();
-        scrollPane1 = new JScrollPane();
+        JScrollPane scrollPane1 = new JScrollPane();
         inputUserName = new JTextArea();
         passwordLabel = new JLabel();
         inputPassword = new JPasswordField();
@@ -132,8 +130,8 @@ public class RegisterMenu extends JFrame {
         usernameErrorLabel = new JLabel();
         passwordErrorLabel = new JLabel();
         previousButton = new JButton();
-        PictureLabel = new JLabel();
-        label1 = new JLabel();
+        JLabel pictureLabel = new JLabel();
+        JLabel label1 = new JLabel();
 
         //======== this ========
         setResizable(false);
@@ -142,7 +140,7 @@ public class RegisterMenu extends JFrame {
         setBackground(new Color(0, 112, 192));
         setTitle("Register Menu");
         setFont(new Font("Calibri", Font.PLAIN, 14));
-        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
+        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/Logo.jpg"))).getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModalExclusionType(Dialog.ModalExclusionType.APPLICATION_EXCLUDE);
         setName("RegisterMenu");
@@ -207,7 +205,7 @@ public class RegisterMenu extends JFrame {
             registerButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
             registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             registerButton.setBorder(null);
-            registerButton.addActionListener(e -> RegisterButtonActionPerformed(e));
+            registerButton.addActionListener(this::RegisterButtonActionPerformed);
             mainBackground.add(registerButton);
             registerButton.setBounds(80, 505, 215, 47);
 
@@ -234,33 +232,23 @@ public class RegisterMenu extends JFrame {
             previousButton.setFocusable(false);
             previousButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             previousButton.setBorder(null);
-            previousButton.addActionListener(e -> PreviousButtonActionPerformed(e));
+            previousButton.addActionListener(this::PreviousButtonActionPerformed);
             mainBackground.add(previousButton);
             previousButton.setBounds(125, 555, 124, 38);
 
             //---- PictureLabel ----
-            PictureLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/icon@2x.png")));
-            mainBackground.add(PictureLabel);
-            PictureLabel.setBounds(new Rectangle(new Point(35, 65), PictureLabel.getPreferredSize()));
+            pictureLabel.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/icon@2x.png"))));
+            mainBackground.add(pictureLabel);
+            pictureLabel.setBounds(new Rectangle(new Point(35, 65), pictureLabel.getPreferredSize()));
 
             //---- label1 ----
-            label1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/appTitle.png")));
+            label1.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/resources/icons/Theme/appTitle.png"))));
             mainBackground.add(label1);
             label1.setBounds(190, 65, 161, 168);
 
             {
                 // compute preferred size
-                Dimension preferredSize = new Dimension();
-                for (int i = 0; i < mainBackground.getComponentCount(); i++) {
-                    Rectangle bounds = mainBackground.getComponent(i).getBounds();
-                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                }
-                Insets insets = mainBackground.getInsets();
-                preferredSize.width += insets.right;
-                preferredSize.height += insets.bottom;
-                mainBackground.setMinimumSize(preferredSize);
-                mainBackground.setPreferredSize(preferredSize);
+                preferSize(mainBackground);
             }
         }
 
@@ -277,5 +265,19 @@ public class RegisterMenu extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+    }
+
+    public static void preferSize(JPanel mainBackground) {
+        Dimension preferredSize = new Dimension();
+        for (int i = 0; i < mainBackground.getComponentCount(); i++) {
+            Rectangle bounds = mainBackground.getComponent(i).getBounds();
+            preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+            preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+        }
+        Insets insets = mainBackground.getInsets();
+        preferredSize.width += insets.right;
+        preferredSize.height += insets.bottom;
+        mainBackground.setMinimumSize(preferredSize);
+        mainBackground.setPreferredSize(preferredSize);
     }
 }

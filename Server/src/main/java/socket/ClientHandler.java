@@ -26,22 +26,26 @@ public class ClientHandler extends Thread {
 
     @Override
     public void run() {
-        while (true) {
-            var command = getRequest();
+        try {
+            while (true) {
+                var command = DATA_INPUT_STREAM.readUTF();
 
-            switch (command) {
-                case "REGISTER" -> register();
-                case "LOGIN" -> login();
-                case "ThemeId" -> getThemIdByUsernames();
-                case "getThemes" -> getAllThemes();
-                case "UPDATE_THEME" -> updateTheme();
-                case "UPDATE_SETTINGS" -> updateSettings();
-                case "INIT_RECORDS" -> initRecords();
-                case "USER_ORDER_BY_RECORDS" -> getUserOrder();
-                case "GET_QUESTIONS" -> getQuestions();
-                case "UPDATE_COINS" -> updateCoins();
-                case "UPDATE_RECORDS" -> updateRecords();
+                switch (command) {
+                    case "REGISTER" -> register();
+                    case "LOGIN" -> login();
+                    case "ThemeId" -> getThemIdByUsernames();
+                    case "getThemes" -> getAllThemes();
+                    case "UPDATE_THEME" -> updateTheme();
+                    case "UPDATE_SETTINGS" -> updateSettings();
+                    case "INIT_RECORDS" -> initRecords();
+                    case "USER_ORDER_BY_RECORDS" -> getUserOrder();
+                    case "GET_QUESTIONS" -> getQuestions();
+                    case "UPDATE_COINS" -> updateCoins();
+                    case "UPDATE_RECORDS" -> updateRecords();
+                }
             }
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
