@@ -17,8 +17,8 @@ new FormModel {
 			"name": "Multiplayer"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "MultiplayerWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq t {space ::48:x, comp label1:::p::p, space :p:45:p}, seq {par l {seq {space :::p, comp previousButton:::p:57:p}, seq l {space :p:86:p, comp label2:::p::p}}, space ::92:x}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :p:27:p, comp label2:::p:194:p, space s:::p, comp label1:::p::p, space ::239:x}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp previousButton:::p:57:p, space ::315:x}, seq t {space :0:42:x, par l {seq t {comp loadingText:::p::p, space :p:45:p}, seq t {comp loadingGif:::p::p, space :p:83:p}}}}}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :p:27:p, comp loadingGif:::p:194:p, space s:::p, comp loadingText:::p::p, space ::239:x}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
@@ -31,12 +31,12 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
+					name: "loadingText"
 					"text": "Looking for a player..."
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 18, false )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
+					name: "loadingGif"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Spinner-1s-200px (1).gif" )
 				} )
 			} )

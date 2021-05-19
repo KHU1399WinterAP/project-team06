@@ -27,8 +27,8 @@ public class Multiplayer extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
         previousButton = new JButton();
-        label1 = new JLabel();
-        label2 = new JLabel();
+        loadingText = new JLabel();
+        loadingGif = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -57,30 +57,32 @@ public class Multiplayer extends JFrame {
             previousButton.setBorder(null);
             previousButton.addActionListener(e -> previousButtonActionPerformed(e));
 
-            //---- label1 ----
-            label1.setText("Looking for a player...");
-            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 18f));
+            //---- loadingText ----
+            loadingText.setText("Looking for a player...");
+            loadingText.setFont(loadingText.getFont().deriveFont(loadingText.getFont().getSize() + 18f));
 
-            //---- label2 ----
-            label2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Spinner-1s-200px (1).gif")));
+            //---- loadingGif ----
+            loadingGif.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Spinner-1s-200px (1).gif")));
 
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
             PanelLayout.setHorizontalGroup(
                 PanelLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                        .addContainerGap(48, Short.MAX_VALUE)
-                        .addComponent(label1)
-                        .addGap(45, 45, 45))
                     .addGroup(PanelLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(label2)))
-                        .addContainerGap(92, Short.MAX_VALUE))
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(315, Short.MAX_VALUE))
+                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                .addGap(0, 42, Short.MAX_VALUE)
+                                .addGroup(PanelLayout.createParallelGroup()
+                                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                        .addComponent(loadingText)
+                                        .addGap(45, 45, 45))
+                                    .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
+                                        .addComponent(loadingGif)
+                                        .addGap(83, 83, 83))))))
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
@@ -88,9 +90,9 @@ public class Multiplayer extends JFrame {
                         .addContainerGap()
                         .addComponent(previousButton)
                         .addGap(27, 27, 27)
-                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(loadingGif, GroupLayout.PREFERRED_SIZE, 194, GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(label1)
+                        .addComponent(loadingText)
                         .addContainerGap(239, Short.MAX_VALUE))
             );
         }
@@ -113,7 +115,7 @@ public class Multiplayer extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
     private JButton previousButton;
-    private JLabel label1;
-    private JLabel label2;
+    private JLabel loadingText;
+    private JLabel loadingGif;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
