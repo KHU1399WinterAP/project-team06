@@ -26,8 +26,9 @@ public class Multiplayer extends JFrame {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
-        QuestionMark = new JLabel();
         previousButton = new JButton();
+        loadingGif = new JLabel();
+        label1 = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -49,16 +50,19 @@ public class Multiplayer extends JFrame {
         {
             Panel.setBackground(new Color(0, 112, 192));
 
-            //---- QuestionMark ----
-            QuestionMark.setEnabled(false);
-            QuestionMark.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/QuestionMark.jpg")));
-
             //---- previousButton ----
             previousButton.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/previous.png")));
             previousButton.setBackground(new Color(0, 112, 192));
             previousButton.setFocusable(false);
             previousButton.setBorder(null);
             previousButton.addActionListener(e -> previousButtonActionPerformed(e));
+
+            //---- loadingGif ----
+            loadingGif.setIcon(new ImageIcon("main\\resources\\icons\\Multiplayer\\Spinner-1s-200px.gif"));
+
+            //---- label1 ----
+            label1.setText("Looking for a player...");
+            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 18f));
 
             GroupLayout PanelLayout = new GroupLayout(Panel);
             Panel.setLayout(PanelLayout);
@@ -67,21 +71,26 @@ public class Multiplayer extends JFrame {
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addGroup(PanelLayout.createParallelGroup()
                             .addGroup(PanelLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(QuestionMark))
-                            .addGroup(PanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(29, Short.MAX_VALUE))
+                                .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(45, 45, 45)
+                                .addComponent(label1))
+                            .addGroup(PanelLayout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(loadingGif, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(48, Short.MAX_VALUE))
             );
             PanelLayout.setVerticalGroup(
                 PanelLayout.createParallelGroup()
                     .addGroup(PanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(previousButton)
-                        .addGap(28, 28, 28)
-                        .addComponent(QuestionMark)
-                        .addContainerGap(163, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
+                        .addComponent(loadingGif, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(label1)
+                        .addContainerGap(291, Short.MAX_VALUE))
             );
         }
 
@@ -102,7 +111,8 @@ public class Multiplayer extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel Panel;
-    private JLabel QuestionMark;
     private JButton previousButton;
+    private JLabel loadingGif;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

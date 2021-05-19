@@ -105,6 +105,42 @@ new FormModel {
 					"x": 190
 					"y": 135
 				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+					"autoSize": false
+				} ) {
+					name: "panel1"
+					"background": new java.awt.Color( 0, 32, 96, 255 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "wonLostStarus"
+						"text": "Null!"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 15, false )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 120
+						"y": 10
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "score"
+						"text": "0-0"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 14, false )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 40
+						"y": 10
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "chat"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "/main/resources/icons/Dashboard/chatIcon.png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 235
+						"y": 10
+						"width": 70
+						"height": 40
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 20
+					"y": 235
+					"height": 60
+					"width": 335
+				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 245, 70 )

@@ -17,16 +17,11 @@ new FormModel {
 			"name": "Multiplayer"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "MultiplayerWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq l {space :p:29:p, comp QuestionMark:::p::p}, seq l {space :::p, comp previousButton:::p:57:p}}, space ::29:x}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :p:28:p, comp QuestionMark:::p::p, space ::163:x}}"
+				"$horizontalGroup": "par l {seq {par l {seq {space :::p, comp previousButton:::p:57:p}, seq l {space :p:45:p, comp label1:::p::p}, seq l {space :p:118:p, comp loadingGif:::p:133:p}}, space ::48:x}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :p:51:p, comp loadingGif:::p:116:p, space :p:44:p, comp label1:::p::p, space ::291:x}}"
 			} ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "QuestionMark"
-					"enabled": false
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/QuestionMark.jpg" )
-				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "previousButton"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/previous.png" )
@@ -34,6 +29,15 @@ new FormModel {
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "loadingGif"
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "main\\resources\\icons\\Multiplayer\\Spinner-1s-200px.gif" )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Looking for a player..."
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 18, false )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {

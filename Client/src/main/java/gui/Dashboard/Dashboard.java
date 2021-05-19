@@ -33,6 +33,10 @@ public class Dashboard extends JFrame {
     private JLabel coinLabel;
     private JButton singlePlayerButton;
     private JButton multiplayerButton;
+    private JPanel panel1;
+    private JLabel wonLostStarus;
+    private JLabel score;
+    private JButton chat;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public Dashboard(JFrame LoginRegisterMenu, User activeUser, String password, Client client) {
@@ -148,6 +152,10 @@ public class Dashboard extends JFrame {
         coinLabel = new JLabel();
         singlePlayerButton = new JButton();
         multiplayerButton = new JButton();
+        panel1 = new JPanel();
+        wonLostStarus = new JLabel();
+        score = new JLabel();
+        chat = new JButton();
 
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
@@ -230,6 +238,31 @@ public class Dashboard extends JFrame {
             multiplayerButton.addActionListener(e -> multiplayerButtonActionPerformed(e));
             Panel.add(multiplayerButton);
             multiplayerButton.setBounds(190, 135, 154, 69);
+
+            //======== panel1 ========
+            {
+                panel1.setBackground(new Color(0, 32, 96));
+                panel1.setLayout(null);
+
+                //---- wonLostStarus ----
+                wonLostStarus.setText("Null!");
+                wonLostStarus.setFont(wonLostStarus.getFont().deriveFont(wonLostStarus.getFont().getSize() + 15f));
+                panel1.add(wonLostStarus);
+                wonLostStarus.setBounds(new Rectangle(new Point(120, 10), wonLostStarus.getPreferredSize()));
+
+                //---- score ----
+                score.setText("0-0");
+                score.setFont(score.getFont().deriveFont(score.getFont().getSize() + 14f));
+                panel1.add(score);
+                score.setBounds(new Rectangle(new Point(40, 10), score.getPreferredSize()));
+
+                //---- chat ----
+                chat.setIcon(new ImageIcon("/main/resources/icons/Dashboard/chatIcon.png"));
+                panel1.add(chat);
+                chat.setBounds(235, 10, 70, 40);
+            }
+            Panel.add(panel1);
+            panel1.setBounds(20, 235, 335, 60);
 
             {
                 // compute preferred size
