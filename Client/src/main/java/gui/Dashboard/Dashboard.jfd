@@ -114,6 +114,7 @@ new FormModel {
 						name: "wonLostStarus"
 						"text": "Null!"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 15, false )
+						"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 120
 						"y": 10
@@ -122,13 +123,19 @@ new FormModel {
 						name: "score"
 						"text": "0-0"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 14, false )
+						"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 40
 						"y": 10
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "chat"
-						"icon": new com.jformdesigner.model.SwingIcon( 1, "/main/resources/icons/Dashboard/chatIcon.png" )
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/chatIcon.png" )
+						"background": new java.awt.Color( 36, 41, 46, 255 )
+						"foreground": new java.awt.Color( 225, 228, 232, 255 )
+						"focusable": false
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"cursor": new java.awt.Cursor( 12 )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 235
 						"y": 10
@@ -148,4 +155,3 @@ new FormModel {
 		} )
 	}
 }
-

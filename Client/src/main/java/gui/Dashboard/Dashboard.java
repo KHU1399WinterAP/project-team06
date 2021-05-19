@@ -247,17 +247,24 @@ public class Dashboard extends JFrame {
                 //---- wonLostStarus ----
                 wonLostStarus.setText("Null!");
                 wonLostStarus.setFont(wonLostStarus.getFont().deriveFont(wonLostStarus.getFont().getSize() + 15f));
+                wonLostStarus.setForeground(Color.white);
                 panel1.add(wonLostStarus);
                 wonLostStarus.setBounds(new Rectangle(new Point(120, 10), wonLostStarus.getPreferredSize()));
 
                 //---- score ----
                 score.setText("0-0");
                 score.setFont(score.getFont().deriveFont(score.getFont().getSize() + 14f));
+                score.setForeground(Color.white);
                 panel1.add(score);
                 score.setBounds(new Rectangle(new Point(40, 10), score.getPreferredSize()));
 
                 //---- chat ----
-                chat.setIcon(new ImageIcon("/main/resources/icons/Dashboard/chatIcon.png"));
+                chat.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/chatIcon.png")));
+                chat.setBackground(new Color(36, 41, 46));
+                chat.setForeground(new Color(225, 228, 232));
+                chat.setFocusable(false);
+                chat.setBorder(null);
+                chat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 panel1.add(chat);
                 chat.setBounds(235, 10, 70, 40);
             }
