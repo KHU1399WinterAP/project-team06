@@ -1,0 +1,60 @@
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp mainBackground::t:::x}"
+			"$verticalGroup": "par l {comp mainBackground::t::573:x}"
+		} ) {
+			name: "this"
+			"resizable": false
+			"minimumSize": new java.awt.Dimension( 380, 605 )
+			"maximizedBounds": new java.awt.Rectangle( 530, 60, 380, 605 )
+			"background": new java.awt.Color( 0, 112, 192, 255 )
+			"title": "Chet Room"
+			"font": new java.awt.Font( "Calibri", 0, 14 )
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
+			"defaultCloseOperation": 2
+			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "ChetFrameWindowClosing", true ) )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {comp ChetBox:::::x, seq {par l {comp previousButton:::p:60:p, seq l {comp scrollPane1:::p:292:p, space :::p, comp SendButton:::p::p}}, space :0:0:x}}, space :::p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :::p, comp ChetBox:::p:440:p, space :::p, par l {comp scrollPane1:::::x, comp SendButton:::::x}, space :::p}}"
+			} ) {
+				name: "mainBackground"
+				"maximumSize": new java.awt.Dimension( 380, 605 )
+				"minimumSize": new java.awt.Dimension( 380, 605 )
+				"background": new java.awt.Color( 0, 112, 192, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "previousButton"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/previous.png" )
+					"background": new java.awt.Color( 0, 112, 192, 255 )
+					"focusable": false
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": new java.awt.Cursor( 12 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "ChetBox"
+					"background": new java.awt.Color( 255, 255, 255, 255 )
+					"editable": false
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTextArea" ) {
+						name: "MessageField"
+						"background": new java.awt.Color( 255, 255, 255, 255 )
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "SendButton"
+					"text": "Send"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "SendButtonActionPerformed", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 380, 605 )
+			"location": new java.awt.Point( 15, 0 )
+		} )
+	}
+}

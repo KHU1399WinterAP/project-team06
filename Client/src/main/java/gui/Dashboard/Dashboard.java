@@ -5,6 +5,7 @@
 package main.java.gui.Dashord;
 
 import main.java.config.*;
+import main.java.gui.Dashboard.ChetRoom.ChetRoom;
 import main.java.gui.Dashord.profilesettings.ProfileSettings;
 import main.java.gui.Dashord.setting.SettingPanel;
 import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
@@ -142,6 +143,11 @@ public class Dashboard extends JFrame {
         this.setVisible(false);
     }
 
+    private void chatActionPerformed(ActionEvent e) {
+        clicked();
+        new ChetRoom(this , CLIENT );
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         Panel = new JPanel();
@@ -265,6 +271,7 @@ public class Dashboard extends JFrame {
                 chat.setFocusable(false);
                 chat.setBorder(null);
                 chat.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                chat.addActionListener(e -> chatActionPerformed(e));
                 panel1.add(chat);
                 chat.setBounds(235, 10, 70, 40);
             }

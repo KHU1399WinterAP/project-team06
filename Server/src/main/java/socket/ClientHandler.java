@@ -1,6 +1,7 @@
 package main.java.socket;
 
 import main.java.Database.Database;
+import main.java.app.AppManager;
 import main.java.models.*;
 import main.java.utils.GuiValidation;
 
@@ -42,11 +43,24 @@ public class ClientHandler extends Thread {
                     case "GET_QUESTIONS" -> getQuestions();
                     case "UPDATE_COINS" -> updateCoins();
                     case "UPDATE_RECORDS" -> updateRecords();
+                    case "SEND_MESSAGE" -> sendMessage();
+                    case "UPDATE_CHET" -> updateChet();
                 }
             }
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private void updateChet() {
+        AppManager.syncChet();
+    }
+
+    private void sendMessage() {
+        String name = getRequest();
+        String message = getRequest();
+        AppManager.addMessage(name , message);
+        AppManager.syncChet();
     }
 
     private void updateRecords() {
