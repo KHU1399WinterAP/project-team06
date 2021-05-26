@@ -50,6 +50,7 @@ public class ClientHandler extends Thread {
                     case "UPDATE_CHET" -> updateChet();
                     case "WAIT_FOR_OTHER_PLAYER" -> waitForOtherPlayer();
                     case "OUT_OF_MULTIPLAYER" -> outOfMultiPlayer();
+                    case "SEND_SELECTED_CATEGORY"-> sendSelectedCategory();
                 }
             }
         } catch (IOException e) {
@@ -80,9 +81,13 @@ public class ClientHandler extends Thread {
         ArrayList<String> categories = new ArrayList<>(
                 Arrays.asList("English", "Math", "Food", "Science", "Common", "Geography"));
 
-        AppManager.sendCategoryName(categories);
+        AppManager.sendRandomCategoryName(categories);
     }
 
+    private void sendSelectedCategory(){
+        String selectedCategory=getRequest();
+        AppManager.sendSelectedCategoryName(selectedCategory);
+    }
 
     private void updateChet() {
         AppManager.syncChet();

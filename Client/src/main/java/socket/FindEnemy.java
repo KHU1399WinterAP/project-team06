@@ -15,7 +15,7 @@ public class FindEnemy extends Thread {
     @Override
     public void run() {
         CLIENT.sendRequest(Requests.WAIT_FOR_OTHER_PLAYER.request);
-        if (CLIENT.getResponse().equals(Requests.ACCEPT.request))
-            multiplayer.found();
+        CLIENT.getResponse();
+        multiplayer.found();
     }
 }

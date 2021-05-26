@@ -4,15 +4,23 @@
 
 package main.java.gui.MultiplayerQuestion;
 
+import main.java.models.Question;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
  * @author Alireza
  */
 public class MultiplayerQuestion extends JFrame {
-    public MultiplayerQuestion() {
+    ArrayList<Question>questions;
+    ArrayList<Question>questions2;
+    public MultiplayerQuestion(ArrayList<Question> questions,String x) {
+        this.questions=questions;
+        System.out.println(x);
+        questions2=new ArrayList<>(questions);
         initComponents();
         this.setVisible(true);
     }

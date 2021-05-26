@@ -4,9 +4,19 @@
 
 package main.java.gui.chooseCategory;
 
+import java.awt.event.*;
+
+import main.java.config.ThemeConfig;
+import main.java.gui.MultiplayerQuestion.MultiplayerQuestion;
+import main.java.models.Question;
+import main.java.questionTypes.QuestionTypes;
 import main.java.socket.Client;
+import main.java.socket.RandomCategory;
+import main.java.socket.ReceiveCategoryName;
+import main.java.socket.Requests;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -18,13 +28,30 @@ public class ChooseCategory extends JFrame {
     public ChooseCategory(Client client) {
         this.CLIENT = client;
         initComponents();
-        receiveCategory();
+        new RandomCategory(categoryButton1,categoryButton2,CLIENT,turn).start();
+        initListeners();
+        initCostume();
         this.setVisible(true);
+        new ReceiveCategoryName(this,CLIENT).start();
     }
 
-    private void receiveCategory() {
-        categoryButton1.setText(CLIENT.getResponse());
-        categoryButton2.setText(CLIENT.getResponse());
+    private void initCostume(){
+        panel.setBackground(ThemeConfig.background);
+        categoryButton1.setBackground(ThemeConfig.button);
+        categoryButton2.setBackground(ThemeConfig.button);
+    }
+
+    private void initListeners() {
+        categoryButton1.addActionListener(e -> {
+            CLIENT.sendRequest("SEND_SELECTED_CATEGORY");
+            CLIENT.sendRequest(categoryButton1.getText());
+            this.dispose();
+        });
+        categoryButton2.addActionListener(e -> {
+            CLIENT.sendRequest("SEND_SELECTED_CATEGORY");
+            CLIENT.sendRequest(categoryButton2.getText());
+            this.dispose();
+        });
     }
 
     private void initComponents() {
@@ -33,6 +60,7 @@ public class ChooseCategory extends JFrame {
         label1 = new JLabel();
         categoryButton1 = new JButton();
         categoryButton2 = new JButton();
+        turn = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -52,6 +80,8 @@ public class ChooseCategory extends JFrame {
             categoryButton1.setBounds(55, 250, 115, 65);
             panel.add(categoryButton2);
             categoryButton2.setBounds(185, 250, 130, 65);
+            panel.add(turn);
+            turn.setBounds(120, 345, 125, 35);
 
             {
                 // compute preferred size
@@ -95,5 +125,6 @@ public class ChooseCategory extends JFrame {
     private JLabel label1;
     private JButton categoryButton1;
     private JButton categoryButton2;
+    private JLabel turn;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

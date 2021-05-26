@@ -36,8 +36,7 @@ public class AppManager {
     }
 
     public static boolean startTheGame() {
-        System.out.println(CLIENT_HANDLERS_MULTIPLAYER.size());
-        if (CLIENT_HANDLERS_MULTIPLAYER.size() == 2) {
+        if (CLIENT_HANDLERS_MULTIPLAYER.size() == 3) {
             for (var clientHandlersMultiplayer : CLIENT_HANDLERS_MULTIPLAYER)
                 clientHandlersMultiplayer.sendResponseStr(Responses.ACCEPT.response);
 
@@ -55,11 +54,26 @@ public class AppManager {
         return randomCategory;
     }
 
-    public static void sendCategoryName(ArrayList<String> arrayList){
-        for (var clientHandler : CLIENT_HANDLERS_MULTIPLAYER) {
-            clientHandler.sendResponseStr(randomCategoryName(arrayList));
-            clientHandler.sendResponseStr(randomCategoryName(arrayList));
+    public static void sendRandomCategoryName(ArrayList<String> arrayList){
+        Random random=new Random();
+        int rand=random.nextInt(CLIENT_HANDLERS_MULTIPLAYER.size());
+
+        String categoryButton1= randomCategoryName(arrayList);
+        String categoryButton2= randomCategoryName(arrayList);
+
+        for (int i=0;i< CLIENT_HANDLERS_MULTIPLAYER.size();i++) {
+            CLIENT_HANDLERS_MULTIPLAYER.get(i).sendResponseStr(categoryButton1);
+            CLIENT_HANDLERS_MULTIPLAYER.get(i).sendResponseStr(categoryButton2);
+            if (i==rand)
+                CLIENT_HANDLERS_MULTIPLAYER.get(i).sendResponseStr(Responses.ACCEPT.response);
+            else
+                CLIENT_HANDLERS_MULTIPLAYER.get(i).sendResponseStr(Responses.REJECT.response);
         }
+    }
+
+    public static void sendSelectedCategoryName(String category){
+        for (var clientHandlersMultiplayer:CLIENT_HANDLERS_MULTIPLAYER)
+            clientHandlersMultiplayer.sendResponseStr(category);
     }
 
     public static void changeState(Socket socket,ArrayList<ClientHandler> arrayList1,ArrayList<ClientHandler> arrayList2 ){

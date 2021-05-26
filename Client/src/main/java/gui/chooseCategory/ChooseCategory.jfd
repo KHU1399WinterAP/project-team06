@@ -34,6 +34,14 @@ new FormModel {
 					"width": 130
 					"height": 65
 				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "turn"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 120
+					"y": 345
+					"width": 125
+					"height": 35
+				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
 				"y": 0
