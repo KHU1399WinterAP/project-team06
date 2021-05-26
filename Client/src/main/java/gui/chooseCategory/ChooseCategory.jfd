@@ -5,6 +5,8 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
+			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
+			"title": "Select category"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel"
 				"background": new java.awt.Color( 255, 102, 102, 255 )
@@ -12,35 +14,61 @@ new FormModel {
 					name: "label1"
 					"text": "Choose a category"
 					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
+					"font": &Font0 new java.awt.Font( "Comic Sans MS", 1, 22 )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 100
-					"y": 170
-					"width": 175
+					"x": 50
+					"y": 105
+					"width": 225
 					"height": 60
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "categoryButton1"
+					"foreground": sfield java.awt.Color white
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": &Cursor0 new java.awt.Cursor( 12 )
+					"focusable": false
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 55
-					"y": 250
-					"width": 115
-					"height": 65
+					"x": 100
+					"y": 195
+					"width": 150
+					"height": 75
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "categoryButton2"
+					"foreground": sfield java.awt.Color white
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": #Cursor0
+					"focusable": false
+					"font": #Font0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 185
-					"y": 250
-					"width": 130
-					"height": 65
+					"x": 100
+					"y": 280
+					"width": 150
+					"height": 70
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "turn"
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 15 )
+					"horizontalAlignment": 0
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 120
-					"y": 345
-					"width": 125
-					"height": 35
+					"x": 75
+					"y": 360
+					"width": 200
+					"height": 45
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "selectedCategory"
+					"foreground": sfield java.awt.Color white
+					"font": new java.awt.Font( "Comic Sans MS", 1, 18 )
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 75
+					"y": 420
+					"width": 200
+					"height": 55
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
@@ -50,7 +78,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 380, 600 )
+			"size": new java.awt.Dimension( 415, 600 )
 		} )
 	}
 }

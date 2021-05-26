@@ -4,54 +4,106 @@
 
 package main.java.gui.MultiplayerQuestion;
 
-import main.java.models.Question;
+import main.java.animations.ClockAnimation;
+import main.java.config.FontConfig;
+import main.java.config.MusicConfig;
+import main.java.config.ThemeConfig;
+import main.java.gui.Dashboard.Dashboard;
+import main.java.models.User;
+import main.java.socket.Client;
+import main.java.socket.Requests;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 
 /**
  * @author Alireza
  */
 public class MultiplayerQuestion extends JFrame {
-    ArrayList<Question>questions;
-    ArrayList<Question>questions2;
-    public MultiplayerQuestion(ArrayList<Question> questions,String x) {
-        this.questions=questions;
-        System.out.println(x);
-        questions2=new ArrayList<>(questions);
+    int seconds = 10;
+    int questionNumber;
+    User activeUser;
+    ClockAnimation clockAnimationSlow;
+    Client CLIENT;
+    JFrame currentFrame;
+
+    public MultiplayerQuestion(Client client) {
+        questionNumber = 0;
+        currentFrame = this;
+        activeUser = Dashboard.activeUser;
         initComponents();
+        init();
+        clockAnimationSlow = new ClockAnimation(clockLabel);
+        this.CLIENT = client;
         this.setVisible(true);
+        receiveQuestion();
+    }
+
+    private void receiveQuestion() {
+        CLIENT.sendRequest(Requests.GET_QUESTION.request);
+        CLIENT.sendRequest(String.valueOf(questionNumber));
+
+        questionLabel.setText(CLIENT.getResponse());
+        for (JButton jButton : Arrays.asList(answerButton1, answerButton2, answerButton3, answerButton4))
+            jButton.setText(CLIENT.getResponse());
+
+        questionNumber++;
+    }
+
+    private void initCustomTheme() {
+        Panel.setBackground(ThemeConfig.background);
+        for (JButton jButton : Arrays.asList(answerButton1, answerButton2, answerButton3, answerButton4)) {
+            jButton.setBackground(ThemeConfig.button);
+        }
+    }
+
+    private void initComponentsProperties() {
+        init1(answerButton1, answerButton2, answerButton3, answerButton4, Freezer, Helper, questionLabel, coinAmountLabel);
+    }
+
+    public static void init1(JButton answerButton1,
+                             JButton answerButton2, JButton answerButton3,
+                             JButton answerButton4, JButton freezer,
+                             JButton helper, JLabel questionLabel, JLabel coinAmountLabel) {
+        for (JButton jButton : Arrays.asList(answerButton1, answerButton2, answerButton3,
+                answerButton4, freezer, helper))
+            jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
+
+        questionLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
+        coinAmountLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
+    }
+
+    private void init() {
+        initCustomTheme();
+        coinAmountLabel.setText(String.valueOf(activeUser.coins));
+        timeProgressBar.setMaximum(10);
+        timeProgressBar.setMinimum(0);
+        initComponentsProperties();
+    }
+
+
+    private void updateCoins() {
+        CLIENT.sendRequest("UPDATE_COINS");
+        CLIENT.sendRequest(activeUser.username);
+        CLIENT.sendRequest(String.valueOf(activeUser.coins));
+
+        coinAmountLabel.setText(String.valueOf(activeUser.coins));
     }
 
     private void questionsWindowClosing(WindowEvent e) {
-        // TODO add your code here
+
     }
 
     private void FreezerActionPerformed(ActionEvent e) {
-        // TODO add your code here
+
     }
 
     private void HelperActionPerformed(ActionEvent e) {
-        // TODO add your code here
+
     }
 
-    private void answerButton3ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void answerButton2ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void answerButton4ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void answerButton1ActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -65,8 +117,6 @@ public class MultiplayerQuestion extends JFrame {
         answerButton1 = new JButton();
         coinLabel = new JLabel();
         coinAmountLabel = new JLabel();
-        label1 = new JLabel();
-        currentScoreLable = new JLabel();
         timelabel = new JLabel();
         timeProgressBar = new JProgressBar();
         clockLabel = new JLabel();
@@ -100,12 +150,15 @@ public class MultiplayerQuestion extends JFrame {
         //======== Panel ========
         {
             Panel.setBackground(new Color(0, 112, 192));
+            Panel.setLayout(null);
 
             //---- questionLabel ----
             questionLabel.setHorizontalAlignment(SwingConstants.CENTER);
             questionLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
             questionLabel.setForeground(Color.white);
             questionLabel.setBackground(new Color(0, 0, 204));
+            Panel.add(questionLabel);
+            questionLabel.setBounds(6, 139, 366, 188);
 
             //---- Freezer ----
             Freezer.setText("<html>Freeze Time<br>&nbsp;&nbsp;&nbsp;100 coins </html>");
@@ -116,6 +169,8 @@ public class MultiplayerQuestion extends JFrame {
             Freezer.setBorder(null);
             Freezer.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             Freezer.addActionListener(e -> FreezerActionPerformed(e));
+            Panel.add(Freezer);
+            Freezer.setBounds(25, 525, 150, 53);
 
             //---- Helper ----
             Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
@@ -126,6 +181,8 @@ public class MultiplayerQuestion extends JFrame {
             Helper.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             Helper.setFocusable(false);
             Helper.addActionListener(e -> HelperActionPerformed(e));
+            Panel.add(Helper);
+            Helper.setBounds(200, 525, 150, 53);
 
             //---- answerButton3 ----
             answerButton3.setBackground(new Color(0, 32, 96));
@@ -134,7 +191,8 @@ public class MultiplayerQuestion extends JFrame {
             answerButton3.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             answerButton3.setBorder(null);
             answerButton3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            answerButton3.addActionListener(e -> answerButton3ActionPerformed(e));
+            Panel.add(answerButton3);
+            answerButton3.setBounds(25, 339, 150, 76);
 
             //---- answerButton2 ----
             answerButton2.setBackground(new Color(0, 32, 96));
@@ -143,7 +201,8 @@ public class MultiplayerQuestion extends JFrame {
             answerButton2.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             answerButton2.setBorder(null);
             answerButton2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            answerButton2.addActionListener(e -> answerButton2ActionPerformed(e));
+            Panel.add(answerButton2);
+            answerButton2.setBounds(202, 339, 150, 76);
 
             //---- answerButton4 ----
             answerButton4.setBackground(new Color(0, 32, 96));
@@ -152,7 +211,8 @@ public class MultiplayerQuestion extends JFrame {
             answerButton4.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             answerButton4.setBorder(null);
             answerButton4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            answerButton4.addActionListener(e -> answerButton4ActionPerformed(e));
+            Panel.add(answerButton4);
+            answerButton4.setBounds(25, 427, 150, 76);
 
             //---- answerButton1 ----
             answerButton1.setBackground(new Color(0, 32, 96));
@@ -161,21 +221,19 @@ public class MultiplayerQuestion extends JFrame {
             answerButton1.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
             answerButton1.setBorder(null);
             answerButton1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            answerButton1.addActionListener(e -> answerButton1ActionPerformed(e));
+            Panel.add(answerButton1);
+            answerButton1.setBounds(202, 427, 150, 76);
 
             //---- coinLabel ----
             coinLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Dashboard/smallCoin.png")));
+            Panel.add(coinLabel);
+            coinLabel.setBounds(320, 15, 35, 37);
 
             //---- coinAmountLabel ----
             coinAmountLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             coinAmountLabel.setForeground(new Color(255, 255, 51));
-
-            //---- label1 ----
-            label1.setText("Score :");
-            label1.setForeground(Color.white);
-
-            //---- currentScoreLable ----
-            currentScoreLable.setForeground(Color.white);
+            Panel.add(coinAmountLabel);
+            coinAmountLabel.setBounds(255, 15, 57, 43);
 
             //---- timelabel ----
             timelabel.setBackground(new Color(255, 153, 0));
@@ -183,162 +241,93 @@ public class MultiplayerQuestion extends JFrame {
             timelabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
             timelabel.setText("10");
             timelabel.setHorizontalAlignment(SwingConstants.CENTER);
+            Panel.add(timelabel);
+            timelabel.setBounds(27, 55, 46, timelabel.getPreferredSize().height);
 
             //---- timeProgressBar ----
             timeProgressBar.setBackground(Color.green);
+            Panel.add(timeProgressBar);
+            timeProgressBar.setBounds(90, 65, 220, 23);
+            Panel.add(clockLabel);
+            clockLabel.setBounds(320, 50, 45, 39);
 
             //---- icon1 ----
             icon1.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon1);
+            icon1.setBounds(34, 95, icon1.getPreferredSize().width, 38);
 
             //---- icon2 ----
             icon2.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon2);
+            icon2.setBounds(68, 95, icon2.getPreferredSize().width, 38);
 
             //---- icon3 ----
             icon3.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon3);
+            icon3.setBounds(102, 95, icon3.getPreferredSize().width, 38);
 
             //---- icon4 ----
             icon4.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon4);
+            icon4.setBounds(136, 95, icon4.getPreferredSize().width, 38);
 
             //---- icon5 ----
             icon5.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/green-button.png")));
+            Panel.add(icon5);
+            icon5.setBounds(170, 95, icon5.getPreferredSize().width, 38);
 
             //---- icon6 ----
             icon6.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/green-button.png")));
+            Panel.add(icon6);
+            icon6.setBounds(196, 95, icon6.getPreferredSize().width, 38);
 
             //---- icon7 ----
             icon7.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon7);
+            icon7.setBounds(222, 95, icon7.getPreferredSize().width, 38);
 
             //---- icon8 ----
             icon8.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon8);
+            icon8.setBounds(256, 95, icon8.getPreferredSize().width, 38);
 
             //---- icon9 ----
             icon9.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon9);
+            icon9.setBounds(290, 95, icon9.getPreferredSize().width, 38);
 
             //---- icon10 ----
             icon10.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Questions/red-button.png")));
+            Panel.add(icon10);
+            icon10.setBounds(324, 95, icon10.getPreferredSize().width, 38);
 
-            GroupLayout PanelLayout = new GroupLayout(Panel);
-            Panel.setLayout(PanelLayout);
-            PanelLayout.setHorizontalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(questionLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
-                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
-                                        .addComponent(label1)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(currentScoreLable, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(coinAmountLabel, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(GroupLayout.Alignment.LEADING, PanelLayout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(timelabel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(50, 50, 50)
-                                        .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(clockLabel, GroupLayout.DEFAULT_SIZE, 3, Short.MAX_VALUE))
-                                    .addGroup(PanelLayout.createSequentialGroup()
-                                        .addGap(0, 19, Short.MAX_VALUE)
-                                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addComponent(icon1)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon2)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon3)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon4)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon5)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon6)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon7)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon8)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon9)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(icon10))
-                                            .addGroup(PanelLayout.createSequentialGroup()
-                                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(Freezer, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                                    .addComponent(answerButton4, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                                    .addComponent(answerButton3, GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                                .addGap(27, 27, 27)
-                                                .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))))))
-                                .addGap(26, 26, 26))))
-            );
-            PanelLayout.setVerticalGroup(
-                PanelLayout.createParallelGroup()
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addComponent(currentScoreLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(4, 4, 4))
-                            .addComponent(label1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coinLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(coinAmountLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(timelabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(timeProgressBar, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE))
-                            .addComponent(clockLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addComponent(icon1, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon2, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon4, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon5, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon6, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon7, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon8, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon9, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon10, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(icon3, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(questionLabel, GroupLayout.PREFERRED_SIZE, 188, GroupLayout.PREFERRED_SIZE)
-                        .addGroup(PanelLayout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, PanelLayout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(answerButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(answerButton1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PanelLayout.createSequentialGroup()
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(answerButton3, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(answerButton4, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)))
-                        .addGap(425, 425, 425)
-                        .addGroup(PanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(Freezer, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Helper, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35))
-            );
+            {
+                // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < Panel.getComponentCount(); i++) {
+                    Rectangle bounds = Panel.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = Panel.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                Panel.setMinimumSize(preferredSize);
+                Panel.setPreferredSize(preferredSize);
+            }
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addComponent(Panel, GroupLayout.PREFERRED_SIZE, 611, GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -356,8 +345,6 @@ public class MultiplayerQuestion extends JFrame {
     private JButton answerButton1;
     private JLabel coinLabel;
     private JLabel coinAmountLabel;
-    private JLabel label1;
-    private JLabel currentScoreLable;
     private JLabel timelabel;
     private JProgressBar timeProgressBar;
     private JLabel clockLabel;

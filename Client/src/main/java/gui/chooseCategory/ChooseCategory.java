@@ -6,6 +6,7 @@ package main.java.gui.chooseCategory;
 
 import java.awt.event.*;
 
+import main.java.config.FontConfig;
 import main.java.config.ThemeConfig;
 import main.java.gui.MultiplayerQuestion.MultiplayerQuestion;
 import main.java.models.Question;
@@ -31,8 +32,9 @@ public class ChooseCategory extends JFrame {
         new RandomCategory(categoryButton1,categoryButton2,CLIENT,turn).start();
         initListeners();
         initCostume();
+        initComponentsProperties();
         this.setVisible(true);
-        new ReceiveCategoryName(this,CLIENT).start();
+        new ReceiveCategoryName(CLIENT,selectedCategory,this).start();
     }
 
     private void initCostume(){
@@ -41,17 +43,22 @@ public class ChooseCategory extends JFrame {
         categoryButton2.setBackground(ThemeConfig.button);
     }
 
+    private void initComponentsProperties() {
+        label1.setFont(FontConfig.comic.deriveFont(Font.BOLD, 22));
+        categoryButton1.setFont(FontConfig.comic.deriveFont(Font.BOLD, 17));
+        categoryButton2.setFont(FontConfig.comic.deriveFont(Font.BOLD, 17));
+        turn.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 16));
+        selectedCategory.setFont(FontConfig.comic.deriveFont(Font.BOLD,22));
+    }
+
     private void initListeners() {
-        categoryButton1.addActionListener(e -> {
-            CLIENT.sendRequest("SEND_SELECTED_CATEGORY");
-            CLIENT.sendRequest(categoryButton1.getText());
-            this.dispose();
-        });
-        categoryButton2.addActionListener(e -> {
-            CLIENT.sendRequest("SEND_SELECTED_CATEGORY");
-            CLIENT.sendRequest(categoryButton2.getText());
-            this.dispose();
-        });
+        categoryButton1.addActionListener(e -> sendCategory(categoryButton1));
+        categoryButton2.addActionListener(e -> sendCategory(categoryButton2));
+    }
+
+    private void sendCategory(JButton button){
+        CLIENT.sendRequest(Requests.SEND_SELECTED_CATEGORY.request);
+        CLIENT.sendRequest(button.getText());
     }
 
     private void initComponents() {
@@ -61,8 +68,11 @@ public class ChooseCategory extends JFrame {
         categoryButton1 = new JButton();
         categoryButton2 = new JButton();
         turn = new JLabel();
+        selectedCategory = new JLabel();
 
         //======== this ========
+        setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
+        setTitle("Select category");
         var contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -74,14 +84,42 @@ public class ChooseCategory extends JFrame {
             //---- label1 ----
             label1.setText("Choose a category");
             label1.setHorizontalAlignment(SwingConstants.CENTER);
+            label1.setForeground(Color.white);
+            label1.setFont(new Font("Comic Sans MS", Font.BOLD, 22));
             panel.add(label1);
-            label1.setBounds(100, 170, 175, 60);
+            label1.setBounds(50, 105, 225, 60);
+
+            //---- categoryButton1 ----
+            categoryButton1.setForeground(Color.white);
+            categoryButton1.setBorder(null);
+            categoryButton1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            categoryButton1.setFocusable(false);
+            categoryButton1.setFont(new Font("Comic Sans MS", Font.BOLD, 22));
             panel.add(categoryButton1);
-            categoryButton1.setBounds(55, 250, 115, 65);
+            categoryButton1.setBounds(100, 195, 150, 75);
+
+            //---- categoryButton2 ----
+            categoryButton2.setForeground(Color.white);
+            categoryButton2.setBorder(null);
+            categoryButton2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            categoryButton2.setFocusable(false);
+            categoryButton2.setFont(new Font("Comic Sans MS", Font.BOLD, 22));
             panel.add(categoryButton2);
-            categoryButton2.setBounds(185, 250, 130, 65);
+            categoryButton2.setBounds(100, 280, 150, 70);
+
+            //---- turn ----
+            turn.setForeground(Color.white);
+            turn.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+            turn.setHorizontalAlignment(SwingConstants.CENTER);
             panel.add(turn);
-            turn.setBounds(120, 345, 125, 35);
+            turn.setBounds(75, 360, 200, 45);
+
+            //---- selectedCategory ----
+            selectedCategory.setForeground(Color.white);
+            selectedCategory.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+            selectedCategory.setHorizontalAlignment(SwingConstants.CENTER);
+            panel.add(selectedCategory);
+            selectedCategory.setBounds(75, 420, 200, 55);
 
             {
                 // compute preferred size
@@ -126,5 +164,6 @@ public class ChooseCategory extends JFrame {
     private JButton categoryButton1;
     private JButton categoryButton2;
     private JLabel turn;
+    private JLabel selectedCategory;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

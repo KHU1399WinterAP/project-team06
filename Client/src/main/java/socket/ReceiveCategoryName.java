@@ -1,35 +1,34 @@
 package main.java.socket;
 
 import main.java.gui.MultiplayerQuestion.MultiplayerQuestion;
+import main.java.gui.chooseCategory.ChooseCategory;
 import main.java.models.Question;
 import main.java.questionTypes.QuestionTypes;
 
 import javax.swing.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ReceiveCategoryName extends Thread {
-    JFrame chooseCategory;
     Client CLIENT;
+    JLabel selectedCategory;
+    JFrame chooseCategory;
 
-    public ReceiveCategoryName(JFrame chooseCategory ,Client client){
-        this.chooseCategory=chooseCategory;
+    public ReceiveCategoryName(Client client,JLabel selectedCategory,JFrame chooseCategory){
         this.CLIENT=client;
+        this.chooseCategory=chooseCategory;
+        this.selectedCategory=selectedCategory;
     }
 
     @Override
     public void run() {
         String category=CLIENT.getResponse();
-        ArrayList<Question> questions;
-        switch (category){
-            case "English"->questions= QuestionTypes.english;
-            case "Math"->questions= QuestionTypes.mathematics;
-            case "Food"->questions= QuestionTypes.foodAndDrink;
-            case "Science"->questions= QuestionTypes.science;
-            case "Common"->questions= QuestionTypes.commonKnowledge;
-            default ->questions=QuestionTypes.geography;
-        }
-
-        chooseCategory.dispose();
-        new MultiplayerQuestion(questions,category);
+        selectedCategory.setText(category);
+        Timer pause = new Timer(1000, e -> {
+            new MultiplayerQuestion(CLIENT);
+            chooseCategory.dispose();
+        });
+        pause.setRepeats(false);
+        pause.start();
     }
 }

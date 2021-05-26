@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp Panel::t:::x}"
-			"$verticalGroup": "par l {comp Panel::t::573:x}"
+			"$horizontalGroup": "par l {comp Panel::l::378:x}"
+			"$verticalGroup": "par l {seq l {comp Panel:::p:611:p, space :0:0:x}}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
@@ -16,10 +16,7 @@ new FormModel {
 			"background": new java.awt.Color( 0, 112, 192, 255 )
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "questionsWindowClosing", true ) )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp questionLabel:::::x, space :::p}, seq t {par t {seq l {comp label1:::p::p, space :::p, comp currentScoreLable:::p:43:p, space :::x, comp coinAmountLabel:::p:57:p, space :::p, comp coinLabel:::p:35:p}, seq l {space :p:21:p, comp timelabel:::p:46:p, space :p:50:p, comp timeProgressBar:::p:220:p, space :::p, comp clockLabel::::3:x}, seq {space :0:19:x, par t {seq {comp icon1:::p::p, space :::p, comp icon2:::p::p, space :::p, comp icon3:::p::p, space :::p, comp icon4:::p::p, space :::p, comp icon5:::p::p, space :::p, comp icon6:::p::p, space :::p, comp icon7:::p::p, space :::p, comp icon8:::p::p, space :::p, comp icon9:::p::p, space :::p, comp icon10:::p::p}, seq {par l:::p {comp Freezer::t::150:x, comp answerButton4::l::150:x, comp answerButton3::l::150:x}, space :p:27:p, par t {comp Helper::t:p:150:p, comp answerButton1::t:p:150:p, comp answerButton2::t:p:150:p}}}}}, space :p:26:p}}}}"
-				"$verticalGroup": "par l {seq l {space :::p, par l {seq {comp currentScoreLable:::::x, space :p:4:p}, comp label1::l:p:43:p, comp coinLabel::l:p:37:p, comp coinAmountLabel:::::x}, space :::p, par l {comp timelabel:::::x, seq t {space :0:0:x, comp timeProgressBar:::p:13:p}, comp clockLabel:::::x}, space :::p, par l {comp icon1:::p:38:p, comp icon2:::p:38:p, comp icon4::l:p:38:p, comp icon5:::p:38:p, comp icon6::l:p:38:p, comp icon7::l:p:38:p, comp icon8:::p:38:p, comp icon9:::p:38:p, comp icon10:::p:38:p, comp icon3:::p:38:p}, space :::p, comp questionLabel:::p:188:p, par l {seq t {space :p:12:p, comp answerButton2:::p:76:p, space u:::p, comp answerButton1:::p:76:p}, seq l {space u:::p, comp answerButton3:::p:76:p, space u:::p, comp answerButton4:::p:76:p}}, space :p:425:p, par t {comp Freezer:::p:53:p, comp Helper:::p:53:p}, space :p:35:p}}"
-			} ) {
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
@@ -28,6 +25,11 @@ new FormModel {
 					"font": new java.awt.Font( "Comic Sans MS", 0, 18 )
 					"foreground": sfield java.awt.Color white
 					"background": new java.awt.Color( 0, 0, 204, 255 )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 6
+					"y": 139
+					"width": 366
+					"height": 188
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "Freezer"
@@ -39,6 +41,11 @@ new FormModel {
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": &Cursor0 new java.awt.Cursor( 12 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "FreezerActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 25
+					"y": 525
+					"width": 150
+					"height": 53
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "Helper"
@@ -50,6 +57,11 @@ new FormModel {
 					"cursor": #Cursor0
 					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "HelperActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 200
+					"y": 525
+					"width": 150
+					"height": 53
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "answerButton3"
@@ -59,7 +71,11 @@ new FormModel {
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton3ActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 25
+					"y": 339
+					"width": 150
+					"height": 76
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "answerButton2"
@@ -69,7 +85,11 @@ new FormModel {
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton2ActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 202
+					"y": 339
+					"width": 150
+					"height": 76
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "answerButton4"
@@ -79,7 +99,11 @@ new FormModel {
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton4ActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 25
+					"y": 427
+					"width": 150
+					"height": 76
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "answerButton1"
@@ -89,25 +113,30 @@ new FormModel {
 					"font": new java.awt.Font( "Comic Sans MS", 0, 15 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"cursor": #Cursor0
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "answerButton1ActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 202
+					"y": 427
+					"width": 150
+					"height": 76
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "coinLabel"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Dashboard/smallCoin.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 320
+					"y": 15
+					"width": 35
+					"height": 37
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "coinAmountLabel"
 					"horizontalAlignment": 4
 					"foreground": new java.awt.Color( 255, 255, 51, 255 )
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "Score :"
-					"foreground": sfield java.awt.Color white
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "currentScoreLable"
-					"foreground": sfield java.awt.Color white
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 255
+					"y": 15
+					"width": 57
+					"height": 43
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "timelabel"
@@ -116,58 +145,112 @@ new FormModel {
 					"font": new java.awt.Font( "Comic Sans MS", 0, 24 )
 					"text": "10"
 					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 27
+					"y": 55
+					"width": 46
 				} )
 				add( new FormComponent( "javax.swing.JProgressBar" ) {
 					name: "timeProgressBar"
 					"background": sfield java.awt.Color green
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 90
+					"y": 65
+					"width": 220
+					"height": 23
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "clockLabel"
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 320
+					"y": 50
+					"width": 45
+					"height": 39
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon1"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 34
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon2"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 68
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon3"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 102
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon4"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 136
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon5"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/green-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 170
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon6"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/green-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 196
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon7"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 222
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon8"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 256
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon9"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 290
+					"y": 95
+					"height": 38
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "icon10"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Questions/red-button.png" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 324
+					"y": 95
+					"height": 38
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"size": new java.awt.Dimension( 380, 605 )
-			"location": new java.awt.Point( 235, 30 )
+			"size": new java.awt.Dimension( 380, 645 )
+			"location": new java.awt.Point( 485, 0 )
 		} )
 	}
 }

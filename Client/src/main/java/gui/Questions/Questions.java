@@ -8,6 +8,7 @@ import main.java.animations.ClockAnimation;
 import main.java.config.*;
 import main.java.gui.Dashboard.Dashboard;
 import main.java.gui.GameOver.GameOver;
+import main.java.gui.MultiplayerQuestion.MultiplayerQuestion;
 import main.java.models.Question;
 import main.java.models.User;
 import main.java.socket.Client;
@@ -271,12 +272,7 @@ public class Questions extends JFrame {
     }
 
     private void initComponentsProperties() {
-        for (JButton jButton : Arrays.asList(answerButton1, answerButton2, answerButton3,
-                answerButton4, Freezer, Helper)) {
-            jButton.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 15));
-        }
-        questionLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
-        coinAmountLabel.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
+        MultiplayerQuestion.init1(answerButton1, answerButton2, answerButton3, answerButton4, Freezer, Helper, questionLabel, coinAmountLabel);
         currentScoreLable.setFont(FontConfig.comic.deriveFont(Font.BOLD, 19));
     }
 

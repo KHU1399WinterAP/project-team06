@@ -50,12 +50,32 @@ public class ClientHandler extends Thread {
                     case "UPDATE_CHET" -> updateChet();
                     case "WAIT_FOR_OTHER_PLAYER" -> waitForOtherPlayer();
                     case "OUT_OF_MULTIPLAYER" -> outOfMultiPlayer();
-                    case "SEND_SELECTED_CATEGORY"-> sendSelectedCategory();
+                    case "SEND_SELECTED_CATEGORY" -> sendSelectedCategory();
+                    case "GET_QUESTION" -> getQuestion();
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void getQuestion() {
+        int index = Integer.parseInt(getRequest());
+        Question question = AppManager.questionArray.get(index);
+
+        sendResponseStr(question.question);
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add(question.answer1);
+        answers.add(question.answer2);
+        answers.add(question.answer3);
+        answers.add(question.correctAnswer);
+
+        String[] randomAnswers = new String[4];
+        for (int i = 0; i < randomAnswers.length; i++)
+            randomAnswers[i] = AppManager.randomAnswer(answers);
+
+        for (String randomAnswer : randomAnswers)
+            sendResponseStr(randomAnswer);
     }
 
     private void outOfMultiPlayer() {
@@ -76,7 +96,7 @@ public class ClientHandler extends Thread {
     private void waitForOtherPlayer() {
         AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS, AppManager.CLIENT_HANDLERS_MULTIPLAYER);
 
-       if (!AppManager.startTheGame()) return;
+        if (!AppManager.startTheGame()) return;
 
         ArrayList<String> categories = new ArrayList<>(
                 Arrays.asList("English", "Math", "Food", "Science", "Common", "Geography"));
@@ -84,9 +104,11 @@ public class ClientHandler extends Thread {
         AppManager.sendRandomCategoryName(categories);
     }
 
-    private void sendSelectedCategory(){
-        String selectedCategory=getRequest();
+    private void sendSelectedCategory() {
+        String selectedCategory = getRequest();
         AppManager.sendSelectedCategoryName(selectedCategory);
+
+        AppManager.findTheQuestionsArray(selectedCategory);
     }
 
     private void updateChet() {
