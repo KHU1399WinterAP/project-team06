@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Sat Mar 20 21:29:29 IRST 2021
  */
 
-package main.java.gui.Dashord.setting.About;
+package main.java.gui.dashboard.setting.About;
 
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;

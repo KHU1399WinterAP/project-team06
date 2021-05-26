@@ -31,4 +31,21 @@ public class User {
 		this.recordCommon = recordCommon;
 		this.recordGeography = recordGeography;
 	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"username='" + username + '\'' +
+				", password=" + password +
+				", profilePicture=" + profilePicture +
+				", settingId=" + settingId +
+				", coins=" + coins +
+				", recordEnglish=" + recordEnglish +
+				", recordMath=" + recordMath +
+				", recordFood=" + recordFood +
+				", recordScience=" + recordScience +
+				", recordCommon=" + recordCommon +
+				", recordGeography=" + recordGeography +
+				'}';
+	}
 }

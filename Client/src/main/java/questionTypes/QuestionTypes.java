@@ -1,6 +1,6 @@
 package main.java.questionTypes;
 
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.models.Question;
 import main.java.socket.Client;
 import main.java.socket.Requests;

@@ -1,10 +1,7 @@
-/*
- * Created by JFormDesigner on Thu May 20 18:31:58 IRDT 2021
- */
-
 package main.java.gui.Dashboard.ChetRoom;
 
 import main.java.config.MusicConfig;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.models.User;
 import main.java.socket.ChetSyncer;
 import main.java.socket.Client;
@@ -18,11 +15,11 @@ import javax.swing.GroupLayout;
  * @author Sina
  */
 public class ChetRoom extends JFrame {
-    User activeUser = main.java.gui.Dashord.Dashboard.activeUser;
+    User activeUser = Dashboard.activeUser;
     public final JFrame dashboard;
     public static Client CLIENT;
 
-    public ChetRoom(JFrame dashboard ,  Client client) {
+    public ChetRoom(JFrame dashboard, Client client) {
         this.dashboard = dashboard;
         CLIENT = client;
         CLIENT.sendRequest("UPDATE_CHET");
@@ -35,20 +32,29 @@ public class ChetRoom extends JFrame {
     public void updateChet(String chet) {
         ChetBox.setText(chet);
     }
+
     private void ChetFrameWindowClosing(WindowEvent e) {
         previousPage();
     }
+
     private void previousButtonActionPerformed(ActionEvent e) {
         previousPage();
     }
-    private void SendButtonActionPerformed(ActionEvent e) { sendMessage(); }
+
+    private void SendButtonActionPerformed(ActionEvent e) {
+        sendMessage();
+    }
 
     private void SendByEnter() {
         MessageField.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {
+            }
+
             @Override
-            public void keyPressed(KeyEvent e) {}
+            public void keyPressed(KeyEvent e) {
+            }
+
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == 10)
@@ -56,11 +62,13 @@ public class ChetRoom extends JFrame {
             }
         });
     }
+
     private void previousPage() {
         MusicConfig.initShortMp3(MusicConfig.celClickSong);
         this.dispose();
         dashboard.setVisible(true);
     }
+
     private void sendMessage() {
         String message = normalize(MessageField.getText());
         if (message.isBlank())
@@ -71,8 +79,8 @@ public class ChetRoom extends JFrame {
         CLIENT.sendRequest(message);
 
         MessageField.setText("");
-
     }
+
     public String normalize(String text) {
         text = text.replaceAll(" +", " ");
         return text.trim();
@@ -146,7 +154,7 @@ public class ChetRoom extends JFrame {
                                 .addGroup(mainBackgroundLayout.createParallelGroup()
                                     .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
                                     .addGroup(mainBackgroundLayout.createSequentialGroup()
-                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(SendButton)))
                                 .addGap(0, 0, Short.MAX_VALUE)))

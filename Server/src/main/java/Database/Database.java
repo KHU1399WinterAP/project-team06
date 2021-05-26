@@ -26,7 +26,6 @@ public class Database {
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-
                 int password = resultSet.getInt("password");
                 int profilePicture = resultSet.getInt("profilepicture");
                 int settingsId = resultSet.getInt("settingId");

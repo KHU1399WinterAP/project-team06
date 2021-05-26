@@ -45,6 +45,7 @@ new FormModel {
 					"background": new java.awt.Color( 255, 255, 255, 255 )
 					"foreground": new java.awt.Color( 0, 32, 96, 255 )
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "inputPasswordKeyPressed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "loginButton"
@@ -77,6 +78,7 @@ new FormModel {
 					"tabSize": 10
 					"alignmentX": 1.5f
 					"alignmentY": 1.5f
+					addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "inputUsernameKeyPressed", true ) )
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "PictureLabel"
@@ -93,4 +95,3 @@ new FormModel {
 		} )
 	}
 }
-

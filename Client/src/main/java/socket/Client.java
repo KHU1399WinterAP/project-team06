@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class Client {
     public static final String HOST = "localhost";
-    public static final int PORT = 5002;
+    public static final int PORT = 5000;
 
     public final Socket SOCKET;
     public final DataInputStream DATA_INPUT_STREAM;

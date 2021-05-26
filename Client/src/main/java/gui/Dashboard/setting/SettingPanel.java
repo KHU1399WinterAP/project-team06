@@ -1,10 +1,10 @@
-package main.java.gui.Dashord.setting;
+package main.java.gui.Dashboard.setting;
 
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
-import main.java.gui.Dashord.Dashboard;
-import main.java.gui.Dashord.setting.About.About;
+import main.java.gui.Dashboard.Dashboard;
+import main.java.gui.dashboard.setting.About.About;
 import main.java.gui.theme.ThemeTypes;
 import main.java.models.User;
 import main.java.socket.Client;

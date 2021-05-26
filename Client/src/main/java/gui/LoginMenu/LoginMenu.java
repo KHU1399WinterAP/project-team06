@@ -7,7 +7,7 @@ package main.java.gui.LoginMenu;
 import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
 import main.java.config.GuiConfig;
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.models.User;
 import main.java.socket.Client;
 import main.java.socket.Requests;
@@ -47,7 +47,11 @@ public class LoginMenu extends JFrame {
     }
 
     private void loginButtonActionPerformed(ActionEvent e) {
-        String username = inputUsername.getText();
+        loginButton();
+    }
+
+    private void loginButton(){
+        String username = inputUsername.getText().replace("\n","");
         String password = String.valueOf(inputPassword.getPassword());
         int passwordHash = Objects.hash(password);
 
@@ -78,6 +82,17 @@ public class LoginMenu extends JFrame {
     private void previousPage() {
         this.dispose();
         LoginRegisterMenu.setVisible(true);
+    }
+
+    private void inputUsernameKeyPressed(KeyEvent e) {
+        if (e.getKeyCode()==10)
+            inputPassword.requestFocus();
+
+    }
+
+    private void inputPasswordKeyPressed(KeyEvent e) {
+        if (e.getKeyCode()==10)
+            loginButton();
     }
 
     private void initComponents() {
@@ -132,6 +147,12 @@ public class LoginMenu extends JFrame {
             inputPassword.setBackground(Color.white);
             inputPassword.setForeground(new Color(0, 32, 96));
             inputPassword.setBorder(null);
+            inputPassword.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    inputPasswordKeyPressed(e);
+                }
+            });
 
             //---- loginButton ----
             loginButton.setText("LOGIN");
@@ -161,6 +182,12 @@ public class LoginMenu extends JFrame {
             inputUsername.setTabSize(10);
             inputUsername.setAlignmentX(1.5F);
             inputUsername.setAlignmentY(1.5F);
+            inputUsername.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    inputUsernameKeyPressed(e);
+                }
+            });
 
             //---- PictureLabel ----
             PictureLabel.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/icon@2x.png")));

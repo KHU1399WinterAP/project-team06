@@ -11,7 +11,7 @@ public class ChetSyncer extends Thread{
     @Override
     public void run() {
         while (true) {
-            String chet = CHET_ROOM.CLIENT.getResponse();
+            String chet = ChetRoom.CLIENT.getResponse();
             CHET_ROOM.updateChet(chet);
         }
     }

@@ -1,6 +1,6 @@
 package main.java.gui.theme;
 
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.models.Theme;
 import main.java.socket.Client;
 

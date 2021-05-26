@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.9.1" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp Panel::l:::x}"
-			"$verticalGroup": "par l {comp Panel::l:::x}"
+			"$horizontalGroup": "par l {comp Panel::l::373:x}"
+			"$verticalGroup": "par l {comp Panel::l::590:x}"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )

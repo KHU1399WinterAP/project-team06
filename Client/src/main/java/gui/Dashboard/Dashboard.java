@@ -1,18 +1,15 @@
-/*
- * Created by JFormDesigner on Thu Mar 11 21:54:48 IRST 2021
- */
-
-package main.java.gui.Dashord;
+package main.java.gui.Dashboard;
 
 import main.java.config.*;
 import main.java.gui.Dashboard.ChetRoom.ChetRoom;
-import main.java.gui.Dashord.profilesettings.ProfileSettings;
-import main.java.gui.Dashord.setting.SettingPanel;
+import main.java.gui.Dashboard.profilesettings.ProfileSettings;
+import main.java.gui.Dashboard.setting.SettingPanel;
 import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
 import main.java.gui.Multiplayer.Multiplayer;
 import main.java.gui.Singleplayer.SinglePlayer;
 import main.java.models.User;
 import main.java.socket.Client;
+import main.java.socket.Requests;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -96,6 +93,10 @@ public class Dashboard extends JFrame {
     private void dashboardFrameWindowClosing(WindowEvent e) {
         MusicConfig.initShortMp3(MusicConfig.celClickSong);
         MusicConfig.mp3PlayerLong.stop();
+
+        CLIENT.sendRequest(Requests.LOG_OUT.request);
+        CLIENT.sendRequest(activeUser.username);
+
         this.dispose();
         new LoginRegisterMenu(CLIENT);
     }
@@ -298,11 +299,11 @@ public class Dashboard extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());

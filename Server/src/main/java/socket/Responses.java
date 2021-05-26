@@ -9,7 +9,7 @@ public enum Responses {
     OVER("OVER"),
     ALREADY_EXIST("ALREADY_EXIST");
 
-    String response;
+    public String response;
     Responses(String response){
         this.response=response;
     }

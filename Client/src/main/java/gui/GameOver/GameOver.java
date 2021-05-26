@@ -7,7 +7,7 @@ package main.java.gui.GameOver;
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.models.User;
 
 import java.awt.*;

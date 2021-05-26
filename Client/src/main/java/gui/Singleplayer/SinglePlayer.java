@@ -8,7 +8,7 @@ import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
 import main.java.gui.Category.Categories;
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.gui.Questions.Questions;
 import main.java.gui.Singleplayer.ScoreBoard.ScoreBoard;
 import main.java.models.Question;

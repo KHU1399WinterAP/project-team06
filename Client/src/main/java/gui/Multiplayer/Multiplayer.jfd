@@ -3,10 +3,7 @@ JFDML JFormDesigner: "7.0.3.0.337" Java: "11.0.10" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp Panel::l:::x}"
-			"$verticalGroup": "par l {comp Panel::l:::x}"
-		} ) {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 380, 605 )
 			"maximizedBounds": new java.awt.Rectangle( 580, 60, 380, 605 )
@@ -16,10 +13,7 @@ new FormModel {
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			"name": "Multiplayer"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "MultiplayerWindowClosing", true ) )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp previousButton:::p:57:p, space ::315:x}, seq t {space :0:42:x, par l {seq t {comp loadingText:::p::p, space :p:45:p}, seq t {comp loadingGif:::p::p, space :p:83:p}}}}}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp previousButton:::p::p, space :p:27:p, comp loadingGif:::p:194:p, space s:::p, comp loadingText:::p::p, space ::239:x}}"
-			} ) {
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "Panel"
 				"background": new java.awt.Color( 0, 112, 192, 255 )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -28,17 +22,36 @@ new FormModel {
 					"background": new java.awt.Color( 0, 112, 192, 255 )
 					"focusable": false
 					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"cursor": new java.awt.Cursor( 12 )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "previousButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 18
+					"y": 21
+					"width": 57
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "loadingText"
 					"text": "Looking for a player..."
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 18, false )
+					"foreground": sfield java.awt.Color white
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"y": 365
+					"x": 40
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "loadingGif"
 					"icon": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Multiplayer/Spinner-1s-200px (1).gif" )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 85
+					"y": 140
+					"height": 162
 				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"y": 0
+				"width": 380
+				"height": 565
+				"x": 0
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"size": new java.awt.Dimension( 380, 605 )

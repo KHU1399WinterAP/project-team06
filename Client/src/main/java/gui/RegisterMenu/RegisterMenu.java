@@ -3,7 +3,7 @@ package main.java.gui.RegisterMenu;
 import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
 import main.java.config.GuiConfig;
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.models.User;
 import main.java.socket.Client;
 import main.java.socket.Requests;

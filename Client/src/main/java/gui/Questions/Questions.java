@@ -6,7 +6,7 @@ package main.java.gui.Questions;
 
 import main.java.animations.ClockAnimation;
 import main.java.config.*;
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.gui.GameOver.GameOver;
 import main.java.models.Question;
 import main.java.models.User;

@@ -2,17 +2,18 @@
  * Created by JFormDesigner on Wed Mar 17 10:29:16 IRST 2021
  */
 
-package main.java.gui.Dashord.profilesettings;
+package main.java.gui.Dashboard.profilesettings;
 
 import main.java.animations.RunAnimation;
 import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
 import main.java.config.ProfileConfig;
 import main.java.config.ThemeConfig;
-import main.java.gui.Dashord.Dashboard;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.gui.LoginRegisterMenu.LoginRegisterMenu;
 import main.java.models.User;
 import main.java.socket.Client;
+import main.java.socket.Requests;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -59,6 +60,10 @@ public class ProfileSettings extends JFrame {
     private void logoutButtonActionPerformed(ActionEvent e) {
         MusicConfig.initShortMp3(MusicConfig.celClickSong);
         MusicConfig.mp3PlayerLong.stop();
+
+        client.sendRequest(Requests.LOG_OUT.request);
+        client.sendRequest(activeUser.username);
+
         this.dispose();
         new LoginRegisterMenu(client);
     }

@@ -14,6 +14,7 @@ import javax.swing.*;
 public class MultiplayerQuestion extends JFrame {
     public MultiplayerQuestion() {
         initComponents();
+        this.setVisible(true);
     }
 
     private void questionsWindowClosing(WindowEvent e) {

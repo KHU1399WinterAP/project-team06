@@ -10,7 +10,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Random;
 
 public class ClientHandler extends Thread {
     public final Socket SOCKET;
@@ -34,6 +36,7 @@ public class ClientHandler extends Thread {
                 switch (command) {
                     case "REGISTER" -> register();
                     case "LOGIN" -> login();
+                    case "LOG_OUT" -> logout();
                     case "ThemeId" -> getThemIdByUsernames();
                     case "getThemes" -> getAllThemes();
                     case "UPDATE_THEME" -> updateTheme();
@@ -45,12 +48,41 @@ public class ClientHandler extends Thread {
                     case "UPDATE_RECORDS" -> updateRecords();
                     case "SEND_MESSAGE" -> sendMessage();
                     case "UPDATE_CHET" -> updateChet();
+                    case "WAIT_FOR_OTHER_PLAYER" -> waitForOtherPlayer();
+                    case "OUT_OF_MULTIPLAYER" -> outOfMultiPlayer();
                 }
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private void outOfMultiPlayer() {
+        AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_MULTIPLAYER, AppManager.CLIENT_HANDLERS);
+    }
+
+    private void logout() {
+        String username = getRequest();
+
+        for (int i = 0; i < AppManager.EnteredUsers.size(); i++) {
+            if (username.equals(AppManager.EnteredUsers.get(i).username)) {
+                AppManager.EnteredUsers.remove(i);
+                break;
+            }
+        }
+    }
+
+    private void waitForOtherPlayer() {
+        AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS, AppManager.CLIENT_HANDLERS_MULTIPLAYER);
+
+       if (!AppManager.startTheGame()) return;
+
+        ArrayList<String> categories = new ArrayList<>(
+                Arrays.asList("English", "Math", "Food", "Science", "Common", "Geography"));
+
+        AppManager.sendCategoryName(categories);
+    }
+
 
     private void updateChet() {
         AppManager.syncChet();
@@ -59,7 +91,7 @@ public class ClientHandler extends Thread {
     private void sendMessage() {
         String name = getRequest();
         String message = getRequest();
-        AppManager.addMessage(name , message);
+        AppManager.addMessage(name, message);
         AppManager.syncChet();
     }
 
@@ -95,6 +127,7 @@ public class ClientHandler extends Thread {
 
             User user = new User(username, Objects.hash(password), settingId);
             Database.insertInToUsers(user);
+            AppManager.addUser(user);
 
             sendResponseStr(Responses.ACCEPT.response);
             sendResponseInt(settingId);
@@ -119,7 +152,8 @@ public class ClientHandler extends Thread {
 
         User user = Database.getUserByUsername(username);
 
-        if (user != null && user.password == Integer.parseInt(password) && !username.isBlank()) {
+        if (user != null && user.password == Integer.parseInt(password) && !username.isBlank() && isValid(user.username)) {
+            AppManager.addUser(user);
             sendResponseStr(Responses.ACCEPT.response);
             sendResponseInt(user.settingId);
             sendResponseInt(user.profilePicture);
@@ -132,6 +166,14 @@ public class ClientHandler extends Thread {
             sendResponseInt(user.recordGeography);
         } else
             sendResponseStr(Responses.REJECT.response);
+    }
+
+    private boolean isValid(String username) {
+        for (User user : AppManager.EnteredUsers)
+            if (user.username.equals(username))
+                return false;
+
+        return true;
     }
 
     private void getThemIdByUsernames() {
