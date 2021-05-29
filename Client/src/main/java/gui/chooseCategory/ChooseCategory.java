@@ -76,6 +76,7 @@ public class ChooseCategory extends JFrame {
         //======== this ========
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
         setTitle("Select category");
+        setResizable(false);
         var contentPane = getContentPane();
         contentPane.setLayout(null);
 
@@ -127,7 +128,7 @@ public class ChooseCategory extends JFrame {
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for (int i = 0; i < panel.getComponentCount(); i++) {
+                for(int i = 0; i < panel.getComponentCount(); i++) {
                     Rectangle bounds = panel.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -145,7 +146,7 @@ public class ChooseCategory extends JFrame {
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
-            for (int i = 0; i < contentPane.getComponentCount(); i++) {
+            for(int i = 0; i < contentPane.getComponentCount(); i++) {
                 Rectangle bounds = contentPane.getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);

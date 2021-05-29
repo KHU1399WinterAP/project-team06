@@ -9,6 +9,7 @@ new FormModel {
 			name: "this"
 			"title": "GameOver"
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
+			"resizable": false
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "thisWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel1"
@@ -16,6 +17,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "result"
 					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 55
 					"y": 155
@@ -25,6 +27,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "scorePlayer1"
 					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 80
 					"y": 260
@@ -34,6 +37,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "scorePlayer2"
 					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 95
 					"height": 45
@@ -54,6 +58,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "dashboardButton"
 					"text": "dashboard"
+					"foreground": sfield java.awt.Color white
+					"cursor": new java.awt.Cursor( 12 )
+					"focusable": false
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "dashboardButtonActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 115
@@ -64,6 +71,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "usernameLabel1"
 					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 25
 					"y": 315
@@ -83,6 +91,8 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "usernameLabel2"
+					"horizontalAlignment": 0
+					"foreground": sfield java.awt.Color white
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 215
 					"y": 310
@@ -92,12 +102,12 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
 				"y": 0
-				"height": 555
+				"height": 585
 				"width": 395
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 395, 595 )
+			"size": new java.awt.Dimension( 395, 590 )
 		} )
 	}
 }

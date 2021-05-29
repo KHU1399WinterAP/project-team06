@@ -7,6 +7,7 @@ new FormModel {
 			name: "this"
 			"iconImage": new com.jformdesigner.model.SwingIcon( 0, "/main/resources/icons/Theme/Logo.jpg" )
 			"title": "Select category"
+			"resizable": false
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel"
 				"background": new java.awt.Color( 255, 102, 102, 255 )

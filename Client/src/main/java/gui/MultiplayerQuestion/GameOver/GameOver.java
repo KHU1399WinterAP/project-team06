@@ -6,12 +6,15 @@ package main.java.gui.MultiplayerQuestion.GameOver;
 
 import java.awt.event.*;
 
+import main.java.config.FontConfig;
+import main.java.config.ThemeConfig;
 import main.java.gui.Dashboard.Dashboard;
 import main.java.models.User;
 import main.java.socket.Client;
 import main.java.socket.Requests;
 
 import java.awt.*;
+import java.util.Arrays;
 import javax.swing.*;
 
 /**
@@ -20,23 +23,39 @@ import javax.swing.*;
 public class GameOver extends JFrame {
     Client CLIENT;
     JFrame dashboard;
-    User activeUser= Dashboard.activeUser;
-    public GameOver(Client client,JFrame dashboard) {
-        this.dashboard=dashboard;
-        this.CLIENT=client;
+    User activeUser = Dashboard.activeUser;
+
+    public GameOver(Client client, JFrame dashboard) {
+        this.dashboard = dashboard;
+        this.CLIENT = client;
         initComponents();
+        initCostumeTheme();
+        initCostumeProperties();
         this.setVisible(true);
         receiveInformation();
     }
 
-    private void receiveInformation(){
+    private void initCostumeProperties() {
+        dashboardButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
+        result.setFont(FontConfig.comic.deriveFont(Font.BOLD, 22));
+        
+        for (JLabel jLabel : Arrays.asList(scorePlayer1, scorePlayer2, usernameLabel1, usernameLabel2))
+            jLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
+    }
+
+    private void initCostumeTheme() {
+        panel1.setBackground(ThemeConfig.background);
+        dashboardButton.setBackground(ThemeConfig.button);
+    }
+
+    private void receiveInformation() {
         CLIENT.sendRequest(Requests.GET_FINAL_SCORE.request);
 
-        String username1=CLIENT.getResponse();
-        int score1=CLIENT.getResponseInt();
+        String username1 = CLIENT.getResponse();
+        int score1 = CLIENT.getResponseInt();
 
-        String username2=CLIENT.getResponse();
-        int score2 =CLIENT.getResponseInt();
+        String username2 = CLIENT.getResponse();
+        int score2 = CLIENT.getResponseInt();
 
         usernameLabel1.setText(username1);
         usernameLabel2.setText(username2);
@@ -44,22 +63,24 @@ public class GameOver extends JFrame {
         scorePlayer1.setText(String.valueOf(score1));
         scorePlayer2.setText(String.valueOf(score2));
 
-        if (score1==score2)
-            result.setText("! -DRAW- !");
+        if (score1 == score2)
+            result.setText("!     -DRAW-     !");
         else if (username1.equals(activeUser.username))
-            result.setText("! YOU WON !");
+            result.setText("!    YOU  WON    !");
         else
-            result.setText("! YOU LOSt !");
+            result.setText("!    YOU LOST    !");
 
     }
 
     private void dashboardButtonActionPerformed(ActionEvent e) {
         this.dispose();
+        CLIENT.sendRequest(Requests.EXIT_MULTIPLAYER_AFTER_GAME.request);
         dashboard.setVisible(true);
     }
 
     private void thisWindowClosing(WindowEvent e) {
         this.dispose();
+        CLIENT.sendRequest(Requests.EXIT_MULTIPLAYER_AFTER_GAME.request);
         dashboard.setVisible(true);
     }
 
@@ -78,6 +99,7 @@ public class GameOver extends JFrame {
         //======== this ========
         setTitle("GameOver");
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
+        setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -94,16 +116,19 @@ public class GameOver extends JFrame {
 
             //---- result ----
             result.setHorizontalAlignment(SwingConstants.CENTER);
+            result.setForeground(Color.white);
             panel1.add(result);
             result.setBounds(55, 155, 280, 50);
 
             //---- scorePlayer1 ----
             scorePlayer1.setHorizontalAlignment(SwingConstants.CENTER);
+            scorePlayer1.setForeground(Color.white);
             panel1.add(scorePlayer1);
             scorePlayer1.setBounds(80, 260, 95, 45);
 
             //---- scorePlayer2 ----
             scorePlayer2.setHorizontalAlignment(SwingConstants.CENTER);
+            scorePlayer2.setForeground(Color.white);
             panel1.add(scorePlayer2);
             scorePlayer2.setBounds(210, 260, 95, 45);
 
@@ -116,12 +141,16 @@ public class GameOver extends JFrame {
 
             //---- dashboardButton ----
             dashboardButton.setText("dashboard");
+            dashboardButton.setForeground(Color.white);
+            dashboardButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            dashboardButton.setFocusable(false);
             dashboardButton.addActionListener(e -> dashboardButtonActionPerformed(e));
             panel1.add(dashboardButton);
             dashboardButton.setBounds(115, 385, 155, 70);
 
             //---- usernameLabel1 ----
             usernameLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+            usernameLabel1.setForeground(Color.white);
             panel1.add(usernameLabel1);
             usernameLabel1.setBounds(25, 315, 150, 45);
 
@@ -131,6 +160,10 @@ public class GameOver extends JFrame {
             label6.setForeground(Color.white);
             panel1.add(label6);
             label6.setBounds(185, 310, 20, 45);
+
+            //---- usernameLabel2 ----
+            usernameLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+            usernameLabel2.setForeground(Color.white);
             panel1.add(usernameLabel2);
             usernameLabel2.setBounds(215, 310, 155, 45);
 
@@ -150,9 +183,9 @@ public class GameOver extends JFrame {
             }
         }
         contentPane.add(panel1);
-        panel1.setBounds(0, 0, 395, 555);
+        panel1.setBounds(0, 0, 395, 585);
 
-        contentPane.setPreferredSize(new Dimension(395, 595));
+        contentPane.setPreferredSize(new Dimension(395, 590));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

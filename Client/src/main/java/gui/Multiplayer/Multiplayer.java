@@ -81,11 +81,11 @@ public class Multiplayer extends JFrame {
         //======== this ========
         setMinimumSize(new Dimension(380, 605));
         setMaximizedBounds(new Rectangle(580, 60, 380, 605));
-        setResizable(false);
         setTitle("Multiplayer");
         setBackground(new Color(0, 112, 192));
         setIconImage(new ImageIcon(getClass().getResource("/main/resources/icons/Theme/Logo.jpg")).getImage());
         setName("Multiplayer");
+        setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -116,12 +116,13 @@ public class Multiplayer extends JFrame {
             loadingText.setForeground(Color.white);
             loadingText.setHorizontalAlignment(SwingConstants.CENTER);
             Panel.add(loadingText);
-            loadingText.setBounds(new Rectangle(new Point(40, 365), loadingText.getPreferredSize()));
+            loadingText.setBounds(15, 365, 345, 65);
 
             //---- loadingGif ----
             loadingGif.setIcon(new ImageIcon(getClass().getResource("/main/resources/icons/Multiplayer/Spinner-1s-200px (1).gif")));
+            loadingGif.setHorizontalAlignment(SwingConstants.CENTER);
             Panel.add(loadingGif);
-            loadingGif.setBounds(85, 140, loadingGif.getPreferredSize().width, 162);
+            loadingGif.setBounds(75, 115, 235, 220);
 
             {
                 // compute preferred size
@@ -139,7 +140,7 @@ public class Multiplayer extends JFrame {
             }
         }
         contentPane.add(Panel);
-        Panel.setBounds(0, 0, 380, 565);
+        Panel.setBounds(0, 0, 380, 585);
 
         {
             // compute preferred size

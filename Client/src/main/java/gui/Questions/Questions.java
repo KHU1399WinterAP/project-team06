@@ -166,7 +166,7 @@ public class Questions extends JFrame {
 
     private void isCorrect(JButton inputAnswer) {
         if (inputAnswer.getText().equals(question.correctAnswer)) {
-            seconds=10;
+            seconds = 10;
             timelabel.setText(String.valueOf(seconds));
             timeProgressBar.setBackground(Color.green);
             clockAnimationSlow.time = 800;
@@ -227,7 +227,6 @@ public class Questions extends JFrame {
         client.sendRequest(activeUser.username);
         client.sendRequest(recordColumn);
         client.sendRequest(String.valueOf(score));
-
     }
 
     private void updateUserRecord() {
@@ -323,27 +322,23 @@ public class Questions extends JFrame {
             String firstOut = outAnswers.get(0);
             String secondOut = outAnswers.get(1);
             for (JButton b : outButtons) {
-                if (firstOut.equals(b.getText())) {
+                if (firstOut.equals(b.getText()))
                     b.setVisible(false);
-                }
-                if (secondOut.equals(b.getText())) {
+
+                if (secondOut.equals(b.getText()))
                     b.setVisible(false);
-                }
             }
-
-        } else {
+        } else
             Helper.setText("Not Enough Coin");
-        }
-
     }
 
     private void ResetComponents() {
         countdown.start();
         outAnswers.clear();
         timeProgressBar.setValue(0);
-        for (JButton button : outButtons) {
+        for (JButton button : outButtons)
             button.setVisible(true);
-        }
+
         Helper.setEnabled(true);
         Helper.setText("<html>2 Wrongs Out<br>&nbsp;&nbsp;&nbsp;200 coins</html>");
         Helper.setBackground(GuiConfig.COLOR_GREEN);

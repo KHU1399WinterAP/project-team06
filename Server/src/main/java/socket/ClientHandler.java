@@ -56,11 +56,16 @@ public class ClientHandler extends Thread {
                     case "IS_CORRECT" -> isCorrect();
                     case "SET_USER" -> setUser();
                     case "GET_FINAL_SCORE"->getFinalScore();
+                    case "EXIT_MULTIPLAYER_AFTER_GAME"->exitMultiplayerAfterGame();
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void exitMultiplayerAfterGame(){
+        AppManager.changeState(this.SOCKET,AppManager.CLIENT_HANDLERS_RESULT,AppManager.CLIENT_HANDLERS);
     }
 
     private void getFinalScore(){

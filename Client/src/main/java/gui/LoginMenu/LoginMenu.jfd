@@ -20,7 +20,7 @@ new FormModel {
 			"name": "LoginMenu"
 			addEvent( new FormEvent( "java.awt.event.WindowListener", "windowClosing", "loginMenuWindowClosing", true ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space ::38:x, comp PictureLabel:::p::p, space :::p, comp label1:::p:161:p, space :p:30:p}, seq l {space :p:91:p, par l {comp inputPassword::l:p:198:p, comp passwordLabel::l:p::p, comp inputUsername::l:p:198:p, comp usernameLabel::l:p::p, comp loginButton::l:p:200:p}, space :0:0:x}, seq l {space :p:129:p, comp previousButton:::p:123:p, space :::x}}"
+				"$horizontalGroup": "par l {seq {space ::38:x, comp PictureLabel:::p::p, space :::p, comp label1:::p:161:p, space :p:30:p}, seq l {space :p:91:p, par l {comp inputPassword::l:p:198:p, comp inputUsername::l:p:198:p, comp usernameLabel::l:p::p, comp loginButton::l:p:200:p, comp passwordLabel::l:p:72:p}, space :0:0:x}, seq l {space :p:129:p, comp previousButton:::p:123:p, space :::x}}"
 				"$verticalGroup": "par l {seq t {space :p:59:p, par l:::p {comp label1:::::x, comp PictureLabel:::::x}, space :p:43:p, comp usernameLabel:::p:35:p, space :::p, comp inputUsername:::p:22:p, space :::p, comp passwordLabel:::p:39:p, space :::p, comp inputPassword:::::p, space :::x, comp loginButton:::p:47:p, space :::p, comp previousButton:::p:42:p, space :p:20:p}}"
 			} ) {
 				name: "mainBackground"

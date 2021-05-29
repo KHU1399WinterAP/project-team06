@@ -26,7 +26,6 @@ public class ClockAnimation extends Thread {
                 stateIndex = (stateIndex + 1) % states.length;
 
                 sleep(time);
-
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
