@@ -14,9 +14,15 @@ import java.util.Random;
 public class AppManager {
     private static String chet = "";
     public static final ArrayList<ClientHandler> CLIENT_HANDLERS = new ArrayList<>();
-    public static final ArrayList<User> EnteredUsers = new ArrayList<>();
     public static final ArrayList<ClientHandler> CLIENT_HANDLERS_MULTIPLAYER = new ArrayList<>();
+    public static final ArrayList<ClientHandler> CLIENT_HANDLERS_RESULT = new ArrayList<>();
+    public static final ArrayList<User> EnteredUsers = new ArrayList<>();
+    public static final ArrayList<User> MultiplayerUsers = new ArrayList<>();
+
     public static final ArrayList<Question> questionArray = new ArrayList<>();
+
+    public static int userScore1 = 0;
+    public static int userScore2 = 0;
 
     public static void addUser(User user) {
         EnteredUsers.add(user);
@@ -37,6 +43,26 @@ public class AppManager {
             clientHandler.sendResponseStr(chet);
     }
 
+    public static void findTheWinner() {
+        String username1=MultiplayerUsers.get(0).username;
+        String username2=MultiplayerUsers.get(1).username;
+
+        if (userScore1 > userScore2)
+            sendFinalDataToUsers(username1,userScore1,username2,userScore2);
+        else
+            sendFinalDataToUsers(username2,userScore2,username1,userScore1);
+    }
+
+    private static void sendFinalDataToUsers(String winnerName, int winneScorer, String loserName, int loserScore) {
+        for (var clientHandlersResult : CLIENT_HANDLERS_RESULT) {
+            clientHandlersResult.sendResponseStr(winnerName);
+            clientHandlersResult.sendResponseInt(winneScorer);
+
+            clientHandlersResult.sendResponseStr(loserName);
+            clientHandlersResult.sendResponseInt(loserScore);
+        }
+    }
+
     public static void findTheQuestionsArray(String category) {
         ArrayList<Question> questions;
         switch (category) {
@@ -50,6 +76,28 @@ public class AppManager {
 
         for (int i = 0; i < 5; i++)
             questionArray.add(randomQuestion(questions));
+    }
+
+    public static void updateScores(String username, String isTrue, int index) {
+        if (isTrue.equals(Responses.ACCEPT.response)) {
+            if (MultiplayerUsers.get(0).username.equals(username))
+                userScore1++;
+            else
+                userScore2++;
+        }
+        for (var clientHandlersMultiplayer : CLIENT_HANDLERS_MULTIPLAYER) {
+            clientHandlersMultiplayer.sendResponseStr(username);
+            clientHandlersMultiplayer.sendResponseStr(isTrue);
+            clientHandlersMultiplayer.sendResponseInt(index);
+        }
+    }
+
+    public static void removeUserByUsername(String username) {
+        for (int i = 0; i < MultiplayerUsers.size(); i++)
+            if (MultiplayerUsers.get(i).username.equals(username)) {
+                MultiplayerUsers.remove(i);
+                break;
+            }
     }
 
     public static String randomAnswer(ArrayList<String> answers) {

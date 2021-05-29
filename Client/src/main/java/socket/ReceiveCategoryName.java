@@ -13,8 +13,10 @@ public class ReceiveCategoryName extends Thread {
     Client CLIENT;
     JLabel selectedCategory;
     JFrame chooseCategory;
+    JFrame dashboard;
 
-    public ReceiveCategoryName(Client client,JLabel selectedCategory,JFrame chooseCategory){
+    public ReceiveCategoryName(Client client,JLabel selectedCategory,JFrame chooseCategory,JFrame dashboard){
+        this.dashboard=dashboard;
         this.CLIENT=client;
         this.chooseCategory=chooseCategory;
         this.selectedCategory=selectedCategory;
@@ -25,8 +27,9 @@ public class ReceiveCategoryName extends Thread {
         String category=CLIENT.getResponse();
         selectedCategory.setText(category);
         Timer pause = new Timer(1000, e -> {
-            new MultiplayerQuestion(CLIENT);
             chooseCategory.dispose();
+            new MultiplayerQuestion(CLIENT,dashboard);
+
         });
         pause.setRepeats(false);
         pause.start();

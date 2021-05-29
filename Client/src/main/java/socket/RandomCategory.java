@@ -22,7 +22,6 @@ public class RandomCategory extends Thread{
         categoryButton2.setText(secondChoice);
 
         String isYourTurn = CLIENT.getResponse();
-        System.out.println(isYourTurn);
         if (isYourTurn.equals(Requests.ACCEPT.request)) {
             categoryButton1.setEnabled(true);
             categoryButton2.setEnabled(true);

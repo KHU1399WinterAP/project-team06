@@ -18,6 +18,7 @@ public class ClientHandler extends Thread {
     public final Socket SOCKET;
     public final DataInputStream DATA_INPUT_STREAM;
     public final DataOutputStream DATA_OUTPUT_STREAM;
+    public static String result;
 
     public ClientHandler(Socket socket) throws IOException {
         this.SOCKET = socket;
@@ -52,11 +53,42 @@ public class ClientHandler extends Thread {
                     case "OUT_OF_MULTIPLAYER" -> outOfMultiPlayer();
                     case "SEND_SELECTED_CATEGORY" -> sendSelectedCategory();
                     case "GET_QUESTION" -> getQuestion();
+                    case "IS_CORRECT" -> isCorrect();
+                    case "SET_USER" -> setUser();
+                    case "GET_FINAL_SCORE"->getFinalScore();
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void getFinalScore(){
+        AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_MULTIPLAYER, AppManager.CLIENT_HANDLERS_RESULT);
+
+        if (AppManager.CLIENT_HANDLERS_MULTIPLAYER.size()==0)
+            AppManager.findTheWinner();
+
+    }
+
+    private void setUser() {
+        for (User user : AppManager.MultiplayerUsers) {
+            sendResponseStr(user.username);
+            sendResponseInt(user.profilePicture);
+        }
+    }
+
+    private void isCorrect() {
+        String username = getRequest();
+        int index = Integer.parseInt(getRequest());
+        String userAnswer = getRequest();
+
+        if (AppManager.questionArray.get(index).correctAnswer.equals(userAnswer))
+            result = Responses.ACCEPT.response;
+        else
+            result = Responses.REJECT.response;
+
+        AppManager.updateScores(username, result,index);
     }
 
     private void getQuestion() {
@@ -79,21 +111,25 @@ public class ClientHandler extends Thread {
     }
 
     private void outOfMultiPlayer() {
+        String username=getRequest();
+        AppManager.removeUserByUsername(username);
         AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_MULTIPLAYER, AppManager.CLIENT_HANDLERS);
+        sendResponseStr(Responses.REJECT.response);
     }
 
     private void logout() {
         String username = getRequest();
 
-        for (int i = 0; i < AppManager.EnteredUsers.size(); i++) {
+        for (int i = 0; i < AppManager.EnteredUsers.size(); i++)
             if (username.equals(AppManager.EnteredUsers.get(i).username)) {
                 AppManager.EnteredUsers.remove(i);
                 break;
             }
-        }
     }
 
     private void waitForOtherPlayer() {
+        AppManager.MultiplayerUsers.add(Database.getUserByUsername(getRequest()));
+
         AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS, AppManager.CLIENT_HANDLERS_MULTIPLAYER);
 
         if (!AppManager.startTheGame()) return;

@@ -8,6 +8,7 @@ import java.awt.event.*;
 
 import main.java.config.FontConfig;
 import main.java.config.ThemeConfig;
+import main.java.gui.Dashboard.Dashboard;
 import main.java.gui.MultiplayerQuestion.MultiplayerQuestion;
 import main.java.models.Question;
 import main.java.questionTypes.QuestionTypes;
@@ -25,19 +26,21 @@ import javax.swing.*;
  */
 public class ChooseCategory extends JFrame {
     Client CLIENT;
+    JFrame dashboard;
 
-    public ChooseCategory(Client client) {
+    public ChooseCategory(Client client, JFrame dashboard) {
+        this.dashboard=dashboard;
         this.CLIENT = client;
         initComponents();
-        new RandomCategory(categoryButton1,categoryButton2,CLIENT,turn).start();
+        new RandomCategory(categoryButton1, categoryButton2, CLIENT, turn).start();
         initListeners();
         initCostume();
         initComponentsProperties();
         this.setVisible(true);
-        new ReceiveCategoryName(CLIENT,selectedCategory,this).start();
+        new ReceiveCategoryName(CLIENT, selectedCategory, this,dashboard).start();
     }
 
-    private void initCostume(){
+    private void initCostume() {
         panel.setBackground(ThemeConfig.background);
         categoryButton1.setBackground(ThemeConfig.button);
         categoryButton2.setBackground(ThemeConfig.button);
@@ -48,7 +51,7 @@ public class ChooseCategory extends JFrame {
         categoryButton1.setFont(FontConfig.comic.deriveFont(Font.BOLD, 17));
         categoryButton2.setFont(FontConfig.comic.deriveFont(Font.BOLD, 17));
         turn.setFont(FontConfig.comic.deriveFont(Font.ITALIC, 16));
-        selectedCategory.setFont(FontConfig.comic.deriveFont(Font.BOLD,22));
+        selectedCategory.setFont(FontConfig.comic.deriveFont(Font.BOLD, 22));
     }
 
     private void initListeners() {
@@ -56,7 +59,7 @@ public class ChooseCategory extends JFrame {
         categoryButton2.addActionListener(e -> sendCategory(categoryButton2));
     }
 
-    private void sendCategory(JButton button){
+    private void sendCategory(JButton button) {
         CLIENT.sendRequest(Requests.SEND_SELECTED_CATEGORY.request);
         CLIENT.sendRequest(button.getText());
     }
@@ -124,7 +127,7 @@ public class ChooseCategory extends JFrame {
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panel.getComponentCount(); i++) {
+                for (int i = 0; i < panel.getComponentCount(); i++) {
                     Rectangle bounds = panel.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -137,12 +140,12 @@ public class ChooseCategory extends JFrame {
             }
         }
         contentPane.add(panel);
-        panel.setBounds(0, 0, 380, 560);
+        panel.setBounds(0, 0, 375, 585);
 
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
-            for(int i = 0; i < contentPane.getComponentCount(); i++) {
+            for (int i = 0; i < contentPane.getComponentCount(); i++) {
                 Rectangle bounds = contentPane.getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);

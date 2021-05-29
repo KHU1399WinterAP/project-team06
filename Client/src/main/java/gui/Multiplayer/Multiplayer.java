@@ -4,8 +4,8 @@ import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
 import main.java.config.ThemeConfig;
 import main.java.gui.Dashboard.Dashboard;
-import main.java.gui.MultiplayerQuestion.MultiplayerQuestion;
 import main.java.gui.chooseCategory.ChooseCategory;
+import main.java.models.User;
 import main.java.socket.Client;
 import main.java.socket.FindEnemy;
 import main.java.socket.Requests;
@@ -14,10 +14,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
 import javax.swing.*;
-import javax.swing.GroupLayout;
+
 
 public class Multiplayer extends JFrame {
     public final JFrame dashboard;
+    User activeUser=Dashboard.activeUser;
     public final Client CLIENT = Dashboard.CLIENT;
     FindEnemy findEnemy;
 
@@ -26,7 +27,7 @@ public class Multiplayer extends JFrame {
         initComponents();
         initComponentsProperties();
         initCustomTheme();
-        findEnemy = new FindEnemy(CLIENT, this);
+        findEnemy=new FindEnemy(CLIENT, this,activeUser.username);
         findEnemy.start();
         this.setVisible(true);
     }
@@ -37,7 +38,7 @@ public class Multiplayer extends JFrame {
 
         Timer pause = new Timer(1000, e -> {
             this.dispose();
-            new ChooseCategory(CLIENT);
+            new ChooseCategory(CLIENT,dashboard);
         });
         pause.setRepeats(false);
         pause.start();
@@ -62,10 +63,10 @@ public class Multiplayer extends JFrame {
     }
 
     private void previous() {
-        MusicConfig.initShortMp3(MusicConfig.celClickSong);
-        this.dispose();
-
         CLIENT.sendRequest(Requests.OUT_OF_MULTIPLAYER.request);
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
+        CLIENT.sendRequest(activeUser.username);
+        this.dispose();
 
         dashboard.setVisible(true);
     }
@@ -125,7 +126,7 @@ public class Multiplayer extends JFrame {
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for (int i = 0; i < Panel.getComponentCount(); i++) {
+                for(int i = 0; i < Panel.getComponentCount(); i++) {
                     Rectangle bounds = Panel.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -143,7 +144,7 @@ public class Multiplayer extends JFrame {
         {
             // compute preferred size
             Dimension preferredSize = new Dimension();
-            for (int i = 0; i < contentPane.getComponentCount(); i++) {
+            for(int i = 0; i < contentPane.getComponentCount(); i++) {
                 Rectangle bounds = contentPane.getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);

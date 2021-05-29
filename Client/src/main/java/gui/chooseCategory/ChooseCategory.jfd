@@ -73,12 +73,12 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 0
 				"y": 0
-				"height": 560
-				"width": 380
+				"height": 585
+				"width": 375
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 415, 600 )
+			"size": new java.awt.Dimension( 375, 625 )
 		} )
 	}
 }
