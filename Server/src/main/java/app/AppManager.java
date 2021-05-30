@@ -100,14 +100,6 @@ public class AppManager {
             }
     }
 
-    public static String randomAnswer(ArrayList<String> answers) {
-        Random random = new Random();
-        int rand = random.nextInt(answers.size());
-        String answer = answers.get(rand);
-        answers.remove(rand);
-        return answer;
-    }
-
     private static Question randomQuestion(ArrayList<Question> questions2) {
         if (questions2.size() > 0) {
             Random random = new Random();
@@ -115,9 +107,8 @@ public class AppManager {
             Question question = questions2.get(rand);
             questions2.remove(rand);
             return question;
-        } else {
+        } else
             return null;
-        }
     }
 
     public static boolean startTheGame() {

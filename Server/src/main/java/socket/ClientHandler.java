@@ -53,7 +53,7 @@ public class ClientHandler extends Thread {
                     case "OUT_OF_MULTIPLAYER" -> outOfMultiPlayer();
                     case "SEND_SELECTED_CATEGORY" -> sendSelectedCategory();
                     case "GET_QUESTION" -> getQuestion();
-                    case "IS_CORRECT" -> isCorrect();
+                    case "UPDATE_SCORES" -> updateScores();
                     case "SET_USER" -> setUser();
                     case "GET_FINAL_SCORE"->getFinalScore();
                     case "EXIT_MULTIPLAYER_AFTER_GAME"->exitMultiplayerAfterGame();
@@ -65,14 +65,21 @@ public class ClientHandler extends Thread {
     }
 
     private void exitMultiplayerAfterGame(){
+        AppManager.userScore2=0;
+        AppManager.userScore1=0;
         AppManager.changeState(this.SOCKET,AppManager.CLIENT_HANDLERS_RESULT,AppManager.CLIENT_HANDLERS);
+        AppManager.removeUserByUsername(getRequest());
     }
 
     private void getFinalScore(){
+
+        sendResponseStr("QUESTION");
         AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_MULTIPLAYER, AppManager.CLIENT_HANDLERS_RESULT);
 
         if (AppManager.CLIENT_HANDLERS_MULTIPLAYER.size()==0)
             AppManager.findTheWinner();
+
+        System.out.println(AppManager.CLIENT_HANDLERS_RESULT.size());
 
     }
 
@@ -83,36 +90,24 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private void isCorrect() {
+    private void updateScores() {
         String username = getRequest();
         int index = Integer.parseInt(getRequest());
-        String userAnswer = getRequest();
-
-        if (AppManager.questionArray.get(index).correctAnswer.equals(userAnswer))
-            result = Responses.ACCEPT.response;
-        else
-            result = Responses.REJECT.response;
+        String result = getRequest();
 
         AppManager.updateScores(username, result,index);
     }
 
     private void getQuestion() {
-        int index = Integer.parseInt(getRequest());
-        Question question = AppManager.questionArray.get(index);
-
-        sendResponseStr(question.question);
-        ArrayList<String> answers = new ArrayList<>();
-        answers.add(question.answer1);
-        answers.add(question.answer2);
-        answers.add(question.answer3);
-        answers.add(question.correctAnswer);
-
-        String[] randomAnswers = new String[4];
-        for (int i = 0; i < randomAnswers.length; i++)
-            randomAnswers[i] = AppManager.randomAnswer(answers);
-
-        for (String randomAnswer : randomAnswers)
-            sendResponseStr(randomAnswer);
+        for(Question question:AppManager.questionArray){
+            sendResponseInt(question.category);
+            sendResponseInt(question.questionIndex);
+            sendResponseStr(question.answer1);
+            sendResponseStr(question.answer2);
+            sendResponseStr(question.answer3);
+            sendResponseStr(question.correctAnswer);
+            sendResponseStr(question.question);
+        }
     }
 
     private void outOfMultiPlayer() {
@@ -149,6 +144,7 @@ public class ClientHandler extends Thread {
         String selectedCategory = getRequest();
         AppManager.sendSelectedCategoryName(selectedCategory);
 
+        AppManager.questionArray.clear();
         AppManager.findTheQuestionsArray(selectedCategory);
     }
 

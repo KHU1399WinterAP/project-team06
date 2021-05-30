@@ -9,36 +9,37 @@ import main.java.animations.ClockAnimation;
 import main.java.config.*;
 import main.java.gui.Dashboard.Dashboard;
 import main.java.gui.MultiplayerQuestion.GameOver.GameOver;
+import main.java.models.Question;
 import main.java.models.User;
-import main.java.socket.Client;
-import main.java.socket.ReceiveCategoryName;
-import main.java.socket.Requests;
-import main.java.socket.UpdateScores;
+import main.java.socket.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Random;
 import javax.swing.*;
 
 /**
  * @author Alireza
  */
+
 public class MultiplayerQuestion extends JFrame {
     int seconds = 10;
     static int questionNumber;
     User activeUser;
     Client CLIENT;
     JFrame currentFrame;
-    static ArrayList<JLabel> labelsLeft = new ArrayList<>();
-    static ArrayList<JLabel> labelsRight = new ArrayList<>();
-    JButton selectedButton;
+    static ArrayList<JLabel> labelsLeft;
+    static ArrayList<JLabel> labelsRight;
     JFrame dashboard;
     ClockAnimation clockAnimationSlow;
+    ArrayList<Question> questions = new ArrayList<>();
 
     public MultiplayerQuestion(Client client, JFrame dashboard) {
+        labelsLeft = new ArrayList<>();
+        labelsRight = new ArrayList<>();
         this.dashboard = dashboard;
         questionNumber = 0;
         currentFrame = this;
@@ -52,6 +53,7 @@ public class MultiplayerQuestion extends JFrame {
         initCircleLabels();
         setUsers();
         receiveQuestion();
+        x();
         new UpdateScores(CLIENT, this).start();
         this.setVisible(true);
     }
@@ -84,12 +86,27 @@ public class MultiplayerQuestion extends JFrame {
                 MusicConfig.mp3PlayerClockFast.stop();
                 countDown.stop();
                 resetComponents();
-                selectedButton=null;
 
-                CLIENT.sendRequest(Requests.IS_CORRECT.request);
+                CLIENT.sendRequest(Requests.UPDATE_SCORES.request);
                 CLIENT.sendRequest(activeUser.username);
                 CLIENT.sendRequest(String.valueOf(questionNumber));
-                CLIENT.sendRequest("Empty Answer!");
+                CLIENT.sendRequest(Requests.FALSE.request);
+
+                Timer pause = new Timer(500, e1 -> {
+
+                    questionNumber++;
+
+                    if (questionNumber == 5) {
+                        MusicConfig.mp3PlayerClockSlow.stop();
+                        MusicConfig.mp3PlayerClockFast.stop();
+
+                        currentFrame.dispose();
+                        new GameOver(CLIENT, dashboard);
+                    } else
+                        x();
+                });
+                pause.setRepeats(false);
+                pause.start();
             }
         }
     });
@@ -99,7 +116,6 @@ public class MultiplayerQuestion extends JFrame {
         timelabel.setText(String.valueOf(seconds));
         timeProgressBar.setBackground(Color.green);
         clockAnimationSlow.time = 800;
-
     }
 
     private void setUsers() {
@@ -116,14 +132,41 @@ public class MultiplayerQuestion extends JFrame {
 
     private void receiveQuestion() {
         CLIENT.sendRequest(Requests.GET_QUESTION.request);
-        CLIENT.sendRequest(String.valueOf(questionNumber));
+        for (int i = 0; i < 5; i++) {
+            int category = CLIENT.getResponseInt();
+            int questionIndex = CLIENT.getResponseInt();
+            String answer1 = CLIENT.getResponse();
+            String answer2 = CLIENT.getResponse();
+            String answer3 = CLIENT.getResponse();
+            String correctAnswer = CLIENT.getResponse();
+            String question = CLIENT.getResponse();
+            questions.add(new Question(category, questionIndex, answer1, answer2, answer3, correctAnswer, question));
+        }
+    }
 
-        questionLabel.setText(CLIENT.getResponse());
+    public void x() {
+        var question = questions.get(questionNumber);
+
+        ArrayList<String> answers = new ArrayList<>();
+        answers.add(question.answer1);
+        answers.add(question.answer2);
+        answers.add(question.answer3);
+        answers.add(question.correctAnswer);
+
+        questionLabel.setText(question.question);
         for (JButton jButton : Arrays.asList(answerButton1, answerButton2,
                 answerButton3, answerButton4))
-            jButton.setText(CLIENT.getResponse());
+            jButton.setText(randomAnswer(answers));
 
         countDown.start();
+    }
+
+    public static String randomAnswer(ArrayList<String> answers) {
+        Random random = new Random();
+        int rand = random.nextInt(answers.size());
+        String answer = answers.get(rand);
+        answers.remove(rand);
+        return answer;
     }
 
     private void initCustomTheme() {
@@ -177,38 +220,23 @@ public class MultiplayerQuestion extends JFrame {
             greenOrRed(labelsLeft, isTrue, questionNumberServer);
         else
             greenOrRed(labelsRight, isTrue, questionNumberServer);
-
-        if (username.equals(activeUser.username)) {
-            if (isTrue.equals(Requests.ACCEPT.request))
-                updateInClient(GuiConfig.COLOR_GREEN, 20, MusicConfig.correctSong);
-
-            else
-                updateInClient(GuiConfig.COLOR_DARK_RED, 0, MusicConfig.wrongSong);
-        }
     }
 
-    private void updateInClient(Color color, int coins, String mp3Player) {
-        MusicConfig.initShortMp3(mp3Player);
-        activeUser.coins += coins;
-        updateCoins();
-
-        if (selectedButton != null)
-            selectedButton.setBackground(color);
-
+    private void updateInClient(JButton button, Color color) {
+        button.setBackground(color);
         Timer pause = new Timer(500, e -> {
-            if (selectedButton != null)
-                selectedButton.setBackground(ThemeConfig.button);
+            button.setBackground(ThemeConfig.button);
 
-            seconds = 10;
             questionNumber++;
 
             if (questionNumber == 5) {
-                UpdateScores.isFinished = true;
                 MusicConfig.mp3PlayerClockSlow.stop();
+                MusicConfig.mp3PlayerClockFast.stop();
+
                 this.dispose();
                 new GameOver(CLIENT, dashboard);
             } else
-                receiveQuestion();
+                x();
         });
         pause.setRepeats(false);
         pause.start();
@@ -222,12 +250,21 @@ public class MultiplayerQuestion extends JFrame {
     private void checkTheAnswer(JButton button) {
         countDown.stop();
         resetComponents();
-        CLIENT.sendRequest(Requests.IS_CORRECT.request);
+
+        CLIENT.sendRequest(Requests.UPDATE_SCORES.request);
         CLIENT.sendRequest(activeUser.username);
         CLIENT.sendRequest(String.valueOf(questionNumber));
-        CLIENT.sendRequest(button.getText());
-
-        selectedButton = button;
+        if (button.getText().equals(questions.get(questionNumber).correctAnswer)) {
+            CLIENT.sendRequest(Requests.ACCEPT.request);
+            MusicConfig.initShortMp3(MusicConfig.correctSong);
+            activeUser.coins += 20;
+            updateCoins();
+            updateInClient(button, GuiConfig.COLOR_GREEN);
+        } else {
+            CLIENT.sendRequest(Requests.FALSE.request);
+            MusicConfig.initShortMp3(MusicConfig.wrongSong);
+            updateInClient(button, GuiConfig.COLOR_DARK_RED);
+        }
     }
 
     private void updateCoins() {
@@ -478,7 +515,7 @@ public class MultiplayerQuestion extends JFrame {
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for(int i = 0; i < Panel.getComponentCount(); i++) {
+                for (int i = 0; i < Panel.getComponentCount(); i++) {
                     Rectangle bounds = Panel.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -494,14 +531,14 @@ public class MultiplayerQuestion extends JFrame {
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(Panel, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(Panel, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addComponent(Panel, GroupLayout.PREFERRED_SIZE, 611, GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE))
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addComponent(Panel, GroupLayout.PREFERRED_SIZE, 611, GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());

@@ -29,7 +29,6 @@ public class ReceiveCategoryName extends Thread {
         Timer pause = new Timer(1000, e -> {
             chooseCategory.dispose();
             new MultiplayerQuestion(CLIENT,dashboard);
-
         });
         pause.setRepeats(false);
         pause.start();

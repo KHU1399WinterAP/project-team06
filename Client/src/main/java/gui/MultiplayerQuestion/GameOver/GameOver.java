@@ -50,7 +50,6 @@ public class GameOver extends JFrame {
 
     private void receiveInformation() {
         CLIENT.sendRequest(Requests.GET_FINAL_SCORE.request);
-
         String username1 = CLIENT.getResponse();
         int score1 = CLIENT.getResponseInt();
 
@@ -75,12 +74,14 @@ public class GameOver extends JFrame {
     private void dashboardButtonActionPerformed(ActionEvent e) {
         this.dispose();
         CLIENT.sendRequest(Requests.EXIT_MULTIPLAYER_AFTER_GAME.request);
+        CLIENT.sendRequest(activeUser.username);
         dashboard.setVisible(true);
     }
 
     private void thisWindowClosing(WindowEvent e) {
         this.dispose();
         CLIENT.sendRequest(Requests.EXIT_MULTIPLAYER_AFTER_GAME.request);
+        CLIENT.sendRequest(activeUser.username);
         dashboard.setVisible(true);
     }
 
