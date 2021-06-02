@@ -54,7 +54,9 @@ public class AppManager {
     }
 
     private static void sendFinalDataToUsers(String winnerName, int winneScorer, String loserName, int loserScore) {
+        System.out.println(CLIENT_HANDLERS_RESULT.size()+"2");
         for (var clientHandlersResult : CLIENT_HANDLERS_RESULT) {
+            System.out.println("x");
             clientHandlersResult.sendResponseStr(winnerName);
             clientHandlersResult.sendResponseInt(winneScorer);
 

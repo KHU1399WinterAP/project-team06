@@ -72,15 +72,13 @@ public class ClientHandler extends Thread {
     }
 
     private void getFinalScore(){
-
         sendResponseStr("QUESTION");
         AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_MULTIPLAYER, AppManager.CLIENT_HANDLERS_RESULT);
 
-        if (AppManager.CLIENT_HANDLERS_MULTIPLAYER.size()==0)
-            AppManager.findTheWinner();
-
         System.out.println(AppManager.CLIENT_HANDLERS_RESULT.size());
 
+        if (AppManager.CLIENT_HANDLERS_MULTIPLAYER.size()==0)
+            AppManager.findTheWinner();
     }
 
     private void setUser() {

@@ -11,6 +11,7 @@ import main.java.config.ThemeConfig;
 import main.java.gui.Dashboard.Dashboard;
 import main.java.models.User;
 import main.java.socket.Client;
+import main.java.socket.GetFinalScore;
 import main.java.socket.Requests;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ import javax.swing.*;
 public class GameOver extends JFrame {
     Client CLIENT;
     JFrame dashboard;
-    User activeUser = Dashboard.activeUser;
+    public User activeUser = Dashboard.activeUser;
 
     public GameOver(Client client, JFrame dashboard) {
         this.dashboard = dashboard;
@@ -32,13 +33,13 @@ public class GameOver extends JFrame {
         initCostumeTheme();
         initCostumeProperties();
         this.setVisible(true);
-        receiveInformation();
+        new GetFinalScore(this, CLIENT).start();
     }
 
     private void initCostumeProperties() {
         dashboardButton.setFont(FontConfig.comic.deriveFont(Font.BOLD, 18));
         result.setFont(FontConfig.comic.deriveFont(Font.BOLD, 22));
-        
+
         for (JLabel jLabel : Arrays.asList(scorePlayer1, scorePlayer2, usernameLabel1, usernameLabel2))
             jLabel.setFont(FontConfig.comic.deriveFont(Font.PLAIN, 16));
     }
@@ -46,29 +47,6 @@ public class GameOver extends JFrame {
     private void initCostumeTheme() {
         panel1.setBackground(ThemeConfig.background);
         dashboardButton.setBackground(ThemeConfig.button);
-    }
-
-    private void receiveInformation() {
-        CLIENT.sendRequest(Requests.GET_FINAL_SCORE.request);
-        String username1 = CLIENT.getResponse();
-        int score1 = CLIENT.getResponseInt();
-
-        String username2 = CLIENT.getResponse();
-        int score2 = CLIENT.getResponseInt();
-
-        usernameLabel1.setText(username1);
-        usernameLabel2.setText(username2);
-
-        scorePlayer1.setText(String.valueOf(score1));
-        scorePlayer2.setText(String.valueOf(score2));
-
-        if (score1 == score2)
-            result.setText("!     -DRAW-     !");
-        else if (username1.equals(activeUser.username))
-            result.setText("!    YOU  WON    !");
-        else
-            result.setText("!    YOU LOST    !");
-
     }
 
     private void dashboardButtonActionPerformed(ActionEvent e) {
@@ -171,7 +149,7 @@ public class GameOver extends JFrame {
             {
                 // compute preferred size
                 Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panel1.getComponentCount(); i++) {
+                for (int i = 0; i < panel1.getComponentCount(); i++) {
                     Rectangle bounds = panel1.getComponent(i).getBounds();
                     preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                     preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -194,13 +172,13 @@ public class GameOver extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
-    private JLabel result;
-    private JLabel scorePlayer1;
-    private JLabel scorePlayer2;
+    public JLabel result;
+    public JLabel scorePlayer1;
+    public JLabel scorePlayer2;
     private JLabel label4;
     private JButton dashboardButton;
-    private JLabel usernameLabel1;
+    public JLabel usernameLabel1;
     private JLabel label6;
-    private JLabel usernameLabel2;
+    public JLabel usernameLabel2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

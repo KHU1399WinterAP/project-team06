@@ -16,7 +16,7 @@ public class UpdateScores extends Thread {
         while (true) {
             String username = CLIENT.getResponse();
             if (username.equals("QUESTION"))
-                break;
+                return;
 
             String isTrue = CLIENT.getResponse();
             int questionNumber = CLIENT.getResponseInt();

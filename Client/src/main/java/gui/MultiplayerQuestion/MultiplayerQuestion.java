@@ -82,6 +82,8 @@ public class MultiplayerQuestion extends JFrame {
                 timeProgressBar.setBackground(Color.red);
                 clockAnimationSlow.time = 100;
             } else if (seconds == 0) {
+                MusicConfig.mp3PlayerClockSlow.stop();
+                MusicConfig.mp3PlayerClockFast.stop();
                 MusicConfig.initShortMp3(MusicConfig.wrongSong);
                 MusicConfig.mp3PlayerClockFast.stop();
                 countDown.stop();
@@ -97,9 +99,6 @@ public class MultiplayerQuestion extends JFrame {
                     questionNumber++;
 
                     if (questionNumber == 5) {
-                        MusicConfig.mp3PlayerClockSlow.stop();
-                        MusicConfig.mp3PlayerClockFast.stop();
-
                         currentFrame.dispose();
                         new GameOver(CLIENT, dashboard);
                     } else
@@ -230,9 +229,6 @@ public class MultiplayerQuestion extends JFrame {
             questionNumber++;
 
             if (questionNumber == 5) {
-                MusicConfig.mp3PlayerClockSlow.stop();
-                MusicConfig.mp3PlayerClockFast.stop();
-
                 this.dispose();
                 new GameOver(CLIENT, dashboard);
             } else
@@ -248,6 +244,8 @@ public class MultiplayerQuestion extends JFrame {
     }
 
     private void checkTheAnswer(JButton button) {
+        MusicConfig.mp3PlayerClockSlow.stop();
+        MusicConfig.mp3PlayerClockFast.stop();
         countDown.stop();
         resetComponents();
 
