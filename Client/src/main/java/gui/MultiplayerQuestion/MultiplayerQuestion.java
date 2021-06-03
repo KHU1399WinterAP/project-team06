@@ -82,11 +82,10 @@ public class MultiplayerQuestion extends JFrame {
                 timeProgressBar.setBackground(Color.red);
                 clockAnimationSlow.time = 100;
             } else if (seconds == 0) {
+                countDown.stop();
                 MusicConfig.mp3PlayerClockSlow.stop();
-                MusicConfig.mp3PlayerClockFast.stop();
                 MusicConfig.initShortMp3(MusicConfig.wrongSong);
                 MusicConfig.mp3PlayerClockFast.stop();
-                countDown.stop();
                 resetComponents();
 
                 CLIENT.sendRequest(Requests.UPDATE_SCORES.request);
@@ -94,13 +93,7 @@ public class MultiplayerQuestion extends JFrame {
                 CLIENT.sendRequest(String.valueOf(questionNumber));
                 CLIENT.sendRequest(Requests.FALSE.request);
 
-                questionNumber++;
-
-                if (questionNumber == 5) {
-                    currentFrame.dispose();
-                    new GameOver(CLIENT, dashboard);
-                } else
-                    x();
+                nextQuestion();
             }
         }
     });
@@ -110,6 +103,7 @@ public class MultiplayerQuestion extends JFrame {
         timelabel.setText(String.valueOf(seconds));
         timeProgressBar.setBackground(Color.green);
         clockAnimationSlow.time = 800;
+        timeProgressBar.setValue(0);
     }
 
     private void setUsers() {
@@ -216,22 +210,6 @@ public class MultiplayerQuestion extends JFrame {
             greenOrRed(labelsRight, isTrue, questionNumberServer);
     }
 
-    private void updateInClient(JButton button, Color color) {
-        button.setBackground(color);
-        Timer pause = new Timer(500, e -> {
-            button.setBackground(ThemeConfig.button);
-
-            questionNumber++;
-
-            if (questionNumber == 5) {
-                this.dispose();
-                new GameOver(CLIENT, dashboard);
-            } else
-                x();
-        });
-        pause.setRepeats(false);
-        pause.start();
-    }
 
     private void greenOrRed(ArrayList<JLabel> jLabels, String isTrue, int questionNumberServer) {
         jLabels.get(questionNumberServer).setIcon(new ImageIcon(Objects.requireNonNull(
@@ -239,9 +217,9 @@ public class MultiplayerQuestion extends JFrame {
     }
 
     private void checkTheAnswer(JButton button) {
+        countDown.stop();
         MusicConfig.mp3PlayerClockSlow.stop();
         MusicConfig.mp3PlayerClockFast.stop();
-        countDown.stop();
         resetComponents();
 
         CLIENT.sendRequest(Requests.UPDATE_SCORES.request);
@@ -249,16 +227,37 @@ public class MultiplayerQuestion extends JFrame {
         CLIENT.sendRequest(String.valueOf(questionNumber));
 
         if (button.getText().equals(questions.get(questionNumber).correctAnswer)) {
-            CLIENT.sendRequest(Requests.ACCEPT.request);
             MusicConfig.initShortMp3(MusicConfig.correctSong);
+            CLIENT.sendRequest(Requests.ACCEPT.request);
             activeUser.coins += 20;
-            updateCoins();
             updateInClient(button, GuiConfig.COLOR_GREEN);
+            updateCoins();
         } else {
             CLIENT.sendRequest(Requests.FALSE.request);
             MusicConfig.initShortMp3(MusicConfig.wrongSong);
             updateInClient(button, GuiConfig.COLOR_DARK_RED);
         }
+    }
+
+    private void updateInClient(JButton button, Color color) {
+        button.setBackground(color);
+        Timer pause = new Timer(200, e -> {
+            button.setBackground(ThemeConfig.button);
+
+            nextQuestion();
+        });
+        pause.setRepeats(false);
+        pause.start();
+    }
+
+    private void nextQuestion() {
+        questionNumber++;
+
+        if (questionNumber == 5) {
+            this.dispose();
+            new GameOver(CLIENT, dashboard);
+        } else
+            x();
     }
 
     private void updateCoins() {

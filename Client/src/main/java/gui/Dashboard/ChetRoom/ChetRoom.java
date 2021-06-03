@@ -1,10 +1,13 @@
 package main.java.gui.Dashboard.ChetRoom;
 
+import main.java.config.FontConfig;
 import main.java.config.MusicConfig;
+import main.java.config.ThemeConfig;
 import main.java.gui.Dashboard.Dashboard;
 import main.java.models.User;
 import main.java.socket.ChetSyncer;
 import main.java.socket.Client;
+import main.java.socket.Requests;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -22,16 +25,20 @@ public class ChetRoom extends JFrame {
     public ChetRoom(JFrame dashboard, Client client) {
         this.dashboard = dashboard;
         CLIENT = client;
+        CLIENT.sendRequest(Requests.ENTERED_CHET_ROOM.request);
         CLIENT.sendRequest("UPDATE_CHET");
         new ChetSyncer(this).start();
         initComponents();
         SendByEnter();
+        initProperties();
+        initCostumeTheme();
         this.setVisible(true);
     }
 
     public void updateChet(String chet) {
         ChetBox.setText(chet);
     }
+
 
     private void ChetFrameWindowClosing(WindowEvent e) {
         previousPage();
@@ -63,13 +70,26 @@ public class ChetRoom extends JFrame {
         });
     }
 
+    private void initProperties(){
+        ChetBox.setFont(FontConfig.comic.deriveFont(Font.BOLD,15));
+        ChetBox.setForeground(Color.white);
+        MessageField.setFont(FontConfig.comic.deriveFont(Font.BOLD,15));
+        SendButton.setForeground(Color.white);
+        SendButton.setFocusable(false);
+        SendButton.setBorder(null);
+        SendButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        SendButton.setFont(FontConfig.comic.deriveFont(Font.BOLD,15));
+    }
+
     private void previousPage() {
         MusicConfig.initShortMp3(MusicConfig.celClickSong);
+        CLIENT.sendRequest(Requests.OUT_OF_CHET_ROOM.request);
         this.dispose();
         dashboard.setVisible(true);
     }
 
     private void sendMessage() {
+        MusicConfig.initShortMp3(MusicConfig.celClickSong);
         String message = normalize(MessageField.getText());
         if (message.isBlank())
             return;
@@ -84,6 +104,13 @@ public class ChetRoom extends JFrame {
     public String normalize(String text) {
         text = text.replaceAll(" +", " ");
         return text.trim();
+    }
+
+    private void initCostumeTheme() {
+        mainBackground.setBackground(ThemeConfig.background);
+        previousButton.setBackground(ThemeConfig.background);
+        ChetBox.setBackground(ThemeConfig.background);
+        SendButton.setBackground(ThemeConfig.button);
     }
 
     private void initComponents() {
@@ -145,45 +172,45 @@ public class ChetRoom extends JFrame {
             GroupLayout mainBackgroundLayout = new GroupLayout(mainBackground);
             mainBackground.setLayout(mainBackgroundLayout);
             mainBackgroundLayout.setHorizontalGroup(
-                mainBackgroundLayout.createParallelGroup()
-                    .addGroup(mainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(mainBackgroundLayout.createParallelGroup()
-                            .addComponent(ChetBox)
+                    mainBackgroundLayout.createParallelGroup()
                             .addGroup(mainBackgroundLayout.createSequentialGroup()
-                                .addGroup(mainBackgroundLayout.createParallelGroup()
-                                    .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(mainBackgroundLayout.createSequentialGroup()
-                                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(SendButton)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                                    .addContainerGap()
+                                    .addGroup(mainBackgroundLayout.createParallelGroup()
+                                            .addComponent(ChetBox)
+                                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                                    .addGroup(mainBackgroundLayout.createParallelGroup()
+                                                            .addComponent(previousButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                                                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                                                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 280, GroupLayout.PREFERRED_SIZE)
+                                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                                    .addComponent(SendButton)))
+                                                    .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addContainerGap())
             );
             mainBackgroundLayout.setVerticalGroup(
-                mainBackgroundLayout.createParallelGroup()
-                    .addGroup(mainBackgroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(previousButton)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ChetBox, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(mainBackgroundLayout.createParallelGroup()
-                            .addComponent(scrollPane1)
-                            .addComponent(SendButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                    mainBackgroundLayout.createParallelGroup()
+                            .addGroup(mainBackgroundLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(previousButton)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(ChetBox, GroupLayout.PREFERRED_SIZE, 440, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(mainBackgroundLayout.createParallelGroup()
+                                            .addComponent(scrollPane1)
+                                            .addComponent(SendButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addContainerGap())
             );
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(mainBackground, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
         );
         pack();
         setLocationRelativeTo(getOwner());

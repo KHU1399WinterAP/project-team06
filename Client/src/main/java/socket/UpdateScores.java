@@ -13,11 +13,13 @@ public class UpdateScores extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        int x=0;
+        while (x<10) {
             String username = CLIENT.getResponse();
             if (username.equals("QUESTION"))
                 return;
 
+            x++;
             String isTrue = CLIENT.getResponse();
             int questionNumber = CLIENT.getResponseInt();
 

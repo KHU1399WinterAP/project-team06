@@ -12,6 +12,10 @@ public class ChetSyncer extends Thread{
     public void run() {
         while (true) {
             String chet = ChetRoom.CLIENT.getResponse();
+
+            if (chet.equals("EXIT"))
+                return;
+
             CHET_ROOM.updateChet(chet);
         }
     }

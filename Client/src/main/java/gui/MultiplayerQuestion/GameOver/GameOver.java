@@ -25,6 +25,7 @@ public class GameOver extends JFrame {
     Client CLIENT;
     JFrame dashboard;
     public User activeUser = Dashboard.activeUser;
+    GetFinalScore getFinalScore;
 
     public GameOver(Client client, JFrame dashboard) {
         this.dashboard = dashboard;
@@ -33,7 +34,13 @@ public class GameOver extends JFrame {
         initCostumeTheme();
         initCostumeProperties();
         this.setVisible(true);
-        new GetFinalScore(this, CLIENT).start();
+        getFinalScore = new GetFinalScore(this, CLIENT);
+        getFinalScore.start();
+        try {
+            getFinalScore.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initCostumeProperties() {

@@ -16,6 +16,10 @@ public class GetFinalScore extends Thread{
     public void run() {
         CLIENT.sendRequest(Requests.GET_FINAL_SCORE.request);
         String username1 = CLIENT.getResponse();
+
+        if (username1.equals("QUESTION"))
+            username1= CLIENT.getResponse();
+
         gameOver.usernameLabel1.setText(username1);
 
         int score1 = CLIENT.getResponseInt();

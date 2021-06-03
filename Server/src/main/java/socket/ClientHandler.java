@@ -55,8 +55,10 @@ public class ClientHandler extends Thread {
                     case "GET_QUESTION" -> getQuestion();
                     case "UPDATE_SCORES" -> updateScores();
                     case "SET_USER" -> setUser();
-                    case "GET_FINAL_SCORE"->getFinalScore();
-                    case "EXIT_MULTIPLAYER_AFTER_GAME"->exitMultiplayerAfterGame();
+                    case "GET_FINAL_SCORE" -> getFinalScore();
+                    case "ENTERED_CHET_ROOM" -> enterTheChetRoom();
+                    case "OUT_OF_CHET_ROOM" -> outOfChetRoom();
+                    case "EXIT_MULTIPLAYER_AFTER_GAME" -> exitMultiplayerAfterGame();
                 }
             }
         } catch (IOException e) {
@@ -64,20 +66,29 @@ public class ClientHandler extends Thread {
         }
     }
 
-    private void exitMultiplayerAfterGame(){
-        AppManager.userScore2=0;
-        AppManager.userScore1=0;
-        AppManager.changeState(this.SOCKET,AppManager.CLIENT_HANDLERS_RESULT,AppManager.CLIENT_HANDLERS);
+    private void outOfChetRoom(){
+        AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_CHET_ROOM, AppManager.CLIENT_HANDLERS);
+        sendResponseStr("EXIT");
+    }
+
+    private void enterTheChetRoom() {
+        AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS, AppManager.CLIENT_HANDLERS_CHET_ROOM);
+        System.out.println("1"+AppManager.CLIENT_HANDLERS.size());
+        System.out.println(AppManager.CLIENT_HANDLERS_CHET_ROOM.size());
+    }
+
+    private void exitMultiplayerAfterGame() {
+        AppManager.userScore2 = 0;
+        AppManager.userScore1 = 0;
+        AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_RESULT, AppManager.CLIENT_HANDLERS);
         AppManager.removeUserByUsername(getRequest());
     }
 
-    private void getFinalScore(){
+    private void getFinalScore() {
         sendResponseStr("QUESTION");
         AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_MULTIPLAYER, AppManager.CLIENT_HANDLERS_RESULT);
 
-        System.out.println(AppManager.CLIENT_HANDLERS_RESULT.size());
-
-        if (AppManager.CLIENT_HANDLERS_MULTIPLAYER.size()==0)
+        if (AppManager.CLIENT_HANDLERS_MULTIPLAYER.size() == 0)
             AppManager.findTheWinner();
     }
 
@@ -93,11 +104,11 @@ public class ClientHandler extends Thread {
         int index = Integer.parseInt(getRequest());
         String result = getRequest();
 
-        AppManager.updateScores(username, result,index);
+        AppManager.updateScores(username, result, index);
     }
 
     private void getQuestion() {
-        for(Question question:AppManager.questionArray){
+        for (Question question : AppManager.questionArray) {
             sendResponseInt(question.category);
             sendResponseInt(question.questionIndex);
             sendResponseStr(question.answer1);
@@ -109,7 +120,7 @@ public class ClientHandler extends Thread {
     }
 
     private void outOfMultiPlayer() {
-        String username=getRequest();
+        String username = getRequest();
         AppManager.removeUserByUsername(username);
         AppManager.changeState(this.SOCKET, AppManager.CLIENT_HANDLERS_MULTIPLAYER, AppManager.CLIENT_HANDLERS);
         sendResponseStr(Responses.REJECT.response);

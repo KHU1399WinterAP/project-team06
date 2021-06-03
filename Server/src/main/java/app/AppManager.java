@@ -14,6 +14,8 @@ import java.util.Random;
 public class AppManager {
     private static String chet = "";
     public static final ArrayList<ClientHandler> CLIENT_HANDLERS = new ArrayList<>();
+    public static final ArrayList<ClientHandler> CLIENT_HANDLERS_CHET_ROOM = new ArrayList<>();
+
     public static final ArrayList<ClientHandler> CLIENT_HANDLERS_MULTIPLAYER = new ArrayList<>();
     public static final ArrayList<ClientHandler> CLIENT_HANDLERS_RESULT = new ArrayList<>();
     public static final ArrayList<User> EnteredUsers = new ArrayList<>();
@@ -39,7 +41,7 @@ public class AppManager {
     }
 
     public static void syncChet() {
-        for (var clientHandler : CLIENT_HANDLERS)
+        for (var clientHandler : CLIENT_HANDLERS_CHET_ROOM)
             clientHandler.sendResponseStr(chet);
     }
 
@@ -54,9 +56,7 @@ public class AppManager {
     }
 
     private static void sendFinalDataToUsers(String winnerName, int winneScorer, String loserName, int loserScore) {
-        System.out.println(CLIENT_HANDLERS_RESULT.size()+"2");
         for (var clientHandlersResult : CLIENT_HANDLERS_RESULT) {
-            System.out.println("x");
             clientHandlersResult.sendResponseStr(winnerName);
             clientHandlersResult.sendResponseInt(winneScorer);
 
