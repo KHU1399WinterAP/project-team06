@@ -94,18 +94,13 @@ public class MultiplayerQuestion extends JFrame {
                 CLIENT.sendRequest(String.valueOf(questionNumber));
                 CLIENT.sendRequest(Requests.FALSE.request);
 
-                Timer pause = new Timer(500, e1 -> {
+                questionNumber++;
 
-                    questionNumber++;
-
-                    if (questionNumber == 5) {
-                        currentFrame.dispose();
-                        new GameOver(CLIENT, dashboard);
-                    } else
-                        x();
-                });
-                pause.setRepeats(false);
-                pause.start();
+                if (questionNumber == 5) {
+                    currentFrame.dispose();
+                    new GameOver(CLIENT, dashboard);
+                } else
+                    x();
             }
         }
     });
@@ -252,6 +247,7 @@ public class MultiplayerQuestion extends JFrame {
         CLIENT.sendRequest(Requests.UPDATE_SCORES.request);
         CLIENT.sendRequest(activeUser.username);
         CLIENT.sendRequest(String.valueOf(questionNumber));
+
         if (button.getText().equals(questions.get(questionNumber).correctAnswer)) {
             CLIENT.sendRequest(Requests.ACCEPT.request);
             MusicConfig.initShortMp3(MusicConfig.correctSong);
